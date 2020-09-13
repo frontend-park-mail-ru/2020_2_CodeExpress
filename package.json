@@ -1,0 +1,24 @@
+{
+  "name": "2020_2_CodeExpress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "DEBUG=http node server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontend-park-mail-ru/2020_2_CodeExpress.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frontend-park-mail-ru/2020_2_CodeExpress/issues"
+  },
+  "homepage": "https://github.com/frontend-park-mail-ru/2020_2_CodeExpress#readme",
+  "devDependencies": {
+    "debug": "^4.1.1"
+  }
+}
