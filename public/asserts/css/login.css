@@ -1,6 +1,13 @@
 body, html {
-    position: relative;
     height: 100%;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+    width: 100%;
 }
 
 .header {
@@ -18,7 +25,7 @@ body, html {
     font-weight: 900;
 }
 
-.header__title span {
+.header__title_span {
     color: var(--primary-color);
 }
 
@@ -91,14 +98,12 @@ body, html {
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
-
     display: flex;
     justify-content: center;
 
     width: 100%;
     padding: 25px 0;
+    margin-top: auto;
     background-color: var(--black-1);
 }
 
