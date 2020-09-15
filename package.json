@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "DEBUG=http node server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pretest": "./node_modules/.bin/eslint --ignore-path .gitignore . --fix",
+    "eslint": "node_modules/.bin/eslint src/"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,16 @@
   },
   "homepage": "https://github.com/frontend-park-mail-ru/2020_2_CodeExpress#readme",
   "devDependencies": {
-    "debug": "^4.1.1"
+    "eslint": "^7.9.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
+  },
+  "dependencies": {
+    "husky": "^4.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run pretest"
+    }
   }
 }
