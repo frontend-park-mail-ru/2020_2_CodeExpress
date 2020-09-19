@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "DEBUG=http node server",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pretest": "./node_modules/.bin/eslint --ignore-path .gitignore . --fix",
     "eslint": "node_modules/.bin/eslint src/"
