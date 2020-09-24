@@ -1,0 +1,42 @@
+.album-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    margin: 10px;
+}
+
+.album__item {
+    display: flex;
+    flex-direction: column;
+
+    margin: 10px;
+}
+
+.album__item__img {
+    height: 200px;
+
+    margin-bottom: 10px;
+
+    border-radius: 10px;
+}
+
+.album__item__information {
+    display: flex;
+    flex-direction: column;
+}
+
+.album__item__title {
+    width: 200px;
+
+    margin: 5px 0;
+}
+
+.album__item__group {
+    cursor: pointer;
+
+    color: var(--gray-1);
+}
+
+.album__item__group:hover {
+    text-decoration: underline;
+}
