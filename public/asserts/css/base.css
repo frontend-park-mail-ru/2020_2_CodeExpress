@@ -10,7 +10,7 @@ body {
 
     background-color: var(--gray-2);
 
-    font-family: "Montserrat";
+    font-family: "Montserrat", Arial, sans-serif;
 
     overscroll-behavior-y: none;
 }
@@ -182,11 +182,8 @@ body {
 
 .turntable__progress-bar {
     position: absolute;
-
     top: 0;
     left: 0;
-
-    content: '';
 
     height: 8px;
     width: 0;

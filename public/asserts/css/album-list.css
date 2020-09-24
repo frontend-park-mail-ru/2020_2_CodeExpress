@@ -5,14 +5,14 @@
     margin: 10px;
 }
 
-.album__item {
+.album-item {
     display: flex;
     flex-direction: column;
 
     margin: 10px;
 }
 
-.album__item__img {
+.album-item__img {
     height: 200px;
 
     margin-bottom: 10px;
@@ -20,23 +20,23 @@
     border-radius: 10px;
 }
 
-.album__item__information {
+.album-item__information {
     display: flex;
     flex-direction: column;
 }
 
-.album__item__title {
+.album-item__title {
     width: 200px;
 
     margin: 5px 0;
 }
 
-.album__item__group {
+.album-item__group {
     cursor: pointer;
 
     color: var(--gray-1);
 }
 
-.album__item__group:hover {
+.album-item__group:hover {
     text-decoration: underline;
 }

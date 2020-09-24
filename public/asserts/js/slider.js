@@ -1,4 +1,4 @@
-// TODO: Испролзовать на нижнем слайдере.
+// TODO: Использовать на нижнем слайдере.
 // const slider = document.querySelector('.index-slider__track');
 // const slides = document.querySelectorAll('.index-slider__item');
 // const sliderWidth = parseFloat(getComputedStyle(slider).width);

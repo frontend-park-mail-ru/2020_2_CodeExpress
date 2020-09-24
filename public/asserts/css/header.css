@@ -17,14 +17,14 @@
 }
 
 .layout__header-title {
-    color: #4B39BF;
+    color: var(--secondary-color);
 
     font-size: 24px;
     font-weight: bolder;
 }
 
 .title_active {
-    color: #04BFBF;
+    color: var(--primary-color);
 }
 
 .group-links {
@@ -36,7 +36,7 @@
 .group-links_title {
     margin: 10px 0;
 
-    color: #B9B9B9;
+    color: var(--gray-4);
 }
 
 .group-links__link,
