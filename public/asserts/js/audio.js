@@ -23,8 +23,8 @@ playButton.dataset.status = status.statusOff;
 const defaultSong = {
     'title': 'Fade in',
     'group': 'Apocalyptica',
-    'album': 'asserts/backgrounds/fadein.jpg',
-    'audio': 'asserts/mp3/fade.mp3'
+    'album': 'asserts/backgrounds/apocalyptica-metalica-cover-album.jpg',
+    'audio': 'asserts/mp3/apocalyptica-fade.mp3'
 };
 
 /**
