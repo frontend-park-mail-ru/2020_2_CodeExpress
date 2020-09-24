@@ -1,6 +1,6 @@
 'use strict';
 
-import * as status from './statuses.js';
+import { ICON_PAUSE, ICON_PLAY, STATUS_OFF, STATUS_ON } from './consts.js';
 
 const audio = document.getElementById('music-js');
 const lastAudio = JSON.parse(localStorage.getItem('lastAudio'));
@@ -18,13 +18,13 @@ const songs = document.querySelectorAll('.track-item');
 let timer;
 let percent = 0;
 
-playButton.dataset.status = status.statusOff;
+playButton.dataset.status = STATUS_OFF;
 
 const defaultSong = {
-    'title': 'Fade in',
-    'group': 'Apocalyptica',
-    'album': 'asserts/backgrounds/apocalyptica-metalica-cover-album.jpg',
-    'audio': 'asserts/mp3/apocalyptica-fade.mp3'
+    title: 'Fade in',
+    group: 'Apocalyptica',
+    album: 'asserts/backgrounds/apocalyptica-metalica-cover-album.jpg',
+    audio: 'asserts/mp3/apocalyptica-fade.mp3'
 };
 
 /**
@@ -45,8 +45,8 @@ setLastTrack( lastAudio ? lastAudio : defaultSong);
  */
 const audioPlay = () => {
     audio.play();
-    playButton.src = status.iconPause;
-    playButton.dataset.status = status.statusOn;
+    playButton.src = ICON_PAUSE;
+    playButton.dataset.status = STATUS_ON;
 };
 
 /**
@@ -120,14 +120,14 @@ const startTimer = (duration, element) => {
  * @param target
  */
 const tooglePlay = (target) => {
-    if (target.dataset.status === status.statusOff) {
+    if (target.dataset.status === STATUS_OFF) {
         audioPlay();
         return;
-    } else {
-        audio.pause();
-        target.dataset.status = status.statusOff;
-        target.src = status.iconPlay;
     }
+
+    audio.pause();
+    target.dataset.status = STATUS_OFF;
+    target.src = ICON_PLAY;
 };
 
 timeLine.addEventListener('click', seek);
@@ -139,8 +139,8 @@ songs.forEach((item) => {
 });
 
 audio.addEventListener('ended', (event) => {
-    playButton.src = status.iconPlay;
-    playButton.dataset.status = status.statusOff;
+    playButton.src = ICON_PLAY;
+    playButton.dataset.status = STATUS_OFF;
     progressBar.style.width = '0%';
     percent = 0;
     clearTimeout(timer);
@@ -163,14 +163,14 @@ repeatButton.addEventListener('click', (event) => {
     const loopFlag = !audio.loop;
 
     audio.loop = loopFlag;
-    target.style.filter = loopFlag ? status.invertHidden : status.invertVisible;
+    target.style.filter = loopFlag ? 'invert(0)' : 'invert(0.8)';
 });
 
 volumeButton.addEventListener('click', (event) => {
     const viewFlag = volumeInput.dataset.hidden === 'false';
 
     volumeInput.dataset.hidden = viewFlag;
-    volumeInput.style.display = viewFlag ? status.displayNone : status.displayBlock;
+    volumeInput.style.display = viewFlag ? 'none' : 'block';
 });
 
 volumeInput.oninput = (event) => {
