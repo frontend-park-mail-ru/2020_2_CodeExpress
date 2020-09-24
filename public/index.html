@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+    <link href="asserts/css/base.css" rel="stylesheet">
+    <link href="asserts/css/header.css" rel="stylesheet">
+    <link href="asserts/css/index.css" rel="stylesheet">
+    <link href="asserts/css/slider.css" rel="stylesheet">
+    <link href="asserts/css/album-list.css" rel="stylesheet">
+</head>
+<body>
+<div class="app">
+    <div class="layout__sidebars">
+        <div class="layout__header">
+            <div class="layout__header-title"><span class="title_active">Music</span>Express</div>
+            <div class="group-links">
+                <div class="group-links__link_active">Главная</div>
+                <div class="group-links__link">Категории</div>
+                <div class="group-links__link">Исполнители</div>
+            </div>
+            <div class="group-links">
+                <div class="group-links_title">Моя медиатека</div>
+                <div class="group-links__link">Недавно прослушано</div>
+                <div class="group-links__link">Любимые треки</div>
+                <div class="group-links__link">Альбомы</div>
+                <div class="group-links__link">Плейлисты</div>
+                <div class="group-links__link">Подписки</div>
+            </div>
+        </div>
+        <div class="layout__right-sidebar">
+            <div class="layout__right-sidebar-wrap">
+                <div class="sub-menu">
+                    <div class="sub-menu__links">
+                        <img class="sub-menu__link" src="asserts/icons/chevron-left-solid.svg">
+                        <img class="sub-menu__link" src="asserts/icons/chevron-right-solid.svg">
+                    </div>
+                    <form action="#" class="sub-menu__search">
+                        <input type="search" class="sub-menu__search-input" placeholder="Поиск...">
+                        <img class="sub-menu__search-icon" src="asserts/icons/search-solid.svg">
+                    </form>
+                    <div class="sub-menu__profile">
+                        <div class="sub-menu__profile-nickname">Alex</div>
+                        <img class="sub-menu__profile-avatar" src="asserts/icons/user-circle-solid.svg">
+                    </div>
+                </div>
+                <div class="layout__content">
+                    <div class="layout__content_wrap">
+                        <div class="index-slider">
+                            <div class="index-slider__track">
+                                <div class="index-slider__item index-slider__item_left" style="background-image: url('asserts/backgrounds/banner-natural-2.jpg')"></div>
+                                <div class="index-slider__item index-slider__item_current" style="background-image: url('asserts/backgrounds/banner-origins.jpg')">
+                                    <div class="index-slider__item__information">
+                                        <div class="index-slider__information__group">imagine dragons</div>
+                                        <div class="index-slider__information__album">origins</div>
+                                        <div class="index-slider__information__buttons">
+                                            <div class='primary-button'>Слушать</div>
+                                            <div class='secondary-button'>Подписаться</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="index-slider__item index-slider__item_right" style="background-image: url('asserts/backgrounds/banner-natural.jpg')"></div>
+                            </div>
+                        </div>
+                        <div class="index-content">
+                            <div class="index-content__wrapper">
+                                <div class="content__item">
+                                    <div class="content__item__title">Популярные треки</div>
+                                    <div class="content__item__wrapper">
+                                        <div class="track-item">
+                                            <div class="track-item__album" data-audio="asserts/mp3/nirvana-smells.mp3">
+                                                <img src="asserts/icons/play-solid.svg" class="track-item__play-button">
+                                                <img class="track-item__img" src="asserts/backgrounds/nirvana-nevermind-album.jpg">
+                                            </div>
+                                            <div class="track-item__information">
+                                                <div class="track-item__title">Smells Like Teen Spirit</div>
+                                                <div class="track-item__group">Nirvana</div>
+                                            </div>
+                                            <div class="track-item__duration">5:20</div>
+                                        </div>
+                                        <div class="track-item">
+                                            <div class="track-item__album" data-audio="asserts/mp3/nirvana-man.mp3">
+                                                <img src="asserts/icons/play-solid.svg" class="track-item__play-button">
+                                                <img class="track-item__img" src="asserts/backgrounds/nirvana-nevermind-album.jpg">
+                                            </div>
+                                            <div class="track-item__information">
+                                                <div class="track-item__title">The Man Who Sold the World</div>
+                                                <div class="track-item__group">Nirvana</div>
+                                            </div>
+                                            <div class="track-item__duration">5:20</div>
+                                        </div>
+                                        <div class="track-item">
+                                            <div class="track-item__album" data-audio="asserts/mp3/apocalyptica-path.mp3">
+                                                <img src="asserts/icons/play-solid.svg" class="track-item__play-button">
+                                                <img class="track-item__img" src="asserts/backgrounds/apocalyptica-cult-album.jpeg">
+                                            </div>
+                                            <div class="track-item__information">
+                                                <div class="track-item__title">Path</div>
+                                                <div class="track-item__group">Apocalyptica</div>
+                                            </div>
+                                            <div class="track-item__duration">5:20</div>
+                                        </div>
+                                        <div class="track-item">
+                                            <div class="track-item__album" data-audio="asserts/mp3/apocalyptica-fade.mp3">
+                                                <img src="asserts/icons/play-solid.svg" class="track-item__play-button">
+                                                <img class="track-item__img" src="asserts/backgrounds/apocalyptica-metalica-cover-album.jpg">
+                                            </div>
+                                            <div class="track-item__information">
+                                                <div class="track-item__title">Fade in</div>
+                                                <div class="track-item__group">Apocalyptica</div>
+                                            </div>
+                                            <div class="track-item__duration">5:20</div>
+                                        </div>
+                                        <div class="track-item">
+                                            <div class="track-item__album" data-audio="asserts/mp3/Apocalyptica-One.mp3">
+                                                <img src="asserts/icons/play-solid.svg" class="track-item__play-button">
+                                                <img class="track-item__img" src="asserts/backgrounds/apocalyptica-inquisition-symphony-album.jpg">
+                                            </div>
+                                            <div class="track-item__information">
+                                                <div class="track-item__title">One</div>
+                                                <div class="track-item__group">Apocalyptica</div>
+                                            </div>
+                                            <div class="track-item__duration">5:20</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content__item">
+                                    <div class="content__item__title">Музыка по настроению</div>
+                                    <div class="content__item__wrapper">
+                                        <div class="slider">
+                                            <div class="slider__wrapper">
+                                                <img class="slider__prev-button" src="asserts/icons/chevron-left-solid.svg">
+                                                <div class="slider__track">
+                                                    <div class="slider__item">
+                                                        <div class="slider__item__img" style="background-image: url('asserts/backgrounds/topic-calm.jpg')"></div>
+                                                        <div class="slider__item__title">Спокойное</div>
+                                                    </div>
+                                                    <div class="slider__item">
+                                                        <div class="slider__item__img" style="background-image: url('asserts/backgrounds/topic-rock.jpg')"></div>
+                                                        <div class="slider__item__title">Рок</div>
+                                                    </div>
+                                                    <div class="slider__item">
+                                                        <div class="slider__item__img" style="background-image: url('asserts/backgrounds/topic-sport.jpg')"></div>
+                                                        <div class="slider__item__title">Спорт</div>
+                                                    </div>
+                                                </div>
+                                                <img class="slider__next-button" src="asserts/icons/chevron-right-solid.svg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content__item">
+                                    <div class="content__item__title">Альбомы</div>
+                                    <div class="content__item__wrapper">
+                                        <div class="album-list">
+                                            <div class="album-item">
+                                                <img class="album-item__img" src="asserts/backgrounds/apocalyptica-cult-album.jpeg">
+                                                <div class="album-item__information">
+                                                    <div class="album-item__title">Cult</div>
+                                                    <div class="album-item__group">Apocalyptica</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="album-list">
+                                            <div class="album-item">
+                                                <img class="album-item__img" src="asserts/backgrounds/apocalyptica-metalica-cover-album.jpg">
+                                                <div class="album-item__information">
+                                                    <div class="album-item__title">Plays Metallica by Four Cellos</div>
+                                                    <div class="album-item__group">Apocalyptica</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="album-list">
+                                            <div class="album-item">
+                                                <img class="album-item__img" src="asserts/backgrounds/nirvana-nevermind-album.jpg">
+                                                <div class="album-item__information">
+                                                    <div class="album-item__title">Nevermind</div>
+                                                    <div class="album-item__group">Nirvana</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layout__turntable">
+        <div class="turntable__time-line" id="time-line-js">
+            <div class="turntable__progress-bar" id="progress-bar-js"></div>
+        </div>
+        <div class="turntable__content">
+            <div class="song-controls">
+                <img class="song-control__icon" id="backward" src="asserts/icons/backward-solid.svg">
+                <img class="song-control__icon" id="play" src="asserts/icons/play-solid.svg">
+                <img class="song-control__icon" id="forward" src="asserts/icons/forward-solid.svg">
+            </div>
+            <div class="song-info">
+                <img class="song__avatar" id="player-album-js" src="">
+                <div class="song__content">
+                    <div class="song__content_title" id="player-title-js"></div>
+                    <div class="song__content_author" id="player-group-js"></div>
+                </div>
+            </div>
+            <div class="song-controls">
+                <img class="song-control__icon" src="asserts/icons/plus-solid.svg">
+                <img class="song-control__icon" src="asserts/icons/heart-regular.svg">
+                <img class="song-control__icon" src="asserts/icons/share-square-solid.svg">
+            </div>
+            <div class="song-controls">
+                <img class="song-control__icon" id="repeat-button-js" src="asserts/icons/retweet-solid.svg">
+                <img class="song-control__icon" id="volume-button-js" src="asserts/icons/volume-up-solid.svg">
+                <input class="song-controls__input" id="volume-input-js" data-hidden="true" min="0" max="100" value="100" type="range">
+                <img class="song-control__icon" src="asserts/icons/ellipsis-v-solid.svg">
+            </div>
+        </div>
+        <audio id="music-js" src=""></audio>
+    </div>
+</div>
+<script type="module" src="asserts/js/audio.js"></script>
+<script src="asserts/js/slider.js"></script>
+</body>
+</html>
