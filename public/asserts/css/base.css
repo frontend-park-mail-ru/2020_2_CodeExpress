@@ -5,7 +5,13 @@
     src: url("../ttf/montserrat.ttf");
 }
 
+html {
+    height: 100%;
+}
+
 body {
+    height: 100%;
+
     margin: 0;
 
     background-color: var(--gray-2);
@@ -22,6 +28,21 @@ body {
 
     height: 100%;
     width: 100%;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    padding: 25px 0;
+    margin-top: auto;
+    background-color: var(--black-1);
+}
+
+.footer__title {
+    font-size: 18px;
+    color: white;
 }
 
 .primary-button,

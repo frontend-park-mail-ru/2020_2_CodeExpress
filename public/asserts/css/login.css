@@ -1,7 +1,3 @@
-body, html {
-    height: 100%;
-}
-
 .header {
     display: flex;
     justify-content: center;
@@ -18,7 +14,7 @@ body, html {
     font-weight: 900;
 }
 
-.header__title_span {
+.header__title_accent {
     color: var(--primary-color);
 }
 
@@ -30,7 +26,7 @@ body, html {
     margin: 50px 0;
 }
 
-.content__wrap {
+.content__wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -88,19 +84,4 @@ body, html {
 
 .login-form__link {
     color: var(--primary-color);
-}
-
-.footer {
-    display: flex;
-    justify-content: center;
-
-    width: 100%;
-    padding: 25px 0;
-    margin-top: auto;
-    background-color: var(--black-1);
-}
-
-.footer__title {
-    font-size: 18px;
-    color: white;
 }
