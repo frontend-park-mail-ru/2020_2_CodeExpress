@@ -10,7 +10,7 @@ export default class App {
         this.routes = new Route(this.props.parent);
     }
 
-    render() {
-        this.routes.start();
+    start() {
+        this.routes.routing();
     }
 }

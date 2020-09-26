@@ -1,4 +1,5 @@
-export default {
+// eslint-disable-next-line import/prefer-default-export
+export const RouterStore = {
     website: {
         index: '/',
         profile: '/profile/',

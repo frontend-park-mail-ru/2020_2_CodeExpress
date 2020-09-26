@@ -1,19 +1,22 @@
+// eslint-disable-next-line import/extensions
+import { regTemplates } from '../../store/reg-templates.js';
+
 export default class Route {
     constructor(root) {
         this.history = window.history;
-        this.routers = {};
+        this.routes = {};
         this.root = root;
     }
 
-    register(path, View) {
-        this.routers[path] = {
-            View,
+    register(path, Layout) {
+        this.routes[path] = {
+            Layout,
             view: null,
         };
         return this;
     }
 
-    redirect(path) {
+    go(path) {
         if (path === undefined) {
             return;
         }
@@ -21,9 +24,9 @@ export default class Route {
         let route;
         let argvalue;
 
-        Object.keys(this.routers).forEach((key) => {
-            const view = this.routers[key];
-            const match = key.match(/([^:]+):?(.+)?/)[2];
+        Object.keys(this.routes).forEach((key) => {
+            const view = this.routes[key];
+            const match = key.match(regTemplates.url)[2];
 
             const regKey = match ? key.replace(`:${match}`, '(.+)') : key;
 
@@ -36,31 +39,29 @@ export default class Route {
         });
 
         if (!route) {
-            this.redirect('/');
+            this.go('/');
             return;
         }
 
-        const currentView = this.routers[window.location.pathname];
+        const currentView = this.routes[window.location.pathname];
 
         if (window.location.pathname !== path) {
             window.history.pushState(null, '', path);
         }
 
-        const { View } = route;
+        const { Layout } = route;
         let { view } = route;
 
         if (!view) {
-            view = new View(this.root, argvalue[1]);
+            view = new Layout(this.root, argvalue[1]);
         }
 
-        if (!view.active) {
-            if (currentView.view && currentView.view.active) {
-                currentView.view.hide();
-            }
+        if (!view.active && currentView.view && currentView.view.active) {
+            currentView.view.hide();
         }
 
         view.show();
-        this.routers[path] = { View, view };
+        this.routes[path] = { Layout, view };
     }
 
     back() {
@@ -71,17 +72,17 @@ export default class Route {
         this.history.forward();
     }
 
-    start() {
-        this.redirect(window.location.pathname);
+    routing() {
+        this.go(window.location.pathname);
 
         this.root.addEventListener('click', (event) => {
             if (event.target.tagName === 'DIV' && event.target.className === 'link-btn') {
                 event.preventDefault();
-                this.redirect(event.target.dataset.url);
+                this.go(event.target.dataset.url);
             }
         });
         window.addEventListener('popstate', () => {
-            this.redirect(window.location.pathname);
+            this.go(window.location.pathname);
         });
     }
 }

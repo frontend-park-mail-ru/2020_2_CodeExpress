@@ -2,20 +2,20 @@ export default class Component {
     constructor(parent, props) {
         this.parent = parent;
         this.props = props;
-        this.hidden = true;
+        this.destroy = true;
     }
 
     get active() {
-        return !this.hidden;
+        return !this.destroy;
     }
 
     hide() {
         this.parent.innerHTML = '';
-        this.hidden = true;
+        this.destroy = true;
     }
 
     show() {
-        this.hidden = false;
+        this.destroy = false;
         this.render();
     }
 }
