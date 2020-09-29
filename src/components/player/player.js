@@ -45,16 +45,16 @@ export default class Player extends Component {
      * @param target
      */
     tooglePlay(target) {
-        if (target.dataset.status === statuses.STATUS_OFF) {
+        if (target.dataset.status === statuses.statusOff) {
             this.audioPlay();
             return;
         }
 
         this.state.audio.pause();
         // eslint-disable-next-line no-param-reassign
-        target.dataset.status = statuses.STATUS_OFF;
+        target.dataset.status = statuses.statusOff;
         // eslint-disable-next-line no-param-reassign
-        target.src = statuses.ICON_PLAY;
+        target.src = statuses.iconPlay;
         clearTimeout(this.timer);
     }
 
@@ -103,8 +103,8 @@ export default class Player extends Component {
     audioPlay() {
         const { audio, playButton } = this.state;
         audio.play();
-        playButton.src = statuses.ICON_PAUSE;
-        playButton.dataset.status = statuses.STATUS_ON;
+        playButton.src = statuses.iconPause;
+        playButton.dataset.status = statuses.statusOn;
     }
 
     /**
@@ -175,8 +175,8 @@ export default class Player extends Component {
         });
 
         audio.addEventListener('ended', () => {
-            playButton.src = statuses.ICON_PLAY;
-            playButton.dataset.status = statuses.STATUS_OFF;
+            playButton.src = statuses.iconPlay;
+            playButton.dataset.status = statuses.statusOff;
             progressBar.style.width = '0%';
             this.percent = 0;
             clearTimeout(this.timer);
