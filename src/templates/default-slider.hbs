@@ -1,0 +1,16 @@
+<div class="slider">
+    <img class="slider__prev-button" src="../assets/icons/chevron-left-solid.svg">
+    <div class="slider__container">
+        <div class="slider__track">
+            {{#each slides}}
+                <div class="slider-item">
+                    <div class="slider-item__wrap">
+                        <div class="slider-item__img" style="background-image: url({{ img }})"></div>
+                        <div class="slider-item__title">{{ title }}</div>
+                    </div>
+                </div>
+            {{/each }}
+        </div>
+    </div>
+    <img class="slider__next-button" src="../assets/icons/chevron-right-solid.svg">
+</div>

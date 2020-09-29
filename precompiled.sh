@@ -1,1 +1,1 @@
-handlebars src/components/templates/*.hbs -f src/handlebars.precompiled.js
+handlebars src/templates/*.hbs -f src/handlebars.precompiled.js

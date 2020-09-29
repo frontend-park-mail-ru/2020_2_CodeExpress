@@ -1,21 +1,10 @@
 export default class Component {
-    constructor(parent, props) {
-        this.parent = parent;
+    constructor(props) {
         this.props = props;
-        this.destroy = true;
+        this.state = {};
     }
 
-    get active() {
-        return !this.destroy;
-    }
-
-    hide() {
-        this.parent.innerHTML = '';
-        this.destroy = true;
-    }
-
-    show() {
-        this.destroy = false;
-        this.render();
+    setState(obj) {
+        this.state = { ...this.state, ...obj };
     }
 }

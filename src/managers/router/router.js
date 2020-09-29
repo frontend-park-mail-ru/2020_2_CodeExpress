@@ -1,11 +1,13 @@
 // eslint-disable-next-line import/extensions
 import { regTemplates } from '../../store/reg-templates.js';
+// eslint-disable-next-line import/extensions
+import Component from '../component/component.js';
 
-export default class Route {
-    constructor(root) {
+export default class Router extends Component {
+    constructor(props) {
+        super(props);
         this.history = window.history;
         this.routes = {};
-        this.root = root;
     }
 
     register(path, Layout) {
@@ -53,7 +55,7 @@ export default class Route {
         let { view } = route;
 
         if (!view) {
-            view = new Layout(this.root, argvalue[1]);
+            view = new Layout(this.props, argvalue[1]);
         }
 
         if (!view.active && currentView.view && currentView.view.active) {
@@ -68,15 +70,13 @@ export default class Route {
         this.history.back();
     }
 
-    next() {
+    forward() {
         this.history.forward();
     }
 
-    routing() {
-        this.go(window.location.pathname);
-
-        this.root.addEventListener('click', (event) => {
-            if (event.target.tagName === 'DIV' && event.target.className === 'link-btn') {
+    setup() {
+        this.props.parent.addEventListener('click', (event) => {
+            if (event.target.tagName === 'DIV' && event.target.classList.contains('link-btn')) {
                 event.preventDefault();
                 this.go(event.target.dataset.url);
             }
@@ -84,5 +84,7 @@ export default class Route {
         window.addEventListener('popstate', () => {
             this.go(window.location.pathname);
         });
+
+        this.go(window.location.pathname);
     }
 }

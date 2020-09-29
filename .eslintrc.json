@@ -12,7 +12,10 @@
     },
     "rules": {
         "quotes": [1, "single", { "allowTemplateLiterals": true }],
-        "max-len": [1, 120, 2, {"ignoreComments": true}],
+        "max-len": [1, 200, 2, {"ignoreComments": true}],
         "indent": ["error", 4]
+    },
+    "globals": {
+        "Handlebars": true
     }
 }

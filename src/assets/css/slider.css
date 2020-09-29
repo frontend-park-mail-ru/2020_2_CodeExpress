@@ -1,18 +1,19 @@
 .slider {
     position: relative;
-    overflow: hidden;
-
-    width: 100%;
-    height: 100%;
-}
-
-.slider__wrapper {
-    position: relative;
 
     display: flex;
     align-items: center;
 
-    width: fit-content;
+    width: 900px;
+    height: 100%;
+}
+
+.slider__container {
+    width: 100%;
+
+    margin: 10px;
+
+    overflow: hidden;
 }
 
 .slider__prev-button,
@@ -37,31 +38,36 @@
 .slider__prev-button {
     left: 10px;
     top: 35%;
+    z-index: 10;
 }
 
 .slider__next-button {
     right: 10px;
     top: 35%;
+    z-index: 10;
 }
 
 .slider__track {
     display: flex;
-    margin: 10px;
+
+    transition: ease-in-out transform .2s;
 }
 
-.slider__item {
+.slider-item {
     width: 280px;
-
-    padding: 10px 15px;
 }
 
-.slider__item__title {
+.slider-item__wrap {
+    margin: 10px 15px;
+}
+
+.slider-item__title {
     margin: 10px 0;
 
     font-size: 14px;
 }
 
-.slider__item__img {
+.slider-item__img {
     height: 150px;
     width: 100%;
 

@@ -1,0 +1,31 @@
+<div class="layout__turntable">
+    <div class="turntable__time-line" id="time-line-js">
+        <div class="turntable__progress-bar" id="progress-bar-js"></div>
+    </div>
+    <div class="turntable__content">
+        <div class="song-controls">
+            <img class="song-control__icon" id="backward" src="../assets/icons/backward-solid.svg">
+            <img class="song-control__icon" id="play" src="../assets/icons/play-solid.svg">
+            <img class="song-control__icon" id="forward" src="../assets/icons/forward-solid.svg">
+        </div>
+        <div class="song-info">
+            <img class="song__avatar" id="player-album-js" src="">
+            <div class="song__content">
+                <div class="song__content_title" id="player-title-js"></div>
+                <div class="song__content_author" id="player-group-js"></div>
+            </div>
+        </div>
+        <div class="song-controls">
+            <img class="song-control__icon" src="../assets/icons/plus-solid.svg">
+            <img class="song-control__icon" src="../assets/icons/heart-regular.svg">
+            <img class="song-control__icon" src="../assets/icons/share-square-solid.svg">
+        </div>
+        <div class="song-controls">
+            <img class="song-control__icon" id="repeat-button-js" src="../assets/icons/retweet-solid.svg">
+            <img class="song-control__icon" id="volume-button-js" src="../assets/icons/volume-up-solid.svg">
+            <input class="song-controls__input" id="volume-input-js" data-hidden="true" min="0" max="100" value="100" type="range">
+            <img class="song-control__icon" src="../assets/icons/ellipsis-v-solid.svg">
+        </div>
+    </div>
+    <audio id="music-js" src=""></audio>
+</div>
