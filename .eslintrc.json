@@ -1,0 +1,25 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "airbnb-base"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "rules": {
+        "quotes": [1, "single", { "allowTemplateLiterals": true }],
+        "max-len": [1, 200, 2, {"ignoreComments": true}],
+        "indent": ["error", 4],
+        "import/extensions": "off",
+        "import/prefer-default-export": "off",
+        "import/named": "off",
+        "class-methods-use-this": "off"
+    },
+    "globals": {
+        "Handlebars": true
+    }
+}

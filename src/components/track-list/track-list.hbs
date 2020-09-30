@@ -1,0 +1,13 @@
+{{#each tracks}}
+    <div class="track-item">
+        <div class="track-item__album" data-audio="{{ audio }}">
+            <img src="../../assets/icons/play-solid.svg" class="track-item__play-button">
+            <img class="track-item__img" src="{{ album }}">
+        </div>
+        <div class="track-item__information">
+            <div class="track-item__title">{{ title }}</div>
+            <div class="track-item__group">{{ group }}</div>
+        </div>
+        <div class="track-item__duration">{{ duration }}</div>
+    </div>
+{{/each}}
