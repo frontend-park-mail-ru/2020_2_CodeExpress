@@ -7,6 +7,10 @@ export class TrackList extends Component {
         this.template = Handlebars.templates['track-list.hbs'];
     }
 
+    /**
+     * Отрисовка компонента
+     * @returns {*|string}
+     */
     render() {
         return this.template({ tracks: this.props.tracks });
     }

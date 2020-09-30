@@ -213,6 +213,10 @@ export class Player extends Component {
         });
     }
 
+    /**
+     * Отрисовка компонента
+     * @returns {*|string}
+     */
     render() {
         return this.template();
     }

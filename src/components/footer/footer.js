@@ -7,6 +7,10 @@ export class Footer extends Component {
         this.template = Handlebars.templates['footer.hbs'];
     }
 
+    /**
+     * Отрисовка компонента
+     * @returns {*|string}
+     */
     render() {
         return this.template();
     }

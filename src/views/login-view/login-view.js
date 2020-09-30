@@ -2,6 +2,9 @@ import { BaseView } from '../../managers/base-view/base-view.js';
 import { HeaderFiller } from '../../components/header-filler/header-filler.js';
 import { Footer } from '../../components/footer/footer.js';
 
+/**
+ * View отображающая страницу входа
+ */
 export class LoginView extends BaseView {
     constructor(props) {
         super(props);

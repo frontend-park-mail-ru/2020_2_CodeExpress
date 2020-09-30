@@ -7,6 +7,10 @@ export class HeaderFiller extends Component {
         this.template = Handlebars.templates['header-filler.hbs'];
     }
 
+    /**
+     * Отрисовка компонента
+     * @returns {*|string}
+     */
     render() {
         return this.template();
     }

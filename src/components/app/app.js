@@ -4,6 +4,9 @@ import { IndexView } from '../../views/index-view/index-view.js';
 import { LoginView } from '../../views/login-view/login-view.js';
 import { Component } from '../../managers/component/component.js';
 
+/**
+ * Класс инициализатор.
+ */
 export class App extends Component {
     constructor(props) {
         super(props);

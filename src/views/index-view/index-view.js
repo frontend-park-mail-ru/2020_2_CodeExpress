@@ -4,6 +4,9 @@ import { DefaultSlider } from '../../components/default-slider/default-slider.js
 import { TrackList } from '../../components/track-list/track-list.js';
 import { slides, tracks } from '../../store/consts.js';
 
+/**
+ * View отображающая главную страницу
+ */
 export class IndexView extends BaseView {
     constructor(props) {
         super(props);

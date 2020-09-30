@@ -1,6 +1,12 @@
 import { regTemplates } from '../../store/reg-templates.js';
 import { Component } from '../component/component.js';
 
+/**
+ * Функция поиска параметров в url
+ * @param path
+ * @param key
+ * @returns {boolean}
+ */
 const findArgs = (path, key) => { // TODO : Доделать маршрутизацию по динамическим урлам.
     const match = key.match(regTemplates.url);
     const args = match[2];
@@ -32,6 +38,10 @@ export class Router extends Component {
         return this;
     }
 
+    /**
+     * Функция перехода по сайту
+     * @param path
+     */
     go(path) {
         if (path === undefined) {
             return;

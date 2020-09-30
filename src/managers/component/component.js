@@ -1,3 +1,6 @@
+/**
+ * Базовый класс для компонентов
+ */
 export class Component {
     constructor(props) {
         this.props = props;

@@ -7,6 +7,10 @@ export class SideBar extends Component {
         this.template = Handlebars.templates['sidebar.hbs'];
     }
 
+    /**
+     * Отрисовка компонента
+     * @returns {*|string}
+     */
     render() {
         return this.template();
     }

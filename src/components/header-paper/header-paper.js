@@ -7,6 +7,10 @@ export class HeaderPaper extends Component {
         this.template = Handlebars.templates['header-paper.hbs'];
     }
 
+    /**
+     * Отрисовка компонента
+     * @returns {*|string}
+     */
     render() {
         return this.template();
     }

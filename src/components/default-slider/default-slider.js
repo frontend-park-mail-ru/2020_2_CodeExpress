@@ -23,6 +23,11 @@ export class DefaultSlider extends Component {
         this.movePosition = this.props.slideToScroll * this.slideWidth;
     }
 
+    /**
+     * Установка минимальной ширины всем слайдам
+     * @param slides
+     * @param slideWidth
+     */
     setMinWidth(slides, slideWidth) {
         slides.forEach((item) => {
             // eslint-disable-next-line no-param-reassign
@@ -30,16 +35,26 @@ export class DefaultSlider extends Component {
         });
     }
 
+    /**
+     * Изменение position у track
+     */
     setPosition() {
         this.track.style.transform = `translateX(${this.position}px)`;
     }
 
+    /**
+     * Функция, которая отключает кнопки управления слайдера при достижении конца слайдера.
+     */
     setDisabledToButtons() {
         this.prevBtn.disabled = this.position === 0;
         const isEnd = this.position <= -(this.slidesCount - this.slideToShow) * this.slideWidth;
         this.nextBtn.disabled = isEnd;
     }
 
+    /**
+     * Функция, которая устанавливает addEventListener блокам управления
+     * @param slider
+     */
     setEventListeners(slider) {
         const { slideToShow, slideToScroll } = this.props;
 
@@ -68,6 +83,10 @@ export class DefaultSlider extends Component {
         });
     }
 
+    /**
+     * Отрисовка компонента
+     * @returns {*|string}
+     */
     render() {
         return this.template({ slides: this.props.slides });
     }
