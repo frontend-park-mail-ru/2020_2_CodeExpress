@@ -54,7 +54,7 @@ export const tracks = [
         duration: '5:20',
     },
     {
-        audio: './assets/mp3/Apocalyptica-One.mp3',
+        audio: '../assets/mp3/Apocalyptica-One.mp3',
         title: 'One',
         album: '../assets/backgrounds/apocalyptica-inquisition-symphony-album.jpg',
         group: 'Apocalyptica',

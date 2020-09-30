@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/prefer-default-export
+// Объект, в котором хранятся строки для RegExp
 export const regTemplates = {
     url: /([^:]+):?(.+)?/,
 };

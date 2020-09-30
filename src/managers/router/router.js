@@ -1,9 +1,18 @@
-// eslint-disable-next-line import/extensions
 import { regTemplates } from '../../store/reg-templates.js';
-// eslint-disable-next-line import/extensions
-import Component from '../component/component.js';
+import { Component } from '../component/component.js';
 
-export default class Router extends Component {
+const findArgs = (path, key) => { // TODO : Доделать маршрутизацию по динамическим урлам.
+    const match = key.match(regTemplates.url);
+    const args = match[2];
+    if (args) {
+        // eslint-disable-next-line no-param-reassign
+        key = key.replace(`:${args}`, '(.+)');
+    }
+
+    return !path.match(key);
+};
+
+export class Router extends Component {
     constructor(props) {
         super(props);
         this.history = window.history;
@@ -13,26 +22,14 @@ export default class Router extends Component {
             currentView: null,
         };
 
-        this.handlerMouseClick = this.handlerMouseClick.bind(this);
-        this.props.parent.addEventListener('click', this.handlerMouseClick);
+        this.handleMouseClick = this.handleMouseClick.bind(this);
+        this.props.parent.addEventListener('click', this.handleMouseClick);
         window.addEventListener('popstate', () => { this.go(window.location.pathname); });
     }
 
     register(path, View) {
-        this.routes.set(path, new View(this.props));
+        this.routes.set(path, View);
         return this;
-    }
-
-    findArgs(path, key) { // TODO : Доделать маршрутизацию по динамическим урлам.
-        const match = key.match(regTemplates.url);
-        const args = match[2];
-        if (args) {
-            // eslint-disable-next-line no-param-reassign
-            key = key.replace(`:${args}`, '(.+)');
-            this.setState(args);
-        }
-
-        return !path.match(key);
     }
 
     go(path) {
@@ -40,8 +37,9 @@ export default class Router extends Component {
             return;
         }
 
-        if (this.state.currentView) {
-            this.state.currentView.hide();
+        const { currentView } = this.state;
+        if (currentView) {
+            currentView.hide();
         }
 
         if (window.location.pathname !== path) {
@@ -49,7 +47,7 @@ export default class Router extends Component {
         }
 
         this.routes.forEach((view, key) => {
-            const matchPath = this.findArgs(path, key);
+            const matchPath = findArgs(path, key);
 
             if (matchPath) {
                 return;
@@ -69,8 +67,8 @@ export default class Router extends Component {
         this.history.forward();
     }
 
-    handlerMouseClick(event) {
-        if (event.target.tagName === 'DIV' && event.target.classList.contains('link-btn')) {
+    handleMouseClick(event) {
+        if (event.target.classList.contains('link-btn')) {
             event.preventDefault();
             this.go(event.target.dataset.url);
         }

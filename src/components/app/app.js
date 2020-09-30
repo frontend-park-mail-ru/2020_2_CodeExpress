@@ -1,24 +1,19 @@
-// eslint-disable-next-line import/extensions
-import Route from '../../managers/router/router.js';
-// eslint-disable-next-line import/extensions
+import { Router } from '../../managers/router/router.js';
 import { RouterStore } from '../../store/routes.js';
-// eslint-disable-next-line import/extensions
-import IndexView from '../../views/index-view/index-view.js';
-// eslint-disable-next-line import/extensions
-import LoginView from '../../views/login-view/login-view.js';
-// eslint-disable-next-line import/extensions
-import Component from '../../managers/component/component.js';
+import { IndexView } from '../../views/index-view/index-view.js';
+import { LoginView } from '../../views/login-view/login-view.js';
+import { Component } from '../../managers/component/component.js';
 
-export default class App extends Component {
+export class App extends Component {
     constructor(props) {
         super(props);
-        this.routes = new Route(this.props);
-        this.routes
-            .register(RouterStore.website.index, IndexView)
-            .register(RouterStore.website.login, LoginView);
+        this.router = new Router(this.props);
+        this.router
+            .register(RouterStore.website.index, new IndexView(props))
+            .register(RouterStore.website.login, new LoginView(props));
     }
 
     start() {
-        this.routes.setup();
+        this.router.setup();
     }
 }

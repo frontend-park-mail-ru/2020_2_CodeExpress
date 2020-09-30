@@ -1,31 +1,32 @@
-// eslint-disable-next-line import/extensions
-import Page from '../../components/page/page.js';
-// eslint-disable-next-line import/extensions
-import BaseView from '../../managers/base-view/base-view.js';
-// eslint-disable-next-line import/extensions
-import DefaultSlider from '../../components/default-slider/default-slider.js';
-// eslint-disable-next-line import/extensions
-import TrackList from '../../components/track-list/track-list.js';
-
-// eslint-disable-next-line import/extensions,import/named
+import { Page } from '../../components/page/page.js';
+import { BaseView } from '../../managers/base-view/base-view.js';
+import { DefaultSlider } from '../../components/default-slider/default-slider.js';
+import { TrackList } from '../../components/track-list/track-list.js';
 import { slides, tracks } from '../../store/consts.js';
 
-export default class IndexView extends BaseView {
+export class IndexView extends BaseView {
+    constructor(props) {
+        super(props);
+        this.page = new Page(this.props);
+        this.slider = new DefaultSlider({ slides, slideToShow: 3, slideToScroll: 1 });
+        this.trackList = new TrackList({ tracks });
+
+        this.template = Handlebars.templates['index.hbs'];
+    }
+
     render() {
-        const template = Handlebars.templates['index.hbs'];
         const page = new Page(this.props);
-        page.init();
+        page.render();
 
         const parent = this.props.parent.querySelector('.layout__content_wrap');
         const slider = new DefaultSlider({ slides, slideToShow: 3, slideToScroll: 1 });
         const trackList = new TrackList({ tracks });
 
-        parent.insertAdjacentHTML('afterbegin', template({ slider: slider.init(), tracks: trackList.init() }));
+        parent.insertAdjacentHTML('afterbegin', this.template({ slider: slider.render(), tracks: trackList.render() }));
 
         const sliderWrap = parent.querySelector('.slider');
-        slider.getElements(sliderWrap);
-        slider.setEvents();
+        slider.setEventListeners(sliderWrap);
 
-        page.setEvents();
+        page.setEventListeners();
     }
 }

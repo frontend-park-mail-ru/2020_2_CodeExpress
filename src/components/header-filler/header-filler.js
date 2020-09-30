@@ -1,9 +1,13 @@
-// eslint-disable-next-line import/extensions
-import Component from '../../managers/component/component.js';
+import { Component } from '../../managers/component/component.js';
 
-export default class HeaderFiller extends Component {
-    init() {
-        const template = Handlebars.templates['header-filler.hbs'];
-        this.props.parent.insertAdjacentHTML('afterbegin', template());
+export class HeaderFiller extends Component {
+    constructor(props) {
+        super(props);
+
+        this.template = Handlebars.templates['header-filler.hbs'];
+    }
+
+    render() {
+        return this.template();
     }
 }

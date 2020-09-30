@@ -1,4 +1,6 @@
-// eslint-disable-next-line import/extensions
-import App from './components/app/app.js';
+import { App } from './components/app/app.js';
 
-new App({ parent: document.getElementById('app') }).start();
+const parent = document.getElementById('app');
+const app = new App({ parent });
+
+app.start();

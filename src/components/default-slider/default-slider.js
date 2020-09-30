@@ -1,75 +1,74 @@
-// eslint-disable-next-line import/extensions
-import Component from '../../managers/component/component.js';
+import { Component } from '../../managers/component/component.js';
 
-export default class DefaultSlider extends Component {
+export class DefaultSlider extends Component {
     constructor(props) {
         super(props);
+
+        this.template = Handlebars.templates['default-slider.hbs'];
         this.position = 0;
     }
 
-    init() {
-        const template = Handlebars.templates['default-slider.hbs'];
-        return template({ slides: this.props.slides });
+    /**
+     * Поиск элементов слайдера
+     * @param slider
+     */
+    didMount(slider) {
+        this.container = slider.querySelector('.slider__container');
+        this.track = slider.querySelector('.slider__track');
+        this.slides = slider.querySelectorAll('.slider-item');
+        this.slidesCount = this.slides.length;
+        this.prevBtn = slider.querySelector('.slider__prev-button');
+        this.nextBtn = slider.querySelector('.slider__next-button');
+        this.slideWidth = this.container.clientWidth / this.props.slideToShow;
+        this.movePosition = this.props.slideToScroll * this.slideWidth;
     }
 
-    getElements(slider) {
-        const container = slider.querySelector('.slider__container');
-        const track = slider.querySelector('.slider__track');
-        const slides = slider.querySelectorAll('.slider-item');
-        const slidesCount = slides.length;
-        const prevBtn = slider.querySelector('.slider__prev-button');
-        const nextBtn = slider.querySelector('.slider__next-button');
-        const slideWidth = container.clientWidth / this.props.slideToShow;
-        const movePosition = this.props.slideToScroll * slideWidth;
-
+    setMinWidth(slides, slideWidth) {
         slides.forEach((item) => {
             // eslint-disable-next-line no-param-reassign
             item.style.minWidth = `${slideWidth}px`;
         });
-
-        this.setState({
-            slider, slides, slidesCount, container, track, slideWidth, movePosition, prevBtn, nextBtn,
-        });
     }
 
     setPosition() {
-        this.state.track.style.transform = `translateX(${this.position}px)`;
+        this.track.style.transform = `translateX(${this.position}px)`;
     }
 
-    checkBtns() {
-        const { slideToShow } = this.props;
-        const {
-            nextBtn, prevBtn, slidesCount, slideWidth,
-        } = this.state;
-
-        prevBtn.disabled = this.position === 0;
-        nextBtn.disabled = this.position <= -(slidesCount - slideToShow) * slideWidth;
+    setDisabledToButtons() {
+        this.prevBtn.disabled = this.position === 0;
+        const isEnd = this.position <= -(this.slidesCount - this.slideToShow) * this.slideWidth;
+        this.nextBtn.disabled = isEnd;
     }
 
-    setEvents() {
+    setEventListeners(slider) {
         const { slideToShow, slideToScroll } = this.props;
-        const {
-            prevBtn, nextBtn, slidesCount, slideWidth, movePosition,
-        } = this.state;
 
-        this.checkBtns();
+        this.didMount(slider);
 
-        nextBtn.addEventListener('click', () => {
-            const slidesLeft = slidesCount - (Math.abs(this.position) + slideToShow * slideWidth) / slideWidth;
+        this.setMinWidth(this.slides, this.slideWidth);
+        this.setDisabledToButtons();
 
-            this.position -= slidesLeft >= slideToScroll ? movePosition : slidesLeft * slideWidth;
+        this.nextBtn.addEventListener('click', () => {
+            const currentPosition = (Math.abs(this.position) + slideToShow * this.slideWidth); // Определение текущего position
+            const slidesLeft = this.slidesCount - currentPosition / this.slideWidth; // Определении кол-ва оставшихся слайдов
 
-            this.setPosition();
-            this.checkBtns();
-        });
-
-        prevBtn.addEventListener('click', () => {
-            const slidesLeft = Math.abs(this.position) / slideWidth;
-
-            this.position += slidesLeft >= slideToScroll ? movePosition : slidesLeft * slideWidth;
+            this.position -= slidesLeft >= slideToScroll ? this.movePosition : slidesLeft * this.slideWidth;
 
             this.setPosition();
-            this.checkBtns();
+            this.setDisabledToButtons();
         });
+
+        this.prevBtn.addEventListener('click', () => {
+            const slidesLeft = Math.abs(this.position) / this.slideWidth;
+
+            this.position += slidesLeft >= slideToScroll ? this.movePosition : slidesLeft * this.slideWidth;
+
+            this.setPosition();
+            this.setDisabledToButtons();
+        });
+    }
+
+    render() {
+        return this.template({ slides: this.props.slides });
     }
 }

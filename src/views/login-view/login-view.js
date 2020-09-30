@@ -1,18 +1,17 @@
-// eslint-disable-next-line import/extensions
-import BaseView from '../../managers/base-view/base-view.js';
-// eslint-disable-next-line import/extensions
-import HeaderFiller from '../../components/header-filler/header-filler.js';
-// eslint-disable-next-line import/extensions
-import Footer from '../../components/footer/footer.js';
+import { BaseView } from '../../managers/base-view/base-view.js';
+import { HeaderFiller } from '../../components/header-filler/header-filler.js';
+import { Footer } from '../../components/footer/footer.js';
 
-export default class LoginView extends BaseView {
+export class LoginView extends BaseView {
+    constructor(props) {
+        super(props);
+        this.header = new HeaderFiller(this.props);
+        this.footer = new Footer(this.props);
+
+        this.template = Handlebars.templates['login.hbs'];
+    }
+
     render() {
-        const template = Handlebars.templates['login.hbs'];
-        const header = new HeaderFiller(this.props);
-        const footer = new Footer(this.props);
-
-        this.props.parent.innerHTML = template();
-        header.init();
-        footer.init();
+        this.props.parent.innerHTML = this.template({ header: this.header.render(), footer: this.footer.render() });
     }
 }

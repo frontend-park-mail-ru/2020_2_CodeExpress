@@ -1,4 +1,4 @@
-src/handlebars.precompiled.js
+src/templates.js
 src/assets/js/handlebars.runtime-v4.7.6.js
 
 public/
