@@ -4,5 +4,6 @@ export const RouterStore = {
         profile: '/profile/',
         login: '/login/',
         register: '/register',
+        signup: '/signup',
     },
 };

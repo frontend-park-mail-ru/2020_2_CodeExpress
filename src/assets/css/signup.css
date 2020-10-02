@@ -73,11 +73,11 @@
 
 .login-section {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-between;
 
     height: 80px;
+    width: 170px;
     margin: 20px 0;
 }
 
