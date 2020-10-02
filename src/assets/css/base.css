@@ -30,6 +30,10 @@ body {
     width: 100%;
 }
 
+.link-btn {
+    cursor: pointer;
+}
+
 .footer {
     display: flex;
     justify-content: center;
