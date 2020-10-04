@@ -50,7 +50,9 @@ body {
 }
 
 .primary-button,
-.secondary-button {
+.primary-header-button,
+.secondary-button,
+.secondary-header-button {
     width: fit-content;
     padding: 10px 15px;
     background-color: var(--primary-color);
@@ -71,7 +73,18 @@ body {
     opacity: 0.8;
 }
 
-.secondary-button {
+.primary-header-button,
+.secondary-header-button {
+    padding: 5px 10px;
+    margin: 0 5px;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+}
+
+.secondary-button,
+.secondary-header-button {
     background-color: var(--secondary-color);
 }
 

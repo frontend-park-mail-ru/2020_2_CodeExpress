@@ -18,7 +18,7 @@ const findArgs = (path, key) => { // TODO : Доделать маршрутиз�
     return !path.match(key);
 };
 
-export class Router extends Component {
+class Router extends Component {
     constructor(props) {
         super(props);
         this.history = window.history;
@@ -29,7 +29,7 @@ export class Router extends Component {
         };
 
         this.handleMouseClick = this.handleMouseClick.bind(this);
-        this.props.parent.addEventListener('click', this.handleMouseClick);
+        this.props.addEventListener('click', this.handleMouseClick);
         window.addEventListener('popstate', () => { this.go(window.location.pathname); });
     }
 
@@ -88,3 +88,5 @@ export class Router extends Component {
         this.go(window.location.pathname);
     }
 }
+
+export const router = new Router(document.getElementById('app'));
