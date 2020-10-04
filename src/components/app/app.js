@@ -1,6 +1,7 @@
 import { router } from '../../managers/router/router.js';
 import { RouterStore } from '../../store/routes.js';
 import { IndexView } from '../../views/index-view/index-view.js';
+import { ProfileView } from '../../views/profile-view/profile-view.js';
 import { LoginView } from '../../views/login-view/login-view.js';
 import { SignupView } from '../../views/signup-view/signup-view.js';
 import { Component } from '../../managers/component/component.js';
@@ -27,7 +28,8 @@ export class App extends Component {
         router
             .register(RouterStore.website.index, new IndexView(this.props, this.storage))
             .register(RouterStore.website.login, new LoginView(this.props, this.storage))
-            .register(RouterStore.website.signup, new SignupView(this.props, this.storage));
+            .register(RouterStore.website.signup, new SignupView(this.props, this.storage))
+            .register(RouterStore.website.profile, new ProfileView(this.props, this.storage));
     }
 
     start() {
