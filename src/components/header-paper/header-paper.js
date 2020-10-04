@@ -1,8 +1,8 @@
 import { Component } from '../../managers/component/component.js';
 
 export class HeaderPaper extends Component {
-    constructor(props) {
-        super(props);
+    constructor(props, storage) {
+        super(props, storage);
 
         this.template = Handlebars.templates['header-paper.hbs'];
     }
@@ -12,6 +12,7 @@ export class HeaderPaper extends Component {
      * @returns {*|string}
      */
     render() {
-        return this.template();
+        const user = this.storage.get('user');
+        return this.template({ load: user.isLoaded, username: user.get('username') });
     }
 }

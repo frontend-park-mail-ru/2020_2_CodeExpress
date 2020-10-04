@@ -3,7 +3,14 @@ export const RouterStore = {
         index: '/',
         profile: '/profile/',
         login: '/login/',
-        register: '/register',
-        signup: '/signup',
+        signup: '/signup/',
+    },
+    api: {
+        user: {
+            current: '/api/v1/user/current/',
+            login: '/api/v1/user/login/',
+            register: '/api/v1/user/register',
+            logout: '/api/v1/user/logout/',
+        },
     },
 };

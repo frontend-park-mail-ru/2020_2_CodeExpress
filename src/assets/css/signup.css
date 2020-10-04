@@ -67,8 +67,18 @@
     border-bottom: 1px solid var(--gray-1);
 }
 
+.content-form__errors {
+    font-size: 15px;
+
+    color: darkred;
+}
+
 .content-form-item__submit {
     width: 100%;
+}
+
+.content-form-item__submit:focus {
+    outline: 0;
 }
 
 .login-section {

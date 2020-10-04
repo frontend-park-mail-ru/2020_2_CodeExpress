@@ -7,11 +7,11 @@ import { Component } from '../../managers/component/component.js';
  * Класс, который отрисовывает основные компоненты сайта.
  */
 export class Page extends Component {
-    constructor(props) {
-        super(props);
+    constructor(props, storage) {
+        super(props, storage);
 
         this.template = Handlebars.templates['page.hbs'];
-        this.header = new HeaderPaper(this.props);
+        this.header = new HeaderPaper(this.props, this.storage);
         this.player = new Player(this.props);
         this.sideBar = new SideBar(this.props);
     }
