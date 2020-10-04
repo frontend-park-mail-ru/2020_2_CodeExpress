@@ -48,11 +48,11 @@
     margin-bottom: 5px;
 }
 
-.content__item__title {
+.content-item__title_profile {
     margin: 0;
     font-size: 21px;
 }
 
-.secondary-title::after {
+.secondary-title:after {
     background-color: var(--secondary-color);
 }

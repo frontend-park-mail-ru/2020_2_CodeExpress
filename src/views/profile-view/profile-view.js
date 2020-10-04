@@ -7,7 +7,7 @@ import { BaseView } from '../../managers/base-view/base-view.js';
 export class ProfileView extends BaseView {
     constructor(props, storage) {
         super(props, storage);
-        this.page = new Page(this.props);
+        this.page = new Page(this.props, this.storage);
 
         this.template = Handlebars.templates['profile.hbs'];
     }
