@@ -1,10 +1,11 @@
 import { BaseView } from '../../managers/base-view/base-view.js';
 import { HeaderFiller } from '../../components/header-filler/header-filler.js';
 import { Footer } from '../../components/footer/footer.js';
-import { validator } from '../../managers/validator/validator.js';
+import { userFormValidator } from '../../managers/validator/validator.js';
 import { regTemplates } from '../../store/reg-templates.js';
 import { RouterStore } from '../../store/routes.js';
 import { Request } from '../../managers/request/request.js';
+import { router } from '../../managers/router/router.js';
 
 /**
  * View отображающая страницу регистрации
@@ -38,19 +39,19 @@ export class SignupView extends BaseView {
         passwordErrors.innerText = '';
         emailErrors.innerText = '';
 
-        const emailValidator = validator(email, regTemplates.email, 'Поле дожно быть формата email@email.ru');
+        const emailValidator = userFormValidator(email, regTemplates.email, 'Поле дожно быть формата email@email.ru');
         if (!emailValidator.status) {
             emailErrors.innerText = emailValidator.message;
             isValidate = false;
         }
 
-        const usernameValidator = validator(username, regTemplates.username, 'Имя может содержать только буквы и цифры');
+        const usernameValidator = userFormValidator(username, regTemplates.username, 'Имя может содержать только буквы и цифры');
         if (!usernameValidator.status) {
             usernameErrors.innerText = usernameValidator.message;
             isValidate = false;
         }
 
-        const password1Validator = validator(password1,
+        const password1Validator = userFormValidator(password1,
             regTemplates.password,
             'Длина пароля от 8 до 30 символов<br />Может содержать только латинские буквы и цифры');
 
@@ -76,6 +77,7 @@ export class SignupView extends BaseView {
                 const { status, body } = res;
                 if (status !== 200) {
                     formErrors.innerText = body.message;
+                    return;
                 }
 
                 const userAttrs = {
@@ -88,8 +90,6 @@ export class SignupView extends BaseView {
                 user.update(userAttrs);
                 user.isLoaded = true;
                 this.storage.set('user', user);
-
-                const router = this.storage.get('router');
                 router.go(RouterStore.website.index);
             });
         }
@@ -97,7 +97,6 @@ export class SignupView extends BaseView {
 
     render() {
         const user = this.storage.get('user');
-        const router = this.storage.get('router');
 
         if (user.isLoaded) {
             router.go('/');

@@ -1,4 +1,4 @@
-import { Router } from '../../managers/router/router.js';
+import { router } from '../../managers/router/router.js';
 import { RouterStore } from '../../store/routes.js';
 import { IndexView } from '../../views/index-view/index-view.js';
 import { LoginView } from '../../views/login-view/login-view.js';
@@ -13,12 +13,10 @@ export class App extends Component {
     constructor(props) {
         super(props);
 
-        const router = new Router(this.props);
         const user = new ModelUser();
 
         this.state = {
             user,
-            router,
         };
 
         this.storage = {
@@ -26,20 +24,13 @@ export class App extends Component {
             set: (key, value) => { this.setState(key, value); },
         };
 
-        this.state.router
+        router
             .register(RouterStore.website.index, new IndexView(this.props, this.storage))
             .register(RouterStore.website.login, new LoginView(this.props, this.storage))
             .register(RouterStore.website.signup, new SignupView(this.props, this.storage));
     }
 
     start() {
-        const { router } = this.state;
-        //
-        // ModelUser.getCurrentUser().then((user) => {
-        //     this.setState({ user, loading: false });
-        //     router.go(window.location.pathname);
-        // });
-
         router.setup();
     }
 }

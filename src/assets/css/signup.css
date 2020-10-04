@@ -70,7 +70,7 @@
 .content-form__errors {
     font-size: 15px;
 
-    color: darkred;
+    color: var(--error);
 }
 
 .content-form-item__submit {
