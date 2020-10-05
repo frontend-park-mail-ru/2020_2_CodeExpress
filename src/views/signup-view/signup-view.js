@@ -93,12 +93,13 @@ export class SignupView extends BaseView {
 
         if (user.isLoaded) {
             router.go('/');
-        } else {
-            this.props.parent.innerHTML = this.template({
-                header: this.header.render(),
-                footer: this.footer.render(),
-            });
+            return;
         }
+
+        this.props.parent.innerHTML = this.template({
+            header: this.header.render(),
+            footer: this.footer.render(),
+        });
 
         const form = this.props.parent.querySelector('.sign-up-form');
         form.addEventListener('submit', this.submit);

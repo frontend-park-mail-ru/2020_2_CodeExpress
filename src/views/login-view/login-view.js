@@ -84,10 +84,10 @@ export class LoginView extends BaseView {
 
         if (user.isLoaded) {
             router.go(RouterStore.website.index);
-        } else {
-            this.props.parent.innerHTML = this.template({ header: this.header.render(), footer: this.footer.render() });
+            return;
         }
 
+        this.props.parent.innerHTML = this.template({ header: this.header.render(), footer: this.footer.render() });
         const form = this.props.parent.querySelector('.login-form');
         form.addEventListener('submit', this.submit);
     }
