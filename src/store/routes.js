@@ -11,6 +11,11 @@ export const RouterStore = {
             login: '/api/v1/user/login/',
             register: '/api/v1/user/register',
             logout: '/api/v1/user/logout/',
+            change: {
+                avatar: '/api/v1/user/change/avatar',
+                profile: '/api/v1/user/change/profile',
+                password: '/api/v1/user/change/password',
+            },
         },
     },
 };

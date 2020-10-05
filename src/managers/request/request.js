@@ -29,9 +29,6 @@ export class Request {
             method: 'POST',
             credentials: 'include',
             mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8',
-            },
             body: serialize ? JSON.stringify(data) : data,
         }).then((response) => response.json().then((body) => ({ status: response.status, body })));
     }
