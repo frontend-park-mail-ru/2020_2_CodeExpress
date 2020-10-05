@@ -30,7 +30,11 @@ export class Page extends Component {
      * Установка EventListeners
      */
     setEventListeners() {
+        this.player.setEventListeners();
+    }
+
+    setEventToTracks() {
         const tracksWrap = this.props.parent.querySelector('[data-tracks="true"]');
-        this.player.setEventListeners(tracksWrap);
+        this.player.setEventToTracks(tracksWrap);
     }
 }

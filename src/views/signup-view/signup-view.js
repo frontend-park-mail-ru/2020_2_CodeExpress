@@ -17,8 +17,6 @@ export class SignupView extends BaseView {
         this.footer = new Footer(this.props);
 
         this.submit = this.submit.bind(this);
-        this.props.parent.addEventListener('submit', this.submit);
-
         this.template = Handlebars.templates['signup.hbs'];
     }
 
@@ -35,6 +33,7 @@ export class SignupView extends BaseView {
         const passwordErrors = target.querySelector('.password-errors');
         let isValidate = true;
 
+        formErrors.innerText = '';
         usernameErrors.innerText = '';
         passwordErrors.innerText = '';
         emailErrors.innerText = '';
@@ -72,27 +71,21 @@ export class SignupView extends BaseView {
             repeated_password: password2.value,
         };
 
-        if (isValidate) {
-            Request.post(RouterStore.api.user.register, { payload }).then((res) => {
-                const { status, body } = res;
-                if (status !== 200) {
-                    formErrors.innerText = body.message;
-                    return;
-                }
-
-                const userAttrs = {
-                    id: body.id,
-                    username: body.username,
-                    email: body.email,
-                };
-
-                const user = this.storage.get('user');
-                user.update(userAttrs);
-                user.isLoaded = true;
-                this.storage.set('user', user);
-                router.go(RouterStore.website.index);
-            });
+        if (!isValidate) {
+            return;
         }
+
+        Request.post(RouterStore.api.user.register, { payload }).then((res) => {
+            const { status, body } = res;
+            if (status !== 200) {
+                formErrors.innerText = body.message;
+                return;
+            }
+
+            if (status === 200) {
+                router.go(RouterStore.website.login);
+            }
+        });
     }
 
     render() {
@@ -106,5 +99,8 @@ export class SignupView extends BaseView {
                 footer: this.footer.render(),
             });
         }
+
+        const form = this.props.parent.querySelector('.sign-up-form');
+        form.addEventListener('submit', this.submit);
     }
 }

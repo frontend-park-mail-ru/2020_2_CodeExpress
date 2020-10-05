@@ -27,5 +27,6 @@ export class IndexView extends BaseView {
         this.slider.setEventListeners(sliderWrap);
 
         this.page.setEventListeners();
+        this.page.setEventToTracks();
     }
 }

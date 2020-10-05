@@ -149,7 +149,7 @@ export class Player extends Component {
     /**
      * Функция, которая навешивает обработчики событий на элементы управления плейера.
      */
-    setEventListeners(tracksWrap) {
+    setEventListeners() {
         this.didMount();
 
         this.playButton.addEventListener('click', (event) => {
@@ -194,8 +194,6 @@ export class Player extends Component {
         this.volumeInput.oninput = (event) => {
             this.audio.volume = parseFloat(event.target.value / 100);
         };
-
-        this.setEventToTracks(tracksWrap);
     }
 
     /**
