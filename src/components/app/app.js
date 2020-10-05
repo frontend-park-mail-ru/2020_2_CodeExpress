@@ -33,6 +33,9 @@ export class App extends Component {
     }
 
     start() {
+        ModelUser.getCurrentUser().then((user) => {
+            this.setState({ user });
+        });
         router.setup();
     }
 }
