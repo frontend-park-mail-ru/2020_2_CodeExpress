@@ -131,10 +131,15 @@ export class ProfileView extends BaseView {
     logout(event) {
         event.preventDefault();
 
+        // TODO: Передалать позже на выскакивающее сообщение
+        const logoutErrors = this.props.parent.querySelector('.logout-error');
+
         Request.post(RouterStore.api.user.logout).then((res) => {
-            const { status } = res;
+            const { status, body } = res;
             if (status === 200) {
                 router.go(RouterStore.website.index);
+            } else {
+                logoutErrors.innerText = body.message;
             }
         });
     }
