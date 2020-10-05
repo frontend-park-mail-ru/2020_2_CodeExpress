@@ -17,6 +17,7 @@ export class ProfileView extends BaseView {
         this.changeAvatar = this.changeAvatar.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.changeProfile = this.changeProfile.bind(this);
+        this.logout = this.logout.bind(this);
         this.template = Handlebars.templates['profile.hbs'];
     }
 
@@ -127,6 +128,22 @@ export class ProfileView extends BaseView {
         });
     }
 
+    logout(event) {
+        event.preventDefault();
+
+        // TODO: Передалать позже на выскакивающее сообщение
+        const logoutErrors = this.props.parent.querySelector('.logout-error');
+
+        Request.post(RouterStore.api.user.logout).then((res) => {
+            const { status, body } = res;
+            if (status === 200) {
+                router.go(RouterStore.website.index);
+            } else {
+                logoutErrors.innerText = body.message;
+            }
+        });
+    }
+
     render() {
         const user = this.storage.get('user');
 
@@ -151,5 +168,8 @@ export class ProfileView extends BaseView {
 
         const passwordChangeForm = this.props.parent.querySelector('.form-change-password');
         passwordChangeForm.addEventListener('submit', this.changePassword);
+
+        const logoutBtn = this.props.parent.querySelector('.logout-btn');
+        logoutBtn.addEventListener('click', this.logout);
     }
 }

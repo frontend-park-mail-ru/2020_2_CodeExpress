@@ -67,7 +67,8 @@
     border-bottom: 1px solid var(--gray-1);
 }
 
-.content-form__errors {
+.content-form__errors,
+.logout-errors {
     font-size: 15px;
 
     color: var(--error);
