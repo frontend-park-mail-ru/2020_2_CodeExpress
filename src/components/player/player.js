@@ -1,6 +1,9 @@
 import { statuses } from '../../store/consts.js';
 import { Component } from '../../managers/component/component.js';
 
+/**
+ * Плеер
+ */
 export class Player extends Component {
     constructor(props) {
         super(props);
@@ -21,7 +24,7 @@ export class Player extends Component {
     }
 
     /**
-     * Поиск элементов управления плейера
+     * Поиск элементов управления плеера
      */
     didMount() {
         this.audio = document.getElementById('music-js');

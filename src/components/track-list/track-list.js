@@ -1,5 +1,8 @@
 import { Component } from '../../managers/component/component.js';
 
+/**
+ * Список песен
+ */
 export class TrackList extends Component {
     constructor(props) {
         super(props);

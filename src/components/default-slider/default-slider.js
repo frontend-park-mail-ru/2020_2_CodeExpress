@@ -1,5 +1,8 @@
 import { Component } from '../../managers/component/component.js';
 
+/**
+ * Слайдер
+ */
 export class DefaultSlider extends Component {
     constructor(props) {
         super(props);

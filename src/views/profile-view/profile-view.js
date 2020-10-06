@@ -21,6 +21,10 @@ export class ProfileView extends BaseView {
         this.template = Handlebars.templates['profile.hbs'];
     }
 
+    /**
+     * Обработчик формы изменения аватарки пользователя
+     * @param event
+     */
     changeAvatar(event) {
         event.preventDefault();
 
@@ -43,6 +47,10 @@ export class ProfileView extends BaseView {
         });
     }
 
+    /**
+     * Обработчик формы изменения данных пользователя
+     * @param event
+     */
     changeProfile(event) {
         event.preventDefault();
 
@@ -88,6 +96,10 @@ export class ProfileView extends BaseView {
         });
     }
 
+    /**
+     * Обработчик формы изменения пароля пользователя
+     * @param event
+     */
     changePassword(event) {
         event.preventDefault();
 
@@ -144,6 +156,9 @@ export class ProfileView extends BaseView {
         });
     }
 
+    /**
+     * Функция отрисовки View
+     */
     render() {
         const user = this.storage.get('user');
 

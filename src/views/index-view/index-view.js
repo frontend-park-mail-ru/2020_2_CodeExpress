@@ -17,6 +17,9 @@ export class IndexView extends BaseView {
         this.template = Handlebars.templates['index.hbs'];
     }
 
+    /**
+     * Функция отрисовки View
+     */
     render() {
         this.page.render();
 

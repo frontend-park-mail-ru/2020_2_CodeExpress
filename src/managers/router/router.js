@@ -18,6 +18,9 @@ const findArgs = (path, key) => { // TODO : Доделать маршрутиз�
     return !path.match(key);
 };
 
+/**
+ * Компонент маршрутизатор проекта
+ */
 class Router extends Component {
     constructor(props) {
         super(props);
@@ -33,6 +36,12 @@ class Router extends Component {
         window.addEventListener('popstate', () => { this.go(window.location.pathname); });
     }
 
+    /**
+     * Функция добавления пары Path View в route
+     * @param path
+     * @param View
+     * @returns {Router}
+     */
     register(path, View) {
         this.routes.set(path, View);
         return this;
@@ -77,6 +86,10 @@ class Router extends Component {
         this.history.forward();
     }
 
+    /**
+     * Обработчик клика
+     * @param event
+     */
     handleMouseClick(event) {
         if (event.target.classList.contains('link-btn')) {
             event.preventDefault();

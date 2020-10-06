@@ -1,3 +1,10 @@
+/**
+ * Функция валидатор данных пользоватея
+ * @param target
+ * @param reg
+ * @param helpText
+ * @returns {{message: string, status: boolean}|{status: boolean}}
+ */
 export const userFormValidator = (target, reg, helpText) => {
     const { value } = target;
     if (!value) {

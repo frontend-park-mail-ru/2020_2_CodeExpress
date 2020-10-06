@@ -1,6 +1,9 @@
 import { RouterStore } from '../store/routes.js';
 import { Request } from '../managers/request/request.js';
 
+/**
+ * Модель пользователя
+ */
 export class ModelUser {
     constructor(attrs = null, isLoaded = false) {
         const defaults = {
@@ -13,6 +16,12 @@ export class ModelUser {
         this.isLoaded = isLoaded;
     }
 
+    /**
+     * Функция получения значения по ключу из объека модели
+     * @param key
+     * @param defaultv
+     * @returns {*|{id, email, username}}
+     */
     get(key, defaultv) {
         const spl = key.split('.');
 
@@ -33,10 +42,18 @@ export class ModelUser {
         return result;
     }
 
+    /**
+     * Функция изменения полей в объекте модели
+     * @param attrs
+     */
     update(attrs) {
         this.attrs = Object.assign(this.attrs, attrs);
     }
 
+    /**
+     * Функция получения текущего пользователя с сервера
+     * @returns {Promise}
+     */
     static getCurrentUser() {
         return new Promise((resolve) => {
             const url = RouterStore.api.user.current;

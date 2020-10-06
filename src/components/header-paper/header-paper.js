@@ -1,5 +1,8 @@
 import { Component } from '../../managers/component/component.js';
 
+/**
+ * Header на основных страницах
+ */
 export class HeaderPaper extends Component {
     constructor(props, storage) {
         super(props, storage);

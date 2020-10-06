@@ -20,6 +20,10 @@ export class SignupView extends BaseView {
         this.template = Handlebars.templates['signup.hbs'];
     }
 
+    /**
+     * Обработчик формы регистрации
+     * @param event
+     */
     submit(event) {
         event.preventDefault();
         const { target } = event;
@@ -88,6 +92,9 @@ export class SignupView extends BaseView {
         });
     }
 
+    /**
+     * Функция отрисовки View
+     */
     render() {
         const user = this.storage.get('user');
 

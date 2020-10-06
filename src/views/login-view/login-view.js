@@ -20,6 +20,10 @@ export class LoginView extends BaseView {
         this.template = Handlebars.templates['login.hbs'];
     }
 
+    /**
+     * Обработчик формы авторизации
+     * @param event
+     */
     submit(event) {
         event.preventDefault();
         const { target } = event;
@@ -79,6 +83,9 @@ export class LoginView extends BaseView {
         });
     }
 
+    /**
+     * Функция отрисовки View
+     */
     render() {
         const user = this.storage.get('user');
 

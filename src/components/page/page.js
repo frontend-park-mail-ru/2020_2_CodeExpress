@@ -33,6 +33,9 @@ export class Page extends Component {
         this.player.setEventListeners();
     }
 
+    /**
+     * Установка события click на все песни в блоке с data-tracks
+     */
     setEventToTracks() {
         const tracksWrap = this.props.parent.querySelector('[data-tracks="true"]');
         this.player.setEventToTracks(tracksWrap);
