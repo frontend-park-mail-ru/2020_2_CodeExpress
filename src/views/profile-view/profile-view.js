@@ -5,6 +5,7 @@ import { RouterStore } from '../../store/routes.js';
 import { userFormValidator } from '../../managers/validator/validator.js';
 import { regTemplates } from '../../store/reg-templates.js';
 import { router } from '../../managers/router/router.js';
+import { ModelUser } from '../../models/user.js';
 
 /**
  * View отображающая страницу профиля
@@ -155,9 +156,14 @@ export class ProfileView extends BaseView {
         // TODO: Передалать позже на выскакивающее сообщение
         const logoutErrors = this.props.parent.querySelector('.logout-error');
 
-        Request.post(RouterStore.api.user.logout).then((res) => {
+        Request.delete(RouterStore.api.user.logout).then((res) => {
             const { status, body } = res;
             if (status === 200) {
+                const newUser = new ModelUser();
+                const user = this.storage.get('user');
+                user.update(newUser.attrs);
+                user.isLoaded = false;
+
                 router.go(RouterStore.website.index);
             } else {
                 logoutErrors.innerText = body.message;

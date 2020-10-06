@@ -1,4 +1,4 @@
-const baseBackendUrl = 'http://127.0.0.1:8080';
+const baseBackendUrl = 'http://musicexpress.sarafa2n.ru:8080';
 
 /**
  * Модуль для работы с сетью
@@ -11,6 +11,18 @@ export class Request {
      */
     static getBackendUrl(url) {
         return `${baseBackendUrl}${url}`;
+    }
+
+    static delete(url) {
+        const requestUrl = this.getBackendUrl(url);
+
+        return fetch(requestUrl, {
+            method: 'DELETE',
+            credentials: 'include',
+            mode: 'cors',
+            headers: {
+            },
+        }).then((response) => response.json().then((body) => ({ status: response.status, body })));
     }
 
     /**
