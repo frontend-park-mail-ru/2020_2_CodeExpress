@@ -10,6 +10,11 @@ import { router } from '../../managers/router/router.js';
  * View отображающая страницу профиля
  */
 export class ProfileView extends BaseView {
+    /**
+     * Конструктор ProfileView
+     * @param {object} props - объект, в котором лежат переданные параметры
+     * @param {object} storage - объект, который в котором лежат фукнции для работы с User
+     */
     constructor(props, storage) {
         super(props, storage);
         this.page = new Page(this.props, this.storage);
@@ -23,7 +28,7 @@ export class ProfileView extends BaseView {
 
     /**
      * Обработчик формы изменения аватарки пользователя
-     * @param event
+     * @param {object} event
      */
     changeAvatar(event) {
         event.preventDefault();
@@ -49,7 +54,7 @@ export class ProfileView extends BaseView {
 
     /**
      * Обработчик формы изменения данных пользователя
-     * @param event
+     * @param {object} event
      */
     changeProfile(event) {
         event.preventDefault();
@@ -98,7 +103,7 @@ export class ProfileView extends BaseView {
 
     /**
      * Обработчик формы изменения пароля пользователя
-     * @param event
+     * @param {object} event
      */
     changePassword(event) {
         event.preventDefault();
@@ -140,6 +145,10 @@ export class ProfileView extends BaseView {
         });
     }
 
+    /**
+     * Обработчик клика на кнопку выхода
+     * @param {object} event
+     */
     logout(event) {
         event.preventDefault();
 

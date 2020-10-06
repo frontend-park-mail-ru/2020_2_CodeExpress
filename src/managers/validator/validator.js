@@ -1,8 +1,8 @@
 /**
  * Функция валидатор данных пользоватея
- * @param target
- * @param reg
- * @param helpText
+ * @param {object} target - значение <input> из <form>
+ * @param {RegExp} reg – регулярное выражение
+ * @param {string} helpText - строка ошибки
  * @returns {{message: string, status: boolean}|{status: boolean}}
  */
 export const userFormValidator = (target, reg, helpText) => {

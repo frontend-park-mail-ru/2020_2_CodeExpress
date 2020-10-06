@@ -22,6 +22,10 @@ const findArgs = (path, key) => { // TODO : Доделать маршрутиз�
  * Компонент маршрутизатор проекта
  */
 class Router extends Component {
+    /**
+     * Конструктор роутера
+     * @param {object} props - объект, в котором лежат переданные параметры
+     */
     constructor(props) {
         super(props);
         this.history = window.history;
@@ -38,8 +42,8 @@ class Router extends Component {
 
     /**
      * Функция добавления пары Path View в route
-     * @param path
-     * @param View
+     * @param {string} path - pathname
+     * @param {object} View - View, которая отображается по данному path
      * @returns {Router}
      */
     register(path, View) {
@@ -49,7 +53,7 @@ class Router extends Component {
 
     /**
      * Функция перехода по сайту
-     * @param path
+     * @param {string} path - pathname куда нужно перейти
      */
     go(path) {
         if (path === undefined) {
@@ -88,7 +92,7 @@ class Router extends Component {
 
     /**
      * Обработчик клика
-     * @param event
+     * @param {object} event
      */
     handleMouseClick(event) {
         if (event.target.classList.contains('link-btn')) {

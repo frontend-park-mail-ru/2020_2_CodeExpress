@@ -7,6 +7,11 @@ import { Component } from '../../managers/component/component.js';
  * Класс, который отрисовывает основные компоненты сайта.
  */
 export class Page extends Component {
+    /**
+     * Конструктор Page
+     * @param {object} props - объект, в котором лежат переданные параметры
+     * @param {object} storage - объект, который в котором лежат фукнции для работы с User
+     */
     constructor(props, storage) {
         super(props, storage);
 

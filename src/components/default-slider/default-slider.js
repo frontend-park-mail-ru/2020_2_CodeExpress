@@ -4,6 +4,10 @@ import { Component } from '../../managers/component/component.js';
  * Слайдер
  */
 export class DefaultSlider extends Component {
+    /**
+     * Конструктор слайдера
+     * @param {object} props - объект, в котором лежат переданные параметры
+     */
     constructor(props) {
         super(props);
 
@@ -13,7 +17,7 @@ export class DefaultSlider extends Component {
 
     /**
      * Поиск элементов слайдера
-     * @param slider
+     * @param {object} slider - контейнер слайдер
      */
     didMount(slider) {
         this.container = slider.querySelector('.slider__container');
@@ -28,8 +32,8 @@ export class DefaultSlider extends Component {
 
     /**
      * Установка минимальной ширины всем слайдам
-     * @param slides
-     * @param slideWidth
+     * @param {object} slides - NodeList со всеми слайдами
+     * @param {number} slideWidth - минимальная ширина слайда
      */
     setMinWidth(slides, slideWidth) {
         slides.forEach((item) => {
@@ -56,7 +60,7 @@ export class DefaultSlider extends Component {
 
     /**
      * Функция, которая устанавливает addEventListener блокам управления
-     * @param slider
+     * @param {object} slider -  контейнер слайдера
      */
     setEventListeners(slider) {
         const { slideToShow, slideToScroll } = this.props;

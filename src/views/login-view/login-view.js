@@ -11,6 +11,11 @@ import { router } from '../../managers/router/router.js';
  * View отображающая страницу входа
  */
 export class LoginView extends BaseView {
+    /**
+     * Конструктор LoginView
+     * @param {object} props - объект, в котором лежат переданные параметры
+     * @param {object} storage - объект, который в котором лежат фукнции для работы с User
+     */
     constructor(props, storage) {
         super(props, storage);
         this.header = new HeaderFiller(this.props);
@@ -22,7 +27,7 @@ export class LoginView extends BaseView {
 
     /**
      * Обработчик формы авторизации
-     * @param event
+     * @param {object} event
      */
     submit(event) {
         event.preventDefault();

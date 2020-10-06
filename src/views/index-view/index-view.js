@@ -8,6 +8,11 @@ import { slides, tracks } from '../../store/consts.js';
  * View отображающая главную страницу
  */
 export class IndexView extends BaseView {
+    /**
+     * Конструктор IndexView
+     * @param {object} props - объект, в котором лежат переданные параметры
+     * @param {object} storage - объект, который в котором лежат фукнции для работы с User
+     */
     constructor(props, storage) {
         super(props, storage);
         this.page = new Page(this.props, this.storage);

@@ -6,7 +6,7 @@ const baseBackendUrl = 'http://127.0.0.1:8080';
 export class Request {
     /**
      * Функция, которая возвращает готовый url для запроса на сервер
-     * @param url
+     * @param  {string} url - api url
      * @returns {string}
      */
     static getBackendUrl(url) {
@@ -15,7 +15,7 @@ export class Request {
 
     /**
      * Функция, которая делает GET запрос на сервер
-     * @param url
+     * @param {string} url - api url
      * @returns {Promise<{body: *, status: *}>}
      */
     static get(url) {
@@ -32,8 +32,8 @@ export class Request {
 
     /**
      * Функция, которая делает POST запрос на сервер
-     * @param url
-     * @param params
+     * @param {string} url - api url
+     * @param {object} params - объект с доп параметрами
      * @returns {Promise<{body: *, status: *}>}
      */
     static post(url, params = {}) {
