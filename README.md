@@ -4,19 +4,19 @@
 
 ## Репозитории
 
-- [фронтенд](https://github.com/frontend-park-mail-ru/2020_2_CodeExpress)
-- [бекенд](https://github.com/go-park-mail-ru/2020_2_CodeExpress)
+- [Фронтенд](https://github.com/frontend-park-mail-ru/2020_2_CodeExpress)
+- [Бекенд](https://github.com/go-park-mail-ru/2020_2_CodeExpress)
 
 ## Что используем ?
 
 - JavaScript
 - Handlebars
-- ESlint
+- ESLint
 - Express JS
 
 ## Документация
 
-[swagger](https://app.swaggerhub.com/apis/NikitaLobaev/MusicExpress/1.0.0)
+[Swagger](https://app.swaggerhub.com/apis/NikitaLobaev/MusicExpress/1.0.0)
 
 ## Как запустить ?
 ````sh
