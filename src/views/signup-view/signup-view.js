@@ -11,6 +11,11 @@ import { router } from '../../managers/router/router.js';
  * View отображающая страницу регистрации
  */
 export class SignupView extends BaseView {
+    /**
+     * Конструктор SignupView
+     * @param {object} props - объект, в котором лежат переданные параметры
+     * @param {object} storage - объект, который в котором лежат фукнции для работы с User
+     */
     constructor(props, storage) {
         super(props, storage);
         this.header = new HeaderFiller(this.props);
@@ -20,6 +25,10 @@ export class SignupView extends BaseView {
         this.template = Handlebars.templates['signup.hbs'];
     }
 
+    /**
+     * Обработчик формы регистрации
+     * @param {object} event
+     */
     submit(event) {
         event.preventDefault();
         const { target } = event;
@@ -88,6 +97,9 @@ export class SignupView extends BaseView {
         });
     }
 
+    /**
+     * Функция отрисовки View
+     */
     render() {
         const user = this.storage.get('user');
 

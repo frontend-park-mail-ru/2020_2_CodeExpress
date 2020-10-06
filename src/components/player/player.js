@@ -1,7 +1,14 @@
 import { statuses } from '../../store/consts.js';
 import { Component } from '../../managers/component/component.js';
 
+/**
+ * Плеер
+ */
 export class Player extends Component {
+    /**
+     * Конструктор Player
+     * @param {object} props - объект, в котором лежат переданные параметры
+     */
     constructor(props) {
         super(props);
 
@@ -21,7 +28,7 @@ export class Player extends Component {
     }
 
     /**
-     * Поиск элементов управления плейера
+     * Поиск элементов управления плеера
      */
     didMount() {
         this.audio = document.getElementById('music-js');
@@ -41,7 +48,7 @@ export class Player extends Component {
 
     /**
      * Функция обработки клика на иконку Play.
-     * @param target
+     * @param {object} target - кнопка play/pause
      */
     tooglePlay(target) {
         if (target.dataset.status === statuses.statusOff) {
@@ -59,7 +66,7 @@ export class Player extends Component {
 
     /**
      * Функция, которая устанавливает на проигрывание либо defaultSong или песню из localStorage.
-     * @param song
+     * @param {object} song - объект с ифнормацией о треке
      */
     setLastTrack(song) {
         this.playerTitle.innerText = song.title;
@@ -70,8 +77,8 @@ export class Player extends Component {
 
     /**
      * Функция, которая устанавлвает таймаут для вызова функции изменения progressBar.
-     * @param duration
-     * @param element
+     * @param {number} duration - длина трека
+     * @param {object} element - html объект <audio>
      */
     startTimer(duration, element) {
         if (this.percent < 100) {
@@ -81,8 +88,8 @@ export class Player extends Component {
 
     /**
      * Функция которая изменят ширину progressBar у песни.
-     * @param duration - длина пенси
-     * @param element - html объект <audio>
+     * @param {number} duration - длина пенси
+     * @param {object} element - html объект <audio>
      */
     advance(duration, element) {
         const increment = 10 / duration;
@@ -114,7 +121,7 @@ export class Player extends Component {
 
     /**
      * Функция смены текущей песни.
-     * @param item
+     * @param {object} item - трек
      */
     changeSong(item) {
         const currentSong = document.querySelector('.track-item_active');
@@ -198,7 +205,7 @@ export class Player extends Component {
 
     /**
      * Функция, которая добавляет обработчик клика на треки во view.
-     * @param tracksWrap
+     * @param {object} tracksWrap - контейнер со всеми треками на странице
      */
     setEventToTracks(tracksWrap) {
         const tracks = tracksWrap.querySelectorAll('.track-item');

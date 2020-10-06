@@ -1,6 +1,13 @@
 import { Component } from '../../managers/component/component.js';
 
+/**
+ * Список песен
+ */
 export class TrackList extends Component {
+    /**
+     * Конструктор TrackLIst
+     * @param {object} props - объект, в котором лежат переданные параметры
+     */
     constructor(props) {
         super(props);
 

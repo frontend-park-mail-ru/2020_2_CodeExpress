@@ -1,7 +1,15 @@
 import { RouterStore } from '../store/routes.js';
 import { Request } from '../managers/request/request.js';
 
+/**
+ * Модель пользователя
+ */
 export class ModelUser {
+    /**
+     * конструктор модели пользователя
+     * @param {object} attrs - объект, в котором храняться данные пользователя
+     * @param {boolean} isLoaded - флаг показывающий загружен ли пользователь
+     */
     constructor(attrs = null, isLoaded = false) {
         const defaults = {
             id: null,
@@ -13,6 +21,12 @@ export class ModelUser {
         this.isLoaded = isLoaded;
     }
 
+    /**
+     * Функция получения значения по ключу из объека модели
+     * @param {string} key - поле, значение которого нужно получить
+     * @param defaultv
+     * @returns {*}
+     */
     get(key, defaultv) {
         const spl = key.split('.');
 
@@ -33,10 +47,18 @@ export class ModelUser {
         return result;
     }
 
+    /**
+     * Функция изменения полей в объекте модели
+     * @param {object} attrs - объект, в котором храняться данные пользователя
+     */
     update(attrs) {
         this.attrs = Object.assign(this.attrs, attrs);
     }
 
+    /**
+     * Функция получения текущего пользователя с сервера
+     * @returns {Promise}
+     */
     static getCurrentUser() {
         return new Promise((resolve) => {
             const url = RouterStore.api.user.current;

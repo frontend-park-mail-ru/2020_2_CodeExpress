@@ -11,6 +11,10 @@ import { ModelUser } from '../../models/user.js';
  * Класс инициализатор.
  */
 export class App extends Component {
+    /**
+     *  Конструктор компонента App
+     * @param {object} props - объект, в котором лежат переданные параметры
+     */
     constructor(props) {
         super(props);
 
@@ -32,6 +36,9 @@ export class App extends Component {
             .register(RouterStore.website.profile, new ProfileView(this.props, this.storage));
     }
 
+    /**
+     * Функция инициализатор
+     */
     start() {
         ModelUser.getCurrentUser().then((user) => {
             this.setState({ user });
