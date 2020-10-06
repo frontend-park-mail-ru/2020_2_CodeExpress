@@ -7,10 +7,10 @@ export const RouterStore = {
     },
     api: {
         user: {
-            current: '/api/v1/user/current/',
-            login: '/api/v1/user/login/',
+            current: '/api/v1/user/current',
+            login: '/api/v1/user/login',
             register: '/api/v1/user/register',
-            logout: '/api/v1/user/logout/',
+            logout: '/api/v1/user/logout',
             change: {
                 avatar: '/api/v1/user/change/avatar',
                 profile: '/api/v1/user/change/profile',

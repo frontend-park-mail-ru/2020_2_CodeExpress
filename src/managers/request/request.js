@@ -13,6 +13,18 @@ export class Request {
         return `${baseBackendUrl}${url}`;
     }
 
+    static delete(url) {
+        const requestUrl = this.getBackendUrl(url);
+
+        return fetch(requestUrl, {
+            method: 'DELETE',
+            credentials: 'include',
+            mode: 'cors',
+            headers: {
+            },
+        }).then((response) => response.json().then((body) => ({ status: response.status, body })));
+    }
+
     /**
      * Функция, которая делает GET запрос на сервер
      * @param {string} url - api url
