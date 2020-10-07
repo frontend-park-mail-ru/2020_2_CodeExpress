@@ -15,6 +15,7 @@ export class ModelUser {
             id: null,
             username: null,
             email: null,
+            avatar: null,
         };
 
         this.attrs = { ...defaults, ...attrs };
@@ -66,7 +67,12 @@ export class ModelUser {
             Request.get(url).then((res) => {
                 const { body, status } = res;
                 if (status === 200) {
-                    user = new ModelUser(body.data.user, true);
+                    user = new ModelUser();
+                    user.attrs.username = body.username;
+                    user.attrs.email = body.email;
+                    user.attrs.id = body.id;
+                    user.attrs.avatar = body.avatar.slice(1);
+                    user.isLoaded = true;
                 } else {
                     user = new ModelUser();
                 }

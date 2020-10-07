@@ -8,7 +8,11 @@
                         <div class="input-hidden-file input-hidden-file_round">
                             <input class="input-hidden-file__input" type="file" name="upload_avatar" id="upload_avatar" accept="image/png">
                             <label class="input-hidden-file__label" for="upload_avatar">
-                                <img class="profile__avatar" src="../../assets/icons/user-circle-solid.svg">
+                                {{# if isAvatar }}
+                                    <img class="profile__avatar" src="http://musicexpress.sarafa2n.ru:8080{{avatar}}">
+                                {{else}}
+                                    <img class="profile__avatar" src="../../assets/icons/user-circle-solid.svg">
+                                {{/if}}
                                 <div class="input-hidden-file__wrapper">
                                     <img class="input-hidden-file__icon" src="../../assets/icons/upload-solid.svg">
                                 </div>

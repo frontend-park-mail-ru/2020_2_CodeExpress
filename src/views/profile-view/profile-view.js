@@ -49,7 +49,14 @@ export class ProfileView extends BaseView {
                 return;
             }
             const user = this.storage.get('user');
-            user.update(body.user);
+            const avatar = body.avatar.slice(1);
+            user.update({ avatar });
+
+            const profileAvatarPage = this.props.parent.querySelector('.profile__avatar');
+            const profileAvatarHeader = this.props.parent.querySelector('.sub-menu__profile-avatar');
+
+            profileAvatarPage.src = `http://musicexpress.sarafa2n.ru:8080${avatar}`;
+            profileAvatarHeader.src = `http://musicexpress.sarafa2n.ru:8080${avatar}`;
         });
     }
 
@@ -95,10 +102,13 @@ export class ProfileView extends BaseView {
             }
 
             const user = this.storage.get('user');
-            user.update(body.user);
+            user.update({ username: body.username, email: body.email });
 
             email.value = user.get('email');
             username.value = user.get('username');
+
+            const headerUsername = this.props.parent.querySelector('.sub-menu__profile-nickname');
+            headerUsername.innerText = body.username;
         });
     }
 
@@ -138,7 +148,7 @@ export class ProfileView extends BaseView {
             repeated_password: password2.value,
         };
 
-        Request.post(RouterStore.api.user.change.profile, { payload }).then((res) => {
+        Request.post(RouterStore.api.user.change.password, { payload }).then((res) => {
             const { status, body } = res;
             if (status !== 200) {
                 formErrors.innerText = body.message;
@@ -185,8 +195,10 @@ export class ProfileView extends BaseView {
         this.page.render();
 
         const parent = this.props.parent.querySelector('.layout__content_wrap');
-
-        parent.insertAdjacentHTML('afterbegin', this.template({ username: user.get('username'), email: user.get('email') }));
+        const avatar = user.get('avatar');
+        parent.insertAdjacentHTML('afterbegin', this.template({
+            username: user.get('username'), email: user.get('email'), isAvatar: avatar !== '' && avatar, avatar,
+        }));
 
         this.page.setEventListeners();
 
