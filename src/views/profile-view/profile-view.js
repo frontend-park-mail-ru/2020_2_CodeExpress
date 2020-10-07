@@ -55,8 +55,8 @@ export class ProfileView extends BaseView {
             const profileAvatarPage = this.props.parent.querySelector('.profile__avatar');
             const profileAvatarHeader = this.props.parent.querySelector('.sub-menu__profile-avatar');
 
-            profileAvatarPage.src = `http://localhost:8080${avatar}`;
-            profileAvatarHeader.src = `http://localhost:8080${avatar}`;
+            profileAvatarPage.src = `http://musicexpress.sarafa2n.ru:8080${avatar}`;
+            profileAvatarHeader.src = `http://musicexpress.sarafa2n.ru:8080${avatar}`;
         });
     }
 
