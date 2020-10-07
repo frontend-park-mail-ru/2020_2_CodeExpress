@@ -78,6 +78,7 @@ export class LoginView extends BaseView {
                 id: body.id,
                 username: body.username,
                 email: body.email,
+                avatar: body.avatar.slice(1),
             };
 
             const user = this.storage.get('user');

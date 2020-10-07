@@ -10,7 +10,11 @@
     <div class="sub-menu__profile">
         {{# if load }}
             <div class="sub-menu__profile-nickname link-btn" data-url="/profile/" >{{ username }}</div>
-            <img class="sub-menu__profile-avatar" src="../../assets/icons/user-circle-solid.svg">
+            {{# if isAvatar }}
+                <img class="sub-menu__profile-avatar" src="http://musicexpress.sarafa2n.ru{{ avatar }}">
+            {{else}}
+                <img class="sub-menu__profile-avatar" src="../../assets/icons/user-circle-solid.svg">
+            {{/if}}
         {{else}}
             <div class="primary-header-button link-btn" data-url="/login/">Войти</div>
             <div class="secondary-header-button link-btn" data-url="/signup/">Зарегистрироваться</div>

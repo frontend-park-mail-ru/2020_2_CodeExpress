@@ -21,6 +21,9 @@ export class HeaderPaper extends Component {
      */
     render() {
         const user = this.storage.get('user');
-        return this.template({ load: user.isLoaded, username: user.get('username') });
+        const avatar = user.get('avatar');
+        return this.template({
+            load: user.isLoaded, username: user.get('username'), isAvatar: avatar !== '' && avatar, avatar,
+        });
     }
 }

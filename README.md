@@ -2,6 +2,10 @@
 
 Общение через музыку
 
+## Деплой
+
+  http://musicexpress.sarafa2n.ru/
+
 ## Репозитории
 
 - [Фронтенд](https://github.com/frontend-park-mail-ru/2020_2_CodeExpress)
