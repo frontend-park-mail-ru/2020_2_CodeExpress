@@ -1,5 +1,6 @@
-import { Component } from '../../managers/component/component.js';
-
+import { Component } from 'managers/component/component';
+import HeaderPaperTemplate from './header-paper.hbs';
+import './header-paper.css';
 /**
  * Header на основных страницах
  */
@@ -12,7 +13,7 @@ export class HeaderPaper extends Component {
     constructor(props, storage) {
         super(props, storage);
 
-        this.template = Handlebars.templates['header-paper.hbs'];
+        this.template = HeaderPaperTemplate;
     }
 
     /**

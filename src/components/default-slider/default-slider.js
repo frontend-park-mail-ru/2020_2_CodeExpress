@@ -1,5 +1,6 @@
-import { Component } from '../../managers/component/component.js';
-
+import { Component } from 'managers/component/component';
+import SliderTemplate from './default-slider.hbs';
+import './slider.css';
 /**
  * Слайдер
  */
@@ -11,7 +12,7 @@ export class DefaultSlider extends Component {
     constructor(props) {
         super(props);
 
-        this.template = Handlebars.templates['default-slider.hbs'];
+        this.template = SliderTemplate;
         this.position = 0;
     }
 

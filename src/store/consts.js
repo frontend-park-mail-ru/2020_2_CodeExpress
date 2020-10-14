@@ -1,8 +1,8 @@
 export const statuses = {
     statusOff: 'off',
     statusOn: 'on',
-    iconPause: '../assets/icons/pause-solid.svg',
-    iconPlay: '../assets/icons/play-solid.svg',
+    iconPause: 'fa-pause',
+    iconPlay: 'fa-play',
 };
 
 export const slides = [

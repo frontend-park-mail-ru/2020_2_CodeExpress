@@ -1,5 +1,6 @@
-import { Component } from '../../managers/component/component.js';
-
+import { Component } from 'managers/component/component';
+import HeaderFillerTemplate from './header-filler.hbs';
+import './header.css';
 /**
  * Header на страницах sing up и login
  */
@@ -11,7 +12,7 @@ export class HeaderFiller extends Component {
     constructor(props) {
         super(props);
 
-        this.template = Handlebars.templates['header-filler.hbs'];
+        this.template = HeaderFillerTemplate;
     }
 
     /**

@@ -1,4 +1,6 @@
-import { Component } from '../../managers/component/component.js';
+import { Component } from 'managers/component/component';
+
+import TrackListTemplate from './track-list.hbs';
 
 /**
  * Список песен
@@ -11,7 +13,7 @@ export class TrackList extends Component {
     constructor(props) {
         super(props);
 
-        this.template = Handlebars.templates['track-list.hbs'];
+        this.template = TrackListTemplate;
     }
 
     /**

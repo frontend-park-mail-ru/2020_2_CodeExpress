@@ -1,5 +1,5 @@
-import { regTemplates } from '../../store/reg-templates.js';
-import { Component } from '../component/component.js';
+import { regTemplates } from 'store/reg-templates';
+import { Component } from 'managers/component/component';
 
 /**
  * Функция поиска параметров в url

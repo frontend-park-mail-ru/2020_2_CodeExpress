@@ -1,12 +1,14 @@
-import { Page } from '../../components/page/page.js';
-import { BaseView } from '../../managers/base-view/base-view.js';
-import { Request } from '../../managers/request/request.js';
-import { RouterStore } from '../../store/routes.js';
-import { userFormValidator } from '../../managers/validator/validator.js';
-import { regTemplates } from '../../store/reg-templates.js';
-import { router } from '../../managers/router/router.js';
-import { ModelUser } from '../../models/user.js';
+import { Page } from 'components/page/page';
+import { BaseView } from 'managers/base-view/base-view';
+import { Request } from 'managers/request/request';
+import { RouterStore } from 'store/routes';
+import { userFormValidator } from 'managers/validator/validator';
+import { regTemplates } from 'store/reg-templates';
+import { router } from 'managers/router/router';
+import { ModelUser } from 'models/user';
 
+import ProfileTemplate from './profile.hbs';
+import './profile.css';
 /**
  * View отображающая страницу профиля
  */
@@ -24,7 +26,7 @@ export class ProfileView extends BaseView {
         this.changePassword = this.changePassword.bind(this);
         this.changeProfile = this.changeProfile.bind(this);
         this.logout = this.logout.bind(this);
-        this.template = Handlebars.templates['profile.hbs'];
+        this.template = ProfileTemplate;
     }
 
     /**
