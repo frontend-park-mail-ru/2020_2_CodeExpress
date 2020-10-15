@@ -358,7 +358,7 @@ body {
     content: '';
 
     font-size: 25px;
-    color: white;
+    color: var(--white-0);
     text-align: center;
     z-index: 1;
 

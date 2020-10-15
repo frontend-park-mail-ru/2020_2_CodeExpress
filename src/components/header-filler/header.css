@@ -9,7 +9,7 @@
 }
 
 .header__title {
-    color: #4B39BF;
+    color: var(--secondary-color);
     font-size: 36px;
     font-weight: 900;
 }

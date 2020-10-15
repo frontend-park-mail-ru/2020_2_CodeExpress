@@ -40,7 +40,6 @@ export class App extends Component {
      * Функция инициализатор
      */
     start() {
-        console.log(router);
         ModelUser.getCurrentUser().then((user) => {
             this.setState({ user });
         });
