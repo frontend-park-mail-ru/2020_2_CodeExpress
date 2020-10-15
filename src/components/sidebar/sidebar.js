@@ -1,5 +1,7 @@
-import { Component } from '../../managers/component/component.js';
+import { Component } from 'managers/component/component';
 
+import SlideBarTemplate from './sidebar.hbs';
+import './sidebar.css';
 /**
  * Боковое меню
  */
@@ -11,7 +13,7 @@ export class SideBar extends Component {
     constructor(props) {
         super(props);
 
-        this.template = Handlebars.templates['sidebar.hbs'];
+        this.template = SlideBarTemplate;
     }
 
     /**

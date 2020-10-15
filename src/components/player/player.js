@@ -1,5 +1,7 @@
-import { statuses } from '../../store/consts.js';
-import { Component } from '../../managers/component/component.js';
+import { statuses } from 'store/consts';
+import { Component } from 'managers/component/component';
+
+import PlayerTemplate from './player.hbs';
 
 /**
  * Плеер
@@ -12,7 +14,7 @@ export class Player extends Component {
     constructor(props) {
         super(props);
 
-        this.template = Handlebars.templates['player.hbs'];
+        this.template = PlayerTemplate;
 
         this.state = {
             defaultSong: {
@@ -59,8 +61,8 @@ export class Player extends Component {
         this.audio.pause();
         // eslint-disable-next-line no-param-reassign
         target.dataset.status = statuses.statusOff;
-        // eslint-disable-next-line no-param-reassign
-        target.src = statuses.iconPlay;
+        target.classList.remove(statuses.iconPause);
+        target.classList.add(statuses.iconPlay);
         clearTimeout(this.timer);
     }
 
@@ -103,7 +105,8 @@ export class Player extends Component {
      */
     audioPlay() {
         this.audio.play();
-        this.playButton.src = statuses.iconPause;
+        this.playButton.classList.remove(statuses.iconPlay);
+        this.playButton.classList.add(statuses.iconPause);
         this.playButton.dataset.status = statuses.statusOn;
     }
 
@@ -168,7 +171,8 @@ export class Player extends Component {
         });
 
         this.audio.addEventListener('ended', () => {
-            this.playButton.src = statuses.iconPlay;
+            this.playButton.classList.remove(statuses.iconPause);
+            this.playButton.classList.add(statuses.iconPlay);
             this.playButton.dataset.status = statuses.statusOff;
             this.progressBar.style.width = '0%';
             this.percent = 0;

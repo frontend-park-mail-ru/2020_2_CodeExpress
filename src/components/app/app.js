@@ -1,12 +1,13 @@
-import { router } from '../../managers/router/router.js';
-import { RouterStore } from '../../store/routes.js';
-import { IndexView } from '../../views/index-view/index-view.js';
-import { ProfileView } from '../../views/profile-view/profile-view.js';
-import { LoginView } from '../../views/login-view/login-view.js';
-import { SignupView } from '../../views/signup-view/signup-view.js';
-import { Component } from '../../managers/component/component.js';
-import { ModelUser } from '../../models/user.js';
+import { router } from 'managers/router/router';
+import { RouterStore } from 'store/routes';
+import { IndexView } from 'views/index-view/index-view';
+import { ProfileView } from 'views/profile-view/profile-view';
+import { LoginView } from 'views/login-view/login-view';
+import { SignupView } from 'views/signup-view/signup-view';
+import { Component } from 'managers/component/component';
+import { ModelUser } from 'models/user';
 
+import './base.css';
 /**
  * Класс инициализатор.
  */
@@ -28,7 +29,6 @@ export class App extends Component {
             get: (key) => (key ? this.state[key] || null : this.state),
             set: (key, value) => { this.setState(key, value); },
         };
-
         router
             .register(RouterStore.website.index, new IndexView(this.props, this.storage))
             .register(RouterStore.website.login, new LoginView(this.props, this.storage))
@@ -42,6 +42,7 @@ export class App extends Component {
     start() {
         ModelUser.getCurrentUser().then((user) => {
             this.setState({ user });
-        }).then(() => router.setup());
+        });
+        router.setup();
     }
 }

@@ -1,11 +1,11 @@
 <div class="sub-menu">
     <div class="sub-menu__links">
-        <img class="sub-menu__link" src="../../assets/icons/chevron-left-solid.svg">
-        <img class="sub-menu__link" src="../../assets/icons/chevron-right-solid.svg">
+        <i class="sub-menu__link fas fa-chevron-left"></i>
+        <i class="sub-menu__link fas fa-chevron-right"></i>
     </div>
     <form action="#" class="sub-menu__search">
         <input type="search" class="sub-menu__search-input" placeholder="Поиск...">
-        <img class="sub-menu__search-icon" src="../../assets/icons/search-solid.svg">
+        <i class="sub-menu__search-icon fas fa-search"></i>
     </form>
     <div class="sub-menu__profile">
         {{# if load }}
@@ -13,7 +13,7 @@
             {{# if isAvatar }}
                 <img class="sub-menu__profile-avatar" src="http://musicexpress.sarafa2n.ru:8080{{ avatar }}">
             {{else}}
-                <img class="sub-menu__profile-avatar" src="../../assets/icons/user-circle-solid.svg">
+                <i class="sub-menu__profile-avatar fas fa-user-circle"></i>
             {{/if}}
         {{else}}
             <div class="primary-header-button link-btn" data-url="/login/">Войти</div>

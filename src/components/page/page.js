@@ -1,8 +1,9 @@
-import { Player } from '../player/player.js';
-import { SideBar } from '../sidebar/sidebar.js';
-import { HeaderPaper } from '../header-paper/header-paper.js';
-import { Component } from '../../managers/component/component.js';
+import { Player } from 'components/player/player';
+import { SideBar } from 'components/sidebar/sidebar';
+import { HeaderPaper } from 'components/header-paper/header-paper';
+import { Component } from 'managers/component/component';
 
+import PageTemplate from './page.hbs';
 /**
  * Класс, который отрисовывает основные компоненты сайта.
  */
@@ -15,7 +16,7 @@ export class Page extends Component {
     constructor(props, storage) {
         super(props, storage);
 
-        this.template = Handlebars.templates['page.hbs'];
+        this.template = PageTemplate;
         this.header = new HeaderPaper(this.props, this.storage);
         this.player = new Player(this.props);
         this.sideBar = new SideBar(this.props);

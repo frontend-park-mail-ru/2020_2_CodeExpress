@@ -1,8 +1,7 @@
-@import "pallete.css";
-
+@import "./pallete.css";
 @font-face {
     font-family: Montserrat;
-    src: url("../ttf/montserrat.ttf");
+    src: url("../../assets/ttf/montserrat.ttf");
 }
 
 html {
@@ -32,21 +31,6 @@ body {
 
 .link-btn {
     cursor: pointer;
-}
-
-.footer {
-    display: flex;
-    justify-content: center;
-
-    width: 100%;
-    padding: 25px 0;
-    margin-top: auto;
-    background-color: var(--black-1);
-}
-
-.footer__title {
-    font-size: 18px;
-    color: white;
 }
 
 .button-switch {
@@ -194,78 +178,6 @@ body {
     padding: 20px 40px 0;
 }
 
-.sub-menu {
-    display: flex;
-    align-items: center;
-
-    padding: 10px 20px;
-
-    border-radius: 25px;
-    background-color: white;
-}
-
-.sub-menu__profile {
-    display: flex;
-    align-items: center;
-
-    margin-left: auto;
-}
-
-.sub-menu__profile-nickname {
-    font-size: 16px;
-    margin: 0 10px;
-
-}
-
-.sub-menu__profile-avatar {
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-}
-
-.sub-menu__links {
-    display: flex;
-}
-
-.sub-menu__search {
-    display: flex;
-    align-items: center;
-
-    margin: 0 20px;
-}
-
-.sub-menu__search-icon {
-    height: 15px;
-
-    padding: 5px;
-
-    border-radius: 0 10px 10px 0;
-    border: 2px solid var(--gray-2);
-
-    cursor: pointer;
-}
-
-.sub-menu__search-input {
-    padding: 5px 10px;
-
-    border-radius: 10px 0 0 10px;
-    border: 2px solid var(--gray-2);
-}
-
-.sub-menu__search-input:focus,
-.sub-menu__search-input:focus + .sub-menu__search-icon {
-    outline: 0;
-    border-color: var(--secondary-color);
-}
-
-.sub-menu__link {
-    height: 20px;
-
-    margin: 0 5px;
-
-    cursor: pointer;
-}
-
 .turntable__time-line {
     position: relative;
 
@@ -319,7 +231,7 @@ body {
 }
 
 .song-control__icon {
-    height: 25px;
+    font-size: 25px;
     margin: 0 5px;
 
     filter: invert(.8);
@@ -445,10 +357,9 @@ body {
 
     content: '';
 
-    height: 25px;
-
+    font-size: 25px;
+    color: var(--white-0);
     text-align: center;
-    filter: invert(1);
     z-index: 1;
 
     transition: ease-in-out display 0.5s;

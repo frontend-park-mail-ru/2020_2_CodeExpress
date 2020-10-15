@@ -1,5 +1,7 @@
-import { Component } from '../../managers/component/component.js';
+import { Component } from 'managers/component/component';
 
+import FooterTemplate from './footer.hbs';
+import './footer.css';
 /**
  * Подвал сайта на страницах sign up и login
  */
@@ -11,7 +13,7 @@ export class Footer extends Component {
     constructor(props) {
         super(props);
 
-        this.template = Handlebars.templates['footer.hbs'];
+        this.template = FooterTemplate;
     }
 
     /**

@@ -1,12 +1,14 @@
-import { BaseView } from '../../managers/base-view/base-view.js';
-import { HeaderFiller } from '../../components/header-filler/header-filler.js';
-import { Footer } from '../../components/footer/footer.js';
-import { userFormValidator } from '../../managers/validator/validator.js';
-import { regTemplates } from '../../store/reg-templates.js';
-import { RouterStore } from '../../store/routes.js';
-import { Request } from '../../managers/request/request.js';
-import { router } from '../../managers/router/router.js';
+import { BaseView } from 'managers/base-view/base-view';
+import { HeaderFiller } from 'components/header-filler/header-filler';
+import { Footer } from 'components/footer/footer';
+import { userFormValidator } from 'managers/validator/validator';
+import { regTemplates } from 'store/reg-templates';
+import { RouterStore } from 'store/routes';
+import { Request } from 'managers/request/request';
+import { router } from 'managers/router/router';
 
+import SighupTemplate from './signup.hbs';
+import './signup.css';
 /**
  * View отображающая страницу регистрации
  */
@@ -22,7 +24,7 @@ export class SignupView extends BaseView {
         this.footer = new Footer(this.props);
 
         this.submit = this.submit.bind(this);
-        this.template = Handlebars.templates['signup.hbs'];
+        this.template = SighupTemplate;
     }
 
     /**

@@ -1,12 +1,14 @@
-import { BaseView } from '../../managers/base-view/base-view.js';
-import { HeaderFiller } from '../../components/header-filler/header-filler.js';
-import { Footer } from '../../components/footer/footer.js';
-import { userFormValidator } from '../../managers/validator/validator.js';
-import { regTemplates } from '../../store/reg-templates.js';
-import { Request } from '../../managers/request/request.js';
-import { RouterStore } from '../../store/routes.js';
-import { router } from '../../managers/router/router.js';
+import { BaseView } from 'managers/base-view/base-view';
+import { HeaderFiller } from 'components/header-filler/header-filler';
+import { Footer } from 'components/footer/footer';
+import { userFormValidator } from 'managers/validator/validator';
+import { regTemplates } from 'store/reg-templates';
+import { Request } from 'managers/request/request';
+import { RouterStore } from 'store/routes';
+import { router } from 'managers/router/router';
 
+import LoginTemplate from './login.hbs';
+import './login.css';
 /**
  * View отображающая страницу входа
  */
@@ -22,7 +24,7 @@ export class LoginView extends BaseView {
         this.footer = new Footer(this.props);
 
         this.submit = this.submit.bind(this);
-        this.template = Handlebars.templates['login.hbs'];
+        this.template = LoginTemplate;
     }
 
     /**

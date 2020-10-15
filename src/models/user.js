@@ -1,5 +1,5 @@
-import { RouterStore } from '../store/routes.js';
-import { Request } from '../managers/request/request.js';
+import { RouterStore } from 'store/routes';
+import { Request } from 'managers/request/request';
 
 /**
  * Модель пользователя
