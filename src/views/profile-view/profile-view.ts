@@ -1,24 +1,27 @@
 import { Page } from 'components/page/page';
-import { BaseView } from 'managers/base-view/base-view';
+import { View } from 'managers/base-view/base-view';
 import { Request } from 'managers/request/request';
 import { RouterStore } from 'store/routes';
 import { userFormValidator } from 'managers/validator/validator';
 import { regTemplates } from 'store/reg-templates';
 import { router } from 'managers/router/router';
 import { ModelUser } from 'models/user';
+import { IProps, IState } from 'store/interfaces';
 
 import ProfileTemplate from './profile.hbs';
 import './profile.css';
 /**
  * View отображающая страницу профиля
  */
-export class ProfileView extends BaseView {
+export class ProfileView extends View<IProps, IState> {
+    private page: Page;
+
     /**
      * Конструктор ProfileView
      * @param {object} props - объект, в котором лежат переданные параметры
      * @param {object} storage - объект, который в котором лежат фукнции для работы с User
      */
-    constructor(props, storage) {
+    constructor(props: IProps, storage: any) {
         super(props, storage);
         this.page = new Page(this.props, this.storage);
 
@@ -26,19 +29,18 @@ export class ProfileView extends BaseView {
         this.changePassword = this.changePassword.bind(this);
         this.changeProfile = this.changeProfile.bind(this);
         this.logout = this.logout.bind(this);
-        this.template = ProfileTemplate;
     }
 
     /**
      * Обработчик формы изменения аватарки пользователя
-     * @param {object} event
+     * @param {Event} event
      */
-    changeAvatar(event) {
+    changeAvatar(event: Event) {
         event.preventDefault();
 
         const { target } = event;
-        const file = target.files[0];
-        const formErrors = target.querySelector('.profile-change-errors');
+        const file = (<HTMLInputElement>target).files[0];
+        const formErrors: HTMLInputElement = (<HTMLElement>target).querySelector('.profile-change-errors');
 
         const payload = new FormData();
         payload.append('avatar', file);
@@ -54,8 +56,8 @@ export class ProfileView extends BaseView {
             const avatar = body.avatar.slice(1);
             user.update({ avatar });
 
-            const profileAvatarPage = this.props.parent.querySelector('.profile__avatar');
-            const profileAvatarHeader = this.props.parent.querySelector('.sub-menu__profile-avatar');
+            const profileAvatarPage: HTMLImageElement = this.props.parent.querySelector('.profile__avatar') as HTMLImageElement;
+            const profileAvatarHeader: HTMLImageElement = this.props.parent.querySelector('.sub-menu__profile-avatar') as HTMLImageElement;
 
             profileAvatarPage.src = `http://musicexpress.sarafa2n.ru:8080${avatar}`;
             profileAvatarHeader.src = `http://musicexpress.sarafa2n.ru:8080${avatar}`;
@@ -66,13 +68,13 @@ export class ProfileView extends BaseView {
      * Обработчик формы изменения данных пользователя
      * @param {object} event
      */
-    changeProfile(event) {
+    changeProfile(event: Event) {
         event.preventDefault();
 
         const { target } = event;
-        const email = target.querySelector('[name="email"]');
-        const username = target.querySelector('[name="username"]');
-        const formErrors = target.querySelector('.profile-change-errors');
+        const email: HTMLInputElement = (<HTMLElement>target).querySelector('[name="email"]');
+        const username: HTMLInputElement = (<HTMLElement>target).querySelector('[name="username"]');
+        const formErrors: HTMLInputElement = (<HTMLElement>target).querySelector('.profile-change-errors');
         let isValidate = true;
 
         const emailValidator = userFormValidator(email, regTemplates.email, 'Поле дожно быть формата email@email.ru');
@@ -96,7 +98,7 @@ export class ProfileView extends BaseView {
             username: username.value,
         };
 
-        Request.post(RouterStore.api.user.change.profile, { payload }).then((res) => {
+        Request.post(RouterStore.api.user.change.profile, { payload, serialize: true }).then((res) => {
             const { status, body } = res;
             if (status !== 200) {
                 formErrors.innerText = body.message;
@@ -109,7 +111,7 @@ export class ProfileView extends BaseView {
             email.value = user.get('email');
             username.value = user.get('username');
 
-            const headerUsername = this.props.parent.querySelector('.sub-menu__profile-nickname');
+            const headerUsername: HTMLElement = this.props.parent.querySelector('.sub-menu__profile-nickname');
             headerUsername.innerText = body.username;
         });
     }
@@ -118,13 +120,13 @@ export class ProfileView extends BaseView {
      * Обработчик формы изменения пароля пользователя
      * @param {object} event
      */
-    changePassword(event) {
+    changePassword(event: Event) {
         event.preventDefault();
 
         const { target } = event;
-        const password1 = target.querySelector('[name="password1"]');
-        const password2 = target.querySelector('[name="password2"]');
-        const formErrors = target.querySelector('.password-errors');
+        const password1: HTMLInputElement = (<HTMLElement>target).querySelector('[name="password1"]');
+        const password2: HTMLInputElement = (<HTMLElement>target).querySelector('[name="password2"]');
+        const formErrors: HTMLInputElement = (<HTMLElement>target).querySelector('.password-errors');
         let isValidate = true;
 
         const password1Validator = userFormValidator(password1,
@@ -150,7 +152,7 @@ export class ProfileView extends BaseView {
             repeated_password: password2.value,
         };
 
-        Request.post(RouterStore.api.user.change.password, { payload }).then((res) => {
+        Request.post(RouterStore.api.user.change.password, { payload, serialize: true }).then((res) => {
             const { status, body } = res;
             if (status !== 200) {
                 formErrors.innerText = body.message;
@@ -162,11 +164,11 @@ export class ProfileView extends BaseView {
      * Обработчик клика на кнопку выхода
      * @param {object} event
      */
-    logout(event) {
+    logout(event: Event) {
         event.preventDefault();
 
         // TODO: Передалать позже на выскакивающее сообщение
-        const logoutErrors = this.props.parent.querySelector('.logout-error');
+        const logoutErrors: HTMLElement = this.props.parent.querySelector('.logout-error');
 
         Request.delete(RouterStore.api.user.logout).then((res) => {
             const { status, body } = res;
@@ -175,7 +177,7 @@ export class ProfileView extends BaseView {
                 const user = this.storage.get('user');
                 user.update(newUser.attrs);
                 user.isLoaded = false;
-
+                this.storage.set({ user });
                 router.go(RouterStore.website.index);
             } else {
                 logoutErrors.innerText = body.message;
@@ -196,24 +198,24 @@ export class ProfileView extends BaseView {
 
         this.page.render();
 
-        const parent = this.props.parent.querySelector('.layout__content_wrap');
-        const avatar = user.get('avatar');
-        parent.insertAdjacentHTML('afterbegin', this.template({
+        const parent: HTMLElement = this.props.parent.querySelector('.layout__content_wrap');
+        const avatar: string = user.get('avatar');
+        parent.insertAdjacentHTML('afterbegin', ProfileTemplate({
             username: user.get('username'), email: user.get('email'), isAvatar: avatar !== '' && avatar, avatar,
         }));
 
         this.page.setEventListeners();
 
-        const avatarChangeForm = this.props.parent.querySelector('.form-change-avatar');
+        const avatarChangeForm: HTMLElement = this.props.parent.querySelector('.form-change-avatar');
         avatarChangeForm.addEventListener('change', this.changeAvatar);
 
-        const profileChangeForm = this.props.parent.querySelector('.form-change-profile');
+        const profileChangeForm: HTMLElement = this.props.parent.querySelector('.form-change-profile');
         profileChangeForm.addEventListener('submit', this.changeProfile);
 
-        const passwordChangeForm = this.props.parent.querySelector('.form-change-password');
+        const passwordChangeForm: HTMLElement = this.props.parent.querySelector('.form-change-password');
         passwordChangeForm.addEventListener('submit', this.changePassword);
 
-        const logoutBtn = this.props.parent.querySelector('.logout-btn');
+        const logoutBtn: HTMLElement = this.props.parent.querySelector('.logout-btn');
         logoutBtn.addEventListener('click', this.logout);
     }
 }

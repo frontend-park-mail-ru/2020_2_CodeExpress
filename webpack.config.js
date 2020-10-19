@@ -8,7 +8,7 @@ const src = path.join(__dirname, 'src');
 
 module.exports = {
     mode: isProduction ? 'production' : 'development',
-    entry: './src/index.js',
+    entry: './src/index.ts',
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.[hash:8].js',
@@ -23,7 +23,7 @@ module.exports = {
             models: path.join(src, 'models'),
             views: path.join(src, 'views'),
         },
-        extensions: ['.js'],
+        extensions: ['.js', '.ts', '.tsx'],
     },
     module: {
         rules: [
@@ -37,11 +37,9 @@ module.exports = {
 
             },
             {
-                test: /\.js$/,
+                test: /\.ts$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                },
+                use: ['babel-loader', 'ts-loader'],
             },
             {
                 test: /\.(jpg|png|gif|svg|pdf|ttf|ico)$/,
@@ -68,7 +66,7 @@ module.exports = {
         publicPath: '/',
         contentBase: [src, path.join(src, 'assets')],
         hot: true,
-        port: 8080,
+        port: 80,
         historyApiFallback: true,
     },
     optimization: {

@@ -1,4 +1,4 @@
-import { BaseView } from 'managers/base-view/base-view';
+import { View } from 'managers/base-view/base-view';
 import { HeaderFiller } from 'components/header-filler/header-filler';
 import { Footer } from 'components/footer/footer';
 import { userFormValidator } from 'managers/validator/validator';
@@ -6,37 +6,42 @@ import { regTemplates } from 'store/reg-templates';
 import { Request } from 'managers/request/request';
 import { RouterStore } from 'store/routes';
 import { router } from 'managers/router/router';
+import { IProps } from 'src/store/interfaces';
 
 import LoginTemplate from './login.hbs';
 import './login.css';
+
 /**
  * View отображающая страницу входа
  */
-export class LoginView extends BaseView {
+export class LoginView extends View {
+    private header: HeaderFiller;
+
+    private footer: Footer;
+
     /**
      * Конструктор LoginView
      * @param {object} props - объект, в котором лежат переданные параметры
      * @param {object} storage - объект, который в котором лежат фукнции для работы с User
      */
-    constructor(props, storage) {
+    constructor(props: IProps, storage: any) {
         super(props, storage);
         this.header = new HeaderFiller(this.props);
         this.footer = new Footer(this.props);
 
         this.submit = this.submit.bind(this);
-        this.template = LoginTemplate;
     }
 
     /**
      * Обработчик формы авторизации
      * @param {object} event
      */
-    submit(event) {
+    submit(event: Event): void {
         event.preventDefault();
         const { target } = event;
-        const login = target.querySelector('[name="login"]');
-        const password = target.querySelector('[name="password"]');
-        const formErrors = target.querySelector('.form-errors');
+        const login: HTMLInputElement = (<HTMLElement>target).querySelector('[name="login"]');
+        const password: HTMLInputElement = (<HTMLElement>target).querySelector('[name="password"]');
+        const formErrors: HTMLElement = (<HTMLElement>target).querySelector('.form-errors');
         let isValidate = true;
 
         formErrors.innerText = '';
@@ -69,7 +74,7 @@ export class LoginView extends BaseView {
             return;
         }
 
-        Request.post(RouterStore.api.user.login, { payload }).then((res) => {
+        Request.post(RouterStore.api.user.login, { payload, serialize: true }).then((res) => {
             const { status, body } = res;
             if (status !== 200) {
                 formErrors.innerText = body.message;
@@ -86,7 +91,7 @@ export class LoginView extends BaseView {
             const user = this.storage.get('user');
             user.update(userAttrs);
             user.isLoaded = true;
-            this.storage.set('user', user);
+            this.storage.set({ user });
             router.back();
         });
     }
@@ -94,7 +99,7 @@ export class LoginView extends BaseView {
     /**
      * Функция отрисовки View
      */
-    render() {
+    render(): void {
         const user = this.storage.get('user');
 
         if (user.isLoaded) {
@@ -102,8 +107,8 @@ export class LoginView extends BaseView {
             return;
         }
 
-        this.props.parent.innerHTML = this.template({ header: this.header.render(), footer: this.footer.render() });
-        const form = this.props.parent.querySelector('.login-form');
+        this.props.parent.innerHTML = LoginTemplate({ header: this.header.render(), footer: this.footer.render() });
+        const form: HTMLFormElement = this.props.parent.querySelector('.login-form');
         form.addEventListener('submit', this.submit);
     }
 }

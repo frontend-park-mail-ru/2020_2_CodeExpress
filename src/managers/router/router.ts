@@ -1,5 +1,7 @@
 import { regTemplates } from 'store/reg-templates';
 import { Component } from 'managers/component/component';
+import { View } from 'managers/base-view/base-view';
+import { IProps } from 'store/interfaces';
 
 /**
  * Функция поиска параметров в url
@@ -7,7 +9,7 @@ import { Component } from 'managers/component/component';
  * @param key
  * @returns {boolean}
  */
-const findArgs = (path, key) => { // TODO : Доделать маршрутизацию по динамическим урлам.
+const findArgs = (path: string, key: string): boolean => { // TODO : Доделать маршрутизацию по динамическим урлам.
     const match = key.match(regTemplates.url);
     const args = match[2];
     if (args) {
@@ -18,36 +20,42 @@ const findArgs = (path, key) => { // TODO : Доделать маршрутиз�
     return !path.match(key);
 };
 
+interface IRouterState {
+    args: string,
+    currentView: View
+}
 /**
  * Компонент маршрутизатор проекта
  */
-class Router extends Component {
+class Router extends Component<IProps, IRouterState> {
+    history: History;
+
+    private routes: Map<string, any>;
+
+    state: IRouterState = { args: null, currentView: null };
+
     /**
      * Конструктор роутера
      * @param {object} props - объект, в котором лежат переданные параметры
      */
-    constructor(props) {
+    constructor(props: IProps) {
         super(props);
         this.history = window.history;
         this.routes = new Map();
-        this.state = {
-            args: null,
-            currentView: null,
-        };
 
         this.handleMouseClick = this.handleMouseClick.bind(this);
-        this.props.addEventListener('click', this.handleMouseClick);
+        this.props.parent.addEventListener('click', this.handleMouseClick);
         window.addEventListener('popstate', () => { this.go(window.location.pathname); });
     }
 
     /**
      * Функция добавления пары Path View в route
      * @param {string} path - pathname
-     * @param {object} View - View, которая отображается по данному path
+     * @param {object} view - View, которая отображается по данному path
      * @returns {Router}
      */
-    register(path, View) {
-        this.routes.set(path, View);
+    register(path: string, view: View): this {
+        this.routes.set(path, view);
         return this;
     }
 
@@ -55,7 +63,7 @@ class Router extends Component {
      * Функция перехода по сайту
      * @param {string} path - pathname куда нужно перейти
      */
-    go(path) {
+    go(path: string): void {
         if (path === undefined) {
             return;
         }
@@ -82,11 +90,11 @@ class Router extends Component {
         this.state.currentView.show();
     }
 
-    back() {
+    back(): void {
         this.history.back();
     }
 
-    forward() {
+    forward(): void {
         this.history.forward();
     }
 
@@ -94,10 +102,11 @@ class Router extends Component {
      * Обработчик клика
      * @param {object} event
      */
-    handleMouseClick(event) {
-        if (event.target.classList.contains('link-btn')) {
+    handleMouseClick(event: Event): void {
+        const { target } = event;
+        if ((<HTMLElement>target).classList.contains('link-btn')) {
             event.preventDefault();
-            this.go(event.target.dataset.url);
+            this.go((<HTMLElement>target).dataset.url);
         }
     }
 
@@ -106,4 +115,4 @@ class Router extends Component {
     }
 }
 
-export const router = new Router(document.getElementById('app'));
+export const router = new Router({ parent: document.getElementById('app') as HTMLElement });

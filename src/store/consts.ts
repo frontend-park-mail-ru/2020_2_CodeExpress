@@ -1,3 +1,5 @@
+import { ITrack } from 'components/track-list/track-list';
+
 export const statuses = {
     statusOff: 'off',
     statusOn: 'on',
@@ -5,7 +7,7 @@ export const statuses = {
     iconPlay: 'fa-play',
 };
 
-export const slides = [
+export const slidesTemp = [
     {
         img: '../assets/backgrounds/topic-calm.jpg',
         title: 'Спокойное',
@@ -24,7 +26,7 @@ export const slides = [
     },
 ];
 
-export const tracks = [
+export const tracksList: ITrack[] = [
     {
         audio: '../assets/mp3/nirvana-smells.mp3',
         title: 'Smells Like Teen Spirit',

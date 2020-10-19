@@ -1,44 +1,70 @@
 import { Component } from 'managers/component/component';
+import { IState } from 'store/interfaces';
+
 import SliderTemplate from './default-slider.hbs';
 import './slider.css';
+
+interface ISliderProps{
+    slidesTemp: Array<any>,
+    slideToShow: number,
+    slideToScroll: number
+}
+
 /**
  * Слайдер
  */
-export class DefaultSlider extends Component {
+export class DefaultSlider extends Component<ISliderProps, IState> {
+    private position: number;
+
+    private container: HTMLElement;
+
+    private track: HTMLElement;
+
+    private slides: NodeListOf<HTMLElement>;
+
+    private slidesCount: number;
+
+    private prevBtn: HTMLFieldSetElement;
+
+    private nextBtn: HTMLFieldSetElement;
+
+    private slideWidth: number;
+
+    private movePosition: number;
+
     /**
      * Конструктор слайдера
      * @param {object} props - объект, в котором лежат переданные параметры
      */
-    constructor(props) {
+    constructor(props: ISliderProps) {
         super(props);
-
-        this.template = SliderTemplate;
         this.position = 0;
     }
 
     /**
      * Поиск элементов слайдера
-     * @param {object} slider - контейнер слайдер
+     * @param {HTMLElement} slider - контейнер слайдер
      */
-    didMount(slider) {
+    didMount(slider: HTMLElement): void {
+        const { slideToShow, slideToScroll } = this.props;
+
         this.container = slider.querySelector('.slider__container');
         this.track = slider.querySelector('.slider__track');
         this.slides = slider.querySelectorAll('.slider-item');
         this.slidesCount = this.slides.length;
         this.prevBtn = slider.querySelector('.slider__prev-button');
         this.nextBtn = slider.querySelector('.slider__next-button');
-        this.slideWidth = this.container.clientWidth / this.props.slideToShow;
-        this.movePosition = this.props.slideToScroll * this.slideWidth;
+        this.slideWidth = this.container.clientWidth / slideToShow;
+        this.movePosition = slideToScroll * this.slideWidth;
     }
 
     /**
      * Установка минимальной ширины всем слайдам
-     * @param {object} slides - NodeList со всеми слайдами
+     * @param {NodeListOf<HTMLElement>} slides - NodeList со всеми слайдами
      * @param {number} slideWidth - минимальная ширина слайда
      */
-    setMinWidth(slides, slideWidth) {
-        slides.forEach((item) => {
-            // eslint-disable-next-line no-param-reassign
+    setMinWidth(slides: NodeListOf<HTMLElement>, slideWidth: number): void {
+        slides.forEach((item: HTMLElement) => {
             item.style.minWidth = `${slideWidth}px`;
         });
     }
@@ -46,24 +72,23 @@ export class DefaultSlider extends Component {
     /**
      * Изменение position у track
      */
-    setPosition() {
+    setPosition(): void {
         this.track.style.transform = `translateX(${this.position}px)`;
     }
 
     /**
      * Функция, которая отключает кнопки управления слайдера при достижении конца слайдера.
      */
-    setDisabledToButtons() {
+    setDisabledToButtons(): void {
         this.prevBtn.disabled = this.position === 0;
-        const isEnd = this.position <= -(this.slidesCount - this.slideToShow) * this.slideWidth;
-        this.nextBtn.disabled = isEnd;
+        this.nextBtn.disabled = this.position <= -(this.slidesCount - this.props.slideToShow) * this.slideWidth;
     }
 
     /**
      * Функция, которая устанавливает addEventListener блокам управления
-     * @param {object} slider -  контейнер слайдера
+     * @param {HTMLElement} slider -  контейнер слайдера
      */
-    setEventListeners(slider) {
+    setEventListeners(slider: HTMLElement): void {
         const { slideToShow, slideToScroll } = this.props;
 
         this.didMount(slider);
@@ -95,7 +120,7 @@ export class DefaultSlider extends Component {
      * Отрисовка компонента
      * @returns {*|string}
      */
-    render() {
-        return this.template({ slides: this.props.slides });
+    render(): HTMLCollection {
+        return SliderTemplate({ slides: this.props.slidesTemp });
     }
 }

@@ -6,20 +6,10 @@ import './header.css';
  */
 export class HeaderFiller extends Component {
     /**
-     * Конструктор HeaderFiller
-     * @param {object} props - объект, в котором лежат переданные параметры
-     */
-    constructor(props) {
-        super(props);
-
-        this.template = HeaderFillerTemplate;
-    }
-
-    /**
      * Отрисовка компонента
      * @returns {*|string}
      */
-    render() {
-        return this.template();
+    render(): HTMLCollection {
+        return HeaderFillerTemplate();
     }
 }

@@ -1,17 +1,30 @@
 import { RouterStore } from 'store/routes';
 import { Request } from 'managers/request/request';
 
+interface IUserAttrs {
+    id: number,
+    username: string,
+    email: string,
+    avatar: string,
+}
+
+type userKeys = keyof IUserAttrs;
+
 /**
  * Модель пользователя
  */
 export class ModelUser {
+    attrs: IUserAttrs;
+
+    isLoaded: boolean;
+
     /**
      * конструктор модели пользователя
      * @param {object} attrs - объект, в котором храняться данные пользователя
      * @param {boolean} isLoaded - флаг показывающий загружен ли пользователь
      */
-    constructor(attrs = null, isLoaded = false) {
-        const defaults = {
+    constructor(attrs: IUserAttrs = null, isLoaded = false) {
+        const defaults: IUserAttrs = {
             id: null,
             username: null,
             email: null,
@@ -25,24 +38,20 @@ export class ModelUser {
     /**
      * Функция получения значения по ключу из объека модели
      * @param {string} key - поле, значение которого нужно получить
-     * @param defaultv
      * @returns {*}
      */
-    get(key, defaultv) {
+    get(key: string): any {
         const spl = key.split('.');
 
-        let result = this.attrs;
+        const tempAttr: IUserAttrs = this.attrs;
+        let result: number | string;
         // eslint-disable-next-line no-plusplus
         for (let i = 0; i < spl.length; i++) {
-            const tempKey = spl[i];
-            result = result[tempKey];
+            const tempKey: string = spl[i];
+            result = tempAttr[tempKey as userKeys];
 
-            if (result === undefined) {
-                return defaultv;
-            }
-
-            if (result === null) {
-                return defaultv || result;
+            if (result === undefined || result === null) {
+                return null;
             }
         }
         return result;
@@ -52,7 +61,7 @@ export class ModelUser {
      * Функция изменения полей в объекте модели
      * @param {object} attrs - объект, в котором храняться данные пользователя
      */
-    update(attrs) {
+    update(attrs: IUserAttrs): void {
         this.attrs = Object.assign(this.attrs, attrs);
     }
 
@@ -60,10 +69,10 @@ export class ModelUser {
      * Функция получения текущего пользователя с сервера
      * @returns {Promise}
      */
-    static getCurrentUser() {
+    static getCurrentUser(): Promise<ModelUser> {
         return new Promise((resolve) => {
             const url = RouterStore.api.user.current;
-            let user;
+            let user: ModelUser;
             Request.get(url).then((res) => {
                 const { body, status } = res;
                 if (status === 200) {

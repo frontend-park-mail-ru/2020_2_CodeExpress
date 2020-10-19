@@ -1,4 +1,4 @@
-import { BaseView } from 'managers/base-view/base-view';
+import { View } from 'managers/base-view/base-view';
 import { HeaderFiller } from 'components/header-filler/header-filler';
 import { Footer } from 'components/footer/footer';
 import { userFormValidator } from 'managers/validator/validator';
@@ -6,19 +6,27 @@ import { regTemplates } from 'store/reg-templates';
 import { RouterStore } from 'store/routes';
 import { Request } from 'managers/request/request';
 import { router } from 'managers/router/router';
+import { IProps, IState, IStorage } from 'store/interfaces';
+import { ModelUser } from 'models/user';
 
 import SighupTemplate from './signup.hbs';
 import './signup.css';
 /**
  * View отображающая страницу регистрации
  */
-export class SignupView extends BaseView {
+export class SignupView extends View {
+    private header: HeaderFiller;
+
+    private footer: Footer;
+
+    private readonly template: any;
+
     /**
      * Конструктор SignupView
      * @param {object} props - объект, в котором лежат переданные параметры
      * @param {object} storage - объект, который в котором лежат фукнции для работы с User
      */
-    constructor(props, storage) {
+    constructor(props: IProps, storage: IStorage<IState>) {
         super(props, storage);
         this.header = new HeaderFiller(this.props);
         this.footer = new Footer(this.props);
@@ -31,17 +39,17 @@ export class SignupView extends BaseView {
      * Обработчик формы регистрации
      * @param {object} event
      */
-    submit(event) {
+    submit(event: Event) {
         event.preventDefault();
         const { target } = event;
-        const email = target.querySelector('[name="email"]');
-        const username = target.querySelector('[name="username"]');
-        const password1 = target.querySelector('[name="password1"]');
-        const password2 = target.querySelector('[name="password2"]');
-        const emailErrors = target.querySelector('.email-errors');
-        const formErrors = target.querySelector('.form-errors');
-        const usernameErrors = target.querySelector('.username-errors');
-        const passwordErrors = target.querySelector('.password-errors');
+        const email: HTMLInputElement = (<HTMLInputElement>target).querySelector('[name="email"]');
+        const username: HTMLInputElement = (<HTMLInputElement>target).querySelector('[name="username"]');
+        const password1: HTMLInputElement = (<HTMLInputElement>target).querySelector('[name="password1"]');
+        const password2: HTMLInputElement = (<HTMLInputElement>target).querySelector('[name="password2"]');
+        const emailErrors: HTMLElement = (<HTMLElement>target).querySelector('.email-errors');
+        const formErrors: HTMLElement = (<HTMLElement>target).querySelector('.form-errors');
+        const usernameErrors: HTMLElement = (<HTMLElement>target).querySelector('.username-errors');
+        const passwordErrors: HTMLElement = (<HTMLElement>target).querySelector('.password-errors');
         let isValidate = true;
 
         formErrors.innerText = '';
@@ -86,7 +94,7 @@ export class SignupView extends BaseView {
             return;
         }
 
-        Request.post(RouterStore.api.user.register, { payload }).then((res) => {
+        Request.post(RouterStore.api.user.register, { payload, serialize: true }).then((res) => {
             const { status, body } = res;
             if (status !== 200) {
                 formErrors.innerText = body.message;
@@ -103,7 +111,7 @@ export class SignupView extends BaseView {
      * Функция отрисовки View
      */
     render() {
-        const user = this.storage.get('user');
+        const user: ModelUser = this.storage.get('user');
 
         if (user.isLoaded) {
             router.go('/');
@@ -115,7 +123,7 @@ export class SignupView extends BaseView {
             footer: this.footer.render(),
         });
 
-        const form = this.props.parent.querySelector('.sign-up-form');
+        const form: HTMLFormElement = this.props.parent.querySelector('.sign-up-form');
         form.addEventListener('submit', this.submit);
     }
 }

@@ -1,68 +1,105 @@
 import { statuses } from 'store/consts';
 import { Component } from 'managers/component/component';
+import { IProps } from 'store/interfaces';
 
 import PlayerTemplate from './player.hbs';
+
+interface ITrack {
+    title: string,
+    group: string,
+    album: string,
+    audio: string,
+}
+
+interface IPlayerState {
+    track: ITrack
+}
 
 /**
  * Плеер
  */
-export class Player extends Component {
+export class Player extends Component<IProps, IPlayerState> {
+    state: IPlayerState;
+
+    private timer: NodeJS.Timeout;
+
+    private percent: number;
+
+    private audio: HTMLMediaElement;
+
+    private lastAudio: ITrack;
+
+    private playButton: HTMLElement;
+
+    private timeLine: HTMLElement;
+
+    private progressBar: HTMLObjectElement;
+
+    private repeatButton: HTMLElement;
+
+    private volumeButton: HTMLElement;
+
+    private volumeInput: HTMLInputElement;
+
+    private playerTitle: HTMLElement;
+
+    private playerAlbum: HTMLImageElement;
+
+    private playerGroup: HTMLImageElement;
+
     /**
      * Конструктор Player
      * @param {object} props - объект, в котором лежат переданные параметры
      */
-    constructor(props) {
+    constructor(props: IProps) {
         super(props);
-
-        this.template = PlayerTemplate;
-
-        this.state = {
-            defaultSong: {
-                title: 'Fade in',
-                group: 'Apocalyptica',
-                album: '../../assets/backgrounds/apocalyptica-metalica-cover-album.jpg',
-                audio: '../../assets/mp3/apocalyptica-fade.mp3',
-            },
-        };
 
         this.timer = null;
         this.percent = 0;
+
+        const defaultTrack: ITrack = {
+            title: 'Fade in',
+            album: 'Apocalyptica',
+            group: '../../assets/backgrounds/apocalyptica-metalica-cover-album.jpg',
+            audio: '../../assets/mp3/apocalyptica-fade.mp3',
+        };
+
+        this.setState({ track: defaultTrack });
     }
 
     /**
      * Поиск элементов управления плеера
      */
-    didMount() {
-        this.audio = document.getElementById('music-js');
+    didMount(): void {
+        this.audio = document.getElementById('music-js') as HTMLMediaElement;
         this.lastAudio = JSON.parse(localStorage.getItem('lastAudio'));
         this.playButton = document.getElementById('play');
         this.timeLine = document.getElementById('time-line-js');
-        this.progressBar = document.getElementById('progress-bar-js');
+        this.progressBar = document.getElementById('progress-bar-js') as HTMLObjectElement;
         this.repeatButton = document.getElementById('repeat-button-js');
         this.volumeButton = document.getElementById('volume-button-js');
-        this.volumeInput = document.getElementById('volume-input-js');
+        this.volumeInput = document.getElementById('volume-input-js') as HTMLInputElement;
         this.playerTitle = document.getElementById('player-title-js');
-        this.playerAlbum = document.getElementById('player-album-js');
-        this.playerGroup = document.getElementById('player-group-js');
+        this.playerAlbum = document.getElementById('player-album-js') as HTMLImageElement;
+        this.playerGroup = document.getElementById('player-group-js') as HTMLImageElement;
 
-        this.setLastTrack(this.lastAudio || this.state.defaultSong);
+        this.setLastTrack(this.lastAudio as ITrack || this.state.track);
     }
 
     /**
      * Функция обработки клика на иконку Play.
      * @param {object} target - кнопка play/pause
      */
-    tooglePlay(target) {
-        if (target.dataset.status === statuses.statusOff) {
+    tooglePlay(target: EventTarget): void {
+        if ((<HTMLElement>target).dataset.status === statuses.statusOff) {
             this.audioPlay();
             return;
         }
 
         this.audio.pause();
-        // eslint-disable-next-line no-param-reassign
-        target.dataset.status = statuses.statusOff;
-        target.classList.remove(statuses.iconPause);
-        target.classList.add(statuses.iconPlay);
+        (<HTMLElement>target).dataset.status = statuses.statusOff;
+        (<HTMLElement>target).classList.remove(statuses.iconPause);
+        (<HTMLElement>target).classList.add(statuses.iconPlay);
         clearTimeout(this.timer);
     }
 
@@ -70,7 +107,7 @@ export class Player extends Component {
      * Функция, которая устанавливает на проигрывание либо defaultSong или песню из localStorage.
      * @param {object} song - объект с ифнормацией о треке
      */
-    setLastTrack(song) {
+    setLastTrack(song: ITrack): void {
         this.playerTitle.innerText = song.title;
         this.playerGroup.innerText = song.group;
         this.playerAlbum.src = song.album;
@@ -82,7 +119,7 @@ export class Player extends Component {
      * @param {number} duration - длина трека
      * @param {object} element - html объект <audio>
      */
-    startTimer(duration, element) {
+    startTimer(duration: number, element: HTMLMediaElement): void {
         if (this.percent < 100) {
             this.timer = setTimeout(() => this.advance(duration, element), 10);
         }
@@ -93,7 +130,7 @@ export class Player extends Component {
      * @param {number} duration - длина пенси
      * @param {object} element - html объект <audio>
      */
-    advance(duration, element) {
+    advance(duration: number, element: HTMLMediaElement): void {
         const increment = 10 / duration;
         this.percent = Math.min(increment * element.currentTime * 10, 100);
         this.progressBar.style.width = `${this.percent}%`;
@@ -103,18 +140,19 @@ export class Player extends Component {
     /**
      * Функция, которая запускает проигрыавание песни.
      */
-    audioPlay() {
-        this.audio.play();
-        this.playButton.classList.remove(statuses.iconPlay);
-        this.playButton.classList.add(statuses.iconPause);
-        this.playButton.dataset.status = statuses.statusOn;
+    audioPlay(): void {
+        this.audio.play().then(() => {
+            this.playButton.classList.remove(statuses.iconPlay);
+            this.playButton.classList.add(statuses.iconPause);
+            this.playButton.dataset.status = statuses.statusOn;
+        });
     }
 
     /**
      * Функция перемотки трека.
      * @param {MouseEvent} event
      */
-    seek(event) {
+    seek(event: MouseEvent): void {
         const audioPercent = event.offsetX / this.timeLine.offsetWidth;
         this.audio.currentTime = audioPercent * this.audio.duration;
         this.progressBar.width = `${audioPercent}%`;
@@ -126,7 +164,7 @@ export class Player extends Component {
      * Функция смены текущей песни.
      * @param {object} item - трек
      */
-    changeSong(item) {
+    changeSong(item: HTMLElement): void {
         const currentSong = document.querySelector('.track-item_active');
         clearTimeout(this.timer);
 
@@ -134,11 +172,10 @@ export class Player extends Component {
             currentSong.classList.remove('track-item_active');
         }
         item.classList.add('track-item_active');
-
-        const title = item.querySelector('.track-item__title');
-        const group = item.querySelector('.track-item__group');
-        const album = item.querySelector('.track-item__img');
-        const newAudio = item.querySelector('.track-item__album');
+        const title: HTMLElement = item.querySelector('.track-item__title');
+        const group: HTMLElement = item.querySelector('.track-item__group');
+        const album: HTMLImageElement = item.querySelector('.track-item__img') as HTMLImageElement;
+        const newAudio: HTMLElement = item.querySelector('.track-item__album');
 
         this.playerTitle.innerText = title.textContent;
         this.playerGroup.innerText = group.textContent;
@@ -159,7 +196,7 @@ export class Player extends Component {
     /**
      * Функция, которая навешивает обработчики событий на элементы управления плейера.
      */
-    setEventListeners() {
+    setEventListeners(): void {
         this.didMount();
 
         this.playButton.addEventListener('click', (event) => {
@@ -180,7 +217,8 @@ export class Player extends Component {
         });
 
         this.audio.addEventListener('playing', (event) => {
-            this.advance(event.target.duration, this.audio);
+            const { target } = event;
+            this.advance((<HTMLMediaElement>target).duration, this.audio);
         });
 
         this.audio.addEventListener('pause', () => {
@@ -192,18 +230,19 @@ export class Player extends Component {
             const loopFlag = !this.audio.loop;
 
             this.audio.loop = loopFlag;
-            target.style.filter = loopFlag ? 'invert(0)' : 'invert(0.8)';
+            (<HTMLElement>target).style.filter = loopFlag ? 'invert(0)' : 'invert(0.8)';
         });
 
         this.volumeButton.addEventListener('click', () => {
-            const viewFlag = this.volumeInput.dataset.hidden === 'false';
+            const viewFlag: boolean = this.volumeInput.dataset.hidden === 'false';
 
-            this.volumeInput.dataset.hidden = viewFlag;
+            this.volumeInput.dataset.hidden = String(viewFlag);
             this.volumeInput.style.display = viewFlag ? 'none' : 'block';
         });
 
         this.volumeInput.oninput = (event) => {
-            this.audio.volume = parseFloat(event.target.value / 100);
+            const { target } = event;
+            this.audio.volume = parseFloat(String(Number((<HTMLInputElement>target).value) / 100));
         };
     }
 
@@ -211,10 +250,10 @@ export class Player extends Component {
      * Функция, которая добавляет обработчик клика на треки во view.
      * @param {object} tracksWrap - контейнер со всеми треками на странице
      */
-    setEventToTracks(tracksWrap) {
+    setEventToTracks(tracksWrap: HTMLElement): void {
         const tracks = tracksWrap.querySelectorAll('.track-item');
 
-        tracks.forEach((item) => {
+        tracks.forEach((item: HTMLElement) => {
             const trackPlay = item.querySelector('.track-item__album');
             trackPlay.addEventListener('click', () => {
                 this.changeSong(item);
@@ -226,7 +265,7 @@ export class Player extends Component {
      * Отрисовка компонента
      * @returns {*|string}
      */
-    render() {
-        return this.template();
+    render(): HTMLCollection {
+        return PlayerTemplate();
     }
 }
