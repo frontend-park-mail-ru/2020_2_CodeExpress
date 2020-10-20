@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "target": "es6",
+    "allowJs": true,
+    "allowSyntheticDefaultImports" : true,
+    "esModuleInterop" : true,
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["src/*"],
+      "components/*": ["src/components/*"],
+      "store/*": ["src/store/*"],
+      "models/*": ["src/models/*"],
+      "managers/*": ["src/managers/*"],
+      "views/*": ["src/views/*"]
+    }
+  },
+
+  "include": [
+    "./src/d.ts",
+    "./src/**/*"
+  ]
+}

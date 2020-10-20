@@ -5,7 +5,8 @@
  * @param {string} helpText - строка ошибки
  * @returns {{message: string, status: boolean}|{status: boolean}}
  */
-export const userFormValidator = (target, reg, helpText) => {
+
+export const userFormValidator = (target: HTMLInputElement, reg: RegExp, helpText: string): { status: boolean, message: string } => {
     const { value } = target;
     if (!value) {
         return { status: false, message: 'Заполните поле' };
@@ -16,5 +17,5 @@ export const userFormValidator = (target, reg, helpText) => {
     if (!match) {
         return { status: false, message: `${helpText}` };
     }
-    return { status: true };
+    return { status: true, message: 'OK' };
 };

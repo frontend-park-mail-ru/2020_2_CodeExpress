@@ -1,0 +1,23 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "max-len": [1, 180, 2, { "ignoreComments": true }],
+    "quotes": [1, "single", { "allowTemplateLiterals": true }],
+    "indent": ["error", 4],
+    "new-cap": ["error", { "capIsNew": false }],
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "import/prefer-default-export": "off",
+    "no-param-reassign": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "import/named": "off",
+    "no-console": "error",
+    "class-methods-use-this": "off"
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:@typescript-eslint/recommended"
+  ]
+}
