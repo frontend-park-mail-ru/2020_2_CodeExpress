@@ -178,6 +178,12 @@ export class ProfileView extends View<IProps, IState> {
                 user.update(newUser.attrs);
                 user.isLoaded = false;
                 this.storage.set({ user });
+
+                const parent: HTMLElement = document.querySelector('.layout__right-sidebar-wrap');
+                const header = parent.querySelector('.sub-menu');
+                parent.removeChild(header);
+                parent.insertAdjacentHTML('afterbegin', this.page.header.render());
+
                 router.go(RouterStore.website.index);
             } else {
                 logoutErrors.innerText = body.message;
@@ -196,15 +202,15 @@ export class ProfileView extends View<IProps, IState> {
             return;
         }
 
-        this.page.render();
+        this.page.show();
+        this.storage.set({ pageState: true });
 
-        const parent: HTMLElement = this.props.parent.querySelector('.layout__content_wrap');
+        this.props.parent = document.querySelector('.layout__content_wrap');
+
         const avatar: string = user.get('avatar');
-        parent.insertAdjacentHTML('afterbegin', ProfileTemplate({
+        this.props.parent.insertAdjacentHTML('afterbegin', ProfileTemplate({
             username: user.get('username'), email: user.get('email'), isAvatar: avatar !== '' && avatar, avatar,
         }));
-
-        this.page.setEventListeners();
 
         const avatarChangeForm: HTMLElement = this.props.parent.querySelector('.form-change-avatar');
         avatarChangeForm.addEventListener('change', this.changeAvatar);

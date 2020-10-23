@@ -1,4 +1,4 @@
-import { Player } from 'components/player/player';
+import { player } from 'components/player/player';
 import { SideBar } from 'components/sidebar/sidebar';
 import { HeaderPaper } from 'components/header-paper/header-paper';
 import { Component } from 'managers/component/component';
@@ -9,9 +9,7 @@ import PageTemplate from './page.hbs';
  * Класс, который отрисовывает основные компоненты сайта.
  */
 export class Page extends Component {
-    private header: HeaderPaper;
-
-    private player: Player;
+    public header: HeaderPaper;
 
     private sideBar: SideBar;
 
@@ -24,8 +22,15 @@ export class Page extends Component {
         super(props, storage);
 
         this.header = new HeaderPaper(this.props, this.storage);
-        this.player = new Player(this.props);
         this.sideBar = new SideBar(this.props);
+    }
+
+    show(): void {
+        const pageState: boolean = this.storage.get('pageState');
+        if (!pageState) {
+            this.render();
+            this.setEventListeners();
+        }
     }
 
     /**
@@ -34,7 +39,7 @@ export class Page extends Component {
      */
     render(): void {
         this.props.parent.innerHTML = PageTemplate({
-            sidebar: this.sideBar.render(), header: this.header.render(), player: this.player.render(),
+            sidebar: this.sideBar.render(), header: this.header.render(), player: player.render(),
         });
     }
 
@@ -42,7 +47,7 @@ export class Page extends Component {
      * Установка EventListeners
      */
     setEventListeners(): void {
-        this.player.setEventListeners();
+        player.setEventListeners();
     }
 
     /**
@@ -50,6 +55,6 @@ export class Page extends Component {
      */
     setEventToTracks(): void {
         const tracksWrap: HTMLElement = this.props.parent.querySelector('[data-tracks="true"]');
-        this.player.setEventToTracks(tracksWrap);
+        player.setEventToTracks(tracksWrap);
     }
 }

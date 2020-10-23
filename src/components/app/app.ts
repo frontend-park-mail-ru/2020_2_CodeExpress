@@ -44,7 +44,6 @@ export class App extends Component<IProps, IAppState> {
     start() {
         ModelUser.getCurrentUser().then((user) => {
             this.setState({ user });
-        }).then(() => { router.go(window.location.pathname); });
-        router.setup();
+        }).then(() => { router.setup(); });
     }
 }

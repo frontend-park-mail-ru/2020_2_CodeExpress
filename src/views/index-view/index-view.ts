@@ -37,13 +37,14 @@ export class IndexView extends View {
      * Функция отрисовки View
      */
     render(): void {
-        this.page.render();
-        const parent = this.props.parent.querySelector('.layout__content_wrap');
-        parent.insertAdjacentHTML('afterbegin', IndexTemplate({ slider: this.slider.render(), tracks: this.trackList.render() }));
-        const sliderWrap: HTMLElement = parent.querySelector('.slider');
+        this.page.show();
+        this.storage.set({ pageState: true });
+
+        this.props.parent = document.querySelector('.layout__content_wrap');
+        this.props.parent.insertAdjacentHTML('afterbegin', IndexTemplate({ slider: this.slider.render(), tracks: this.trackList.render() }));
+        const sliderWrap: HTMLElement = this.props.parent.querySelector('.slider');
         this.slider.setEventListeners(sliderWrap);
 
-        this.page.setEventListeners();
         this.page.setEventToTracks();
     }
 }

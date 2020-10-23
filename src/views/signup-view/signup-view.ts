@@ -8,6 +8,7 @@ import { Request } from 'managers/request/request';
 import { router } from 'managers/router/router';
 import { IProps, IState, IStorage } from 'store/interfaces';
 import { ModelUser } from 'models/user';
+import { player } from 'components/player/player';
 
 import SighupTemplate from './signup.hbs';
 import './signup.css';
@@ -111,6 +112,13 @@ export class SignupView extends View {
      * Функция отрисовки View
      */
     render() {
+        const pageState = this.storage.get('pageState');
+        if (pageState === true) {
+            player.stop();
+        }
+
+        this.storage.set({ pageState: false });
+
         const user: ModelUser = this.storage.get('user');
 
         if (user.isLoaded) {

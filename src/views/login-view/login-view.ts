@@ -6,7 +6,8 @@ import { regTemplates } from 'store/reg-templates';
 import { Request } from 'managers/request/request';
 import { RouterStore } from 'store/routes';
 import { router } from 'managers/router/router';
-import { IProps } from 'src/store/interfaces';
+import { IProps, IStorage, IState } from 'src/store/interfaces';
+import { player } from 'components/player/player';
 
 import LoginTemplate from './login.hbs';
 import './login.css';
@@ -24,7 +25,7 @@ export class LoginView extends View {
      * @param {object} props - объект, в котором лежат переданные параметры
      * @param {object} storage - объект, который в котором лежат фукнции для работы с User
      */
-    constructor(props: IProps, storage: any) {
+    constructor(props: IProps, storage: IStorage<IState>) {
         super(props, storage);
         this.header = new HeaderFiller(this.props);
         this.footer = new Footer(this.props);
@@ -100,6 +101,13 @@ export class LoginView extends View {
      * Функция отрисовки View
      */
     render(): void {
+        const pageState = this.storage.get('pageState');
+        if (pageState) {
+            player.stop();
+        }
+
+        this.storage.set({ pageState: false });
+
         const user = this.storage.get('user');
 
         if (user.isLoaded) {
