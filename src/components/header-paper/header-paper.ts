@@ -2,7 +2,8 @@ import { Component } from 'managers/component/component';
 import { ModelUser } from 'models/user';
 
 import HeaderPaperTemplate from './header-paper.hbs';
-import './header-paper.css';
+import './header-paper.scss';
+
 /**
  * Header на основных страницах
  */

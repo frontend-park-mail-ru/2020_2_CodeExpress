@@ -5,6 +5,8 @@ import { Component } from 'managers/component/component';
 import { IProps, IStorage, IState } from 'store/interfaces';
 
 import PageTemplate from './page.hbs';
+import './page.scss';
+
 /**
  * Класс, который отрисовывает основные компоненты сайта.
  */

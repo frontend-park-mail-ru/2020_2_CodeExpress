@@ -1,0 +1,20 @@
+@import '../../pallete';
+
+.sidebars {
+  position: relative;
+  display: flex;
+
+  margin-bottom: 70px;
+}
+
+.right-sidebar {
+  position: relative;
+
+  width: 100%;
+
+  margin-left: 260px;
+
+  &__content {
+    width: 100%;
+  }
+}

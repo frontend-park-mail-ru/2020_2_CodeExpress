@@ -11,7 +11,11 @@ import { ModelUser } from 'models/user';
 import { player } from 'components/player/player';
 
 import SighupTemplate from './signup.hbs';
-import './signup.css';
+import './signup.scss';
+
+const banner1 = require('../../assets/backgrounds/banner1.jpg');
+const banner2 = require('../../assets/backgrounds/banner2.jpg');
+
 /**
  * View отображающая страницу регистрации
  */
@@ -19,8 +23,6 @@ export class SignupView extends View {
     private header: HeaderFiller;
 
     private footer: Footer;
-
-    private readonly template: any;
 
     /**
      * Конструктор SignupView
@@ -33,7 +35,6 @@ export class SignupView extends View {
         this.footer = new Footer(this.props);
 
         this.submit = this.submit.bind(this);
-        this.template = SighupTemplate;
     }
 
     /**
@@ -43,30 +44,46 @@ export class SignupView extends View {
     submit(event: Event) {
         event.preventDefault();
         const { target } = event;
+
+        const errorInputClass = 'form-signup__error';
+        const errorHelpTextActive = 'help-error_active';
+
         const email: HTMLInputElement = (<HTMLInputElement>target).querySelector('[name="email"]');
         const username: HTMLInputElement = (<HTMLInputElement>target).querySelector('[name="username"]');
         const password1: HTMLInputElement = (<HTMLInputElement>target).querySelector('[name="password1"]');
         const password2: HTMLInputElement = (<HTMLInputElement>target).querySelector('[name="password2"]');
-        const emailErrors: HTMLElement = (<HTMLElement>target).querySelector('.email-errors');
-        const formErrors: HTMLElement = (<HTMLElement>target).querySelector('.form-errors');
-        const usernameErrors: HTMLElement = (<HTMLElement>target).querySelector('.username-errors');
-        const passwordErrors: HTMLElement = (<HTMLElement>target).querySelector('.password-errors');
+        const emailErrors: HTMLElement = (<HTMLElement>target).querySelector('.email-error');
+        const formErrors: HTMLElement = document.querySelector('.signup-page__errors');
+        const usernameErrors: HTMLElement = (<HTMLElement>target).querySelector('.username-error');
+        const passwordErrors: HTMLElement = (<HTMLElement>target).querySelector('.password-error');
         let isValidate = true;
+
+        username.classList.remove(errorInputClass);
+        email.classList.remove(errorInputClass);
+        password1.classList.remove(errorInputClass);
+        password2.classList.remove(errorInputClass);
 
         formErrors.innerText = '';
         usernameErrors.innerText = '';
+        usernameErrors.classList.remove(errorHelpTextActive);
         passwordErrors.innerText = '';
+        passwordErrors.classList.remove(errorHelpTextActive);
         emailErrors.innerText = '';
+        emailErrors.classList.remove(errorHelpTextActive);
 
         const emailValidator = userFormValidator(email, regTemplates.email, 'Поле дожно быть формата email@email.ru');
         if (!emailValidator.status) {
             emailErrors.innerText = emailValidator.message;
+            emailErrors.classList.add(errorHelpTextActive);
+            email.classList.add(errorInputClass);
             isValidate = false;
         }
 
         const usernameValidator = userFormValidator(username, regTemplates.username, 'Имя может содержать только буквы и цифры');
         if (!usernameValidator.status) {
             usernameErrors.innerText = usernameValidator.message;
+            usernameErrors.classList.add(errorHelpTextActive);
+            username.classList.add(errorInputClass);
             isValidate = false;
         }
 
@@ -76,11 +93,17 @@ export class SignupView extends View {
 
         if (!password1Validator.status) {
             passwordErrors.innerHTML = password1Validator.message;
+            passwordErrors.classList.add(errorHelpTextActive);
+            password1.classList.add(errorInputClass);
+            password2.classList.add(errorInputClass);
             isValidate = false;
         }
 
         if (password1.value && password1.value && password1.value !== password2.value) {
             passwordErrors.innerHTML += '<br />Пароли не совпадают';
+            passwordErrors.classList.add(errorHelpTextActive);
+            password1.classList.add(errorInputClass);
+            password2.classList.add(errorInputClass);
             isValidate = false;
         }
 
@@ -103,7 +126,7 @@ export class SignupView extends View {
             }
 
             if (status === 200) {
-                router.go(RouterStore.website.login);
+                router.go(RouterStore.website.index);
             }
         });
     }
@@ -126,12 +149,11 @@ export class SignupView extends View {
             return;
         }
 
-        this.props.parent.innerHTML = this.template({
-            header: this.header.render(),
-            footer: this.footer.render(),
-        });
+        const images: Array<File> = [banner1, banner2];
 
-        const form: HTMLFormElement = this.props.parent.querySelector('.sign-up-form');
+        this.props.parent.innerHTML = SighupTemplate({ img: images[Math.floor(Math.random() * 2)] });
+
+        const form: HTMLFormElement = this.props.parent.querySelector('.form-signup');
         form.addEventListener('submit', this.submit);
     }
 }

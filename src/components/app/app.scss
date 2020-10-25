@@ -1,0 +1,180 @@
+@import "../../pallete";
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+
+  margin: 0;
+
+  background-color: $color-black-2;
+
+  font-family: $font-regular;
+
+  overscroll-behavior-y: none;
+}
+
+#app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  width: 100%;
+}
+
+
+.button-primary {
+  display: flex;
+  align-items: center;
+
+  padding: 10px 15px;
+
+  width: fit-content;
+
+  border-radius: 5px;
+  border: 0;
+  outline: 0;
+
+  color: $color-white;
+  background-color: $color-primary;
+
+  cursor: pointer;
+}
+
+.button-secondary {
+  width: fit-content;
+  height: fit-content;
+
+  padding: 10px 15px;
+
+  border: 2px solid $color-primary;
+  border-radius: 5px;
+
+  color: $color-white;
+
+  cursor: pointer;
+}
+
+.track-item {
+  display: flex;
+  align-items: center;
+
+  width: 460px;
+
+  margin: 5px 10px 5px 0;
+  padding: 0 10px 10px;
+
+  border-bottom: 1px solid $color-gray-1;
+
+  &:last-child {
+    border: 0;
+  }
+
+  &__index {
+    width: 25px;
+  }
+
+  &__index,
+  &__duration,
+  &__icon {
+    margin: 0 5px;
+    color: $color-gray;
+  }
+
+  &__duration {
+    margin-left: auto;
+  }
+
+  &__title {
+    color: $color-white;
+    font-family: $font-medium;
+    font-size: 14px;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  &__group {
+    font-family: $font-thin;
+    font-size: 10px;
+    color: $color-gray;
+  }
+
+  &__album {
+    height: 50px;
+    width: 50px;
+
+    margin: 0 10px;
+
+    background-color: $color-gray;
+    border-radius: 5px;
+  }
+
+}
+
+.share-link {
+  display: flex;
+  align-items: center;
+
+  padding: 5px 10px;
+  margin: 0 5px;
+
+  border-radius: 5px;
+
+  color: $color-gray;
+  background-color: $color-black-2;
+}
+
+.share-link:nth-of-type(1) {
+  margin-left: auto;
+}
+
+
+.genre-item {
+  width: fit-content;
+
+  padding: 10px 15px;
+  margin: 0 10px 5px 0;
+
+  border-radius: 5px;
+
+  font-size: 14px;
+  color: $color-gray;
+  background-color: $color-black-1;
+}
+
+.album-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: fit-content;
+
+  &__title {
+    color: $color-white;
+    font-family: $font-medium;
+    font-size: 16px;
+  }
+
+  &__group {
+    color: $color-gray;
+    font-family: $font-thin;
+    font-size: 14px;
+  }
+
+  &__album {
+    height: 150px;
+    width: 150px;
+
+    margin-bottom: 10px;
+
+    border-radius: 5px;
+  }
+}

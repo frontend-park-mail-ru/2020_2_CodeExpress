@@ -1,23 +1,23 @@
-<div class="sub-menu">
-    <div class="sub-menu__links">
-        <i class="sub-menu__link fas fa-chevron-left"></i>
-        <i class="sub-menu__link fas fa-chevron-right"></i>
+<div class="header">
+    <div class="header__links">
+        <i class="header__link fas fa-long-arrow-alt-left"></i>
+        <i class="header__link fas fa-long-arrow-alt-right"></i>
     </div>
-    <form action="#" class="sub-menu__search">
-        <input type="search" class="sub-menu__search-input" placeholder="Поиск...">
-        <i class="sub-menu__search-icon fas fa-search"></i>
+    <form action="#" class="header__search">
+        <i class="header__search-icon fas fa-search"></i>
+        <input type="text" class="header__search-input" placeholder="Поиск...">
     </form>
-    <div class="sub-menu__profile">
+    <div class="header__profile">
         {{# if load }}
-            <div class="sub-menu__profile-nickname link-btn" data-url="/profile/" >{{ username }}</div>
+            <i class="header__icon fas fa-cog"></i>
             {{# if isAvatar }}
-                <img class="sub-menu__profile-avatar" src="http://musicexpress.sarafa2n.ru:8080{{ avatar }}">
+                <img class="header__profile-avatar link-btn" data-url="/profile/" src="http://musicexpress.sarafa2n.ru:8080{{ avatar }}">
             {{else}}
-                <i class="sub-menu__profile-avatar fas fa-user-circle"></i>
+                <img class="header__profile-avatar link-btn" data-url="/profile/" src="../../assets/default/user-default.svg">
             {{/if}}
         {{else}}
-            <div class="primary-header-button link-btn" data-url="/login/">Войти</div>
-            <div class="secondary-header-button link-btn" data-url="/signup/">Зарегистрироваться</div>
+            <div class="button-secondary header__profile__link link-btn" data-url="/signup/">Зарегистрироваться</div>
+            <div class="button-primary header__profile__link link-btn" data-url="/login/">Войти</div>
         {{/if}}
     </div>
 </div>

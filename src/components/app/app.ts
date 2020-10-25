@@ -7,7 +7,8 @@ import { SignupView } from 'views/signup-view/signup-view';
 import { Component } from 'managers/component/component';
 import { ModelUser } from 'models/user';
 import { IProps } from 'store/interfaces';
-import './base.css';
+
+import './app.scss';
 
 interface IAppState {
     user: ModelUser;
@@ -42,8 +43,10 @@ export class App extends Component<IProps, IAppState> {
      * Функция инициализатор
      */
     start() {
+        const { pathname } = window.location;
         ModelUser.getCurrentUser().then((user) => {
             this.setState({ user });
-        }).then(() => { router.setup(); });
+        }).then(() => { router.go(pathname); });
+        router.setup();
     }
 }

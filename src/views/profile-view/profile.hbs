@@ -1,72 +1,129 @@
 <div class="profile-page">
-    <div class="profile-content profile-info">
-        <div class="profile-content__wrapper">
-            <div class="content-item">
-                <div class="content-item__title content-item__title_profile">Информация о пользователе</div>
-                <div class="profile__item">
-                    <form class="form-change-avatar" method="POST">
-                        <div class="input-hidden-file input-hidden-file_round">
-                            <input class="input-hidden-file__input" type="file" name="upload_avatar" id="upload_avatar" accept="image/png">
-                            <label class="input-hidden-file__label" for="upload_avatar">
-                                {{# if isAvatar }}
-                                    <img class="profile__avatar" src="http://musicexpress.sarafa2n.ru:8080{{avatar}}">
-                                {{else}}
-                                    <img class="profile__avatar" src="../../assets/icons/user-circle-solid.svg">
-                                {{/if}}
-                                <div class="input-hidden-file__wrapper">
-                                    <img class="input-hidden-file__icon" src="../../assets/icons/upload-solid.svg">
-                                </div>
-                            </label>
-                        </div>
-                        <div class="content-form__errors profile-change-errors"></div>
-                    </form>
-                    <form class="form-change-profile" method="POST">
-                        <div class="content-form__errors profile-change-errors"></div>
-                        <input class="default-input" type="text" name="username" value="{{ username }}">
-                        <input class="default-input" type="text" name="email" value="{{ email }}">
-                        <input type="submit" class="primary-button" value="Сохранить">
-                    </form>
-                </div>
-                    <div class="profile_item">
-                        <div class="content-item__title content-item__title_profile secondary-title">Сменить пароль</div>
-                        <form class="form-change-password" method="POST">
-                            <div class="content-form__errors password-errors"></div>
-                            <div class="form-input__item">
-                                <div class="form-input__label">Новый<br />пароль</div>
-                                <input class="default-input" type="password" name="password1">
-                            </div>
-                            <div class="form-input__item">
-                                <div class="form-input__label">Повторите<br />пароль</div>
-                                <input class="default-input" type="password" name="password2">
-                            </div>
-                            <input type="submit" class="primary-button" value="Сохранить">
-                        </form>
-                    </div>
-            </div>
+    <div class="profile-page__title">Настройки</div>
+    <div class="profile-page__wrapper">
+        <div class="profile-page__avatar">
+            <form class="form-avatar form-change-avatar" method="POST">
+                <div class="avatar-error"></div>
+                <label for="upload_avatar">
+                    {{# if isAvatar }}
+                    <img class="form-avatar__img" src="http://musicexpress.sarafa2n.ru:8080{{avatar}}">
+                    {{else}}
+                        <img class="form-avatar__img" src="../../assets/default/user-default.svg">
+                    {{/if}}
+                </label>
+                <label for="upload_avatar" class="button-primary">Изменить аватарку</label>
+                <input class="form-avatar__input" type="file" name="upload_avatar" id="upload_avatar">
+            </form>
         </div>
-    </div>
-    <div class="profile-content">
-        <div class="profile-content__wrapper">
-            <div class="content-item">
-                <div class="content-item__title content-item__title_profile">Настройка портала</div>
-                <div class="profile__item">
-                    Тёмная тема
-                    <label class="button-switch">
-                        <input class="button-switch__input" type="checkbox">
-                        <span class="button-slider round"></span>
-                    </label>
+        <div class="profile-page__forms">
+            <form class="form-change form-change-profile" method="POST">
+                <div class="profile-error"></div>
+                <div class="form-change__title">Ваши данные</div>
+                <div class="form-change__wrapper">
+                    <div class="form-change-item">
+                        <div class="form-change-item__title">Имя пользователя</div>
+                        <input class="form-change-item__input" type="text" name="username" value="{{ username }}">
+                    </div>
+                    <div class="form-change-item">
+                        <div class="form-change-item__title">Почта</div>
+                        <input class="form-change-item__input" type="text" name="email" value="{{ email }}">
+                    </div>
                 </div>
-                <div class="profile__item">
-                    Язык
-                    <select name="select-language">
-                        <option value="value1">Русский</option>
-                    </select>
+                <input type="submit" class="button-primary form-submit" value="Сохранить">
+            </form>
+            <form class="form-change form-change-password" method="POST">
+                <div class="password-error"></div>
+                <div class="form-change__title">Безопасность</div>
+                <div class="form-change__wrapper">
+                    <div class="form-change-item">
+                        <div class="form-change-item__title">Старый пароль</div>
+                        <input class="form-change-item__input" type="password" name="old_password">
+                    </div>
+                    <div class="form-change-item">
+                        <div class="form-change-item__title">Новый пароль</div>
+                        <input class="form-change-item__input" type="password" name="new_password">
+                    </div>
+                    <div class="form-change-item">
+                        <div class="form-change-item__title">Повторите пароль</div>
+                        <input class="form-change-item__input" type="password" name="new_repeated_password">
+                    </div>
                 </div>
-                <div class="profile__item">
-                    <div class="primary-button logout-btn">Выйти</div>
-                    <div class="logout-errors"></div>
-                </div>
-            </div>
+                <input type="submit" class="button-primary form-submit" value="Изменить">
+            </form>
+            <div class="button-secondary logout-btn">Выйти</div>
         </div>
     </div>
 </div>
+
+<!--<div class="profile-page">-->
+<!--    <div class="profile-content profile-info">-->
+<!--        <div class="profile-content__wrapper">-->
+<!--            <div class="content-item">-->
+<!--                <div class="content-item__title content-item__title_profile">Информация о пользователе</div>-->
+<!--                <div class="profile__item">-->
+<!--                    <form class="form-change-avatar" method="POST">-->
+<!--                        <div class="input-hidden-file input-hidden-file_round">-->
+<!--                            <input class="input-hidden-file__input" type="file" name="upload_avatar" id="upload_avatar" accept="image/png">-->
+<!--                            <label class="input-hidden-file__label" for="upload_avatar">-->
+<!--                                {{# if isAvatar }}-->
+<!--                                    <img class="profile__avatar" src="http://musicexpress.sarafa2n.ru:8080{{avatar}}">-->
+<!--                                {{else}}-->
+<!--                                    <img class="profile__avatar" src="../../assets/icons/user-default.svg">-->
+<!--                                {{/if}}-->
+<!--                                <div class="input-hidden-file__wrapper">-->
+<!--                                    <img class="input-hidden-file__icon" src="../../assets/icons/upload-solid.svg">-->
+<!--                                </div>-->
+<!--                            </label>-->
+<!--                        </div>-->
+<!--                        <div class="content-form__errors profile-change-errors"></div>-->
+<!--                    </form>-->
+<!--                    <form class="form-change-profile" method="POST">-->
+<!--                        <div class="content-form__errors profile-change-errors"></div>-->
+<!--                        <input class="default-input" type="text" name="username" value="{{ username }}">-->
+<!--                        <input class="default-input" type="text" name="email" value="{{ email }}">-->
+<!--                        <input type="submit" class="primary-button" value="Сохранить">-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--                    <div class="profile_item">-->
+<!--                        <div class="content-item__title content-item__title_profile secondary-title">Сменить пароль</div>-->
+<!--                        <form class="form-change-password" method="POST">-->
+<!--                            <div class="content-form__errors password-errors"></div>-->
+<!--                            <div class="form-input__item">-->
+<!--                                <div class="form-input__label">Новый<br />пароль</div>-->
+<!--                                <input class="default-input" type="password" name="password1">-->
+<!--                            </div>-->
+<!--                            <div class="form-input__item">-->
+<!--                                <div class="form-input__label">Повторите<br />пароль</div>-->
+<!--                                <input class="default-input" type="password" name="password2">-->
+<!--                            </div>-->
+<!--                            <input type="submit" class="primary-button" value="Сохранить">-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="profile-content">-->
+<!--        <div class="profile-content__wrapper">-->
+<!--            <div class="content-item">-->
+<!--                <div class="content-item__title content-item__title_profile">Настройка портала</div>-->
+<!--                <div class="profile__item">-->
+<!--                    Тёмная тема-->
+<!--                    <label class="button-switch">-->
+<!--                        <input class="button-switch__input" type="checkbox">-->
+<!--                        <span class="button-slider round"></span>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--                <div class="profile__item">-->
+<!--                    Язык-->
+<!--                    <select name="select-language">-->
+<!--                        <option value="value1">Русский</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div class="profile__item">-->
+<!--                    <div class="primary-button logout-btn">Выйти</div>-->
+<!--                    <div class="logout-errors"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->

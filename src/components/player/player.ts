@@ -3,6 +3,7 @@ import { Component } from 'managers/component/component';
 import { IProps } from 'store/interfaces';
 
 import PlayerTemplate from './player.hbs';
+import './player.scss';
 
 interface ITrack {
     title: string,
@@ -47,6 +48,8 @@ class Player extends Component<IProps, IPlayerState> {
 
     private playerGroup: HTMLImageElement;
 
+    private volumeWrapper: HTMLElement;
+
     /**
      * Конструктор Player
      * @param {object} props - объект, в котором лежат переданные параметры
@@ -59,8 +62,8 @@ class Player extends Component<IProps, IPlayerState> {
 
         const defaultTrack: ITrack = {
             title: 'Fade in',
-            album: 'Apocalyptica',
-            group: '../../assets/backgrounds/apocalyptica-metalica-cover-album.jpg',
+            album: '../../assets/backgrounds/apocalyptica-metalica-cover-album.jpg',
+            group: 'Apocalyptica',
             audio: '../../assets/mp3/apocalyptica-fade.mp3',
         };
 
@@ -78,6 +81,7 @@ class Player extends Component<IProps, IPlayerState> {
         this.progressBar = document.getElementById('progress-bar-js') as HTMLObjectElement;
         this.repeatButton = document.getElementById('repeat-button-js');
         this.volumeButton = document.getElementById('volume-button-js');
+        this.volumeWrapper = document.querySelector('.turntable-sub-controls__wrapper');
         this.volumeInput = document.getElementById('volume-input-js') as HTMLInputElement;
         this.playerTitle = document.getElementById('player-title-js');
         this.playerAlbum = document.getElementById('player-album-js') as HTMLImageElement;
@@ -238,10 +242,10 @@ class Player extends Component<IProps, IPlayerState> {
         });
 
         this.volumeButton.addEventListener('click', () => {
-            const viewFlag: boolean = this.volumeInput.dataset.hidden === 'false';
+            const viewFlag: boolean = this.volumeWrapper.dataset.hidden === 'false';
 
-            this.volumeInput.dataset.hidden = String(viewFlag);
-            this.volumeInput.style.display = viewFlag ? 'none' : 'block';
+            this.volumeWrapper.dataset.hidden = String(viewFlag);
+            this.volumeWrapper.style.display = viewFlag ? 'none' : 'block';
         });
 
         this.volumeInput.oninput = (event) => {
