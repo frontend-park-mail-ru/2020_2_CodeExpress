@@ -3,25 +3,26 @@ import { Component } from 'managers/component/component';
 import { View } from 'managers/base-view/base-view';
 import { IProps } from 'store/interfaces';
 
+interface IFindArgs {
+    matchPath: boolean,
+    arg: string
+}
 /**
  * Функция поиска параметров в url
  * @param path
  * @param key
  * @returns {boolean}
  */
-const findArgs = (path: string, key: string): boolean => { // TODO : Доделать маршрутизацию по динамическим урлам.
-    const match = key.match(regTemplates.url);
-    const args = match[2];
-    if (args) {
-        // eslint-disable-next-line no-param-reassign
-        key = key.replace(`:${args}`, '(.+)');
-    }
+const findArgs = (path: string, key: string): IFindArgs => {
+    const reg = new RegExp(`^${key.replace(regTemplates.searchValue, regTemplates.replaceValue)}/?$`);
+    const match = path.match(reg);
+    const arg = match ? match[1] : null;
 
-    return !path.match(key);
+    return { matchPath: !match, arg };
 };
 
 interface IRouterState {
-    args: string,
+    arg: string,
     currentView: View
 }
 /**
@@ -32,7 +33,7 @@ class Router extends Component<IProps, IRouterState> {
 
     private routes: Map<string, any>;
 
-    state: IRouterState = { args: null, currentView: null };
+    state: IRouterState = { arg: null, currentView: null };
 
     /**
      * Конструктор роутера
@@ -72,22 +73,24 @@ class Router extends Component<IProps, IRouterState> {
         if (currentView) {
             currentView.hide();
         }
-
+        this.setState({ currentView: null });
         if (window.location.pathname !== path) {
             window.history.pushState(null, '', path);
         }
-
         this.routes.forEach((view, key) => {
-            const matchPath = findArgs(path, key);
+            const { matchPath, arg } = findArgs(path, key);
 
             if (matchPath) {
                 return;
             }
-
-            this.setState({ currentView: view });
+            this.setState({ currentView: view, arg });
         });
 
-        this.state.currentView.show();
+        if (!this.state.currentView) {
+            this.props.parent.innerHTML = '404';
+        } else {
+            this.state.currentView.show(this.state.arg);
+        }
     }
 
     back(): void {
@@ -106,12 +109,12 @@ class Router extends Component<IProps, IRouterState> {
         const { target } = event;
         if ((<HTMLElement>target).tagName === 'A') {
             event.preventDefault();
-            this.go((<HTMLLinkElement>target).href);
+            this.go((<HTMLLinkElement>target).href.replace(`http://${window.location.hostname}:${process.env.PORT}`, ''));
         } else {
             const parent: HTMLAnchorElement = (<HTMLElement>target).closest('a');
             if (parent !== null) {
                 event.preventDefault();
-                this.go(parent.href);
+                this.go(parent.href.replace(`http://${window.location.hostname}:${process.env.PORT}`, ''));
             }
         }
     }

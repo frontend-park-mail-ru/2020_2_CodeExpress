@@ -45,8 +45,16 @@
     background-color: $color-black-1;
   }
 
+  &-top-tracks {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    margin-right: 25px;
+  }
+
   &-section {
     margin: 20px 30px 50px;
+    flex-grow: 1;
 
     &__title {
       margin-bottom: 20px;
@@ -80,6 +88,7 @@
 
   &-sections {
     display: flex;
+    justify-content: start;
   }
 }
 

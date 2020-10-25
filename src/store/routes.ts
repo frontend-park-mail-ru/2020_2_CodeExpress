@@ -4,6 +4,7 @@ export const RouterStore = {
         profile: '/profile/',
         login: '/login/',
         signup: '/signup/',
+        album: '/album/:title/',
     },
     api: {
         user: {

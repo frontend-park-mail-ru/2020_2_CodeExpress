@@ -4,6 +4,7 @@ import { IndexView } from 'views/index-view/index-view';
 import { ProfileView } from 'views/profile-view/profile-view';
 import { LoginView } from 'views/login-view/login-view';
 import { SignupView } from 'views/signup-view/signup-view';
+import { AlbumView } from 'views/album-view/album-view';
 import { Component } from 'managers/component/component';
 import { ModelUser } from 'models/user';
 import { IProps } from 'store/interfaces';
@@ -37,7 +38,8 @@ export class App extends Component<IProps, IAppState> {
             .register(RouterStore.website.index, new IndexView(this.props, this.storage))
             .register(RouterStore.website.login, new LoginView(this.props, this.storage))
             .register(RouterStore.website.signup, new SignupView(this.props, this.storage))
-            .register(RouterStore.website.profile, new ProfileView(this.props, this.storage));
+            .register(RouterStore.website.profile, new ProfileView(this.props, this.storage))
+            .register(RouterStore.website.album, new AlbumView(this.props, this.storage));
     }
 
     /**

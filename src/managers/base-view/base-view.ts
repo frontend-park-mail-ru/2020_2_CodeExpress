@@ -9,7 +9,8 @@ export abstract class View<TProps extends IProps = IProps, TState extends IState
         this.props.parent.innerHTML = '';
     }
 
-    show(): void {
+    show(arg: string): void {
+        this.props.arg = arg;
         this.render();
     }
 
