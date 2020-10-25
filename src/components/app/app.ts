@@ -43,10 +43,8 @@ export class App extends Component<IProps, IAppState> {
      * Функция инициализатор
      */
     start() {
-        const { pathname } = window.location;
         ModelUser.getCurrentUser().then((user) => {
             this.setState({ user });
-        }).then(() => { router.go(pathname); });
-        router.setup();
+        }).then(() => { router.setup(); });
     }
 }

@@ -203,7 +203,7 @@ export class ProfileView extends View<IProps, IState> {
         this.page.show();
         this.storage.set({ pageState: true });
 
-        this.props.parent = document.querySelector('.layout__content_wrap');
+        this.props.parent = document.querySelector('.right-sidebar__content');
         const avatar: string = user.get('avatar');
         this.props.parent.insertAdjacentHTML('afterbegin', ProfileTemplate({
             username: user.get('username'), email: user.get('email'), isAvatar: avatar !== '' && avatar, avatar,
