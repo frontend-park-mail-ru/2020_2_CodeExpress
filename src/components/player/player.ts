@@ -18,7 +18,7 @@ interface IPlayerState {
 /**
  * Плеер
  */
-export class Player extends Component<IProps, IPlayerState> {
+class Player extends Component<IProps, IPlayerState> {
     state: IPlayerState;
 
     private timer: NodeJS.Timeout;
@@ -51,7 +51,7 @@ export class Player extends Component<IProps, IPlayerState> {
      * Конструктор Player
      * @param {object} props - объект, в котором лежат переданные параметры
      */
-    constructor(props: IProps) {
+    constructor(props: IProps = {}) {
         super(props);
 
         this.timer = null;
@@ -71,7 +71,7 @@ export class Player extends Component<IProps, IPlayerState> {
      * Поиск элементов управления плеера
      */
     didMount(): void {
-        this.audio = document.getElementById('music-js') as HTMLMediaElement;
+        this.audio = new Audio() as HTMLMediaElement;
         this.lastAudio = JSON.parse(localStorage.getItem('lastAudio'));
         this.playButton = document.getElementById('play');
         this.timeLine = document.getElementById('time-line-js');
@@ -101,6 +101,10 @@ export class Player extends Component<IProps, IPlayerState> {
         (<HTMLElement>target).classList.remove(statuses.iconPause);
         (<HTMLElement>target).classList.add(statuses.iconPlay);
         clearTimeout(this.timer);
+    }
+
+    stop() {
+        this.audio.src = '';
     }
 
     /**
@@ -269,3 +273,5 @@ export class Player extends Component<IProps, IPlayerState> {
         return PlayerTemplate();
     }
 }
+
+export const player: Player = new Player();

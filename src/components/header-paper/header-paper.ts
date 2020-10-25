@@ -11,7 +11,7 @@ export class HeaderPaper extends Component {
      * Отрисовка компонента
      * @returns {*|string}
      */
-    render(): HTMLCollection {
+    render(): string {
         const user: ModelUser = this.storage.get('user');
         const avatar: string = user.get('avatar');
         return HeaderPaperTemplate({
