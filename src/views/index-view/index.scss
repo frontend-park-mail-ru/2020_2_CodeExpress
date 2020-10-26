@@ -1,6 +1,6 @@
 @import '../../pallete';
 
-.home-page {
+.index-page {
   position: relative;
 
   &__preview {
@@ -149,4 +149,34 @@
       font-size: 14px;
     }
   }
+}
+
+.share-link {
+  display: flex;
+  align-items: center;
+
+  padding: 5px 10px;
+  margin: 0 5px;
+
+  border-radius: 5px;
+
+  color: $color-gray;
+  background-color: $color-black-2;
+}
+
+.share-link:nth-of-type(1) {
+  margin-left: auto;
+}
+
+.genre-item {
+  width: fit-content;
+
+  padding: 10px 15px;
+  margin: 0 10px 5px 0;
+
+  border-radius: 5px;
+
+  font-size: 14px;
+  color: $color-gray;
+  background-color: $color-black-1;
 }

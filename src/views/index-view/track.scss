@@ -1,0 +1,61 @@
+@import '../../pallete';
+
+.track-item {
+  display: flex;
+  align-items: center;
+
+  width: 460px;
+
+  margin: 5px 10px 5px 0;
+  padding: 0 10px 10px;
+
+  border-bottom: 1px solid $color-gray-1;
+
+  &:last-child {
+    border: 0;
+  }
+
+  &__index {
+    width: 25px;
+  }
+
+  &__index,
+  &__duration,
+  &__icon {
+    margin: 0 5px;
+    color: $color-gray;
+  }
+
+  &__duration {
+    margin-left: auto;
+  }
+
+  &__title {
+    color: $color-white;
+    font-family: $font-medium;
+    font-size: 14px;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  &__group {
+    font-family: $font-thin;
+    font-size: 10px;
+    color: $color-gray;
+  }
+
+  &__album {
+    height: 50px;
+    width: 50px;
+
+    margin: 0 10px;
+
+    background-color: $color-gray;
+    border-radius: 5px;
+  }
+
+}
