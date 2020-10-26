@@ -7,7 +7,8 @@ import { SignupView } from 'views/signup-view/signup-view';
 import { Component } from 'managers/component/component';
 import { ModelUser } from 'models/user';
 import { IProps } from 'store/interfaces';
-import './base.css';
+
+import './app.scss';
 
 interface IAppState {
     user: ModelUser;

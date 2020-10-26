@@ -1,0 +1,103 @@
+@import '../../pallete';
+
+.profile-page {
+  margin: 100px 125px 0;
+
+  &__title {
+    margin-bottom: 20px;
+
+    font-family: $font-black;
+    color: $color-white;
+    font-size: 40px;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__forms {
+    width: 500px;
+  }
+
+  &__avatar {
+    margin-bottom: 20px;
+  }
+}
+
+
+.form-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: fit-content;
+
+  &__input {
+    display: none;
+  }
+
+  &__icon {
+    font-size: 100px;
+    margin: 10px 0;
+  }
+
+  &__img {
+    height: 180px;
+    width: 180px;
+
+    margin-bottom: 20px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+  }
+}
+
+.form-change {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 30px;
+
+  &__title {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-family: $font-medium;
+    color: $color-white;
+  }
+
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 10px 0;
+
+    &__title {
+      color: $color-gray;
+    }
+
+    &__input {
+      width: 280px;
+
+      padding: 10px 15px;
+
+      border: 0;
+      border-radius: 5px;
+
+      outline: 0;
+
+      color: $color-gray;
+      font-family: $font-regular;
+
+      background-color: $color-black-3;
+    }
+  }
+}
+
+
+.form-submit {
+  align-self: flex-end;
+}

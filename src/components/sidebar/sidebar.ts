@@ -1,7 +1,8 @@
 import { Component } from 'managers/component/component';
 
 import SlideBarTemplate from './sidebar.hbs';
-import './sidebar.css';
+
+import './sidebar.scss';
 /**
  * Боковое меню
  */

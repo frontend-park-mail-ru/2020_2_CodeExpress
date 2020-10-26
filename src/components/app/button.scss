@@ -1,0 +1,33 @@
+@import '../../pallete';
+
+.button-primary {
+  display: flex;
+  align-items: center;
+
+  padding: 10px 15px;
+
+  width: fit-content;
+
+  border-radius: 5px;
+  border: 0;
+  outline: 0;
+
+  color: $color-white;
+  background-color: $color-primary;
+
+  cursor: pointer;
+}
+
+.button-secondary {
+  width: fit-content;
+  height: fit-content;
+
+  padding: 10px 15px;
+
+  border: 2px solid $color-primary;
+  border-radius: 5px;
+
+  color: $color-white;
+
+  cursor: pointer;
+}

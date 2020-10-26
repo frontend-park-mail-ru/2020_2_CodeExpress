@@ -1,0 +1,182 @@
+@import '../../pallete';
+
+.index-page {
+  position: relative;
+
+  &__preview {
+    position: relative;
+
+    margin-bottom: 30px;
+  }
+
+  &__preview-wrapper {
+    min-height: 370px;
+    background-image: url('../../assets/backgrounds/imagine_dragons.jpg');
+    background-size: cover;
+  }
+
+  &__content {
+    position: absolute;
+    bottom: 0;
+
+    width: fit-content;
+
+    margin: 20px 30px;
+  }
+
+  &__title {
+    margin: 10px 0 20px;
+
+    font-family: $font-black;
+    font-size: 36px;
+    color: $color-white;
+  }
+
+  &__genre {
+    width: fit-content;
+    height: fit-content;
+
+    padding: 5px 10px;
+
+    border-radius: 5px;
+
+    font-size: 14px;
+    color: $color-gray;
+    background-color: $color-black-1;
+  }
+
+  &-section {
+    margin: 20px 30px 50px;
+
+    &__title {
+      margin-bottom: 20px;
+
+      font-size: 20px;
+      font-family: $font-medium;
+      color: $color-white;
+    }
+
+    &__wrapper {
+      display: flex;
+      flex-wrap: wrap;
+
+      &_column {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &_space-between {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+
+    width: 325px;
+  }
+
+  &-sections {
+    display: flex;
+  }
+}
+
+.random-track-icon {
+  margin-left: 10px;
+}
+
+
+.article {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 200px;
+  width: 300px;
+
+  padding: 20px;
+
+  border-radius: 5px;
+  background-size: cover !important;
+
+  &-content {
+    display: flex;
+    align-items: center;
+
+    &__icon {
+      margin-right: 10px;
+
+      font-size: 20px;
+      color: $color-primary;
+    }
+
+    &__wrapper {
+      display: flex;
+      align-items: center;
+
+      &_column {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    &__img {
+      height: 80px;
+      width: 80px;
+
+      margin-right: 10px;
+
+      border-radius: 5px;
+    }
+
+    &__title {
+      width: 190px;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      font-size: 24px;
+      font-family: $font-medium;
+      color: $color-white;
+    }
+
+    &__sub-title {
+      color: $color-white;
+      font-family: $font-thin;
+      font-size: 14px;
+    }
+  }
+}
+
+.share-link {
+  display: flex;
+  align-items: center;
+
+  padding: 5px 10px;
+  margin: 0 5px;
+
+  border-radius: 5px;
+
+  color: $color-gray;
+  background-color: $color-black-2;
+}
+
+.share-link:nth-of-type(1) {
+  margin-left: auto;
+}
+
+.genre-item {
+  width: fit-content;
+
+  padding: 10px 15px;
+  margin: 0 10px 5px 0;
+
+  border-radius: 5px;
+
+  font-size: 14px;
+  color: $color-gray;
+  background-color: $color-black-1;
+}

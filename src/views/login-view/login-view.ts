@@ -10,12 +10,15 @@ import { IProps, IStorage, IState } from 'src/store/interfaces';
 import { player } from 'components/player/player';
 
 import LoginTemplate from './login.hbs';
-import './login.css';
+import './login.scss';
+
+const banner1 = require('../../assets/backgrounds/banner1.jpg');
+const banner2 = require('../../assets/backgrounds/banner2.jpg');
 
 /**
  * View отображающая страницу входа
  */
-export class LoginView extends View {
+export class LoginView extends View<IProps, IState> {
     private header: HeaderFiller;
 
     private footer: Footer;
@@ -40,11 +43,16 @@ export class LoginView extends View {
     submit(event: Event): void {
         event.preventDefault();
         const { target } = event;
+
+        const errorInputClass = 'form-login__error';
+
         const login: HTMLInputElement = (<HTMLElement>target).querySelector('[name="login"]');
         const password: HTMLInputElement = (<HTMLElement>target).querySelector('[name="password"]');
-        const formErrors: HTMLElement = (<HTMLElement>target).querySelector('.form-errors');
+        const formErrors: HTMLElement = document.querySelector('.login-page__errors');
         let isValidate = true;
 
+        login.classList.remove(errorInputClass);
+        password.classList.remove(errorInputClass);
         formErrors.innerText = '';
 
         const usernameValidator = userFormValidator(
@@ -54,6 +62,7 @@ export class LoginView extends View {
 
         if (!usernameValidator.status) {
             formErrors.innerText = usernameValidator.message;
+            login.classList.add(errorInputClass);
             isValidate = false;
         }
 
@@ -63,6 +72,7 @@ export class LoginView extends View {
 
         if (!password1Validator.status) {
             formErrors.innerHTML = password1Validator.message;
+            password.classList.add(errorInputClass);
             isValidate = false;
         }
 
@@ -79,6 +89,8 @@ export class LoginView extends View {
             const { status, body } = res;
             if (status !== 200) {
                 formErrors.innerText = body.message;
+                login.classList.add(errorInputClass);
+                password.classList.add(errorInputClass);
                 return;
             }
 
@@ -115,8 +127,10 @@ export class LoginView extends View {
             return;
         }
 
-        this.props.parent.innerHTML = LoginTemplate({ header: this.header.render(), footer: this.footer.render() });
-        const form: HTMLFormElement = this.props.parent.querySelector('.login-form');
+        const images: Array<File> = [banner1, banner2];
+
+        this.props.parent.innerHTML = LoginTemplate({ img: images[Math.floor(Math.random() * 2)] });
+        const form: HTMLFormElement = this.props.parent.querySelector('.form-login');
         form.addEventListener('submit', this.submit);
     }
 }

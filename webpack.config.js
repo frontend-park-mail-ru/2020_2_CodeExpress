@@ -11,7 +11,6 @@ module.exports = {
     entry: './src/index.ts',
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'bundle.[hash:8].js',
         publicPath: '/',
     },
     resolve: {
@@ -28,8 +27,8 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
+                test: /\.scss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
             },
             {
                 test: /\.hbs$/,
@@ -42,9 +41,13 @@ module.exports = {
                 use: ['babel-loader', 'ts-loader'],
             },
             {
-                test: /\.(jpg|png|gif|svg|pdf|ttf|ico)$/,
+                test: /\.(jpg|png|gif|svg|pdf|ico)$/,
                 loader: 'file-loader',
 
+            },
+            {
+                test: /\.ttf$/,
+                use: ['file-loader'],
             },
         ],
     },
@@ -64,9 +67,9 @@ module.exports = {
     ],
     devServer: {
         publicPath: '/',
-        contentBase: [src, path.join(src, 'assets')],
+        contentBase: '/',
         hot: true,
-        port: 80,
+        port: 8080,
         historyApiFallback: true,
     },
     optimization: {

@@ -1,30 +1,27 @@
-<div class="layout__turntable">
-    <div class="turntable__time-line" id="time-line-js">
-        <div class="turntable__progress-bar" id="progress-bar-js"></div>
+<div class="player">
+    <div class="player-track">
+        <img class="player-track__album" id="player-album-js" src="">
+        <div class="player-track__wrapper">
+            <div class="player-track__title" id="player-title-js"></div>
+            <div class="player-track__group" id="player-group-js"></div>
+        </div>
     </div>
-    <div class="turntable__content">
-        <div class="song-controls">
-            <i class="song-control__icon fas fa-backward" id="backward"></i>
-            <i class="song-control__icon fas fa-play" id="play" data-status="off"></i>
-            <i class="song-control__icon fas fa-forward" id="forward"></i>
+    <div class="player-controls">
+        <div class="player-controls__wrapper">
+            <i class="player-controls__icon fas fa-backward" id="backward"></i>
+            <i class="player-controls__icon_play fas fa-play" id="play" data-status="off"></i>
+            <i class="player-controls__icon fas fa-forward" id="forward"></i>
         </div>
-        <div class="song-info">
-            <img class="song__avatar" id="player-album-js" src="">
-            <div class="song__content">
-                <div class="song__content_title" id="player-title-js"></div>
-                <div class="song__content_author" id="player-group-js"></div>
-            </div>
+        <div class="player__time-line" id="time-line-js">
+            <div class="player__progress-bar" id="progress-bar-js"></div>
         </div>
-        <div class="song-controls">
-            <i class="song-control__icon fas fa-plus"></i>
-            <i class="song-control__icon fas fa-heart"></i>
-            <i class="song-control__icon fas fa-share-square"></i>
-        </div>
-        <div class="song-controls">
-            <i class="song-control__icon fas fa-retweet" id="repeat-button-js"></i>
-            <i class="song-control__icon fas fa-volume-up" id="volume-button-js"></i>
-            <input class="song-controls__input" id="volume-input-js" data-hidden="true" min="0" max="100" value="100" type="range">
-            <i class="song-control__icon fas fa-ellipsis-v"></i>
+    </div>
+    <div class="player-sub-controls">
+        <i class="player-sub-controls__icon fas fa-undo-alt" id="repeat-button-js"></i>
+        <i class="player-sub-controls__icon fas fa-retweet"></i>
+        <i class="player-sub-controls__icon fas fa-volume-up" id="volume-button-js"></i>
+        <div class="player-sub-controls__wrapper" data-hidden="true">
+            <input class="player-sub-controls__input" id="volume-input-js" min="0" max="100" value="100" type="range">
         </div>
     </div>
 </div>

@@ -2,7 +2,6 @@ import { Component } from 'managers/component/component';
 import { IState } from 'store/interfaces';
 
 import SliderTemplate from './default-slider.hbs';
-import './slider.css';
 
 interface ISliderProps{
     slidesTemp: Array<any>,

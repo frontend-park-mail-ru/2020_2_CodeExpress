@@ -6,8 +6,9 @@ import { slidesTemp, tracksList } from 'store/consts';
 import { IProps, IState, IStorage } from 'store/interfaces';
 
 import IndexTemplate from './index.hbs';
-import './index.css';
-import './album-list.css';
+import './index.scss';
+import './track.scss';
+import './album.scss';
 
 /**
  * View отображающая главную страницу
@@ -40,11 +41,11 @@ export class IndexView extends View {
         this.page.show();
         this.storage.set({ pageState: true });
 
-        this.props.parent = document.querySelector('.layout__content_wrap');
-        this.props.parent.insertAdjacentHTML('afterbegin', IndexTemplate({ slider: this.slider.render(), tracks: this.trackList.render() }));
-        const sliderWrap: HTMLElement = this.props.parent.querySelector('.slider');
-        this.slider.setEventListeners(sliderWrap);
+        const genreArray: Array<string> = ['Альтернативный Рок',
+            'Иностранный Рок', 'Русский Рок', 'Поп', 'Хипхоп', 'Саундтреки',
+            'Електронная', 'Джаз', 'Блюз', 'Кантри', 'Метал', 'Классическая'];
 
-        this.page.setEventToTracks();
+        this.props.parent = document.querySelector('.page__content');
+        this.props.parent.insertAdjacentHTML('afterbegin', IndexTemplate({ genres: genreArray }));
     }
 }

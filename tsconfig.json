@@ -15,7 +15,8 @@
       "store/*": ["src/store/*"],
       "models/*": ["src/models/*"],
       "managers/*": ["src/managers/*"],
-      "views/*": ["src/views/*"]
+      "views/*": ["src/views/*"],
+      "assets/*": ["src/assets/*"]
     }
   },
 

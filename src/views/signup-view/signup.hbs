@@ -1,34 +1,30 @@
-{{{ header }}}
-<div class="content">
-    <div class="content__wrapper">
-        <div class="content__title">Зарегистрируйтесь и слушайте<br>бесплатно</div>
-        <form class="content-form sign-up-form">
-            <div class="content-form__errors form-errors"></div>
-            <div class="content-form-item">
-                <div class="form-input__label">Ваш адрес электронной почты</div>
-                <input class="default-input" type="text" name="email" placeholder="Введите адрес эл. почты">
-                <div class="content-form__errors email-errors"></div>
+<div class="signup-page" style="background-image: url({{ img.default }})">
+    <div class="signup-page__wrapper">
+        <div class="signup-page__content">
+            <div class="signup-page__logo link-btn" data-url="/">
+                <i class="fas fa-compact-disc signup-page__logo-icon"></i>MusicExpress
             </div>
-            <div class="content-form-item">
-                <div class="form-input__label">Ваше имя</div>
-                <input class="default-input" type="text" name="username" placeholder="Укажите Ваше имя. Например John">
-                <div class="content-form__errors username-errors"></div>
-            </div>
-            <div class="content-form-item">
-                <div class="form-input__label">Придумайте пароль</div>
-                <input class="default-input" type="password" name="password1" placeholder="Введите пароль">
-                <input class="default-input" type="password" name="password2" placeholder="Повторите пароль">
-                <div class="content-form__errors password-errors"></div>
-            </div>
-            <div class="content-form-item">
-                <input type="submit" class="primary-button content-form-item__submit" value="Зарегистрироваться">
-            </div>
-        </form>
-        <div class="content-wrap-line"></div>
-        <div class="login-section">
-            <div class="login-section__title">Есть аккаунт?</div>
-            <div class="login-form__link link-btn" data-url="/login/">Войти</div>
+            <div class="signup-page__title">Зарегистрируйтесь<br /> и слушайте
+                бесплатно</div>
+            <div class="signup-page__errors"></div>
+            <form class="form-signup" method="POST">
+                <input class="form-signup__input" type="text" name="email" placeholder="Введите адрес эл. почты">
+                <div class="email-error"></div>
+                <input class="form-signup__input" type="text" name="username" placeholder="Укажите Ваше имя. Например John">
+                <div class="username-error"></div>
+                <input class="form-signup__input" type="password" name="password1" placeholder="Пароль">
+                <input class="form-signup__input" type="password" name="password2" placeholder="Повторите пароль">
+                <div class="password-error"></div>
+                <div class="form-signup__wrapper">
+                    <div class="form-signup__change-password">Забыли пароль?</div>
+                    <input class="form-signup__submit button-primary" type="submit" value="Зарегистрироваться">
+                </div>
+            </form>
+            </form>
         </div>
     </div>
+    <div class="signup-page__helper">
+        Есть аккаунт?
+        <div class="signup-page__link button-secondary">Войти</div>
+    </div>
 </div>
-{{{ footer }}}

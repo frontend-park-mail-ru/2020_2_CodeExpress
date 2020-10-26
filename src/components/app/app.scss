@@ -1,0 +1,26 @@
+@import "../../pallete";
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+
+  margin: 0;
+
+  background-color: $color-black-2;
+
+  font-family: $font-regular;
+
+  overscroll-behavior-y: none;
+}
+
+#app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  width: 100%;
+}

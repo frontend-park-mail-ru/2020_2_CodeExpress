@@ -1,21 +1,24 @@
-{{{ header }}}
-<div class="content">
-    <div class="content__wrap">
-        <div class="content__title">Чтобы продолжить, войтите в MusicExpress</div>
-        <form action="#" class="login-form">
-            <div class="content-form__errors form-errors"></div>
-            <input class="default-input" type="text" name="login" placeholder="Имя пользователя">
-            <input class="default-input" type="password" name="password" placeholder="Пароль">
-            <div class="login-form__buttons">
-                <input type="submit" class="primary-button" value="Войти">
-                <a href="#" class="login-form__link">Забыли пароль?</a>
+<div class="login-page" style="background-image: url({{ img.default }})">
+    <div class="login-page__wrapper">
+        <div class="login-page__content">
+            <div class="login-page__logo link-btn" data-url="/">
+                <i class="fas fa-compact-disc login-page__logo-icon"></i>MusicExpress
             </div>
-        </form>
-        <div class="content-wrap-line"></div>
-        <div class="sign-up-section">
-            <div class="sign-up-section__title">Нет аккаунта?</div>
-            <a class="secondary-button link-btn" data-url="/signup/">Зарегистрироваться</a>
+            <div class="login-page__title">Вход</div>
+            <div class="login-page__errors"></div>
+            <form class="form-login">
+                <input class="form-login__input" type="text" name="login" placeholder="Почта">
+                <input class="form-login__input" type="password" name="password" placeholder="Пароль">
+                <div class="form-login__wrapper">
+                    <div class="form-login__change-password">Забыли пароль?</div>
+                    <input class="form-login__submit button-primary" type="submit" value="Войти">
+                </div>
+            </form>
+            </form>
         </div>
     </div>
+    <div class="login-page__helper">
+        Нет аккаунта?
+        <div class="login-page__link button-secondary">Зарегистрироваться</div>
+    </div>
 </div>
-{{{ footer }}}

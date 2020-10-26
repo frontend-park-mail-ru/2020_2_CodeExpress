@@ -9,7 +9,8 @@ import { ModelUser } from 'models/user';
 import { IProps, IState } from 'store/interfaces';
 
 import ProfileTemplate from './profile.hbs';
-import './profile.css';
+import './profile.scss';
+
 /**
  * View отображающая страницу профиля
  */
@@ -40,7 +41,7 @@ export class ProfileView extends View<IProps, IState> {
 
         const { target } = event;
         const file = (<HTMLInputElement>target).files[0];
-        const formErrors: HTMLInputElement = (<HTMLElement>target).querySelector('.profile-change-errors');
+        const formErrors: HTMLInputElement = (<HTMLElement>target).querySelector('.avatar-error');
 
         const payload = new FormData();
         payload.append('avatar', file);
@@ -56,8 +57,8 @@ export class ProfileView extends View<IProps, IState> {
             const avatar = body.avatar.slice(1);
             user.update({ avatar });
 
-            const profileAvatarPage: HTMLImageElement = this.props.parent.querySelector('.profile__avatar') as HTMLImageElement;
-            const profileAvatarHeader: HTMLImageElement = this.props.parent.querySelector('.sub-menu__profile-avatar') as HTMLImageElement;
+            const profileAvatarPage: HTMLImageElement = this.props.parent.querySelector('.form-avatar__img') as HTMLImageElement;
+            const profileAvatarHeader: HTMLImageElement = this.props.parent.querySelector('.header__profile-avatar ') as HTMLImageElement;
 
             profileAvatarPage.src = `http://musicexpress.sarafa2n.ru:8080${avatar}`;
             profileAvatarHeader.src = `http://musicexpress.sarafa2n.ru:8080${avatar}`;
@@ -74,7 +75,7 @@ export class ProfileView extends View<IProps, IState> {
         const { target } = event;
         const email: HTMLInputElement = (<HTMLElement>target).querySelector('[name="email"]');
         const username: HTMLInputElement = (<HTMLElement>target).querySelector('[name="username"]');
-        const formErrors: HTMLInputElement = (<HTMLElement>target).querySelector('.profile-change-errors');
+        const formErrors: HTMLInputElement = (<HTMLElement>target).querySelector('.profile-error');
         let isValidate = true;
 
         const emailValidator = userFormValidator(email, regTemplates.email, 'Поле дожно быть формата email@email.ru');
@@ -110,9 +111,6 @@ export class ProfileView extends View<IProps, IState> {
 
             email.value = user.get('email');
             username.value = user.get('username');
-
-            const headerUsername: HTMLElement = this.props.parent.querySelector('.sub-menu__profile-nickname');
-            headerUsername.innerText = body.username;
         });
     }
 
@@ -124,9 +122,9 @@ export class ProfileView extends View<IProps, IState> {
         event.preventDefault();
 
         const { target } = event;
-        const password1: HTMLInputElement = (<HTMLElement>target).querySelector('[name="password1"]');
-        const password2: HTMLInputElement = (<HTMLElement>target).querySelector('[name="password2"]');
-        const formErrors: HTMLInputElement = (<HTMLElement>target).querySelector('.password-errors');
+        const password1: HTMLInputElement = (<HTMLElement>target).querySelector('[name="new_password"]');
+        const password2: HTMLInputElement = (<HTMLElement>target).querySelector('[name="new_repeated_password"]');
+        const formErrors: HTMLInputElement = (<HTMLElement>target).querySelector('.password-error');
         let isValidate = true;
 
         const password1Validator = userFormValidator(password1,
@@ -205,8 +203,7 @@ export class ProfileView extends View<IProps, IState> {
         this.page.show();
         this.storage.set({ pageState: true });
 
-        this.props.parent = document.querySelector('.layout__content_wrap');
-
+        this.props.parent = document.querySelector('.page__content');
         const avatar: string = user.get('avatar');
         this.props.parent.insertAdjacentHTML('afterbegin', ProfileTemplate({
             username: user.get('username'), email: user.get('email'), isAvatar: avatar !== '' && avatar, avatar,
@@ -220,7 +217,6 @@ export class ProfileView extends View<IProps, IState> {
 
         const passwordChangeForm: HTMLElement = this.props.parent.querySelector('.form-change-password');
         passwordChangeForm.addEventListener('submit', this.changePassword);
-
         const logoutBtn: HTMLElement = this.props.parent.querySelector('.logout-btn');
         logoutBtn.addEventListener('click', this.logout);
     }
