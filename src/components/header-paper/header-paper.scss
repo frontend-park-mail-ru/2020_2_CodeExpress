@@ -40,6 +40,12 @@
     }
   }
 
+  &__avatar-link {
+    height: 100%;
+    width: 100%;
+
+    z-index: 10;
+  }
   &__search {
     display: flex;
     align-items: center;
@@ -85,6 +91,8 @@
 
     &__link {
       margin: 0 10px;
+
+      text-decoration: none;
     }
 
     &-avatar {
