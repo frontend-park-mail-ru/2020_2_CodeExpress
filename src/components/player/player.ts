@@ -237,7 +237,7 @@ class Player extends Component<IProps, IPlayerState> {
             const loopFlag = !this.audio.loop;
 
             this.audio.loop = loopFlag;
-            (<HTMLElement>target).style.color = loopFlag ? 'rgba(207, 234, 242, 0.141559)' : '#ff0052';
+            (<HTMLElement>target).style.color = loopFlag ? '#ff0052' : 'rgba(207, 234, 242, 0.141559)';
         });
 
         this.volumeButton.addEventListener('click', () => {

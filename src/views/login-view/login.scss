@@ -17,6 +17,7 @@
 
     color: $color-logo;
     font-size: 30px;
+    text-decoration: none;
 
     cursor: pointer;
 
@@ -74,6 +75,8 @@
 
   &__link {
     margin-left: 10px;
+
+    text-decoration: none;
   }
 }
 

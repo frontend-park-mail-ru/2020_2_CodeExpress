@@ -104,9 +104,15 @@ class Router extends Component<IProps, IRouterState> {
      */
     handleMouseClick(event: Event): void {
         const { target } = event;
-        if ((<HTMLElement>target).classList.contains('link-btn')) {
+        if ((<HTMLElement>target).tagName === 'A') {
             event.preventDefault();
-            this.go((<HTMLElement>target).dataset.url);
+            this.go((<HTMLLinkElement>target).href);
+        } else {
+            const parent: HTMLAnchorElement = (<HTMLElement>target).closest('a');
+            if (parent !== null) {
+                event.preventDefault();
+                this.go(parent.href);
+            }
         }
     }
 

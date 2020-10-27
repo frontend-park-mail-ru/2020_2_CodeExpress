@@ -11,13 +11,13 @@
         {{# if load }}
             <i class="header__icon fas fa-cog"></i>
             {{# if isAvatar }}
-                <img class="header__profile-avatar link-btn" data-url="/profile/" src="http://musicexpress.sarafa2n.ru:8080{{ avatar }}">
+                <a class="header__avatar-link" href="/profile/"><img class="header__profile-avatar" src="http://musicexpress.sarafa2n.ru:8080{{ avatar }}"></a>>
             {{else}}
-                <img class="header__profile-avatar link-btn" data-url="/profile/" src="../../assets/default/user-default.svg">
+                <a class="header__avatar-link" href="/profile/"><img class="header__profile-avatar" src="../../assets/default/user-default.svg"></a>
             {{/if}}
         {{else}}
-            <div class="button-secondary header__profile__link link-btn" data-url="/signup/">Зарегистрироваться</div>
-            <div class="button-primary header__profile__link link-btn" data-url="/login/">Войти</div>
+            <a href="/signup/" class="button-secondary header__profile__link">Зарегистрироваться</a>
+            <a href="/login/" class="button-primary header__profile__link">Войти</a>
         {{/if}}
     </div>
 </div>

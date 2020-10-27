@@ -177,8 +177,8 @@ export class ProfileView extends View<IProps, IState> {
                 user.isLoaded = false;
                 this.storage.set({ user });
 
-                const parent: HTMLElement = document.querySelector('.layout__right-sidebar-wrap');
-                const header = parent.querySelector('.sub-menu');
+                const parent: HTMLElement = document.querySelector('.page__wrapper');
+                const header = parent.querySelector('.header');
                 parent.removeChild(header);
                 parent.insertAdjacentHTML('afterbegin', this.page.header.render());
 
