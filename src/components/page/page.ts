@@ -56,7 +56,7 @@ export class Page extends Component {
      * Установка события click на все песни в блоке с data-tracks
      */
     setEventToTracks(): void {
-        const tracksWrap: HTMLElement = this.props.parent.querySelector('[data-tracks="true"]');
-        player.setEventToTracks(tracksWrap);
+        const tracks: NodeList = this.props.parent.querySelectorAll('.track-item');
+        player.setEventToTracks(tracks);
     }
 }

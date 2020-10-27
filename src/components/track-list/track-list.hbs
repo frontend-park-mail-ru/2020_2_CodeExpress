@@ -1,10 +1,9 @@
-{{#each tracks}}
-    <div class="track-item">
-        <div class="track-item__album" data-audio="{{ audio }}">
-            <i class="track-item__play-button fas fa-play"></i>
-            <img class="track-item__img" src="{{ album }}">
-        </div>
-        <div class="track-item__information">
+{{#each tracks }}
+    <div class="track-item" data-audio="{{ audio }}">
+        <div class="track-item__index">0{{ index }}</div>
+        <i class="track-item__icon fas fa-plus"></i>
+        <img class="track-item__album" src="{{ album }}">
+        <div class="track-item__wrapper">
             <div class="track-item__title">{{ title }}</div>
             <div class="track-item__group">{{ group }}</div>
         </div>

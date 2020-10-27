@@ -13,10 +13,11 @@
 
 ## Что используем?
 
-- JavaScript
+- TypeScript
 - Handlebars
 - ESLint
-- Express JS
+- Webpack
+- SCSS
 
 ## Документация
 
@@ -25,7 +26,6 @@
 ## Как запустить?
 ````sh
 npm install
-npm run build
 npm start
 ````
 Профит!

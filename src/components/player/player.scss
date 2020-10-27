@@ -47,7 +47,7 @@
       width: fit-content;
 
       color: $color-gray;
-      font-family: $font-thin;
+      font-family: $font-regular;
       font-size: 14px;
 
       cursor: pointer;
@@ -83,6 +83,18 @@
         font-size: 25px;
 
         cursor: pointer;
+
+        transition: ease-in-out all 0.3s;
+
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+
+      transition: ease-in-out all 0.3s;
+
+      &:hover {
+        transform: scale(1.2);
       }
     }
   }
@@ -102,6 +114,12 @@
       color: $color-gray-1;
 
       cursor: pointer;
+
+      transition: ease-in-out all 0.3s;
+
+      &:hover {
+        transform: scale(1.2);
+      }
     }
 
     &__wrapper {
