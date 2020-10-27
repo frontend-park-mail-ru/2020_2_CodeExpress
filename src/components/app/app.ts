@@ -9,6 +9,7 @@ import { ModelUser } from 'models/user';
 import { IProps } from 'store/interfaces';
 
 import './app.scss';
+import './button.scss';
 
 interface IAppState {
     user: ModelUser;

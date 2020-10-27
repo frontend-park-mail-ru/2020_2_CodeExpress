@@ -2,12 +2,12 @@ import { Page } from 'components/page/page';
 import { View } from 'managers/base-view/base-view';
 import { DefaultSlider } from 'components/default-slider/default-slider';
 import { TrackList } from 'components/track-list/track-list';
-import { slidesTemp, tracksList } from 'store/consts';
+import { slidesTemp, tracksList, albumArray } from 'store/consts';
 import { IProps, IState, IStorage } from 'store/interfaces';
 
 import IndexTemplate from './index.hbs';
 import './index.scss';
-import './track.scss';
+import 'components/track-list/track.scss';
 import './album.scss';
 
 /**
@@ -46,6 +46,7 @@ export class IndexView extends View {
             'Електронная', 'Джаз', 'Блюз', 'Кантри', 'Метал', 'Классическая'];
 
         this.props.parent = document.querySelector('.page__content');
-        this.props.parent.insertAdjacentHTML('afterbegin', IndexTemplate({ genres: genreArray }));
+        this.props.parent.insertAdjacentHTML('afterbegin', IndexTemplate({ albums: albumArray, genres: genreArray, tracklist: this.trackList.render() }));
+        this.page.setEventToTracks();
     }
 }

@@ -81,7 +81,7 @@ class Player extends Component<IProps, IPlayerState> {
         this.progressBar = document.getElementById('progress-bar-js') as HTMLObjectElement;
         this.repeatButton = document.getElementById('repeat-button-js');
         this.volumeButton = document.getElementById('volume-button-js');
-        this.volumeWrapper = document.querySelector('.turntable-sub-controls__wrapper');
+        this.volumeWrapper = document.querySelector('.player-sub-controls__wrapper');
         this.volumeInput = document.getElementById('volume-input-js') as HTMLInputElement;
         this.playerTitle = document.getElementById('player-title-js');
         this.playerAlbum = document.getElementById('player-album-js') as HTMLImageElement;
@@ -182,13 +182,12 @@ class Player extends Component<IProps, IPlayerState> {
         item.classList.add('track-item_active');
         const title: HTMLElement = item.querySelector('.track-item__title');
         const group: HTMLElement = item.querySelector('.track-item__group');
-        const album: HTMLImageElement = item.querySelector('.track-item__img') as HTMLImageElement;
-        const newAudio: HTMLElement = item.querySelector('.track-item__album');
+        const album: HTMLImageElement = item.querySelector('.track-item__album') as HTMLImageElement;
 
         this.playerTitle.innerText = title.textContent;
         this.playerGroup.innerText = group.textContent;
         this.playerAlbum.src = album.src;
-        this.audio.src = newAudio.dataset.audio;
+        this.audio.src = item.dataset.audio;
         this.audioPlay();
 
         const newLastAudio = {
@@ -238,7 +237,7 @@ class Player extends Component<IProps, IPlayerState> {
             const loopFlag = !this.audio.loop;
 
             this.audio.loop = loopFlag;
-            (<HTMLElement>target).style.filter = loopFlag ? 'invert(0)' : 'invert(0.8)';
+            (<HTMLElement>target).style.color = loopFlag ? 'rgba(207, 234, 242, 0.141559)' : '#ff0052';
         });
 
         this.volumeButton.addEventListener('click', () => {
@@ -256,15 +255,14 @@ class Player extends Component<IProps, IPlayerState> {
 
     /**
      * Функция, которая добавляет обработчик клика на треки во view.
-     * @param {object} tracksWrap - контейнер со всеми треками на странице
+     * @param {object} tracks - контейнер со всеми треками на странице
      */
-    setEventToTracks(tracksWrap: HTMLElement): void {
-        const tracks = tracksWrap.querySelectorAll('.track-item');
-
+    setEventToTracks(tracks: NodeList): void {
         tracks.forEach((item: HTMLElement) => {
-            const trackPlay = item.querySelector('.track-item__album');
-            trackPlay.addEventListener('click', () => {
-                this.changeSong(item);
+            item.addEventListener('click', (e) => {
+                if ((<HTMLElement>e.target).className !== 'track-item__title' && (<HTMLElement>e.target).className !== 'track-item__group') {
+                    this.changeSong(item);
+                }
             });
         });
     }

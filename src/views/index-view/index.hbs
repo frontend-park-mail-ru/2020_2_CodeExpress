@@ -18,36 +18,13 @@
 <div class="index-page-section">
     <div class="index-page-section__title">Рекомендованные альбомы</div>
     <div class="index-page-section__wrapper_space-between">
-        <div class="album-item">
-            <img class="album-item__album" src="../../assets/backgrounds/nirvana-nevermind-album.jpg">
-            <div class="album-item__title">Nevermid</div>
-            <div class="album-item__group">Nirvana</div>
-        </div>
-        <div class="album-item">
-            <img class="album-item__album" src="../../assets/backgrounds/nirvana-nevermind-album.jpg">
-            <div class="album-item__title">Nevermid</div>
-            <div class="album-item__group">Nirvana</div>
-        </div>
-        <div class="album-item">
-            <img class="album-item__album" src="../../assets/backgrounds/nirvana-nevermind-album.jpg">
-            <div class="album-item__title">Nevermid</div>
-            <div class="album-item__group">Nirvana</div>
-        </div>
-        <div class="album-item">
-            <img class="album-item__album" src="../../assets/backgrounds/nirvana-nevermind-album.jpg">
-            <div class="album-item__title">Nevermid</div>
-            <div class="album-item__group">Nirvana</div>
-        </div>
-        <div class="album-item">
-            <img class="album-item__album" src="../../assets/backgrounds/nirvana-nevermind-album.jpg">
-            <div class="album-item__title">Nevermid</div>
-            <div class="album-item__group">Nirvana</div>
-        </div>
-        <div class="album-item">
-            <img class="album-item__album" src="../../assets/backgrounds/nirvana-nevermind-album.jpg">
-            <div class="album-item__title">Nevermid</div>
-            <div class="album-item__group">Nirvana</div>
-        </div>
+        {{#each albums }}
+            <div class="album-item">
+                <img class="album-item__album" src="{{ img }}">
+                <div class="album-item__title">{{ title }}</div>
+                <div class="album-item__group">{{ group }}</div>
+            </div>
+        {{/each}}
     </div>
 </div>
 
@@ -55,91 +32,13 @@
     <div class="index-page-section">
     <div class="index-page-section__title">Популярные песни</div>
     <div class="index-page-section__wrapper_column">
-        <div class="track-item">
-            <div class="track-item__index">01</div>
-            <i class="track-item__icon fas fa-plus"></i>
-            <img class="track-item__album" src="../../assets/backgrounds/nirvana-nevermind-album.jpg">
-            <div class="track-item__wrapper">
-                <div class="track-item__title">Smells Like Teen Spirit</div>
-                <div class="track-item__group">Nirvana</div>
-            </div>
-            <div class="track-item__duration">5:20</div>
-        </div>
-        <div class="track-item">
-            <div class="track-item__index">01</div>
-            <i class="track-item__icon fas fa-plus"></i>
-            <img class="track-item__album" src="../../assets/backgrounds/nirvana-nevermind-album.jpg">
-            <div class="track-item__wrapper">
-                <div class="track-item__title">Smells Like Teen Spirit</div>
-                <div class="track-item__group">Nirvana</div>
-            </div>
-            <div class="track-item__duration">5:20</div>
-        </div>
-        <div class="track-item">
-            <div class="track-item__index">01</div>
-            <i class="track-item__icon fas fa-plus"></i>
-            <img class="track-item__album" src="../../assets/backgrounds/nirvana-nevermind-album.jpg">
-            <div class="track-item__wrapper">
-                <div class="track-item__title">Smells Like Teen Spirit</div>
-                <div class="track-item__group">Nirvana</div>
-            </div>
-            <div class="track-item__duration">5:20</div>
-        </div>
-        <div class="track-item">
-            <div class="track-item__index">01</div>
-            <i class="track-item__icon fas fa-plus"></i>
-            <img class="track-item__album" src="../../assets/backgrounds/nirvana-nevermind-album.jpg">
-            <div class="track-item__wrapper">
-                <div class="track-item__title">Smells Like Teen Spirit</div>
-                <div class="track-item__group">Nirvana</div>
-            </div>
-            <div class="track-item__duration">5:20</div>
-        </div>
+        {{{ tracklist }}}
     </div>
 </div>
     <div class="index-page-section">
     <div class="index-page-section__title">Популярные песни</div>
     <div class="index-page-section__wrapper_column">
-        <div class="track-item">
-            <div class="track-item__index">01</div>
-            <i class="track-item__icon fas fa-plus"></i>
-            <img class="track-item__album" src="../../assets/backgrounds/nirvana-nevermind-album.jpg">
-            <div class="track-item__wrapper">
-                <div class="track-item__title">Smells Like Teen Spirit</div>
-                <div class="track-item__group">Nirvana</div>
-            </div>
-            <div class="track-item__duration">5:20</div>
-        </div>
-        <div class="track-item">
-            <div class="track-item__index">01</div>
-            <i class="track-item__icon fas fa-plus"></i>
-            <img class="track-item__album" src="../../assets/backgrounds/nirvana-nevermind-album.jpg">
-            <div class="track-item__wrapper">
-                <div class="track-item__title">Smells Like Teen Spirit</div>
-                <div class="track-item__group">Nirvana</div>
-            </div>
-            <div class="track-item__duration">5:20</div>
-        </div>
-        <div class="track-item">
-            <div class="track-item__index">01</div>
-            <i class="track-item__icon fas fa-plus"></i>
-            <img class="track-item__album" src="../../assets/backgrounds/nirvana-nevermind-album.jpg">
-            <div class="track-item__wrapper">
-                <div class="track-item__title">Smells Like Teen Spirit</div>
-                <div class="track-item__group">Nirvana</div>
-            </div>
-            <div class="track-item__duration">5:20</div>
-        </div>
-        <div class="track-item">
-            <div class="track-item__index">01</div>
-            <i class="track-item__icon fas fa-plus"></i>
-            <img class="track-item__album" src="../../assets/backgrounds/nirvana-nevermind-album.jpg">
-            <div class="track-item__wrapper">
-                <div class="track-item__title">Smells Like Teen Spirit</div>
-                <div class="track-item__group">Nirvana</div>
-            </div>
-            <div class="track-item__duration">5:20</div>
-        </div>
+        {{{ tracklist }}}
     </div>
 </div>
 </div>
@@ -149,11 +48,13 @@
         <div class="article" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0) 2.75%, rgba(17, 18, 23, 0.75) 100%), url('../../assets/backgrounds/imagine_dragons.jpg')">
             <div class="index-page__genre">Исполнители</div>
             <div class="article-content">
-                <img class="article-content__img" src="../../assets/backgrounds/natural-imagine-dragons.jpeg">
+                <div class="article-content__album">
+                    <i class="article-content__icon fas fa-play"></i>
+                    <img class="article-content__img" src="../../assets/backgrounds/natural-imagine-dragons.jpeg">
+                </div>
                 <div class="article-content__wrapper_column">
                     <div class="article-content__sub-title">Новый альбом</div>
                     <div class="article-content__wrapper">
-                        <i class="article-content__icon fas fa-play"></i>
                         <div class="article-content__wrapper_column">
                             <div class="article-content__title">Natural</div>
                             <div class="article-content__sub-title">14 песен, 1 час 54 минуты</div>
@@ -165,11 +66,13 @@
         <div class="article" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0) 2.75%, rgba(17, 18, 23, 0.75) 100%), url('../../assets/backgrounds/imagine_dragons.jpg')">
             <div class="index-page__genre">Исполнители</div>
             <div class="article-content">
-                <img class="article-content__img" src="../../assets/backgrounds/natural-imagine-dragons.jpeg">
+                <div class="article-content__album">
+                    <i class="article-content__icon fas fa-play"></i>
+                    <img class="article-content__img" src="../../assets/backgrounds/natural-imagine-dragons.jpeg">
+                </div>
                 <div class="article-content__wrapper_column">
                     <div class="article-content__sub-title">Новый альбом</div>
                     <div class="article-content__wrapper">
-                        <i class="article-content__icon fas fa-play"></i>
                         <div class="article-content__wrapper_column">
                             <div class="article-content__title">Natural</div>
                             <div class="article-content__sub-title">14 песен, 1 час 54 минуты</div>
@@ -181,11 +84,13 @@
         <div class="article" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0) 2.75%, rgba(17, 18, 23, 0.75) 100%), url('../../assets/backgrounds/imagine_dragons.jpg')">
             <div class="index-page__genre">Исполнители</div>
             <div class="article-content">
-                <img class="article-content__img" src="../../assets/backgrounds/natural-imagine-dragons.jpeg">
+                <div class="article-content__album">
+                    <i class="article-content__icon fas fa-play"></i>
+                    <img class="article-content__img" src="../../assets/backgrounds/natural-imagine-dragons.jpeg">
+                </div>
                 <div class="article-content__wrapper_column">
                     <div class="article-content__sub-title">Новый альбом</div>
                     <div class="article-content__wrapper">
-                        <i class="article-content__icon fas fa-play"></i>
                         <div class="article-content__wrapper_column">
                             <div class="article-content__title">Natural</div>
                             <div class="article-content__sub-title">14 песен, 1 час 54 минуты</div>
