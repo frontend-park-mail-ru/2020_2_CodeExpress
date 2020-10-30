@@ -122,11 +122,6 @@
 
     transition: ease-in-out all 0.1s;
 
-    &:hover,
-    &:hover::before {
-      opacity: 1;
-    }
-
     &::before {
       content: '';
       position: absolute;
@@ -142,6 +137,11 @@
       box-shadow: 0 0 8px #ff0052;
 
       transition: ease-in-out opacity 0.3s;
+    }
+
+    &:hover,
+    &:hover::before {
+      opacity: 1;
     }
 
     &_active {
