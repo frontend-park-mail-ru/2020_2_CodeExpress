@@ -1,5 +1,6 @@
 export interface IProps {
-    parent?: HTMLElement
+    parent?: HTMLElement,
+    arg?: string | number
 }
 
 export interface IState {

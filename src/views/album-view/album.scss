@@ -1,0 +1,88 @@
+@import '../../pallete';
+
+.album-page {
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &-header {
+    padding: 100px 25px 25px 25px;
+    background: $color-black-4;
+    width: 100%;
+  }
+
+  &-section {
+    margin: 20px 50px 50px 25px;
+    width: 100%;
+
+    &__title {
+      margin-bottom: 20px;
+
+      font-size: 20px;
+      font-family: $font-medium;
+      color: $color-white;
+    }
+
+    &__wrapper {
+      display: flex;
+      flex-wrap: wrap;
+
+      &_tracks {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &_other-albums {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}
+
+.header-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: fit-content;
+  height: 100%;
+
+  &__title {
+    color: $color-white;
+    font-family: $font-medium;
+    font-size: 24px;
+
+    margin-bottom: 20px;
+  }
+
+  &__group {
+    color: $color-gray;
+    font-family: $font-regular;
+    font-size: 18px;
+
+    margin-bottom: 20px;
+  }
+
+  &__poster {
+    height: 200px;
+    width: 200px;
+
+    border-radius: 5px;
+  }
+
+  &__info {
+    margin-left: 25px;
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+
+    height: 100%;
+  }
+}

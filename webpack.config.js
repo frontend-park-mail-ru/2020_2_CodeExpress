@@ -1,9 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 const isProduction = process.env.webpack_type === 'production';
+const port = process.env.PORT || 80;
 const src = path.join(__dirname, 'src');
 
 module.exports = {
@@ -64,12 +66,15 @@ module.exports = {
             ],
         }),
         new CleanWebpackPlugin(),
+        new webpack.EnvironmentPlugin({
+            PORT: port,
+        }),
     ],
     devServer: {
         publicPath: '/',
         contentBase: '/',
         hot: true,
-        port: 80,
+        port,
         historyApiFallback: true,
     },
     optimization: {

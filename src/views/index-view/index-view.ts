@@ -47,6 +47,7 @@ export class IndexView extends View {
 
         this.props.parent = document.querySelector('.page__content');
         this.props.parent.insertAdjacentHTML('afterbegin', IndexTemplate({ albums: albumArray, genres: genreArray, tracklist: this.trackList.render() }));
+
         this.page.setEventToTracks();
     }
 }

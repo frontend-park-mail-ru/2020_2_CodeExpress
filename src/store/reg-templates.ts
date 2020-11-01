@@ -4,4 +4,6 @@ export const regTemplates = {
     email: /^.+@.+\..+$/,
     username: /^[a-zA-Z0-9а-яА-Я_]{2,30}$/,
     password: /[a-zA-Z0-9_]{8,30}$/,
+    searchValue: /(:\w+)/,
+    replaceValue: '(\\w+)',
 };
