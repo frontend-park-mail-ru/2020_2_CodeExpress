@@ -68,6 +68,7 @@ module.exports = {
         new CleanWebpackPlugin(),
         new webpack.EnvironmentPlugin({
             PORT: port,
+            DEBUG: process.env.DEBUG,
         }),
     ],
     devServer: {

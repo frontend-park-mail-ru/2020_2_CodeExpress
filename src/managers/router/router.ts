@@ -14,7 +14,7 @@ interface IFindArgs {
  * @returns {boolean}
  */
 const findArgs = (path: string, key: string): IFindArgs => {
-    const reg = new RegExp(`^${key.replace(regTemplates.searchValue, regTemplates.replaceValue)}/?$`);
+    const reg = new RegExp(`^${key.replace(regTemplates.searchValue, regTemplates.replaceValue)}?$`);
     const match = path.match(reg);
     const arg = match ? match[1] : null;
 
@@ -107,14 +107,18 @@ class Router extends Component<IProps, IRouterState> {
      */
     handleMouseClick(event: Event): void {
         const { target } = event;
+
+        const port = process.env.DEBUG === 'true' ? `:${process.env.PORT}` : '';
+        const replaceUrl = `http://${window.location.hostname}${port}`;
+
         if ((<HTMLElement>target).tagName === 'A') {
             event.preventDefault();
-            this.go((<HTMLLinkElement>target).href.replace(`http://${window.location.hostname}:${process.env.PORT}`, ''));
+            this.go((<HTMLLinkElement>target).href.replace(replaceUrl, ''));
         } else {
             const parent: HTMLAnchorElement = (<HTMLElement>target).closest('a');
             if (parent !== null) {
                 event.preventDefault();
-                this.go(parent.href.replace(`http://${window.location.hostname}:${process.env.PORT}`, ''));
+                this.go(parent.href.replace(replaceUrl, ''));
             }
         }
     }
