@@ -15,7 +15,7 @@ export abstract class Component<TProps = IProps, TState extends IState = IState,
      * @param {object} props - объект, в котором лежат переданные параметры
      * @param {object} storage - объект, который в котором лежат фукнции для работы с User
      */
-    constructor(props: TProps, storage: TStorage = null) {
+    protected constructor(props: TProps, storage: TStorage = null) {
         this.storage = storage;
         this.props = { ...props };
     }

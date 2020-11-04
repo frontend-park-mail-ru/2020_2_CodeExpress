@@ -11,9 +11,11 @@ export abstract class View<TProps extends IProps = IProps, TState extends IState
 
     show(arg: string): void {
         this.props.arg = arg;
+        this.didMount();
         this.render();
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    render(): void {}
+    abstract didMount(): void;
+
+    abstract render(): void;
 }

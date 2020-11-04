@@ -2,6 +2,7 @@ import { Page } from 'components/page/page';
 import { View } from 'managers/base-view/base-view';
 import { IProps, IState } from 'store/interfaces';
 import { TrackList } from 'components/track-list/track-list';
+import { ModelArtist } from 'models/artist';
 import { albumArray, tracksList } from 'store/consts';
 
 import ArtistTemplate from './artist-view.hbs';
@@ -26,6 +27,12 @@ export class ArtistView extends View<IProps, IState> {
         const prevButton = this.props.parent.querySelector('.artist-page-preview__link_active');
         prevButton.classList.remove('artist-page-preview__link_active');
         button.classList.add('artist-page-preview__link_active');
+    }
+
+    didMount() {
+        ModelArtist.fetchCurrentArtist(this.props.arg).then((artist: ModelArtist) => {
+            this.setState({ artist: artist.attrs, isLoaded: artist.isLoaded });
+        }).then(() => this.render());
     }
 
     render() {
