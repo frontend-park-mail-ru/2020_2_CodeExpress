@@ -1,19 +1,12 @@
 import { Page } from 'components/page/page';
 import { View } from 'managers/base-view/base-view';
-import { IProps, IState } from 'store/interfaces';
+import { IProps, IState, IAlbum } from 'store/interfaces';
 
-import { ITrack, TrackList } from 'components/track-list/track-list';
+import { TrackList } from 'components/track-list/track-list';
 import { albumArray, tracksList } from 'store/consts';
 
 import AlbumTemplate from './album.hbs';
 import './album.scss';
-
-interface IAlbum {
-    title: string,
-    group: string,
-    albumPicture: string,
-    tracksList: ITrack[],
-}
 
 export class AlbumView extends View<IProps, IState> {
     private page: Page;

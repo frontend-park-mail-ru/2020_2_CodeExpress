@@ -1,4 +1,4 @@
-import { ITrack } from 'components/track-list/track-list';
+import { ITrack } from 'store/interfaces';
 
 export const statuses = {
     statusOff: 'off',

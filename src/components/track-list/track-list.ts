@@ -1,21 +1,9 @@
 import { Component } from 'managers/component/component';
-import { IProps, IState } from 'store/interfaces';
+import { IState, ITrackList } from 'store/interfaces';
 
 import TrackListTemplate from './track-list.hbs';
 import './track.scss';
 
-export interface ITrack {
-    index: number,
-    duration: string,
-    album: string,
-    audio: string,
-    title: string,
-    group: string
-}
-
-export interface ITrackList extends IProps {
-    tracksList: ITrack[],
-}
 /**
  * Список песен
  */

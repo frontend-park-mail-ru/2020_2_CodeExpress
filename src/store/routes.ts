@@ -19,5 +19,9 @@ export const RouterStore = {
                 password: '/api/v1/user/change/password',
             },
         },
+        artist: {
+            list: '/api/v1/artists',
+            current: '/api/v1/artists/:slug',
+        },
     },
 };
