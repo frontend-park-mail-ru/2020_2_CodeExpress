@@ -71,4 +71,14 @@ export class Request {
             body: serialize ? JSON.stringify(data) : data as FormData,
         }).then((response) => response.json().then((body) => ({ status: response.status, body })));
     }
+
+    static put(url: string): Promise<any> {
+        const requestUrl = this.getBackendUrl(url);
+
+        return fetch(requestUrl, {
+            method: 'PUT',
+            credentials: 'include',
+            mode: 'cors',
+        }).then((response) => response.json().then((body) => ({ status: response.status, body })));
+    }
 }

@@ -17,6 +17,7 @@ export interface IModel {
 }
 
 export interface ITrack {
+    id: number,
     index: number,
     duration: string,
     album: string,
