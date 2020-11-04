@@ -61,6 +61,7 @@ export const slidesTemp = [
 
 export const tracksList: ITrack[] = [
     {
+        id: 0,
         index: 1,
         audio: '../../assets/mp3/nirvana-smells.mp3',
         title: 'Smells Like Teen Spirit',
@@ -69,6 +70,7 @@ export const tracksList: ITrack[] = [
         duration: '5:20',
     },
     {
+        id: 1,
         index: 2,
         audio: '../../assets/mp3/nirvana-man.mp3',
         title: 'The Man Who Sold the World',
@@ -77,6 +79,7 @@ export const tracksList: ITrack[] = [
         duration: '5:20',
     },
     {
+        id: 2,
         index: 3,
         audio: '../../assets/mp3/apocalyptica-path.mp3',
         title: 'Path',
@@ -85,6 +88,7 @@ export const tracksList: ITrack[] = [
         duration: '5:20',
     },
     {
+        id: 3,
         index: 4,
         audio: '../../assets/mp3/apocalyptica-fade.mp3',
         title: 'Fade in',
@@ -93,6 +97,7 @@ export const tracksList: ITrack[] = [
         duration: '5:20',
     },
     {
+        id: 4,
         index: 5,
         audio: '../../assets/mp3/Apocalyptica-One.mp3',
         title: 'One',

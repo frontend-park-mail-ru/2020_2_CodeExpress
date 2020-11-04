@@ -15,7 +15,8 @@ export abstract class View<TProps extends IProps = IProps, TState extends IState
         this.render();
     }
 
-    abstract didMount(): void;
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    didMount(): void {}
 
     abstract render(): void;
 }

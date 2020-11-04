@@ -10,7 +10,7 @@
   border-bottom: 1px solid $color-gray-1;
 
   cursor: pointer;
-  transition: ease-in-out all 0.3s;
+  transition: ease-in-out all 0.2s;
 
   &_active,
   &:hover {
@@ -33,6 +33,17 @@
   &__icon {
     margin: 0 5px;
     color: $color-gray;
+
+    transition: ease-in-out all 0.2s;
+  }
+
+  &__icon:hover {
+    transform: rotate(-90deg);
+    color: $color-primary;
+  }
+
+  &__icon_active {
+    color: $color-primary;
   }
 
   &__duration {
@@ -56,6 +67,8 @@
   }
 
   &__group {
+    width: fit-content;
+
     font-family: $font-regular;
     font-size: 14px;
     color: $color-gray;

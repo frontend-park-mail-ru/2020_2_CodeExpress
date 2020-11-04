@@ -23,5 +23,15 @@ export const RouterStore = {
             list: '/api/v1/artists',
             current: '/api/v1/artists/:slug',
         },
+        track: {
+            all: '/api/v1/track',
+            update: '/api/v1/tracks/:id',
+            add: 'api/v1/tracks/',
+            delete: 'api/v1/tracks/:id',
+            favorite: {
+                list: '/api/v1/favorite/tracks',
+                add: '/api/v1/favorite/track/',
+            },
+        },
     },
 };

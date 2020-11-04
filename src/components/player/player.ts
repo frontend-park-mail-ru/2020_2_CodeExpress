@@ -1,6 +1,7 @@
 import { statuses } from 'store/consts';
 import { Component } from 'managers/component/component';
 import { IProps } from 'store/interfaces';
+import { ModelTrack } from 'models/track';
 
 import PlayerTemplate from './player.hbs';
 import './player.scss';
@@ -260,7 +261,19 @@ class Player extends Component<IProps, IPlayerState> {
     setEventToTracks(tracks: NodeList): void {
         tracks.forEach((item: HTMLElement) => {
             item.addEventListener('click', (e) => {
-                if ((<HTMLElement>e.target).className !== 'track-item__title' && (<HTMLElement>e.target).className !== 'track-item__group') {
+                if ((<HTMLElement>e.target).classList.contains('track-item__icon')) {
+                    ModelTrack.fetchFavoriteTrackAdd((<HTMLElement>e.target).dataset.id).then((res) => {
+                        const { body } = res;
+                        if (body.message === 'added') {
+                            (<HTMLElement>e.target).classList.add('track-item__plus_active');
+                        } else if (body.message === 'deleted') {
+                            (<HTMLElement>e.target).classList.remove('track-item__plus_active');
+                        }
+                    });
+                }
+                if ((<HTMLElement>e.target).className !== 'track-item__title'
+                    && (<HTMLElement>e.target).className !== 'track-item__group'
+                    && !(<HTMLElement>e.target).classList.contains('track-item__icon')) {
                     this.changeSong(item);
                 }
             });
