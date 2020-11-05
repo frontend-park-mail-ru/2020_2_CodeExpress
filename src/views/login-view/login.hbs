@@ -1,12 +1,15 @@
 <div class="login-page" style="background-image: url({{ img.default }})">
     <div class="login-page__wrapper">
         <div class="login-page__content">
-            <a href="/" class="login-page__logo">
+            <div class="login-page__mobile-wrapper">
+                <a href="/" class="login-page__logo">
                 <i class="fas fa-compact-disc login-page__logo-icon"></i>MusicExpress
             </a>
-            <div class="login-page__title">Вход</div>
+                <div class="login-page__title">Вход</div>
+            </div>
+            <div class="login-page__mobile-wrapper">
             <div class="login-page__errors"></div>
-            <form class="form-login">
+                <form class="form-login">
                 <input class="form-login__input" type="text" name="login" placeholder="Почта">
                 <input class="form-login__input" type="password" name="password" placeholder="Пароль">
                 <div class="form-login__wrapper">
@@ -14,7 +17,8 @@
                     <input class="form-login__submit button-primary" type="submit" value="Войти">
                 </div>
             </form>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
     <div class="login-page__helper">

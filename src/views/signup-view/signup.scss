@@ -134,3 +134,54 @@
 .help-error_active {
   margin: 5px 0;
 }
+
+@media only screen and (max-width: 1000px) {
+  .signup-page {
+
+    &__wrapper {
+      justify-content: center;
+
+      width: 100%;
+      height: auto;
+
+      padding-top: 30px;
+    }
+
+    &__title,
+    &__logo {
+      font-size: 24px;
+    }
+
+    &__helper {
+      position: absolute;
+
+      margin: 20px 20px 0;
+    }
+
+    &__content {
+      margin: 0 20px;
+    }
+  }
+
+}
+
+@media only screen and (max-width: 1000px) and (orientation: landscape) {
+  .signup-page {
+
+    &__title {
+      margin: 0;
+    }
+
+    &__helper {
+      right: 0;
+    }
+
+    &__content {
+      justify-content: space-between;
+      flex-direction: initial;
+      align-items: center;
+
+      width: 100%;
+    }
+  }
+}
