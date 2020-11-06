@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 const isProduction = process.env.webpack_type === 'production';
 const port = process.env.PORT || 80;
@@ -69,6 +70,10 @@ module.exports = {
         new webpack.EnvironmentPlugin({
             PORT: port,
             DEBUG: process.env.DEBUG,
+        }),
+        new WorkboxPlugin.GenerateSW({
+            exclude: [/^.*\.(mp3)$/],
+            mode: 'production',
         }),
     ],
     devServer: {

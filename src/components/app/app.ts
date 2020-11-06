@@ -15,6 +15,7 @@ import './button.scss';
 
 interface IAppState {
     user: ModelUser;
+    updateState?: boolean
 }
 
 type stateKeys = keyof IAppState;
@@ -48,8 +49,11 @@ export class App extends Component<IProps, IAppState> {
      * Функция инициализатор
      */
     start() {
+        const url: string = window.location.pathname;
+
         ModelUser.getCurrentUser().then((user) => {
-            this.setState({ user });
-        }).then(() => { router.setup(); });
+            this.setState({ user, updateState: true });
+        }).then(() => { router.go(url); });
+        router.setup();
     }
 }
