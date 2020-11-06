@@ -196,6 +196,7 @@ export class ProfileView extends View<IProps, IState> {
         const user = this.storage.get('user');
 
         if (!user.isLoaded) {
+            this.storage.set({ pageState: false });
             router.go('/');
             return;
         }

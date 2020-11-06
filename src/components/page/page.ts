@@ -29,9 +29,21 @@ export class Page extends Component {
 
     show(): void {
         const pageState: boolean = this.storage.get('pageState');
+        const updateState: boolean = this.storage.get('updateState');
+
         if (!pageState) {
             this.render();
             this.setEventListeners();
+        }
+        if (pageState && updateState) {
+            const page = this.props.parent.querySelector('.page');
+            const pageWrapper = this.props.parent.querySelector('.page__wrapper');
+
+            this.props.parent.querySelector('.header').remove();
+            this.props.parent.querySelector('.sidebar').remove();
+
+            page.insertAdjacentHTML('afterbegin', this.sideBar.render());
+            pageWrapper.insertAdjacentHTML('afterbegin', this.header.render());
         }
     }
 
