@@ -46,8 +46,6 @@ export class Request {
             method: 'GET',
             credentials: 'include',
             mode: 'cors',
-            headers: {
-            },
         }).then((response) => response.json().then((body) => ({ status: response.status, body })));
     }
 
@@ -68,6 +66,9 @@ export class Request {
             method: 'POST',
             credentials: 'include',
             mode: 'cors',
+            headers: {
+                'Content-Type': serialize ? 'application/json;charset=utf-8' : null,
+            },
             body: serialize ? JSON.stringify(data) : data as FormData,
         }).then((response) => response.json().then((body) => ({ status: response.status, body })));
     }
