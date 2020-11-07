@@ -9,14 +9,14 @@ export const RouterStore = {
     },
     api: {
         user: {
-            current: '/api/v1/user/current',
-            login: '/api/v1/user/login',
-            register: '/api/v1/user/register',
-            logout: '/api/v1/user/logout',
+            current: '/api/v1/user',
+            login: '/api/v1/session',
+            register: '/api/v1/user',
+            logout: '/api/v1/session',
             change: {
-                avatar: '/api/v1/user/change/avatar',
-                profile: '/api/v1/user/change/profile',
-                password: '/api/v1/user/change/password',
+                avatar: '/api/v1/user/photo',
+                profile: '/api/v1/user/profile',
+                password: '/api/v1/user/password',
             },
         },
         artist: {

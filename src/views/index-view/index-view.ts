@@ -39,7 +39,6 @@ export class IndexView extends View {
      */
     render(): void {
         this.page.show();
-        this.storage.set({ pageState: true });
 
         const genreArray: Array<string> = ['Альтернативный Рок',
             'Иностранный Рок', 'Русский Рок', 'Поп', 'Хипхоп', 'Саундтреки',

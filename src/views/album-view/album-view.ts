@@ -47,7 +47,6 @@ export class AlbumView extends View<IProps, IState> {
         const tracks: TrackList = new TrackList({ tracksList: trackL });
 
         this.page.show();
-        this.storage.set({ pageState: true });
 
         this.props.parent = document.querySelector('.page__content');
         this.props.parent.insertAdjacentHTML('afterbegin', AlbumTemplate({

@@ -1,10 +1,11 @@
 const baseBackendUrl = 'http://musicexpress.sarafa2n.ru:8080';
+export const baseStaticUrl = 'http://musicexpress.sarafa2n.ru:8080';
 
 interface IPayload {
     [key: string] : any
 }
 
-interface IRequestBody {
+export interface IRequestBody {
     payload: IPayload,
     serialize: boolean,
 }
@@ -61,25 +62,33 @@ export class Request {
             serialize = true,
         } = params;
         const requestUrl = this.getBackendUrl(url);
-
+        const headers = serialize ? { 'Content-Type': 'application/json;charset=utf-8' } : null;
         return fetch(requestUrl, {
             method: 'POST',
             credentials: 'include',
             mode: 'cors',
             headers: {
-                'Content-Type': serialize ? 'application/json;charset=utf-8' : null,
+                ...headers,
             },
             body: serialize ? JSON.stringify(data) : data as FormData,
         }).then((response) => response.json().then((body) => ({ status: response.status, body })));
     }
 
-    static put(url: string): Promise<any> {
+    static put(url: string, params: IRequestBody): Promise<any> {
+        const {
+            payload: data,
+            serialize = true,
+        } = params;
         const requestUrl = this.getBackendUrl(url);
-
+        const headers = serialize ? { 'Content-Type': 'application/json;charset=utf-8' } : null;
         return fetch(requestUrl, {
             method: 'PUT',
             credentials: 'include',
             mode: 'cors',
+            headers: {
+                ...headers,
+            },
+            body: serialize ? JSON.stringify(data) : data as FormData,
         }).then((response) => response.json().then((body) => ({ status: response.status, body })));
     }
 }

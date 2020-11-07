@@ -1,7 +1,7 @@
 import { Model } from 'models/model';
 import { ITrack } from 'store/interfaces';
 import { RouterStore } from 'store/routes';
-import { Request } from 'managers/request/request';
+import { IRequestBody, Request } from 'managers/request/request';
 
 export class ModelTrack extends Model<ITrack> {
     constructor(attrs: ITrack = null, isLoaded = false) {
@@ -51,10 +51,10 @@ export class ModelTrack extends Model<ITrack> {
         });
     }
 
-    static fetchUpdateTrack(id: string): Promise<any> {
+    static fetchUpdateTrack(id: string, params: IRequestBody): Promise<any> {
         return new Promise((resolve) => {
             const url = RouterStore.api.track.update.replace(':id', id);
-            Request.put(url).then((res) => {
+            Request.put(url, params).then((res) => {
                 resolve(res);
             });
         });

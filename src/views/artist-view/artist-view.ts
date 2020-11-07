@@ -37,7 +37,6 @@ export class ArtistView extends View<IProps, IState> {
 
     render() {
         this.page.show();
-        this.storage.set({ pageState: true });
 
         const tracks: TrackList = new TrackList({ tracksList });
 

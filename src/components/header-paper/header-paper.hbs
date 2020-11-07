@@ -11,9 +11,9 @@
         {{# if load }}
             <i class="header__icon fas fa-cog"></i>
             {{# if isAvatar }}
-                <a class="header__avatar-link" href="/profile/"><img class="header__profile-avatar" src="http://musicexpress.sarafa2n.ru:8080{{ avatar }}"></a>
+                <a class="header__avatar-link" href="/profile/"><img class="header__profile-avatar" src="{{ baseStaticUrl }}{{ avatar }}"></a>
             {{else}}
-                <a class="header__avatar-link" href="/profile/"><img class="header__profile-avatar" src="../../assets/default/user-default.svg"></a>
+                <a class="header__avatar-link" href="/profile/"><img class="header__profile-avatar" src="{{ defaultAvatar.default }}"></a>
             {{/if}}
         {{else}}
             <a href="/signup/" class="button-secondary header__profile__link">Зарегистрироваться</a>

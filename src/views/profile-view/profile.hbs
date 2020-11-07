@@ -6,9 +6,9 @@
                 <div class="avatar-error"></div>
                 <label for="upload_avatar">
                     {{# if isAvatar }}
-                    <img class="form-avatar__img" src="http://musicexpress.sarafa2n.ru:8080{{avatar}}">
+                    <img class="form-avatar__img" src="{{ baseStaticUrl }}{{avatar}}">
                     {{else}}
-                        <img class="form-avatar__img" src="../../assets/default/user-default.svg">
+                        <img class="form-avatar__img" src="{{ defaultAvatar.default }}">
                     {{/if}}
                 </label>
                 <label for="upload_avatar" class="button-primary">Изменить аватарку</label>

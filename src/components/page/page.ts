@@ -34,6 +34,7 @@ export class Page extends Component {
         if (!pageState) {
             this.render();
             this.setEventListeners();
+            this.storage.set({ pageState: true });
         }
         if (pageState && updateState) {
             const page = this.props.parent.querySelector('.page');

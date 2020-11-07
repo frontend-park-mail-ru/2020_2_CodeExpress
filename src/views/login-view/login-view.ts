@@ -105,6 +105,7 @@ export class LoginView extends View<IProps, IState> {
             user.update(userAttrs);
             user.isLoaded = true;
             this.storage.set({ user });
+            this.storage.set({ updateState: true });
             router.back();
         });
     }
