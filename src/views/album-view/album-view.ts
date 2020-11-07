@@ -1,7 +1,7 @@
 import { Page } from 'components/page/page';
 import { View } from 'managers/base-view/base-view';
 import { IProps, IState, IAlbum } from 'store/interfaces';
-
+import { ModelAlbum } from 'models/album';
 import { TrackList } from 'components/track-list/track-list';
 import { albumArray, tracksList } from 'store/consts';
 
@@ -27,6 +27,12 @@ export class AlbumView extends View<IProps, IState> {
             albumPicture,
             tracksList,
         };
+    }
+
+    didMount(): void {
+        ModelAlbum.fetchGetCurrentAlbum(Number(this.props.arg)).then((album: ModelAlbum) => {
+            this.setState({ album: album.attrs, isLoaded: album.isLoaded });
+        }).then(() => this.render());
     }
 
     render() {
