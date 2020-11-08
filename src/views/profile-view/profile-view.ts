@@ -42,8 +42,10 @@ export class ProfileView extends View<IProps, IState> {
         event.preventDefault();
 
         const { target } = event;
-        const file = (<HTMLInputElement>target).files[0];
+        const file: File = (<HTMLInputElement>target).files[0];
         const formErrors: HTMLInputElement = (<HTMLElement>target).querySelector('.avatar-error');
+        const profileAvatarPage: HTMLImageElement = this.props.parent.querySelector('.form-avatar__img') as HTMLImageElement;
+        const profileAvatarHeader: HTMLImageElement = document.querySelector('.header__profile-avatar') as HTMLImageElement;
 
         const payload = new FormData();
         payload.append('avatar', file);
@@ -55,15 +57,13 @@ export class ProfileView extends View<IProps, IState> {
                 formErrors.innerText = body.message;
                 return;
             }
+
             const user = this.storage.get('user');
-            const avatar = body.avatar.slice(1);
+            const avatar = body.avatar.replace('.', baseStaticUrl);
             user.update({ avatar });
 
-            const profileAvatarPage: HTMLImageElement = this.props.parent.querySelector('.form-avatar__img') as HTMLImageElement;
-            const profileAvatarHeader: HTMLImageElement = document.querySelector('.header__profile-avatar') as HTMLImageElement;
-
-            profileAvatarPage.src = `${baseStaticUrl}${avatar}`;
-            profileAvatarHeader.src = `${baseStaticUrl}${avatar}`;
+            profileAvatarPage.src = avatar;
+            profileAvatarHeader.src = avatar;
         });
     }
 
@@ -200,7 +200,7 @@ export class ProfileView extends View<IProps, IState> {
         const user = this.storage.get('user');
         const avatar: string = user.get('avatar');
 
-        if (!user.isLoaded) {
+        if (!user.isLoaded && this.storage.get('updateState')) {
             this.storage.set({ pageState: false });
             router.go('/');
             return;
@@ -214,7 +214,6 @@ export class ProfileView extends View<IProps, IState> {
             email: user.get('email'),
             isAvatar: avatar !== '' && avatar,
             avatar,
-            baseStaticUrl,
             defaultAvatar,
         }));
 

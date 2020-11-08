@@ -6,6 +6,7 @@ export const RouterStore = {
         signup: '/signup/',
         album: '/album/:title/',
         artist: '/artist/:title/',
+        favorite: '/favorite/',
     },
     api: {
         user: {
@@ -24,18 +25,20 @@ export const RouterStore = {
             current: '/api/v1/artists/:slug',
         },
         albums: {
-            current: '/api/v1/album/:id',
-            indexList: '/api/v1/album/index',
-            artist: '/api/v1/album/artist/:id',
+            current: '/api/v1/albums/:id',
+            indexList: '/api/v1/albums?count=:count&from=:from',
+            artist: '/api/v1/artists/:id/albums',
         },
         track: {
             all: '/api/v1/track',
             update: '/api/v1/tracks/:id',
-            add: 'api/v1/tracks/',
-            delete: 'api/v1/tracks/:id',
+            add: '/api/v1/tracks',
+            delete: '/api/v1/tracks/:id',
+            artist: '/api/v1/artists/:id/tracks',
+            index: '/api/v1/tracks?count=:count&from=:from',
             favorite: {
                 list: '/api/v1/favorite/tracks',
-                add: '/api/v1/favorite/track/',
+                add: '/api/v1/favorite/track/:id',
             },
         },
     },

@@ -2,11 +2,11 @@
     <div class="album-page__wrapper">
         <div class="album-page-header">
             <div class="header-item">
-                <img class="header-item__poster" src="{{ albumPicture }}">
+                <img class="header-item__poster" src="{{ album.poster }}">
                 <div class="header-item__info">
-                    <div class="header-item__title">{{ title }}</div>
-                    <div class="header-item__group">{{ group }}</div>
-                    <div class="button-primary">
+                    <div class="header-item__title">{{ album.title }}</div>
+                    <a href="/artist/{{ album.artist_id }}" class="header-item__group">{{ album.artist_name }}</a>
+                    <div class="button-primary button-play-album">
                         Воспроизвести
                         <i class="random-track-icon fas fa-play"></i>
                     </div>

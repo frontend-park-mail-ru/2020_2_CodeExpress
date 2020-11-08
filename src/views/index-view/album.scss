@@ -12,12 +12,24 @@
     color: $color-white;
     font-family: $font-medium;
     font-size: 16px;
+
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &__group {
     color: $color-gray;
     font-family: $font-regular;
     font-size: 14px;
+
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &__album {

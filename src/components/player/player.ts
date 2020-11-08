@@ -27,7 +27,7 @@ class Player extends Component<IProps, IPlayerState> {
 
     private percent: number;
 
-    private audio: HTMLMediaElement;
+    public audio: HTMLMediaElement;
 
     private lastAudio: ITrack;
 
@@ -271,8 +271,7 @@ class Player extends Component<IProps, IPlayerState> {
                         }
                     });
                 }
-                if ((<HTMLElement>e.target).className !== 'track-item__title'
-                    && (<HTMLElement>e.target).className !== 'track-item__group'
+                if ((<HTMLElement>e.target).className !== 'track-item__group'
                     && !(<HTMLElement>e.target).classList.contains('track-item__icon')) {
                     this.changeSong(item);
                 }

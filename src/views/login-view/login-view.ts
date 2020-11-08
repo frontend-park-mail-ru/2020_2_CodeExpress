@@ -3,7 +3,7 @@ import { HeaderFiller } from 'components/header-filler/header-filler';
 import { Footer } from 'components/footer/footer';
 import { userFormValidator } from 'managers/validator/validator';
 import { regTemplates } from 'store/reg-templates';
-import { Request } from 'managers/request/request';
+import { baseStaticUrl, Request } from 'managers/request/request';
 import { RouterStore } from 'store/routes';
 import { router } from 'managers/router/router';
 import { IProps, IStorage, IState } from 'src/store/interfaces';
@@ -97,7 +97,7 @@ export class LoginView extends View<IProps, IState> {
             const userAttrs = {
                 id: body.id,
                 username: body.username,
-                email: body.email,
+                email: body.email.replace('.', baseStaticUrl),
                 avatar: body.avatar.slice(1),
             };
 

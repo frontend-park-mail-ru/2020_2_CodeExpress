@@ -8,11 +8,13 @@
         <div class="group-links__link"><i class="fas fa-layer-group group-links__link-icon"></i>Жанры</div>
         <div class="group-links__link"><i class="fas fa-podcast group-links__link-icon"></i>Радио</div>
     </div>
-    <div class="group-links">
-        <div class="group-links__title">Ваша медиатека</div>
-        <div class="group-links__link"><i class="fas fa-history group-links__link-icon"></i>Недавно прослушано</div>
-        <div class="group-links__link"><i class="fas fa-fire-alt group-links__link-icon"></i></i>Понравившееся</div>
-        <div class="group-links__link"><i class="fas fa-user-friends group-links__link-icon"></i>Подписки</div>
-        <div class="group-links__link"><i class="fas fa-stream fa-heart group-links__link-icon"></i>Плейлисты</div>
-    </div>
+    {{# if userAuth }}
+        <div class="group-links">
+            <div class="group-links__title">Ваша медиатека</div>
+            <div class="group-links__link"><i class="fas fa-history group-links__link-icon"></i>Недавно прослушано</div>
+            <a href="/favorite/" class="group-links__link"><i class="fas fa-fire-alt group-links__link-icon"></i></i>Понравившееся</a>
+            <div class="group-links__link"><i class="fas fa-user-friends group-links__link-icon"></i>Подписки</div>
+            <div class="group-links__link"><i class="fas fa-stream fa-heart group-links__link-icon"></i>Плейлисты</div>
+        </div>
+    {{/if}}
 </div>

@@ -1,5 +1,5 @@
 import { RouterStore } from 'store/routes';
-import { Request } from 'managers/request/request';
+import { baseStaticUrl, Request } from 'managers/request/request';
 import { Model } from 'models/model';
 
 interface IUserAttrs {
@@ -27,6 +27,10 @@ export class ModelUser extends Model<IUserAttrs> {
             avatar: null,
         };
 
+        if (attrs) {
+            attrs.avatar = attrs.avatar.replace('.', baseStaticUrl);
+        }
+
         this.attrs = { ...defaults, ...attrs };
     }
 
@@ -37,16 +41,12 @@ export class ModelUser extends Model<IUserAttrs> {
     static getCurrentUser(): Promise<ModelUser> {
         return new Promise((resolve) => {
             const url = RouterStore.api.user.current;
-            const user: ModelUser = new ModelUser();
+            let user: ModelUser = new ModelUser();
 
             Request.get(url).then((res) => {
                 const { body, status } = res;
                 if (status === 200) {
-                    user.attrs.username = body.username;
-                    user.attrs.email = body.email;
-                    user.attrs.id = body.id;
-                    user.attrs.avatar = body.avatar.slice(1);
-                    user.isLoaded = true;
+                    user = new ModelUser(body, true);
                 }
                 resolve(user);
             });

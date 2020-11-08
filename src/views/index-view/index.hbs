@@ -20,9 +20,9 @@
     <div class="index-page-section__wrapper_space-between">
         {{#each albums }}
             <div class="album-item">
-                <img class="album-item__album" src="{{ img }}">
-                <div class="album-item__title">{{ title }}</div>
-                <div class="album-item__group">{{ group }}</div>
+                <img class="album-item__album" src="{{ attrs.poster }}">
+                <a href="/album/{{ attrs.id}}" class="album-item__title">{{ attrs.title }}</a>
+                <a href="/artist/{{ attrs.artist_id }}" class="album-item__group">{{ attrs.artist_name }}</a>
             </div>
         {{/each}}
     </div>

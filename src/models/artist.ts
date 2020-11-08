@@ -1,15 +1,13 @@
 import { Model } from 'models/model';
-import { Request } from 'managers/request/request';
-import { IAlbum, ITrack } from 'store/interfaces';
+import { baseStaticUrl, Request } from 'managers/request/request';
 import { RouterStore } from 'store/routes';
 
 interface IArtist {
+    id: number,
     name: string,
     poster: string,
-    banner: string,
-    text: string,
-    trackArray: ITrack[],
-    albumArray: IAlbum[]
+    avatar: string,
+    description: string
 }
 
 export class ModelArtist extends Model<IArtist> {
@@ -17,13 +15,17 @@ export class ModelArtist extends Model<IArtist> {
         super(attrs, isLoaded);
 
         const defaults: IArtist = {
+            id: null,
             name: null,
             poster: null,
-            banner: null,
-            text: null,
-            trackArray: null,
-            albumArray: null,
+            avatar: null,
+            description: null,
         };
+
+        if (attrs) {
+            attrs.poster = attrs.poster.replace('.', baseStaticUrl);
+            attrs.avatar = attrs.avatar.replace('.', baseStaticUrl);
+        }
 
         this.attrs = Object.assign(defaults, attrs);
     }
@@ -33,7 +35,7 @@ export class ModelArtist extends Model<IArtist> {
             const url = RouterStore.api.artist.list;
             Request.get(url).then((res) => {
                 const { body } = res;
-                const artists: IArtist[] = body.map((artist: IArtist) => new ModelArtist(artist));
+                const artists: IArtist[] = body.map ? body.map((artist: IArtist) => new ModelArtist(artist)) : null;
                 resolve(artists);
             });
         });
@@ -42,16 +44,11 @@ export class ModelArtist extends Model<IArtist> {
     static fetchCurrentArtist(slug: string) {
         return new Promise((resolve) => {
             const url = RouterStore.api.artist.current.replace(':slug', slug);
-            const artist: ModelArtist = new ModelArtist();
+            let artist: ModelArtist = new ModelArtist();
             Request.get(url).then((res) => {
                 const { body, status } = res;
                 if (status === 200) {
-                    artist.attrs.name = body.name;
-                    artist.attrs.text = body.text;
-                    artist.attrs.poster = body.poster;
-                    artist.attrs.banner = body.banner;
-                    artist.attrs.trackArray = body.tracks;
-                    artist.attrs.albumArray = body.albums;
+                    artist = new ModelArtist(body, true);
                 }
                 resolve(artist);
             });

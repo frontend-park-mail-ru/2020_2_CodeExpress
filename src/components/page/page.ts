@@ -24,7 +24,7 @@ export class Page extends Component {
         super(props, storage);
 
         this.header = new HeaderPaper(this.props, this.storage);
-        this.sideBar = new SideBar(this.props);
+        this.sideBar = new SideBar(this.props, this.storage);
     }
 
     show(): void {

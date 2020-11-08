@@ -1,5 +1,5 @@
-const baseBackendUrl = 'http://musicexpress.sarafa2n.ru:8080';
-export const baseStaticUrl = 'http://musicexpress.sarafa2n.ru:8080';
+const baseBackendUrl = 'http://localhost:8080';
+export const baseStaticUrl = 'http://localhost:8080';
 
 interface IPayload {
     [key: string] : any
@@ -61,6 +61,7 @@ export class Request {
             payload: data,
             serialize = true,
         } = params;
+
         const requestUrl = this.getBackendUrl(url);
         const headers = serialize ? { 'Content-Type': 'application/json;charset=utf-8' } : null;
         return fetch(requestUrl, {

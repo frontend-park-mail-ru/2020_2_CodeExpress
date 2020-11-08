@@ -6,6 +6,7 @@ import { LoginView } from 'views/login-view/login-view';
 import { SignupView } from 'views/signup-view/signup-view';
 import { AlbumView } from 'views/album-view/album-view';
 import { ArtistView } from 'views/artist-view/artist-view';
+import { FavoriteTrackView } from 'views/favoriteTrack-view/favoriteTrack-view';
 import { Component } from 'managers/component/component';
 import { ModelUser } from 'models/user';
 import { IProps } from 'store/interfaces';
@@ -42,7 +43,8 @@ export class App extends Component<IProps, IAppState> {
             .register(RouterStore.website.signup, new SignupView(this.props, this.storage))
             .register(RouterStore.website.profile, new ProfileView(this.props, this.storage))
             .register(RouterStore.website.album, new AlbumView(this.props, this.storage))
-            .register(RouterStore.website.artist, new ArtistView(this.props, this.storage));
+            .register(RouterStore.website.artist, new ArtistView(this.props, this.storage))
+            .register(RouterStore.website.favorite, new FavoriteTrackView(this.props, this.storage));
     }
 
     /**

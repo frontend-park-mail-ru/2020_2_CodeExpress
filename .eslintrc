@@ -15,7 +15,9 @@
     "@typescript-eslint/no-explicit-any": "off",
     "import/named": "off",
     "no-console": "error",
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "camelcase": "off",
+    "no-plusplus": "off"
   },
   "extends": [
     "airbnb-base",
