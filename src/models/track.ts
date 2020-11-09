@@ -30,9 +30,9 @@ export class ModelTrack extends Model<ITrack> {
         };
 
         if (attrs) {
-            attrs.index = Number.parseInt(attrs.index, 10) > 10 ? attrs.index : `0${attrs.index}`;
+            attrs.index = Number.parseInt(attrs.index, 10) >= 10 ? attrs.index : `0${attrs.index}`;
             const time = new Date(Number.parseInt(attrs.duration, 10) * 1000);
-            const seconds = time.getSeconds() > 10 ? time.getSeconds() : `0${time.getSeconds()}`;
+            const seconds = time.getSeconds() >= 10 ? time.getSeconds() : `0${time.getSeconds()}`;
             attrs.duration = `${time.getMinutes()}:${seconds}`;
             attrs.audio = attrs.audio.replace('.', baseStaticUrl);
             attrs.album_poster = attrs.album_poster.replace('.', baseStaticUrl);
