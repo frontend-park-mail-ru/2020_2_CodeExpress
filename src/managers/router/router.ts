@@ -109,7 +109,7 @@ class Router extends Component<IProps, IRouterState> {
         const { target } = event;
 
         const port = process.env.DEBUG === 'true' ? `:${process.env.PORT}` : '';
-        const replaceUrl = `http://${window.location.hostname}${port}`;
+        const replaceUrl = `https://${window.location.hostname}${port}`;
 
         if ((<HTMLElement>target).tagName === 'A') {
             event.preventDefault();
