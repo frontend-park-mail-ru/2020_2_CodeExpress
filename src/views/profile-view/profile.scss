@@ -84,7 +84,6 @@
 
       padding: 10px 15px;
 
-      border: 0;
       border-radius: 5px;
 
       outline: 0;
@@ -93,6 +92,7 @@
       font-family: $font-regular;
 
       background-color: $color-black-3;
+      border: 1px solid $color-black-3;
     }
   }
 }
@@ -100,4 +100,14 @@
 
 .form-submit {
   align-self: flex-end;
+}
+
+.profile-error {
+  margin-bottom: 5px;
+
+  color: $color-error;
+}
+
+.input__error {
+  border-color: $color-primary;
 }
