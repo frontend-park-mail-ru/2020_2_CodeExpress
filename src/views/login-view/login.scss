@@ -27,11 +27,13 @@
   }
 
   &__errors {
-    height: 20px;
+    min-height: 20px;
+    width: 300px;
+
     margin: 10px 0;
 
-    font-family: $font-black;
     font-size: 16px;
+    font-family: $font-black;
     color: $color-error;
   }
 
