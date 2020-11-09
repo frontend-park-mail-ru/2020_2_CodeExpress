@@ -55,23 +55,14 @@ export class LoginView extends View<IProps, IState> {
         password.classList.remove(errorInputClass);
         formErrors.innerText = '';
 
-        const usernameValidator = userFormValidator(
-            login, regTemplates.username,
-            'Имя может содержать только буквы и цифры. Минимальная длина 2 символа',
-        );
-
-        if (!usernameValidator.status) {
-            formErrors.innerText = usernameValidator.message;
+        if (!login.value) {
+            formErrors.innerText = 'Заполните поле';
             login.classList.add(errorInputClass);
             isValidate = false;
         }
 
-        const password1Validator = userFormValidator(password,
-            regTemplates.password,
-            'Длина пароля от 8 до 30 символов<br />Может содержать только латинские буквы и цифры');
-
-        if (!password1Validator.status) {
-            formErrors.innerHTML = password1Validator.message;
+        if (!password.value) {
+            formErrors.innerHTML = 'Заполните поле';
             password.classList.add(errorInputClass);
             isValidate = false;
         }

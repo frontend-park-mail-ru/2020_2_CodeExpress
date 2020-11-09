@@ -62,10 +62,10 @@ class Player extends Component<IProps, IPlayerState> {
         this.percent = 0;
 
         const defaultTrack: ITrack = {
-            title: 'Fade in',
-            album: '../../assets/backgrounds/apocalyptica-metalica-cover-album.jpg',
-            group: 'Apocalyptica',
-            audio: '../../assets/mp3/apocalyptica-fade.mp3',
+            title: 'Bad Liar',
+            album: 'https://musicexpress.sarafa2n.ru:8080/album_posters/726420f0b9599ef1cb70cb66032a47f6',
+            group: 'Imagine Dragons',
+            audio: 'https://musicexpress.sarafa2n.ru:8080/track_audio/18e1d0c72345f84353be39a3fa7f5029',
         };
 
         this.setState({ track: defaultTrack });

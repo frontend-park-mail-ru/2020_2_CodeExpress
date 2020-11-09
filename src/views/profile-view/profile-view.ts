@@ -43,7 +43,7 @@ export class ProfileView extends View<IProps, IState> {
 
         const { target } = event;
         const file: File = (<HTMLInputElement>target).files[0];
-        const formErrors: HTMLInputElement = (<HTMLElement>target).querySelector('.avatar-error');
+        const formErrors: HTMLInputElement = document.querySelector('.avatar-error');
         const profileAvatarPage: HTMLImageElement = this.props.parent.querySelector('.form-avatar__img') as HTMLImageElement;
         const profileAvatarHeader: HTMLImageElement = document.querySelector('.header__profile-avatar') as HTMLImageElement;
 
@@ -74,21 +74,28 @@ export class ProfileView extends View<IProps, IState> {
     changeProfile(event: Event) {
         event.preventDefault();
 
+        const errorInputClass = 'input__error';
         const { target } = event;
         const email: HTMLInputElement = (<HTMLElement>target).querySelector('[name="email"]');
         const username: HTMLInputElement = (<HTMLElement>target).querySelector('[name="username"]');
         const formErrors: HTMLInputElement = (<HTMLElement>target).querySelector('.profile-error');
         let isValidate = true;
 
+        email.classList.remove(errorInputClass);
+        username.classList.remove(errorInputClass);
+        formErrors.innerText = '';
+
         const emailValidator = userFormValidator(email, regTemplates.email, 'Поле дожно быть формата email@email.ru');
         if (!emailValidator.status) {
             formErrors.innerText = emailValidator.message;
+            email.classList.add(errorInputClass);
             isValidate = false;
         }
 
         const usernameValidator = userFormValidator(username, regTemplates.username, 'Имя может содержать только буквы и цифры');
         if (!usernameValidator.status) {
             formErrors.innerText = usernameValidator.message;
+            username.classList.add(errorInputClass);
             isValidate = false;
         }
 
@@ -123,6 +130,7 @@ export class ProfileView extends View<IProps, IState> {
     changePassword(event: Event) {
         event.preventDefault();
 
+        const errorInputClass = 'input__error';
         const { target } = event;
         const oldPassword: HTMLInputElement = (<HTMLElement>target).querySelector('[name="old_password"]');
         const newPassword: HTMLInputElement = (<HTMLElement>target).querySelector('[name="new_password"]');
@@ -130,17 +138,37 @@ export class ProfileView extends View<IProps, IState> {
         const formErrors: HTMLInputElement = (<HTMLElement>target).querySelector('.password-error');
         let isValidate = true;
 
+        oldPassword.classList.remove(errorInputClass);
+        newPassword.classList.remove(errorInputClass);
+        newPasswordRepeated.classList.remove(errorInputClass);
+        formErrors.innerText = '';
+
         const password1Validator = userFormValidator(newPassword,
             regTemplates.password,
             'Длина пароля от 8 до 30 символов<br />Может содержать только латинские буквы и цифры');
 
+        if (!oldPassword.value) {
+            formErrors.innerHTML = 'Заполните поле';
+            oldPassword.classList.add(errorInputClass);
+            isValidate = false;
+        }
+
         if (!password1Validator.status) {
             formErrors.innerHTML = password1Validator.message;
+            newPassword.classList.add(errorInputClass);
+            isValidate = false;
+        }
+
+        if (!newPasswordRepeated.value) {
+            formErrors.innerHTML = 'Заполните поле';
+            newPasswordRepeated.classList.add(errorInputClass);
             isValidate = false;
         }
 
         if (newPassword.value && newPasswordRepeated.value && newPassword.value !== newPasswordRepeated.value) {
             formErrors.innerHTML += '<br />Пароли не совпадают';
+            newPassword.classList.add(errorInputClass);
+            newPasswordRepeated.classList.add(errorInputClass);
             isValidate = false;
         }
 
