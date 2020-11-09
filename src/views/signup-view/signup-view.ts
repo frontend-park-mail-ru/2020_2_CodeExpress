@@ -126,7 +126,14 @@ export class SignupView extends View {
             }
 
             if (status === 200) {
-                router.go(RouterStore.website.index);
+                const user = this.storage.get('user');
+
+                user.update(body);
+                user.isLoaded = true;
+
+                this.storage.set({ user });
+                this.storage.set({ updateState: true });
+                router.back();
             }
         });
     }

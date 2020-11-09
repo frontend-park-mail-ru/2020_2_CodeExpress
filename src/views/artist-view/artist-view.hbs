@@ -1,10 +1,10 @@
 <div class="artist-page">
     <div class="artist-page-preview">
-        <div class="artist-page-preview__wrapper">
+        <div class="artist-page-preview__wrapper" style="background-image: url({{ artist.poster }})">
             <div class="artist-page-preview__content">
-                <img class="artist-page-preview__img" src="../../assets/backgrounds/imagine-dragons-logo.jpg">
+                <img class="artist-page-preview__img" src="{{ artist.avatar }}">
                 <div class="artist-page-preview__content-wrapper">
-                    <div class="artist-page-preview__title">IMAGINE DRAGONS</div>
+                    <div class="artist-page-preview__title">{{ artist.name }}</div>
                     <div class="artist-page-preview__buttons-wrapper">
                         <div class="button-primary">
                             Случайный трек
@@ -17,7 +17,7 @@
             </div>
             <div class="artist-page-preview__links">
                 <div class="artist-page-preview__link artist-page-preview__link_active review-button">Обзор</div>
-                <div class="artist-page-preview__link text-button">об исполнители</div>
+                <div class="artist-page-preview__link text-button">об исполнителе</div>
             </div>
         </div>
     </div>
@@ -41,15 +41,12 @@
             <div class="artist-page__albums">
                 {{#each albums }}
                     <div class="album-item">
-                        <img class="album-item__album" src="{{ img }}">
-                        <div class="album-item__title">{{ title }}</div>
-                        <div class="album-item__group">{{ group }}</div>
+                        <img class="album-item__album" src="{{ attrs.poster }}">
+                        <a href="/album/{{ attrs.id }}" class="album-item__title">{{ attrs.title }}</a>
                     </div>
                 {{/each}}
             </div>
         </div>
-        <div class="artist-page__text artist-page__hidden">
-            Imagine Dragons (дословно с англ. — «Вообрази Драконов») — американская инди-рок-группа, образованная в 2008 году в городе Лас-Вегас, США. Стали известны после выпуска дебютного студийного альбома Night Visions в сентябре 2012 года. Американский журнал Billboard назвал их самыми яркими новыми звёздами 2013 года и самой большой группой 2017 года, а журнал Rolling Stone назвал их сингл «Radioactive» самым большим рок-хитом года.
-        </div>
+        <div class="artist-page__text artist-page__hidden">{{ artist.description }}</div>
     </div>
 </div>

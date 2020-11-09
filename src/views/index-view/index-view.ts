@@ -1,9 +1,9 @@
 import { Page } from 'components/page/page';
 import { View } from 'managers/base-view/base-view';
-import { DefaultSlider } from 'components/default-slider/default-slider';
 import { TrackList } from 'components/track-list/track-list';
-import { slidesTemp, tracksList, albumArray } from 'store/consts';
 import { IProps, IState, IStorage } from 'store/interfaces';
+import { ModelTrack } from 'models/track';
+import { ModelAlbum } from 'models/album';
 
 import IndexTemplate from './index.hbs';
 import './index.scss';
@@ -16,9 +16,9 @@ import './album.scss';
 export class IndexView extends View {
     private page: Page;
 
-    private slider: DefaultSlider;
-
     private trackList: TrackList;
+
+    private isLoaded: boolean;
 
     /**
      * Конструктор IndexView
@@ -28,10 +28,28 @@ export class IndexView extends View {
     constructor(props: IProps, storage: IStorage<IState>) {
         super(props, storage);
         this.page = new Page(this.props, this.storage);
-        const slideToShow = 3;
-        const slideToScroll = 1;
-        this.slider = new DefaultSlider({ slidesTemp, slideToShow, slideToScroll });
-        this.trackList = new TrackList({ tracksList });
+
+        this.isLoaded = false;
+    }
+
+    didMount(): void {
+        const popularTracks = ModelTrack.fetchIndexTrackList(5, 0).then((tracks) => {
+            this.trackList = new TrackList({ tracksList: tracks });
+        });
+
+        const newTracks = ModelTrack.fetchIndexTrackList(5, 5).then((tracks) => {
+            this.setState({ newList: tracks });
+        });
+
+        const popularAlbums = ModelAlbum.fetchGetIndexAlbumArray(6, 0).then((albums) => {
+            this.setState({ popularAlbums: albums });
+        });
+
+        Promise.all([popularTracks, newTracks, popularAlbums]).then(() => {
+            this.isLoaded = true;
+            this.hide();
+            this.render();
+        });
     }
 
     /**
@@ -39,14 +57,15 @@ export class IndexView extends View {
      */
     render(): void {
         this.page.show();
-        this.storage.set({ pageState: true });
+
+        const popularTrackList = this.isLoaded ? this.trackList.render() : null;
+        const albumArray = this.isLoaded ? this.state.popularAlbums : null;
 
         const genreArray: Array<string> = ['Альтернативный Рок',
             'Иностранный Рок', 'Русский Рок', 'Поп', 'Хипхоп', 'Саундтреки',
             'Електронная', 'Джаз', 'Блюз', 'Кантри', 'Метал', 'Классическая'];
-
         this.props.parent = document.querySelector('.page__content');
-        this.props.parent.insertAdjacentHTML('afterbegin', IndexTemplate({ albums: albumArray, genres: genreArray, tracklist: this.trackList.render() }));
+        this.props.parent.insertAdjacentHTML('afterbegin', IndexTemplate({ albums: albumArray, genres: genreArray, tracklist: popularTrackList }));
 
         this.page.setEventToTracks();
     }

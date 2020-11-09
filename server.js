@@ -1,6 +1,7 @@
 const express = require('express');
 const https = require('https');
 const fs = require('fs');
+const http = require('http');
 
 const app = express();
 
@@ -16,3 +17,7 @@ app.all('*', (req, res) => {
 });
 
 https.createServer(httpsOptions, app).listen(443);
+http.createServer((req, res) => {
+    res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
+    res.end();
+}).listen(80);

@@ -50,7 +50,6 @@
 
   &__albums {
     display: flex;
-    justify-content: space-between;
 
     margin: 20px 0;
   }
@@ -63,13 +62,13 @@
     flex-direction: column;
 
     padding-top: 90px;
-    background-image: url('../../assets/backgrounds/imagine_dragons.jpg');
     background-size: cover;
   }
 
   &__content {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 
     margin: 0 30px 20px;
 
@@ -83,6 +82,7 @@
 
   &__img {
     height: 180px;
+    width: 180px;
 
     margin: 0 20px 0 0;
 

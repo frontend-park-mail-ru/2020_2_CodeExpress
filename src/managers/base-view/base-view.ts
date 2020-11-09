@@ -10,6 +10,7 @@ export abstract class View<TProps extends IProps = IProps, TState extends IState
     }
 
     show(arg: string): void {
+        window.scrollTo(0, 0);
         this.props.arg = arg;
         this.didMount();
         this.render();

@@ -24,7 +24,7 @@ export class Page extends Component {
         super(props, storage);
 
         this.header = new HeaderPaper(this.props, this.storage);
-        this.sideBar = new SideBar(this.props);
+        this.sideBar = new SideBar(this.props, this.storage);
     }
 
     show(): void {
@@ -34,6 +34,7 @@ export class Page extends Component {
         if (!pageState) {
             this.render();
             this.setEventListeners();
+            this.storage.set({ pageState: true });
         }
         if (pageState && updateState) {
             const page = this.props.parent.querySelector('.page');

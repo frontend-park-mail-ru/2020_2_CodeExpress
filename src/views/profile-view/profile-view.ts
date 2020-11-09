@@ -1,6 +1,6 @@
 import { Page } from 'components/page/page';
 import { View } from 'managers/base-view/base-view';
-import { Request } from 'managers/request/request';
+import { baseStaticUrl, Request } from 'managers/request/request';
 import { RouterStore } from 'store/routes';
 import { userFormValidator } from 'managers/validator/validator';
 import { regTemplates } from 'store/reg-templates';
@@ -10,6 +10,8 @@ import { IProps, IState } from 'store/interfaces';
 
 import ProfileTemplate from './profile.hbs';
 import './profile.scss';
+
+const defaultAvatar = require('../../assets/default/user-default.svg');
 
 /**
  * View отображающая страницу профиля
@@ -40,28 +42,28 @@ export class ProfileView extends View<IProps, IState> {
         event.preventDefault();
 
         const { target } = event;
-        const file = (<HTMLInputElement>target).files[0];
+        const file: File = (<HTMLInputElement>target).files[0];
         const formErrors: HTMLInputElement = (<HTMLElement>target).querySelector('.avatar-error');
+        const profileAvatarPage: HTMLImageElement = this.props.parent.querySelector('.form-avatar__img') as HTMLImageElement;
+        const profileAvatarHeader: HTMLImageElement = document.querySelector('.header__profile-avatar') as HTMLImageElement;
 
         const payload = new FormData();
         payload.append('avatar', file);
 
-        Request.post(RouterStore.api.user.change.avatar, { payload, serialize: false }).then((res) => {
+        Request.put(RouterStore.api.user.change.avatar, { payload, serialize: false }).then((res) => {
             const { status, body } = res;
 
             if (status !== 200) {
                 formErrors.innerText = body.message;
                 return;
             }
+
             const user = this.storage.get('user');
-            const avatar = body.avatar.slice(1);
+            const avatar = body.avatar.replace('.', baseStaticUrl);
             user.update({ avatar });
 
-            const profileAvatarPage: HTMLImageElement = this.props.parent.querySelector('.form-avatar__img') as HTMLImageElement;
-            const profileAvatarHeader: HTMLImageElement = this.props.parent.querySelector('.header__profile-avatar ') as HTMLImageElement;
-
-            profileAvatarPage.src = `http://musicexpress.sarafa2n.ru:8080${avatar}`;
-            profileAvatarHeader.src = `http://musicexpress.sarafa2n.ru:8080${avatar}`;
+            profileAvatarPage.src = avatar;
+            profileAvatarHeader.src = avatar;
         });
     }
 
@@ -99,7 +101,7 @@ export class ProfileView extends View<IProps, IState> {
             username: username.value,
         };
 
-        Request.post(RouterStore.api.user.change.profile, { payload, serialize: true }).then((res) => {
+        Request.put(RouterStore.api.user.change.profile, { payload, serialize: true }).then((res) => {
             const { status, body } = res;
             if (status !== 200) {
                 formErrors.innerText = body.message;
@@ -122,12 +124,13 @@ export class ProfileView extends View<IProps, IState> {
         event.preventDefault();
 
         const { target } = event;
-        const password1: HTMLInputElement = (<HTMLElement>target).querySelector('[name="new_password"]');
-        const password2: HTMLInputElement = (<HTMLElement>target).querySelector('[name="new_repeated_password"]');
+        const oldPassword: HTMLInputElement = (<HTMLElement>target).querySelector('[name="old_password"]');
+        const newPassword: HTMLInputElement = (<HTMLElement>target).querySelector('[name="new_password"]');
+        const newPasswordRepeated: HTMLInputElement = (<HTMLElement>target).querySelector('[name="new_repeated_password"]');
         const formErrors: HTMLInputElement = (<HTMLElement>target).querySelector('.password-error');
         let isValidate = true;
 
-        const password1Validator = userFormValidator(password1,
+        const password1Validator = userFormValidator(newPassword,
             regTemplates.password,
             'Длина пароля от 8 до 30 символов<br />Может содержать только латинские буквы и цифры');
 
@@ -136,7 +139,7 @@ export class ProfileView extends View<IProps, IState> {
             isValidate = false;
         }
 
-        if (password1.value && password1.value && password1.value !== password2.value) {
+        if (newPassword.value && newPasswordRepeated.value && newPassword.value !== newPasswordRepeated.value) {
             formErrors.innerHTML += '<br />Пароли не совпадают';
             isValidate = false;
         }
@@ -146,11 +149,12 @@ export class ProfileView extends View<IProps, IState> {
         }
 
         const payload = {
-            password: password1.value,
-            repeated_password: password2.value,
+            old_password: oldPassword.value,
+            password: newPassword.value,
+            repeated_password: newPasswordRepeated.value,
         };
 
-        Request.post(RouterStore.api.user.change.password, { payload, serialize: true }).then((res) => {
+        Request.put(RouterStore.api.user.change.password, { payload, serialize: true }).then((res) => {
             const { status, body } = res;
             if (status !== 200) {
                 formErrors.innerText = body.message;
@@ -194,20 +198,23 @@ export class ProfileView extends View<IProps, IState> {
      */
     render() {
         const user = this.storage.get('user');
+        const avatar: string = user.get('avatar');
 
-        if (!user.isLoaded) {
+        if (!user.isLoaded && this.storage.get('updateState')) {
             this.storage.set({ pageState: false });
             router.go('/');
             return;
         }
 
         this.page.show();
-        this.storage.set({ pageState: true });
-
         this.props.parent = document.querySelector('.page__content');
-        const avatar: string = user.get('avatar');
+
         this.props.parent.insertAdjacentHTML('afterbegin', ProfileTemplate({
-            username: user.get('username'), email: user.get('email'), isAvatar: avatar !== '' && avatar, avatar,
+            username: user.get('username'),
+            email: user.get('email'),
+            isAvatar: avatar !== '' && avatar,
+            avatar,
+            defaultAvatar,
         }));
 
         const avatarChangeForm: HTMLElement = this.props.parent.querySelector('.form-change-avatar');
@@ -218,6 +225,7 @@ export class ProfileView extends View<IProps, IState> {
 
         const passwordChangeForm: HTMLElement = this.props.parent.querySelector('.form-change-password');
         passwordChangeForm.addEventListener('submit', this.changePassword);
+
         const logoutBtn: HTMLElement = this.props.parent.querySelector('.logout-btn');
         logoutBtn.addEventListener('click', this.logout);
     }
