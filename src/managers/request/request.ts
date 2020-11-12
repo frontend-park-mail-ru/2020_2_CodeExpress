@@ -19,6 +19,15 @@ export class Request {
      * @param  {string} url - api url
      * @returns {string}
      */
+
+    static setCsrfToken(token: string): void {
+        localStorage.setItem('token', token);
+    }
+
+    static getCsrfToken(): string | null {
+        return localStorage.getItem('token');
+    }
+
     static getBackendUrl(url: string): string {
         return `${baseBackendUrl}${url}`;
     }
@@ -31,6 +40,7 @@ export class Request {
             credentials: 'include',
             mode: 'cors',
             headers: {
+                'X-Csrf-Token': this.getCsrfToken(),
             },
         }).then((response) => response.json().then((body) => ({ status: response.status, body })));
     }
@@ -70,9 +80,15 @@ export class Request {
             mode: 'cors',
             headers: {
                 ...headers,
+                'X-Csrf-Token': this.getCsrfToken(),
             },
             body: serialize ? JSON.stringify(data) : data as FormData,
-        }).then((response) => response.json().then((body) => ({ status: response.status, body })));
+        }).then((response) => {
+            if (response.headers.get('X-Csrf-Token')) {
+                this.setCsrfToken(response.headers.get('X-Csrf-Token'));
+            }
+            return response.json().then((body) => ({ status: response.status, body }));
+        });
     }
 
     static put(url: string, params: IRequestBody): Promise<any> {
@@ -88,6 +104,7 @@ export class Request {
             mode: 'cors',
             headers: {
                 ...headers,
+                'X-Csrf-Token': this.getCsrfToken(),
             },
             body: serialize ? JSON.stringify(data) : data as FormData,
         }).then((response) => response.json().then((body) => ({ status: response.status, body })));
