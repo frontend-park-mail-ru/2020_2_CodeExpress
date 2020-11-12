@@ -1,8 +1,6 @@
 import { View } from 'managers/base-view/base-view';
 import { HeaderFiller } from 'components/header-filler/header-filler';
 import { Footer } from 'components/footer/footer';
-import { userFormValidator } from 'managers/validator/validator';
-import { regTemplates } from 'store/reg-templates';
 import { baseStaticUrl, Request } from 'managers/request/request';
 import { RouterStore } from 'store/routes';
 import { router } from 'managers/router/router';
@@ -88,8 +86,8 @@ export class LoginView extends View<IProps, IState> {
             const userAttrs = {
                 id: body.id,
                 username: body.username,
-                email: body.email.replace('.', baseStaticUrl),
-                avatar: body.avatar.slice(1),
+                email: body.email,
+                avatar: body.avatar.replace('.', baseStaticUrl),
             };
 
             const user = this.storage.get('user');
