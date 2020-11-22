@@ -50,6 +50,7 @@
 
   &__albums {
     display: flex;
+    flex-wrap: wrap;
 
     margin: 20px 0;
   }
@@ -151,5 +152,39 @@
         opacity: 1;
       }
     }
+  }
+}
+
+
+@media only screen and (max-width: 1000px)  {
+  .artist-page-preview {
+    &__wrapper {
+      padding-top: calc(60px + env(safe-area-inset-top));
+    }
+
+    &__content {
+      justify-content: center;
+
+      margin: 0 20px 25px;
+    }
+  }
+  .artist-page__content {
+    margin: 50px 20px 20px;
+  }
+
+  .artist-page__wrapper {
+    flex-direction: column;
+  }
+
+  .artist-page__albums {
+    justify-content: space-between;
+  }
+
+  .artist-page-preview__img {
+    margin: 0 0 20px 0;
+  }
+
+  .artist-page-preview__title {
+    text-align: center;
   }
 }

@@ -1,6 +1,4 @@
 import { View } from 'managers/base-view/base-view';
-import { HeaderFiller } from 'components/header-filler/header-filler';
-import { Footer } from 'components/footer/footer';
 import { userFormValidator } from 'managers/validator/validator';
 import { regTemplates } from 'store/reg-templates';
 import { RouterStore } from 'store/routes';
@@ -20,10 +18,6 @@ const banner2 = require('../../assets/backgrounds/banner2.jpg');
  * View отображающая страницу регистрации
  */
 export class SignupView extends View {
-    private header: HeaderFiller;
-
-    private footer: Footer;
-
     /**
      * Конструктор SignupView
      * @param {object} props - объект, в котором лежат переданные параметры
@@ -31,8 +25,6 @@ export class SignupView extends View {
      */
     constructor(props: IProps, storage: IStorage<IState>) {
         super(props, storage);
-        this.header = new HeaderFiller(this.props);
-        this.footer = new Footer(this.props);
 
         this.submit = this.submit.bind(this);
     }

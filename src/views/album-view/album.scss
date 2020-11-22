@@ -91,3 +91,21 @@
     height: 100%;
   }
 }
+
+@media only screen and (max-width: 1000px)  {
+  .album-page {
+    &-section {
+      margin: 20px;
+    }
+    &-header {
+      padding: calc(60px + env(safe-area-inset-top)) 20px 25px;
+    }
+  }
+
+  .header-item {
+    &__poster {
+      width: 150px;
+      height: 150px;
+    }
+  }
+}

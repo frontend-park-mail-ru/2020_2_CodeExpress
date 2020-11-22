@@ -29,8 +29,6 @@ interface IRouterState {
  * Компонент маршрутизатор проекта
  */
 class Router extends Component<IProps, IRouterState> {
-    history: History;
-
     private routes: Map<string, any>;
 
     state: IRouterState = { arg: null, currentView: null };
@@ -41,7 +39,6 @@ class Router extends Component<IProps, IRouterState> {
      */
     constructor(props: IProps) {
         super(props);
-        this.history = window.history;
         this.routes = new Map();
 
         this.handleMouseClick = this.handleMouseClick.bind(this);
@@ -94,11 +91,11 @@ class Router extends Component<IProps, IRouterState> {
     }
 
     back(): void {
-        this.history.back();
+        window.history.back();
     }
 
     forward(): void {
-        this.history.forward();
+        window.history.forward();
     }
 
     /**

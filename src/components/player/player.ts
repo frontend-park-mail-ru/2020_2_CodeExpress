@@ -1,19 +1,20 @@
-import { statuses } from 'store/consts';
+import { isMobile, statuses } from 'store/consts';
 import { Component } from 'managers/component/component';
 import { IProps } from 'store/interfaces';
 import { ModelTrack } from 'models/track';
+import { MobilePlayer } from 'components/mobile_player/mobile_player';
 
 import PlayerTemplate from './player.hbs';
 import './player.scss';
 
-interface ITrack {
+export interface ITrack {
     title: string,
     group: string,
     album: string,
     audio: string,
 }
 
-interface IPlayerState {
+export interface IPlayerState {
     track: ITrack
 }
 
@@ -61,6 +62,7 @@ class Player extends Component<IProps, IPlayerState> {
         this.timer = null;
         this.percent = 0;
 
+        // TODO: Переделать на запрос за рандомным треком к беку
         const defaultTrack: ITrack = {
             title: 'Bad Liar',
             album: 'https://musicexpress.sarafa2n.ru:8080/album_posters/726420f0b9599ef1cb70cb66032a47f6',
@@ -238,7 +240,12 @@ class Player extends Component<IProps, IPlayerState> {
             const loopFlag = !this.audio.loop;
 
             this.audio.loop = loopFlag;
-            (<HTMLElement>target).style.color = loopFlag ? '#ff0052' : 'rgba(207, 234, 242, 0.141559)';
+
+            if (loopFlag) {
+                (<HTMLElement>target).classList.add('player-sub-controls__icon_active');
+            } else {
+                (<HTMLElement>target).classList.remove('player-sub-controls__icon_active');
+            }
         });
 
         this.volumeButton.addEventListener('click', () => {
@@ -288,4 +295,4 @@ class Player extends Component<IProps, IPlayerState> {
     }
 }
 
-export const player: Player = new Player();
+export const player: Player | MobilePlayer = isMobile ? new MobilePlayer() : new Player();

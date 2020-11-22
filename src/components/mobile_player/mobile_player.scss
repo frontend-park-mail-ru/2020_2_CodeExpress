@@ -1,0 +1,191 @@
+@import '../../pallete';
+
+.mobile-player {
+  position: fixed;
+  top: calc(100% - 141px);
+
+  width: 100%;
+
+  transition: all 0.3s ease-in-out;
+
+  z-index: 10;
+
+
+  &__toggle {
+    display: flex;
+    flex-direction: column;
+
+    height: 61px;
+
+    background-color: $color-black-1;
+
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 100%;
+
+    &_column {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      height: 100vh;
+
+      padding: calc(10px + env(safe-area-inset-top)) 20px 20px 20px;
+
+      background-color: $color-black-1;
+
+      overflow: scroll;
+    }
+
+    &_controls {
+      justify-content: space-evenly;
+      align-items: center;
+
+      width: 100%;
+
+      padding: 0;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+
+    margin-bottom: 70px;
+  }
+
+  &__help-text {
+    font-size: 18px;
+    font-family: $font-medium;
+    color: $color-white;
+  }
+
+  &__icon {
+    color: $color-white;
+    padding: 5px;
+  }
+
+  &__info {
+    display: flex;
+
+    padding: 5px 0 5px 10px;
+  }
+
+  &__play {
+    display: flex;
+    align-items: center;
+
+    height: 100%;
+
+    padding: 5px 20px;
+
+    color: $color-primary;
+    font-size: 18px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+  }
+
+  &__poster {
+    height: 40px;
+    width: 40px;
+
+    margin-right: 10px;
+
+    border-radius: 5px;
+
+    &_large {
+      width: 350px;
+      height: 350px;
+
+      margin-bottom: 40px;
+      margin-right: 0;
+    }
+  }
+
+  &__group {
+    color: $color-gray;
+
+    &_center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      margin: 50px 0;
+    }
+  }
+
+  &__artist {
+    font-size: 14px;
+
+    &_large {
+      font-size: 20px;
+    }
+  }
+
+  &__title {
+    color: $color-white;
+
+    &_large {
+      font-size: 30px;
+      font-family: $font-medium;
+    }
+  }
+
+  &__time-line {
+    width: 100%;
+    height: 1px;
+
+    background-color: $color-gray-1;
+
+    &_large {
+      height: 5px;
+
+      border-radius: 5px;
+    }
+  }
+
+  &__progress-bar {
+    height: 1px;
+    width: 0;
+
+    background-color: $color-primary;
+
+    transition: ease-in-out all 0.3s;
+
+    &_large {
+      height: 5px;
+
+      border-radius: 5px;
+    }
+  }
+}
+
+.mobile-player-controls__icon {
+  font-size: 25px;
+  color: $color-primary;
+
+  cursor: pointer;
+
+  &_play {
+    font-size: 35px;
+  }
+
+  &_sub {
+    font-size: 20px;
+    color: $color-gray-1;
+  }
+}

@@ -12,6 +12,8 @@
 
   z-index: 10;
 
+  transition: ease-in-out all 0.3s;
+
   &__links {
     display: flex;
     margin: 0 20px 0 0;
@@ -35,6 +37,8 @@
     color: $color-gray;
     background-color: $color-black-1;
 
+    cursor: pointer;
+
     &:last-child {
       margin-left: 15px;
     }
@@ -46,6 +50,7 @@
 
     z-index: 10;
   }
+
   &__search {
     display: flex;
     align-items: center;
@@ -90,9 +95,12 @@
     margin-left: auto;
 
     &__link {
-      margin: 0 10px;
 
       text-decoration: none;
+
+      &:first-child {
+        margin: 0 10px;
+      }
     }
 
     &-avatar {
@@ -105,3 +113,30 @@
     }
   }
 }
+
+.header-paper_mobile {
+  position: fixed;
+
+  background-color: $color-black;
+}
+
+@media only screen and (max-width: 1000px) {
+  .header {
+    margin: 0;
+    padding: calc(10px + env(safe-area-inset-top)) 15px 20px 15px;
+
+
+    &__search {
+      display: none;
+    }
+
+    &__links {
+      margin-right: 10px;
+    }
+
+    &__link:last-child {
+      margin-left: 10px;
+    }
+  }
+}
+
