@@ -52,6 +52,8 @@ class Player extends Component<IProps, IPlayerState> {
 
     private volumeWrapper: HTMLElement;
 
+    private broadcastChannel: BroadcastChannel;
+
     /**
      * Конструктор Player
      * @param {object} props - объект, в котором лежат переданные параметры
@@ -61,6 +63,7 @@ class Player extends Component<IProps, IPlayerState> {
 
         this.timer = null;
         this.percent = 0;
+        this.broadcastChannel = new BroadcastChannel('playToggle');
 
         // TODO: Переделать на запрос за рандомным треком к беку
         const defaultTrack: ITrack = {
@@ -99,6 +102,7 @@ class Player extends Component<IProps, IPlayerState> {
      */
     tooglePlay(target: EventTarget): void {
         if ((<HTMLElement>target).dataset.status === statuses.statusOff) {
+            this.broadcastChannel.postMessage('play');
             this.audioPlay();
             return;
         }
@@ -259,7 +263,44 @@ class Player extends Component<IProps, IPlayerState> {
             const { target } = event;
             this.audio.volume = parseFloat(String(Number((<HTMLInputElement>target).value) / 100));
         };
+
+        window.addEventListener('storage', this.multiChangeTrack);
+        this.broadcastChannel.addEventListener('message', this.changeCurrentPlayingTrack);
     }
+
+    changeCurrentPlayingTrack = (event: MessageEvent) => {
+        const currentSong = document.querySelector('.track-item_active');
+
+        clearTimeout(this.timer);
+
+        if (currentSong) {
+            currentSong.classList.remove('track-item_active');
+        }
+
+        this.audio.pause();
+        this.playButton.dataset.status = statuses.statusOff;
+        this.playButton.classList.remove(statuses.iconPause);
+        this.playButton.classList.add(statuses.iconPlay);
+        this.progressBar.style.width = '0%';
+    };
+
+    multiChangeTrack = (event: StorageEvent) => {
+        const currentSong = document.querySelector('.track-item_active');
+
+        clearTimeout(this.timer);
+
+        if (currentSong) {
+            currentSong.classList.remove('track-item_active');
+        }
+
+        this.audio.pause();
+        this.playButton.dataset.status = statuses.statusOff;
+        this.playButton.classList.remove(statuses.iconPause);
+        this.playButton.classList.add(statuses.iconPlay);
+        this.progressBar.style.width = '0%';
+
+        this.setLastTrack(JSON.parse(event.newValue));
+    };
 
     /**
      * Функция, которая добавляет обработчик клика на треки во view.
