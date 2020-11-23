@@ -1,6 +1,4 @@
 import { View } from 'managers/base-view/base-view';
-import { HeaderFiller } from 'components/header-filler/header-filler';
-import { Footer } from 'components/footer/footer';
 import { baseStaticUrl, Request } from 'managers/request/request';
 import { RouterStore } from 'store/routes';
 import { router } from 'managers/router/router';
@@ -17,10 +15,6 @@ const banner2 = require('../../assets/backgrounds/banner2.jpg');
  * View отображающая страницу входа
  */
 export class LoginView extends View<IProps, IState> {
-    private header: HeaderFiller;
-
-    private footer: Footer;
-
     /**
      * Конструктор LoginView
      * @param {object} props - объект, в котором лежат переданные параметры
@@ -28,8 +22,6 @@ export class LoginView extends View<IProps, IState> {
      */
     constructor(props: IProps, storage: IStorage<IState>) {
         super(props, storage);
-        this.header = new HeaderFiller(this.props);
-        this.footer = new Footer(this.props);
 
         this.submit = this.submit.bind(this);
     }

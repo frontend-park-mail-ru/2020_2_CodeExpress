@@ -155,7 +155,7 @@
     &__helper {
       position: absolute;
 
-      margin: 20px 20px 0;
+      margin: calc(20px + env(safe-area-inset-top)) 20px 0;
     }
 
     &__content {

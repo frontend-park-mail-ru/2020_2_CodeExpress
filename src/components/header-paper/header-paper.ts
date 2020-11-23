@@ -1,6 +1,7 @@
 import { Component } from 'managers/component/component';
 import { ModelUser } from 'models/user';
 import { baseStaticUrl } from 'managers/request/request';
+import { isMobile } from 'store/consts';
 
 import HeaderPaperTemplate from './header-paper.hbs';
 import './header-paper.scss';
@@ -25,5 +26,24 @@ export class HeaderPaper extends Component {
             baseStaticUrl,
             defaultAvatar,
         });
+    }
+
+    mobile() {
+        if (isMobile) {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 0) {
+                header.classList.add('header-paper_mobile');
+            } else {
+                header.classList.remove('header-paper_mobile');
+            }
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 0) {
+                    header.classList.add('header-paper_mobile');
+                } else {
+                    header.classList.remove('header-paper_mobile');
+                }
+            });
+        }
     }
 }

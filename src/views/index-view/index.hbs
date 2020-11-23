@@ -20,7 +20,7 @@
     <div class="index-page-section__wrapper_space-between">
         {{#each albums }}
             <div class="album-item">
-                <img class="album-item__album" src="{{ attrs.poster }}">
+                <a href="/album/{{ attrs.id}}"><img class="album-item__album" src="{{ attrs.poster }}"></a>
                 <a href="/album/{{ attrs.id}}" class="album-item__title">{{ attrs.title }}</a>
                 <a href="/artist/{{ attrs.artist_id }}" class="album-item__group">{{ attrs.artist_name }}</a>
             </div>
@@ -46,13 +46,13 @@
 </div>
 
 <div class="index-page-section">
-    <div class="index-page-section__wrapper_space-between">
-        <div class="article" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0) 2.75%, rgba(17, 18, 23, 0.75) 100%), url('../../assets/backgrounds/imagine_dragons.jpg')">
+    <div class="index-page-section__wrapper_space-between index-page-section__article">
+        <div class="article" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0) 2.75%, rgba(17, 18, 23, 0.75) 100%), url({{ basicArticlePoster.default }})">
             <div class="index-page__genre">Исполнители</div>
             <div class="article-content">
                 <div class="article-content__album">
                     <i class="article-content__icon fas fa-play"></i>
-                    <img class="article-content__img" src="../../assets/backgrounds/natural-imagine-dragons.jpeg">
+                    <img class="article-content__img" src="{{ basicArticleAlbum.default }}">
                 </div>
                 <div class="article-content__wrapper_column">
                     <div class="article-content__sub-title">Новый альбом</div>
@@ -65,12 +65,12 @@
                 </div>
             </div>
         </div>
-        <div class="article" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0) 2.75%, rgba(17, 18, 23, 0.75) 100%), url('../../assets/backgrounds/imagine_dragons.jpg')">
+        <div class="article" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0) 2.75%, rgba(17, 18, 23, 0.75) 100%), url({{ basicArticlePoster.default }}">
             <div class="index-page__genre">Исполнители</div>
             <div class="article-content">
                 <div class="article-content__album">
                     <i class="article-content__icon fas fa-play"></i>
-                    <img class="article-content__img" src="../../assets/backgrounds/natural-imagine-dragons.jpeg">
+                    <img class="article-content__img" src="{{ basicArticleAlbum.default }}">
                 </div>
                 <div class="article-content__wrapper_column">
                     <div class="article-content__sub-title">Новый альбом</div>
@@ -83,12 +83,12 @@
                 </div>
             </div>
         </div>
-        <div class="article" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0) 2.75%, rgba(17, 18, 23, 0.75) 100%), url('../../assets/backgrounds/imagine_dragons.jpg')">
+        <div class="article" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0) 2.75%, rgba(17, 18, 23, 0.75) 100%), url({{ basicArticlePoster.default }})">
             <div class="index-page__genre">Исполнители</div>
             <div class="article-content">
                 <div class="article-content__album">
                     <i class="article-content__icon fas fa-play"></i>
-                    <img class="article-content__img" src="../../assets/backgrounds/natural-imagine-dragons.jpeg">
+                    <img class="article-content__img" src="{{ basicArticleAlbum.default }}">
                 </div>
                 <div class="article-content__wrapper_column">
                     <div class="article-content__sub-title">Новый альбом</div>

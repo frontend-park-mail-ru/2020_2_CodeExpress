@@ -15,3 +15,15 @@
     margin: 0 125px;
   }
 }
+
+@media only screen and (max-width: 1000px)  {
+  .favorite-track-page {
+    &__title {
+      padding: calc(60px + env(safe-area-inset-top)) 20px 20px;
+    }
+
+    &__wrapper {
+      margin: 0 20px;
+    }
+  }
+}

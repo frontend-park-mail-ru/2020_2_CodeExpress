@@ -4,6 +4,8 @@
   position: relative;
   display: flex;
 
+  width: 100%;
+
   margin-bottom: 70px;
 
   &__wrapper {
@@ -16,5 +18,21 @@
 
   &__content {
     width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .page {
+    margin-bottom: 0;
+    display: block;
+
+    &__wrapper {
+      margin: 0;
+    }
+
+    &__content {
+      margin-bottom: 150px;
+    }
+
   }
 }

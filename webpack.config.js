@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 const isProduction = process.env.webpack_type === 'production';
 const port = process.env.PORT || 80;
@@ -44,7 +45,7 @@ module.exports = {
                 use: ['babel-loader', 'ts-loader'],
             },
             {
-                test: /\.(jpg|png|gif|svg|pdf|ico)$/,
+                test: /\.(jpg|jpeg|png|gif|svg|pdf|ico)$/,
                 loader: 'file-loader',
 
             },
@@ -61,15 +62,21 @@ module.exports = {
             filename: path.join(__dirname, '/dist/index.html'),
             favicon: path.join(__dirname, '/favicon.ico'),
         }),
-        new CopyPlugin({
-            patterns: [
-                { from: './src/assets', to: 'assets' },
-            ],
-        }),
         new CleanWebpackPlugin(),
         new webpack.EnvironmentPlugin({
             PORT: port,
             DEBUG: process.env.DEBUG,
+        }),
+        new WebpackPwaManifest({
+            name: 'MusicExpress',
+            short_name: 'MusicExpress',
+            description: 'Музыкальный сервис',
+            orientation: 'portrait',
+            display: 'standalone',
+            start_url: '.',
+            ios: {
+                'apple-mobile-web-app-status-bar-style': 'black-translucent',
+            },
         }),
         new WorkboxPlugin.GenerateSW({
             exclude: [/^.*\.(mp3)$/],

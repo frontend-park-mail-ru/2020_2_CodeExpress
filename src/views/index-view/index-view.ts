@@ -10,6 +10,8 @@ import './index.scss';
 import 'components/track-list/track.scss';
 import './album.scss';
 
+const basicArticlePoster = require('../../assets/backgrounds/imagine_dragons.jpg');
+const basicArticleAlbum = require('../../assets/backgrounds/natural-imagine-dragons.jpeg');
 /**
  * View отображающая главную страницу
  */
@@ -65,7 +67,13 @@ export class IndexView extends View {
             'Иностранный Рок', 'Русский Рок', 'Поп', 'Хипхоп', 'Саундтреки',
             'Електронная', 'Джаз', 'Блюз', 'Кантри', 'Метал', 'Классическая'];
         this.props.parent = document.querySelector('.page__content');
-        this.props.parent.insertAdjacentHTML('afterbegin', IndexTemplate({ albums: albumArray, genres: genreArray, tracklist: popularTrackList }));
+        this.props.parent.insertAdjacentHTML('afterbegin', IndexTemplate({
+            albums: albumArray,
+            genres: genreArray,
+            tracklist: popularTrackList,
+            basicArticlePoster,
+            basicArticleAlbum,
+        }));
 
         this.page.setEventToTracks();
     }

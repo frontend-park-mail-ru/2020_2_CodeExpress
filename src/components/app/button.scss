@@ -1,6 +1,7 @@
 @import '../../pallete';
 
-.button-primary {
+.button-primary,
+.button-secondary {
   display: flex;
   align-items: center;
 
@@ -19,15 +20,17 @@
 }
 
 .button-secondary {
-  width: fit-content;
-  height: fit-content;
-
-  padding: 10px 15px;
-
   border: 2px solid $color-primary;
-  border-radius: 5px;
 
-  color: $color-white;
+  background-color: inherit;
+}
 
-  cursor: pointer;
+@media only screen and (max-width: 1000px) {
+  .button-primary,
+  .button-secondary {
+    padding: 5px 10px;
+
+    font-size: 14px;
+  }
+
 }

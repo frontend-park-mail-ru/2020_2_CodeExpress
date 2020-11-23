@@ -111,3 +111,28 @@
 .input__error {
   border-color: $color-primary;
 }
+
+
+@media only screen and (max-width: 1000px) {
+  .profile-page {
+    margin: 0;
+    padding: calc(60px + env(safe-area-inset-top)) 20px 0;
+
+    &__wrapper {
+      justify-content: center;
+    }
+
+    &__forms {
+      width: 100%;
+    }
+  }
+
+  .form-change-item__input {
+    width: 170px;
+  }
+
+  .form-change-item__title {
+    font-size: 14px;
+  }
+
+}
