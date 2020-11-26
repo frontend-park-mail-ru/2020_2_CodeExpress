@@ -1,0 +1,78 @@
+@import '../../pallete';
+
+.playlist-page {
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-end;
+
+    padding: 100px 25px 25px 25px;
+    background: $color-black-4;
+    width: 100%;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    width: 100%;
+  }
+
+  &__icon {
+    margin: 10px;
+
+    font-size: 20px;
+    color: $color-gray;
+
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      color: $color-primary;
+    }
+
+  }
+
+  &__title {
+    margin: 20px 0;
+
+    font-size: 25px;
+    color: $color-white;
+
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0 20px;
+  }
+
+  &__poster {
+    width: 160px;
+
+    object-fit: cover;
+    border-radius: 5px;
+
+    cursor: pointer;
+  }
+}
+
+[disabled=true] {
+  cursor: initial;
+}
+
+@media only screen and (max-width: 1000px) {
+  .playlist-page {
+    &__header {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}

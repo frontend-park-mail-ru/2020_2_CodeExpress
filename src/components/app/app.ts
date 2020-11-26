@@ -7,15 +7,19 @@ import { SignupView } from 'views/signup-view/signup-view';
 import { AlbumView } from 'views/album-view/album-view';
 import { ArtistView } from 'views/artist-view/artist-view';
 import { FavoriteTrackView } from 'views/favoriteTrack-view/favoriteTrack-view';
+import { PlaylistsView } from 'views/playlists-view/playlists-view';
 import { Component } from 'managers/component/component';
 import { ModelUser } from 'models/user';
+import { ModelPlayList } from 'models/playlist';
 import { IProps } from 'store/interfaces';
+import { PlaylistView } from 'views/playlist-view/playlist-view';
 
 import './app.scss';
 import './button.scss';
 
 interface IAppState {
     user: ModelUser;
+    playlists?: ModelPlayList[]
     updateState?: boolean
 }
 
@@ -44,7 +48,9 @@ export class App extends Component<IProps, IAppState> {
             .register(RouterStore.website.profile, new ProfileView(this.props, this.storage))
             .register(RouterStore.website.album, new AlbumView(this.props, this.storage))
             .register(RouterStore.website.artist, new ArtistView(this.props, this.storage))
-            .register(RouterStore.website.favorite, new FavoriteTrackView(this.props, this.storage));
+            .register(RouterStore.website.favorite, new FavoriteTrackView(this.props, this.storage))
+            .register(RouterStore.website.playlists, new PlaylistsView(this.props, this.storage))
+            .register(RouterStore.website.playlist, new PlaylistView(this.props, this.storage));
     }
 
     /**
@@ -52,10 +58,13 @@ export class App extends Component<IProps, IAppState> {
      */
     start() {
         const url: string = window.location.pathname;
-
         ModelUser.getCurrentUser().then((user) => {
-            this.setState({ user, updateState: true });
-        }).then(() => { router.go(url); });
+            ModelPlayList.fetchGetPlaylists().then((playlists) => {
+                this.setState({ playlists, user, updateState: true });
+                router.go(url);
+            });
+        });
+
         router.setup();
     }
 }

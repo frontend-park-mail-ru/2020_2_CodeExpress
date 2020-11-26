@@ -1,0 +1,106 @@
+@import '../../pallete';
+
+.playlists-page {
+  &__title {
+    margin-bottom: 20px;
+    padding: 100px 125px 20px;
+
+    color: $color-white;
+    font-family: $font-black;
+    font-size: 30px;
+    background: $color-black-4;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    flex-direction: column;
+
+    margin: 0 115px;
+  }
+
+  &__playlists {
+    display: flex;
+    flex-wrap: wrap;
+
+    height: 100%;
+  }
+
+  &-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+
+    margin: 20px 0;
+
+    &__img {
+      height: 300px;
+    }
+
+    &__title {
+      margin: 30px 0;
+
+      font-size: 18px;
+      color: $color-white;
+      text-align: center;
+    }
+  }
+}
+
+.item-add {
+  margin: 10px;
+  padding: 10px 15px;
+
+  border-radius: 5px;
+
+  background-color: $color-black-1;
+
+}
+
+.playlist-add-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__input {
+    width: 200px;
+
+    color: $color-white;
+    outline: 0;
+    border: 0;
+    background-color: initial;
+  }
+
+  &__submit {
+    display: none;
+  }
+
+  &__icon {
+    display: none;
+    margin: 0 10px;
+
+    font-size: 20px;
+
+    cursor: pointer;
+    color: $color-primary;
+
+    &_active {
+      display: block;
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px)  {
+  .playlists-page {
+    &__title {
+      padding: calc(60px + env(safe-area-inset-top)) 20px 20px;
+    }
+
+    &__wrapper {
+      margin: 0 10px;
+    }
+  }
+}

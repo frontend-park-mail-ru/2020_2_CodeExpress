@@ -24,7 +24,7 @@ export class FavoriteTrackView extends View<IProps, IState> {
 
     didMount(): void {
         ModelTrack.fetchFavoriteTrackList().then((tracks) => {
-            this.tracks = new TrackList({ tracksList: tracks });
+            this.tracks = new TrackList({ tracksList: tracks }, this.storage);
             this.isLoaded = true;
         }).then(() => {
             this.hide();

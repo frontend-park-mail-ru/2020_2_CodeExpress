@@ -1,7 +1,6 @@
 import { isMobile, statuses } from 'store/consts';
 import { Component } from 'managers/component/component';
 import { IProps } from 'store/interfaces';
-import { ModelTrack } from 'models/track';
 import { MobilePlayer } from 'components/mobile_player/mobile_player';
 
 import PlayerTemplate from './player.hbs';
@@ -301,31 +300,6 @@ class Player extends Component<IProps, IPlayerState> {
 
         this.setLastTrack(JSON.parse(event.newValue));
     };
-
-    /**
-     * Функция, которая добавляет обработчик клика на треки во view.
-     * @param {object} tracks - контейнер со всеми треками на странице
-     */
-    setEventToTracks(tracks: NodeList): void {
-        tracks.forEach((item: HTMLElement) => {
-            item.addEventListener('click', (e) => {
-                if ((<HTMLElement>e.target).classList.contains('track-item__icon')) {
-                    ModelTrack.fetchFavoriteTrackAdd((<HTMLElement>e.target).dataset.id).then((res) => {
-                        const { body } = res;
-                        if (body.message === 'added') {
-                            (<HTMLElement>e.target).classList.add('track-item__plus_active');
-                        } else if (body.message === 'deleted') {
-                            (<HTMLElement>e.target).classList.remove('track-item__plus_active');
-                        }
-                    });
-                }
-                if ((<HTMLElement>e.target).className !== 'track-item__group'
-                    && !(<HTMLElement>e.target).classList.contains('track-item__icon')) {
-                    this.changeSong(item);
-                }
-            });
-        });
-    }
 
     /**
      * Отрисовка компонента

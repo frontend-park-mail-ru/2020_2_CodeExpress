@@ -1,0 +1,24 @@
+<div class="playlists-page">
+    <div class="playlists-page__title">Плейлисты</div>
+    <div class="playlists-page__wrapper">
+        <div class="item-add">
+            <form class="playlist-add-form">
+                <input class="playlist-add-form__input" type="text" name="title" placeholder="Добавить новый плейлист" autocomplete="off">
+                <label for="playlist-submit">
+                    <i class="fas fa-check-circle playlist-add-form__icon"></i>
+                </label>
+                <input class="playlist-add-form__submit" type="submit" id="playlist-submit">
+            </form>
+        </div>
+        {{# if isEmpty }}
+            <div class="playlists-page-placeholder">
+                <img src="{{ placeholder }}" class="playlists-page-placeholder__img">
+                <div class="playlists-page-placeholder__title">У вас пока что нет плейлистов.<br />Может, пора это исправить?</div>
+            </div>
+        {{else}}
+            <div class="playlists-page__playlists">
+                {{{ playlists }}}
+            </div>
+        {{/if}}
+    </div>
+</div>

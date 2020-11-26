@@ -1,2 +1,25 @@
 declare module '*.hbs'
-declare module '*.jpg';
+
+declare module '*.jpg' {
+    const image: string;
+
+    export default image;
+}
+
+declare module '*.png' {
+    const image: string;
+
+    export default image;
+}
+
+declare module '*.svg' {
+    const image: string;
+
+    export default image;
+}
+
+declare module '*.jpeg' {
+    const image: string;
+
+    export default image;
+}

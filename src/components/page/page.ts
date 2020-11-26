@@ -5,6 +5,7 @@ import { Component } from 'managers/component/component';
 import { IProps, IStorage, IState } from 'store/interfaces';
 import { router } from 'managers/router/router';
 import { HeaderMobile } from 'components/header-mobile/header-mobile';
+import { TrackList } from 'components/track-list/track-list';
 
 import PageTemplate from './page.hbs';
 import './page.scss';
@@ -90,6 +91,6 @@ export class Page extends Component {
      */
     setEventToTracks(): void {
         const tracks: NodeList = this.props.parent.querySelectorAll('.track-item');
-        player.setEventToTracks(tracks);
+        TrackList.setEventToTracks(tracks);
     }
 }

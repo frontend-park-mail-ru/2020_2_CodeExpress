@@ -53,7 +53,7 @@ export class AlbumView extends View<IProps, IState> {
 
     render() {
         const album = this.isLoaded ? this.state.album : null;
-        const tracks = this.isLoaded ? new TrackList({ tracksList: album.tracks }).render() : null;
+        const tracks = this.isLoaded ? new TrackList({ tracksList: album.tracks }, this.storage).render() : null;
         this.page.show();
 
         this.props.parent = document.querySelector('.page__content');

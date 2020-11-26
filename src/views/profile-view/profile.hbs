@@ -8,11 +8,11 @@
                     {{# if isAvatar }}
                     <img class="form-avatar__img" src="{{avatar}}">
                     {{else}}
-                        <img class="form-avatar__img" src="{{ defaultAvatar.default }}">
+                        <img class="form-avatar__img" src="{{ defaultAvatar }}">
                     {{/if}}
                 </label>
                 <label for="upload_avatar" class="button-primary">Изменить аватарку</label>
-                <input class="form-avatar__input" type="file" name="upload_avatar" id="upload_avatar" accept="image/png">
+                <input class="form-avatar__input" type="file" name="upload_avatar" id="upload_avatar" accept="image/jpeg,image/png,image/jpg">
             </form>
         </div>
         <div class="profile-page__forms">

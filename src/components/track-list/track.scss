@@ -1,6 +1,7 @@
 @import '../../pallete';
 
 .track-item {
+  position: relative;
   display: flex;
   align-items: center;
 
@@ -28,6 +29,70 @@
     width: 25px;
   }
 
+  &__dots-wrapper {
+    position: absolute;
+    bottom: -50px;
+    right: 20px;
+
+    display: none;
+
+    height: 76px;
+
+    z-index: 10;
+
+    background-color: $color-black-3;
+
+    &_active {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+  }
+
+  &__playlists {
+    position: absolute;
+    right: 209px;
+    top: 0;
+
+    display: none;
+
+    background-color: $color-black-3;
+  }
+  
+  &__playlist-add {
+    position: relative;
+
+    &:hover .track-item__playlists {
+      display: block;
+    }
+  }
+
+  &__playlist-item {
+    min-width: 100px;
+
+    padding: 10px 15px;
+
+    color: $color-white;
+    font-size: 14px;
+    text-decoration: none;
+
+    &:hover {
+      background-color: $color-black-4;
+    }
+  }
+
+  &__dots-item {
+    padding: 10px 15px;
+
+    color: $color-white;
+    font-size: 14px;
+    text-decoration: none;
+
+    &:hover {
+      background-color: $color-black-4;
+    }
+  }
+
   &__index,
   &__duration,
   &__icon {
@@ -37,8 +102,12 @@
     transition: ease-in-out all 0.2s;
   }
 
+  &__icon-dots {
+    padding: 5px 10px;
+    margin: 0;
+  }
+
   &__icon:hover {
-    transform: rotate(-90deg);
     color: $color-primary;
   }
 

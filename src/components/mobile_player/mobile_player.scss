@@ -105,6 +105,7 @@
 
     margin-right: 10px;
 
+    object-fit: cover;
     border-radius: 5px;
 
     &_large {
@@ -163,8 +164,6 @@
     width: 0;
 
     background-color: $color-primary;
-
-    transition: ease-in-out all 0.3s;
 
     &_large {
       height: 5px;

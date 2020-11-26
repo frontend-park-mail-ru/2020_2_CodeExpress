@@ -11,7 +11,7 @@ import { IProps, IState } from 'store/interfaces';
 import ProfileTemplate from './profile.hbs';
 import './profile.scss';
 
-const defaultAvatar = require('../../assets/default/user-default.svg');
+import defaultAvatar from '../../assets/default/user-default.svg';
 
 /**
  * View отображающая страницу профиля

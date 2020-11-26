@@ -19,3 +19,15 @@ export const userFormValidator = (target: HTMLInputElement, reg: RegExp, helpTex
     }
     return { status: true, message: 'OK' };
 };
+
+export const classContainsValidator = (target: HTMLElement, ...classes: string[]): boolean => {
+    let result = true;
+
+    classes.forEach((item: string) => {
+        if (target.classList.contains(item)) {
+            result = false;
+        }
+    });
+
+    return result;
+};
