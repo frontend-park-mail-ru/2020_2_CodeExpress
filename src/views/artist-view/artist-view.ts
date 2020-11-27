@@ -46,7 +46,7 @@ export class ArtistView extends View<IProps, IState> {
         });
 
         const trackList = ModelTrack.fetchArtistTracks(this.props.arg).then((tracks) => {
-            this.tracks = new TrackList({ tracksList: tracks });
+            this.tracks = new TrackList({ tracksList: tracks }, this.storage);
         });
 
         const artistAlbums = ModelAlbum.fetchGetArtistArray(this.props.arg).then((albums) => {

@@ -37,11 +37,13 @@
 
   &__album {
     width: 100%;
-    height: 100%;
+    height: 150px;
 
     margin-bottom: 10px;
 
     border-radius: 5px;
+
+    object-fit: cover;
   }
 }
 
@@ -50,6 +52,9 @@
   .album-item {
     width: 230px;
 
+    &__album {
+      height: 230px;
+    }
   }
 }
 
@@ -58,5 +63,9 @@
     width: 140px;
 
     margin: 10px 5px;
+
+    &__album {
+      height: 140px;
+    }
   }
 }

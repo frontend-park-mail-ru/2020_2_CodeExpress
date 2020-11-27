@@ -8,8 +8,8 @@ import { player } from 'components/player/player';
 import LoginTemplate from './login.hbs';
 import './login.scss';
 
-const banner1 = require('../../assets/backgrounds/banner1.jpg');
-const banner2 = require('../../assets/backgrounds/banner2.jpg');
+import banner1 from '../../assets/backgrounds/banner1.jpg';
+import banner2 from '../../assets/backgrounds/banner2.jpg';
 
 /**
  * View отображающая страницу входа
@@ -109,7 +109,7 @@ export class LoginView extends View<IProps, IState> {
             return;
         }
 
-        const images: Array<File> = [banner1, banner2];
+        const images: Array<string> = [banner1, banner2];
 
         this.props.parent.innerHTML = LoginTemplate({ img: images[Math.floor(Math.random() * 2)] });
         const form: HTMLFormElement = this.props.parent.querySelector('.form-login');

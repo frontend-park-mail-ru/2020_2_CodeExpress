@@ -11,8 +11,8 @@ import { player } from 'components/player/player';
 import SighupTemplate from './signup.hbs';
 import './signup.scss';
 
-const banner1 = require('../../assets/backgrounds/banner1.jpg');
-const banner2 = require('../../assets/backgrounds/banner2.jpg');
+import banner1 from '../../assets/backgrounds/banner1.jpg';
+import banner2 from '../../assets/backgrounds/banner2.jpg';
 
 /**
  * View отображающая страницу регистрации
@@ -148,7 +148,7 @@ export class SignupView extends View {
             return;
         }
 
-        const images: Array<File> = [banner1, banner2];
+        const images: Array<string> = [banner1, banner2];
 
         this.props.parent.innerHTML = SighupTemplate({ img: images[Math.floor(Math.random() * 2)] });
 

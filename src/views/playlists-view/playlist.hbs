@@ -1,0 +1,8 @@
+{{#each playlists }}
+<a href="/playlist/{{ id }}" class="playlist">
+    <img src="{{ poster }}" class="playlist__poster">
+    <div class="playlist__wrapper">
+        <div class="playlist__title">{{ title }}</div>
+    </div>
+</a>
+{{/each}}

@@ -10,8 +10,9 @@ import './index.scss';
 import 'components/track-list/track.scss';
 import './album.scss';
 
-const basicArticlePoster = require('../../assets/backgrounds/imagine_dragons.jpg');
-const basicArticleAlbum = require('../../assets/backgrounds/natural-imagine-dragons.jpeg');
+import basicArticlePoster from '../../assets/backgrounds/imagine_dragons.jpg';
+import basicArticleAlbum from '../../assets/backgrounds/natural-imagine-dragons.jpeg';
+
 /**
  * View отображающая главную страницу
  */
@@ -36,7 +37,7 @@ export class IndexView extends View {
 
     didMount(): void {
         const popularTracks = ModelTrack.fetchIndexTrackList(5, 0).then((tracks) => {
-            this.trackList = new TrackList({ tracksList: tracks });
+            this.trackList = new TrackList({ tracksList: tracks }, this.storage);
         });
 
         const newTracks = ModelTrack.fetchIndexTrackList(5, 5).then((tracks) => {

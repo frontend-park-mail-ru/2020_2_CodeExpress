@@ -1,0 +1,35 @@
+<div class="playlist-page">
+    <div class="playlist-page__wrapper">
+        <div class="playlist-page__header">
+            <form class="form-upload-poster">
+                <label for="upload_poster">
+                    <img src="{{ playlist.poster }}" class="playlist-page__poster">
+                </label>
+                <input class="form-avatar__input" type="file" name="upload_poster" id="upload_poster" accept="image/jpeg,image/png,image/jpg">
+            </form>
+            <div class="playlist-page__content">
+                <div class="playlist-page__info">
+                    <div class="playlist-page__title">{{ playlist.title }}</div>
+                    <div class="playlist-page__play button-primary">
+                        Воспризвести
+                        <i class="random-track-icon fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="playlists-page__icons">
+                    <i class="fas playlist-page__icon fa-trash"></i>
+                    <i class="fas playlist-page__icon fa-share"></i>
+                </div>
+            </div>
+        </div>
+        {{# if isEmpty }}
+            <div class="playlists-page-placeholder">
+                <img src="{{ placeholder }}" class="playlists-page-placeholder__img">
+                <div class="playlists-page-placeholder__title">Ваш плейлист пуст.<br />Может, пора это исправить?</div>
+            </div>
+        {{else}}
+            <div class="playlist-page-section">
+                {{{ tracks }}}
+            </div>
+        {{/if}}
+    </div>
+</div>

@@ -1,12 +1,24 @@
-{{#each tracks }}
-    <div class="track-item" data-audio="{{ attrs.audio }}">
-        <div class="track-item__index">{{ attrs.index }}</div>
-        <i class="track-item__icon fas fa-plus" data-id="{{ attrs.id }}"></i>
-        <img class="track-item__album" src="{{ attrs.album_poster }}">
+{{#each tracks as |track| }}
+    <div class="track-item" data-audio="{{ track.attrs.audio }}">
+        <div class="track-item__index">{{ track.attrs.index }}</div>
+        <i class="track-item__icon fas fas fa-fire-alt" data-id="{{ attrs.id }}"></i>
+        <img class="track-item__album" src="{{ track.attrs.album_poster }}">
         <div class="track-item__wrapper">
             <div class="track-item__title">{{ attrs.title }}</div>
-            <a href="/artist/{{ attrs.artist_id }}" class="track-item__group">{{ attrs.artist }}</a>
+            <a href="/artist/{{ track.attrs.artist_id }}" class="track-item__group">{{ track.attrs.artist }}</a>
         </div>
-        <div class="track-item__duration">{{ attrs.duration }}</div>
+        <div class="track-item__duration">{{ track.attrs.duration }}</div>
+        <i class="track-item__icon track-item__icon-dots fas fa-ellipsis-v" data-disabled="true"></i>
+        <div class="track-item__dots-wrapper">
+            <div class="track-item__dots-item track-item__playlist-add add-favorite">
+                Добавить в плейлист
+                <div class="track-item__playlists">
+                    {{#each ../playlists as |playlist| }}
+                        <div class="track-item__playlist-item" data-playlist="{{ playlist.attrs.id }}" data-track="{{ track.attrs.id }}">{{ playlist.attrs.title }}</div>
+                    {{/each}}
+                </div>
+            </div>
+            <a href="/artist/{{ track.attrs.artist_id }}" class="track-item__dots-item add-favorite">Перейти к исполнителю</a>
+        </div>
     </div>
 {{/each}}

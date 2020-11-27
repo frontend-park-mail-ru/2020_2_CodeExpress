@@ -2,7 +2,6 @@ import { Component } from 'managers/component/component';
 import { IProps } from 'store/interfaces';
 import { IPlayerState, ITrack } from 'components/player/player';
 import { statuses } from 'store/consts';
-import { ModelTrack } from 'models/track';
 
 import MobilePlayerTemplate from './mobile_player.hbs';
 import './mobile_player.scss';
@@ -219,27 +218,6 @@ export class MobilePlayer extends Component<IProps, IPlayerState> {
 
             this.audio.loop = loopFlag;
             (<HTMLElement>target).style.color = loopFlag ? '#ff0052' : 'rgba(207, 234, 242, 0.141559)';
-        });
-    }
-
-    setEventToTracks(tracks: NodeList): void {
-        tracks.forEach((item: HTMLElement) => {
-            item.addEventListener('click', (e) => {
-                if ((<HTMLElement>e.target).classList.contains('track-item__icon')) {
-                    ModelTrack.fetchFavoriteTrackAdd((<HTMLElement>e.target).dataset.id).then((res) => {
-                        const { body } = res;
-                        if (body.message === 'added') {
-                            (<HTMLElement>e.target).classList.add('track-item__plus_active');
-                        } else if (body.message === 'deleted') {
-                            (<HTMLElement>e.target).classList.remove('track-item__plus_active');
-                        }
-                    });
-                }
-                if ((<HTMLElement>e.target).className !== 'track-item__group'
-                    && !(<HTMLElement>e.target).classList.contains('track-item__icon')) {
-                    this.changeSong(item);
-                }
-            });
         });
     }
 

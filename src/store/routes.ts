@@ -7,6 +7,8 @@ export const RouterStore = {
         album: '/album/:title/',
         artist: '/artist/:title/',
         favorite: '/favorite/',
+        playlists: '/playlists/',
+        playlist: '/playlist/:id/',
     },
     api: {
         user: {
@@ -40,6 +42,15 @@ export const RouterStore = {
                 list: '/api/v1/favorite/tracks',
                 add: '/api/v1/favorite/track/:id',
             },
+        },
+        playlists: {
+            list: '/api/v1/playlists',
+            current: '/api/v1/playlists/:id',
+            add: '/api/v1/playlists/:id/tracks',
+            remove: '/api/v1/playlists/:id/tracks/:track_id',
+            update: '/api/v1/playlists/:id',
+            create: '/api/v1/playlists',
+            delete: '/api/v1/playlists/:id',
         },
     },
 };
