@@ -2,7 +2,7 @@
 
 .mobile-player {
   position: fixed;
-  top: calc(100% - 141px);
+  transform: translateY(calc(100vh - 141px));
 
   width: 100%;
 

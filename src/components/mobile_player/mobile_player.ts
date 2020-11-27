@@ -171,14 +171,14 @@ export class MobilePlayer extends Component<IProps, IPlayerState> {
 
         document.querySelector('.mobile-player__toggle').addEventListener('click', (e) => {
             if (!(<HTMLElement>e.target).classList.contains('mobile-player__play')) {
-                (<HTMLElement>document.querySelector('.mobile-player')).style.top = '-61px';
+                (<HTMLElement>document.querySelector('.mobile-player')).style.transform = 'translateY(-61px)';
                 (<HTMLElement>document.querySelector('.header-mobile')).style.bottom = '-80px';
                 (<HTMLElement>document.querySelector('#app')).style.overflow = 'hidden';
             }
         });
 
         document.getElementById('close-toggle').addEventListener('click', () => {
-            (<HTMLElement>document.querySelector('.mobile-player')).style.top = 'calc(100% - 141px)';
+            (<HTMLElement>document.querySelector('.mobile-player')).style.transform = 'translateY(calc(100vh - 141px))';
             (<HTMLElement>document.querySelector('.header-mobile')).style.bottom = '0px';
             (<HTMLElement>document.querySelector('#app')).style.overflow = 'initial';
         });
