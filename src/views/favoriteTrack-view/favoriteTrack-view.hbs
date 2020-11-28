@@ -1,4 +1,11 @@
 <div class="favorite-track-page">
     <div class="favorite-track-page__title">Любимые треки</div>
-    <div class="favorite-track-page__wrapper">{{{ tracks }}}</div>
+    {{# if isEmpty }}
+        <div class="playlists-page-placeholder">
+            <img src="{{ placeholder }}" class="playlists-page-placeholder__img">
+            <div class="playlists-page-placeholder__title">У вас пока что нет любимых треков.<br />Может, пора это исправить?</div>
+        </div>
+    {{else}}
+        <div class="favorite-track-page__wrapper">{{{ tracks }}}</div>
+    {{/if}}
 </div>

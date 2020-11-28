@@ -96,11 +96,21 @@
 @media only screen and (max-width: 1000px)  {
   .playlists-page {
     &__title {
-      padding: calc(60px + env(safe-area-inset-top)) 20px 20px;
+      padding: calc(60px + env(safe-area-inset-top)) 20px;
     }
 
     &__wrapper {
       margin: 0 10px;
+    }
+
+    &-placeholder {
+      &__img {
+        height: 200px;
+      }
+
+      &__title {
+        font-size: 16px;
+      }
     }
   }
 }

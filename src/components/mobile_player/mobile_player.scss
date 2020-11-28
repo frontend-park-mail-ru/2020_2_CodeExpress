@@ -2,7 +2,8 @@
 
 .mobile-player {
   position: fixed;
-  transform: translateY(calc(100vh - 141px));
+  bottom: 80px;
+  top: calc(100% - 141px);
 
   width: 100%;
 
@@ -29,13 +30,13 @@
     height: 100%;
 
     &_column {
-      display: flex;
+      display: none;
       align-items: center;
       flex-direction: column;
 
       height: 100vh;
 
-      padding: calc(10px + env(safe-area-inset-top)) 20px 20px 20px;
+      padding: calc(10px + env(safe-area-inset-top)) 10px 20px;
 
       background-color: $color-black-1;
 
@@ -95,8 +96,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    width: 100%;
   }
 
   &__poster {
