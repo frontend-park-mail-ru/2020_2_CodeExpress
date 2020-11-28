@@ -1,0 +1,11 @@
+<div class="search-page-section__title">
+    Артисты
+</div>
+<div class="wrapper_albums">
+{{#each artists }}
+    <div class="list-item">
+        <a href="/artist/{{ attrs.id }}"><img class="list-item__artist" src="{{ attrs.avatar }}"></a>
+        <a href="/artist/{{ attrs.id }}" class="list-item__title">{{ attrs.name }}</a>
+    </div>
+{{/each}}
+</div>

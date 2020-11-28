@@ -1,0 +1,59 @@
+@import '../../pallete';
+
+.list-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 150px;
+  height: 100%;
+
+  margin: 10px;
+
+  &__title {
+    color: $color-white;
+    font-family: $font-medium;
+    font-size: 16px;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__group {
+    color: $color-gray;
+    font-family: $font-regular;
+    font-size: 14px;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__album {
+    width: 100%;
+    height: 100%;
+
+    margin-bottom: 10px;
+
+    border-radius: 5px;
+  }
+
+  &__artist {
+    width: 100%;
+    height: 100%;
+
+    margin-bottom: 10px;
+
+    border-radius: 50%;
+  }
+}

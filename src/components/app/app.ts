@@ -1,5 +1,6 @@
 import { router } from 'managers/router/router';
 import { RouterStore } from 'store/routes';
+
 import { IndexView } from 'views/index-view/index-view';
 import { ProfileView } from 'views/profile-view/profile-view';
 import { LoginView } from 'views/login-view/login-view';
@@ -8,6 +9,8 @@ import { AlbumView } from 'views/album-view/album-view';
 import { ArtistView } from 'views/artist-view/artist-view';
 import { FavoriteTrackView } from 'views/favoriteTrack-view/favoriteTrack-view';
 import { PlaylistsView } from 'views/playlists-view/playlists-view';
+import { SearchView } from 'views/search-view/search-view';
+
 import { Component } from 'managers/component/component';
 import { ModelUser } from 'models/user';
 import { ModelPlayList } from 'models/playlist';
@@ -50,7 +53,8 @@ export class App extends Component<IProps, IAppState> {
             .register(RouterStore.website.artist, new ArtistView(this.props, this.storage))
             .register(RouterStore.website.favorite, new FavoriteTrackView(this.props, this.storage))
             .register(RouterStore.website.playlists, new PlaylistsView(this.props, this.storage))
-            .register(RouterStore.website.playlist, new PlaylistView(this.props, this.storage));
+            .register(RouterStore.website.playlist, new PlaylistView(this.props, this.storage))
+            .register(RouterStore.website.search, new SearchView(this.props, this.storage));
     }
 
     /**
