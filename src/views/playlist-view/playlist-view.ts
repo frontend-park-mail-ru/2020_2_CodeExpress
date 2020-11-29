@@ -32,6 +32,9 @@ export class PlaylistView extends View<IProps, IState> {
             }
             this.isLoaded = true;
             this.setState({ playlist: playlist.attrs });
+        }).then(() => {
+            this.hide();
+            this.render();
         });
     }
 
@@ -54,11 +57,20 @@ export class PlaylistView extends View<IProps, IState> {
         const file: File = (<HTMLInputElement>target).files[0];
 
         const payload = new FormData();
+        const playlists = this.storage.get('playlists');
         const poster: HTMLImageElement = document.querySelector('.playlist-page__poster');
         payload.append('poster', file);
 
-        ModelPlayList.fetchPutPlaylist(this.props.arg, payload).then((playlist: ModelPlayList) => {
+        ModelPlayList.fetchChangePosterPlaylist(this.props.arg, payload).then((playlist: ModelPlayList) => {
             poster.src = playlist.attrs.poster;
+
+            playlists.forEach((item: ModelPlayList) => {
+                if (item.attrs.id === Number(this.props.arg)) {
+                    item.attrs.poster = poster.src;
+                }
+            });
+
+            this.storage.set({ playlists });
         });
     };
 
@@ -78,7 +90,7 @@ export class PlaylistView extends View<IProps, IState> {
             return;
         }
 
-        const playlist = this.isLoaded ? this.state.playlist : { title: 'Test text', poster: defaultPlaylist };
+        const playlist = this.isLoaded ? this.state.playlist : null;
         const tracks = this.isLoaded ? new TrackList({ tracksList: playlist.tracks }, this.storage).render() : null;
         const isEmpty = !tracks;
 

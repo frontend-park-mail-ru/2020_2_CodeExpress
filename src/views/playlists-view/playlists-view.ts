@@ -35,7 +35,7 @@ export class PlaylistsView extends View<IProps, IState> {
         }
     }
 
-    createPlaylist(event: Event) {
+    createPlaylist = (event: Event) => {
         event.preventDefault();
 
         const { target } = event;
@@ -43,11 +43,9 @@ export class PlaylistsView extends View<IProps, IState> {
         const title: HTMLInputElement = (<HTMLElement>target).querySelector('[name="title"]');
 
         ModelPlayList.fetchPostCreatePlaylist(title.value).then((playlist) => {
-            document.querySelector('.playlists-page__playlists').insertAdjacentHTML('afterbegin',
-                PlaylistItemTemplate({ playlists: [playlist] }));
             this.storage.set({ playlists: playlists.push(playlist) });
         });
-    }
+    };
 
     render() {
         const user = this.storage.get('user');

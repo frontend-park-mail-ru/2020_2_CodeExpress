@@ -12,6 +12,7 @@
 
   cursor: pointer;
   transition: ease-in-out all 0.2s;
+  user-select: none;
 
   &_active,
   &:hover {
@@ -58,13 +59,15 @@
     display: none;
 
     background-color: $color-black-3;
+    user-select: none;
   }
 
   &__playlist-add {
     position: relative;
     user-select: none;
 
-    &:hover .track-item__playlists {
+    &:hover .track-item__playlists,
+    &:focus .track-item__playlists {
       display: block;
     }
   }
@@ -110,6 +113,8 @@
   &__icon-dots {
     padding: 5px 10px;
     margin: 0;
+
+    user-select: none;
   }
 
   &__icon:hover {
@@ -174,5 +179,17 @@
       font-size: 10px;
     }
 
+    &__playlists {
+      right: 199px;
+    }
+
+    &__playlist-item,
+    &__dots-item {
+      min-width: 60px;
+
+      padding: 5px 10px;
+
+      font-size: 14px;
+    }
   }
 }

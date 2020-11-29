@@ -46,7 +46,7 @@ export class TrackList extends Component<ITrackList, IState> {
         const trackId = (<HTMLElement>target).dataset.track;
 
         // TODO: Доделать с уведомлением
-        ModelPlayList.fetchPostAddTrack(playlistId, { track_id: trackId }).then();
+        ModelPlayList.fetchPostAddTrack(playlistId, { track_id: Number(trackId) }).then();
     };
 
     static hideModalWindow(target: HTMLElement, wrapper: HTMLElement) {
