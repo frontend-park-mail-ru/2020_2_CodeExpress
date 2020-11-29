@@ -4,6 +4,7 @@ import { ITrack, ModelTrack } from 'models/track';
 import { player } from 'components/player/player';
 import { ModelPlayList } from 'models/playlist';
 import { classContainsValidator } from 'managers/validator/validator';
+import { ModelUser } from 'models/user';
 
 import TrackListTemplate from './track-list.hbs';
 import './track.scss';
@@ -20,7 +21,8 @@ export class TrackList extends Component<ITrackList, IState> {
      * @returns {*|string}
      */
     render() {
-        return TrackListTemplate({ tracks: this.props.tracksList, playlists: this.storage.get('playlists') });
+        const user: ModelUser = this.storage.get('user');
+        return TrackListTemplate({ tracks: this.props.tracksList, playlists: this.storage.get('playlists'), user: user.isLoaded });
     }
 
     static removeTrackInFavorite(target: HTMLElement) {

@@ -1,7 +1,9 @@
 {{#each tracks as |track| }}
     <div class="track-item" data-audio="{{ track.attrs.audio }}">
         <div class="track-item__index">{{ track.attrs.index }}</div>
-        <i class="track-item__icon add-favorite fas {{# if attrs.is_favorite }}fa-fire{{else}}fa-fire-alt{{/if}}" data-id="{{ attrs.id }}" data-add="{{ attrs.is_favorite }}"></i>
+        {{# if ../user }}
+            <i class="track-item__icon add-favorite fas {{# if attrs.is_favorite }}fa-fire{{else}}fa-fire-alt{{/if}}" data-id="{{ attrs.id }}" data-add="{{ attrs.is_favorite }}"></i>
+        {{/if}}
         <img class="track-item__album" src="{{ track.attrs.album_poster }}">
         <div class="track-item__wrapper">
             <div class="track-item__title">{{ attrs.title }}</div>
