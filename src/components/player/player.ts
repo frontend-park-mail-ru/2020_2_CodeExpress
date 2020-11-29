@@ -133,7 +133,7 @@ class Player extends Component<IProps, IPlayerState> {
             this.repeatButton.classList.add('player-sub-controls__icon_active');
         }
 
-        this.volumeInput.value = tempVolume ? String(tempVolume.volume * 100) : String(100);
+        this.volumeInput.value = tempVolume ? String(tempVolume.volume * 100) : '100';
     }
 
     /**

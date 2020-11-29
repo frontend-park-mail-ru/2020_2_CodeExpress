@@ -70,8 +70,11 @@
   }
 
   &__icon {
-    color: $color-white;
     padding: 5px;
+
+    color: $color-white;
+
+    user-select: none;
   }
 
   &__info {
@@ -163,6 +166,7 @@
     width: 0;
 
     background-color: $color-primary;
+    user-select: none;
 
     &_large {
       height: 5px;
@@ -177,6 +181,7 @@
   color: $color-primary;
 
   cursor: pointer;
+  user-select: none;
 
   &_play {
     font-size: 35px;
