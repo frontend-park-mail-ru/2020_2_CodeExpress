@@ -21,6 +21,7 @@
   &__item {
     font-size: 20px;
     color: $color-gray;
+    user-select: none;
 
     &_active {
       color: $color-primary;

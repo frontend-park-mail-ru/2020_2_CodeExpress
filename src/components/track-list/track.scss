@@ -12,6 +12,7 @@
 
   cursor: pointer;
   transition: ease-in-out all 0.2s;
+  user-select: none;
 
   &_active,
   &:hover {
@@ -41,6 +42,7 @@
     z-index: 10;
 
     background-color: $color-black-3;
+    user-select: none;
 
     &_active {
       display: flex;
@@ -57,12 +59,15 @@
     display: none;
 
     background-color: $color-black-3;
+    user-select: none;
   }
-  
+
   &__playlist-add {
     position: relative;
+    user-select: none;
 
-    &:hover .track-item__playlists {
+    &:hover .track-item__playlists,
+    &:focus .track-item__playlists {
       display: block;
     }
   }
@@ -75,6 +80,7 @@
     color: $color-white;
     font-size: 14px;
     text-decoration: none;
+    user-select: none;
 
     &:hover {
       background-color: $color-black-4;
@@ -87,6 +93,7 @@
     color: $color-white;
     font-size: 14px;
     text-decoration: none;
+    user-select: none;
 
     &:hover {
       background-color: $color-black-4;
@@ -100,11 +107,14 @@
     color: $color-gray;
 
     transition: ease-in-out all 0.2s;
+    user-select: none;
   }
 
   &__icon-dots {
     padding: 5px 10px;
     margin: 0;
+
+    user-select: none;
   }
 
   &__icon:hover {
@@ -123,6 +133,7 @@
     color: $color-white;
     font-family: $font-medium;
     font-size: 16px;
+    user-select: none;
   }
 
   &__wrapper {
@@ -138,6 +149,7 @@
     font-size: 14px;
     color: $color-gray;
     text-decoration: none;
+    user-select: none;
 
     &:hover {
       text-decoration: underline;
@@ -152,6 +164,7 @@
 
     background-color: $color-gray;
     border-radius: 5px;
+    user-select: none;
   }
 
 }
@@ -166,5 +179,17 @@
       font-size: 10px;
     }
 
+    &__playlists {
+      right: 199px;
+    }
+
+    &__playlist-item,
+    &__dots-item {
+      min-width: 60px;
+
+      padding: 5px 10px;
+
+      font-size: 14px;
+    }
   }
 }

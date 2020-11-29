@@ -2,6 +2,7 @@
 
 .mobile-player {
   position: fixed;
+  bottom: 80px;
   top: calc(100% - 141px);
 
   width: 100%;
@@ -29,13 +30,13 @@
     height: 100%;
 
     &_column {
-      display: flex;
+      display: none;
       align-items: center;
       flex-direction: column;
 
       height: 100vh;
 
-      padding: calc(10px + env(safe-area-inset-top)) 20px 20px 20px;
+      padding: calc(10px + env(safe-area-inset-top)) 10px 20px;
 
       background-color: $color-black-1;
 
@@ -69,8 +70,11 @@
   }
 
   &__icon {
-    color: $color-white;
     padding: 5px;
+
+    color: $color-white;
+
+    user-select: none;
   }
 
   &__info {
@@ -95,8 +99,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    width: 100%;
   }
 
   &__poster {
@@ -164,6 +166,7 @@
     width: 0;
 
     background-color: $color-primary;
+    user-select: none;
 
     &_large {
       height: 5px;
@@ -178,6 +181,7 @@
   color: $color-primary;
 
   cursor: pointer;
+  user-select: none;
 
   &_play {
     font-size: 35px;

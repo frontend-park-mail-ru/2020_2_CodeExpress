@@ -16,6 +16,7 @@ import { ModelUser } from 'models/user';
 import { ModelPlayList } from 'models/playlist';
 import { IProps } from 'store/interfaces';
 import { PlaylistView } from 'views/playlist-view/playlist-view';
+import { RadioView } from 'views/radio-view/radio-view';
 
 import './app.scss';
 import './button.scss';
@@ -54,7 +55,8 @@ export class App extends Component<IProps, IAppState> {
             .register(RouterStore.website.favorite, new FavoriteTrackView(this.props, this.storage))
             .register(RouterStore.website.playlists, new PlaylistsView(this.props, this.storage))
             .register(RouterStore.website.playlist, new PlaylistView(this.props, this.storage))
-            .register(RouterStore.website.search, new SearchView(this.props, this.storage));
+            .register(RouterStore.website.search, new SearchView(this.props, this.storage))
+            .register(RouterStore.website.radio, new RadioView(this.props, this.storage));
     }
 
     /**

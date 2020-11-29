@@ -169,18 +169,27 @@ export class MobilePlayer extends Component<IProps, IPlayerState> {
     setEventListeners() {
         this.didMount();
 
+        const mobilePlayer: HTMLElement = document.querySelector('.mobile-player');
+        const headerMobile: HTMLElement = document.querySelector('.header-mobile');
+        const app: HTMLElement = document.querySelector('#app');
+        const mobilePlayerWrapper: HTMLElement = document.querySelector('.mobile-player__wrapper_column');
+
         document.querySelector('.mobile-player__toggle').addEventListener('click', (e) => {
             if (!(<HTMLElement>e.target).classList.contains('mobile-player__play')) {
-                (<HTMLElement>document.querySelector('.mobile-player')).style.top = '-61px';
-                (<HTMLElement>document.querySelector('.header-mobile')).style.bottom = '-80px';
-                (<HTMLElement>document.querySelector('#app')).style.overflow = 'hidden';
+                mobilePlayer.style.bottom = 'initial';
+                mobilePlayer.style.top = '-61px';
+                headerMobile.style.bottom = '-80px';
+                app.style.overflow = 'hidden';
+                mobilePlayerWrapper.style.display = 'flex';
             }
         });
 
         document.getElementById('close-toggle').addEventListener('click', () => {
-            (<HTMLElement>document.querySelector('.mobile-player')).style.top = 'calc(100% - 141px)';
-            (<HTMLElement>document.querySelector('.header-mobile')).style.bottom = '0px';
-            (<HTMLElement>document.querySelector('#app')).style.overflow = 'initial';
+            mobilePlayer.style.bottom = '80px';
+            mobilePlayer.style.top = 'calc(100% - 141px)';
+            headerMobile.style.bottom = '0px';
+            app.style.overflow = 'initial';
+            setTimeout(() => { mobilePlayerWrapper.style.display = 'none'; }, 500);
         });
 
         this.playButtons.forEach((item: HTMLElement) => {

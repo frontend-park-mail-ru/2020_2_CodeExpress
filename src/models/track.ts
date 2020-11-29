@@ -11,7 +11,8 @@ export interface ITrack {
     album_id: number,
     artist_id: number,
     artist: string,
-    audio: string
+    audio: string,
+    is_favorite: boolean,
 }
 
 export class ModelTrack extends Model<ITrack> {
@@ -27,6 +28,7 @@ export class ModelTrack extends Model<ITrack> {
             artist_id: null,
             artist: null,
             audio: null,
+            is_favorite: false,
         };
 
         if (attrs) {
@@ -81,6 +83,15 @@ export class ModelTrack extends Model<ITrack> {
             const payload = { id };
             const url = RouterStore.api.track.favorite.add.replace(':id', id);
             Request.post(url, { payload, serialize: true }).then((res) => {
+                resolve(res);
+            });
+        });
+    }
+
+    static fetchFavoriteTrackRemove(id: string) {
+        return new Promise((resolve) => {
+            const url = RouterStore.api.track.favorite.add.replace(':id', id);
+            Request.delete(url).then((res) => {
                 resolve(res);
             });
         });

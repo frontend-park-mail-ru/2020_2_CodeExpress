@@ -4,6 +4,7 @@ import { ITrack, ModelTrack } from 'models/track';
 import { player } from 'components/player/player';
 import { ModelPlayList } from 'models/playlist';
 import { classContainsValidator } from 'managers/validator/validator';
+import { ModelUser } from 'models/user';
 
 import TrackListTemplate from './track-list.hbs';
 import './track.scss';
@@ -20,17 +21,21 @@ export class TrackList extends Component<ITrackList, IState> {
      * @returns {*|string}
      */
     render() {
-        return TrackListTemplate({ tracks: this.props.tracksList, playlists: this.storage.get('playlists') });
+        const user: ModelUser = this.storage.get('user');
+        return TrackListTemplate({ tracks: this.props.tracksList, playlists: this.storage.get('playlists'), user: user.isLoaded });
+    }
+
+    static removeTrackInFavorite(target: HTMLElement) {
+        ModelTrack.fetchFavoriteTrackRemove(target.dataset.id).then((res) => {
+            target.classList.remove('fa-fire');
+            target.classList.add('fa-fire-alt');
+        });
     }
 
     static addTrackInFavorite(target: HTMLElement) {
         ModelTrack.fetchFavoriteTrackAdd(target.dataset.id).then((res) => {
-            const { body } = res;
-            if (body.message === 'added') {
-                target.classList.add('track-item__plus_active');
-            } else if (body.message === 'deleted') {
-                target.classList.remove('track-item__plus_active');
-            }
+            target.classList.remove('fa-fire-alt');
+            target.classList.add('fa-fire');
         });
     }
 
@@ -41,7 +46,7 @@ export class TrackList extends Component<ITrackList, IState> {
         const trackId = (<HTMLElement>target).dataset.track;
 
         // TODO: Доделать с уведомлением
-        ModelPlayList.fetchPostAddTrack(playlistId, { track_id: trackId }).then();
+        ModelPlayList.fetchPostAddTrack(playlistId, { track_id: Number(trackId) }).then();
     };
 
     static hideModalWindow(target: HTMLElement, wrapper: HTMLElement) {
@@ -87,8 +92,12 @@ export class TrackList extends Component<ITrackList, IState> {
             item.addEventListener('click', (e) => {
                 const target = e.target as HTMLElement;
 
-                if (target.classList.contains('fa-fire-alt')) {
-                    TrackList.addTrackInFavorite(target);
+                if (target.classList.contains('add-favorite')) {
+                    if (target.dataset.add === 'false') {
+                        TrackList.addTrackInFavorite(target);
+                    } else {
+                        TrackList.removeTrackInFavorite(target);
+                    }
                 }
                 if (target.classList.contains('fa-ellipsis-v')) {
                     TrackList.toggleEllipsis(target, item);

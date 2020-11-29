@@ -51,8 +51,6 @@ class Player extends Component<IProps, IPlayerState> {
 
     private volumeWrapper: HTMLElement;
 
-    private broadcastChannel: BroadcastChannel;
-
     /**
      * Конструктор Player
      * @param {object} props - объект, в котором лежат переданные параметры
@@ -62,7 +60,6 @@ class Player extends Component<IProps, IPlayerState> {
 
         this.timer = null;
         this.percent = 0;
-        this.broadcastChannel = new BroadcastChannel('playToggle');
 
         // TODO: Переделать на запрос за рандомным треком к беку
         const defaultTrack: ITrack = {
@@ -101,7 +98,7 @@ class Player extends Component<IProps, IPlayerState> {
      */
     tooglePlay(target: EventTarget): void {
         if ((<HTMLElement>target).dataset.status === statuses.statusOff) {
-            this.broadcastChannel.postMessage('play');
+            localStorage.setItem('play', JSON.stringify(new Date()));
             this.audioPlay();
             return;
         }
@@ -126,6 +123,17 @@ class Player extends Component<IProps, IPlayerState> {
         this.playerGroup.innerText = song.group;
         this.playerAlbum.src = song.album;
         this.audio.src = song.audio;
+
+        const tempVolume = JSON.parse(localStorage.getItem('volume'));
+        const tempRepeat = JSON.parse(localStorage.getItem('repeat'));
+        this.audio.volume = tempVolume ? tempVolume.volume : 1;
+        this.audio.loop = tempRepeat || false;
+
+        if (this.audio.loop) {
+            this.repeatButton.classList.add('player-sub-controls__icon_active');
+        }
+
+        this.volumeInput.value = tempVolume ? String(tempVolume.volume * 100) : '100';
     }
 
     /**
@@ -244,6 +252,8 @@ class Player extends Component<IProps, IPlayerState> {
 
             this.audio.loop = loopFlag;
 
+            localStorage.setItem('repeat', JSON.stringify(loopFlag));
+
             if (loopFlag) {
                 (<HTMLElement>target).classList.add('player-sub-controls__icon_active');
             } else {
@@ -260,30 +270,32 @@ class Player extends Component<IProps, IPlayerState> {
 
         this.volumeInput.oninput = (event) => {
             const { target } = event;
-            this.audio.volume = parseFloat(String(Number((<HTMLInputElement>target).value) / 100));
+            this.audio.volume = Number((<HTMLInputElement>target).value) / 100;
+            localStorage.setItem('volume', JSON.stringify({ volume: this.audio.volume }));
         };
 
         window.addEventListener('storage', this.multiChangeTrack);
-        this.broadcastChannel.addEventListener('message', this.changeCurrentPlayingTrack);
     }
 
-    changeCurrentPlayingTrack = (event: MessageEvent) => {
-        const currentSong = document.querySelector('.track-item_active');
-
-        clearTimeout(this.timer);
-
-        if (currentSong) {
-            currentSong.classList.remove('track-item_active');
-        }
-
-        this.audio.pause();
-        this.playButton.dataset.status = statuses.statusOff;
-        this.playButton.classList.remove(statuses.iconPause);
-        this.playButton.classList.add(statuses.iconPlay);
-        this.progressBar.style.width = '0%';
-    };
-
     multiChangeTrack = (event: StorageEvent) => {
+        if (event.key === 'volume') {
+            const temp = JSON.parse(event.newValue);
+
+            this.audio.volume = temp.volume;
+            this.volumeInput.value = String(temp.volume * 100);
+            return;
+        }
+
+        if (event.key === 'repeat') {
+            const flag = JSON.parse(event.newValue);
+            this.audio.loop = flag;
+
+            if (flag) {
+                this.repeatButton.classList.add('player-sub-controls__icon_active');
+            } else {
+                this.repeatButton.classList.remove('player-sub-controls__icon_active');
+            }
+        }
         const currentSong = document.querySelector('.track-item_active');
 
         clearTimeout(this.timer);
@@ -298,7 +310,9 @@ class Player extends Component<IProps, IPlayerState> {
         this.playButton.classList.add(statuses.iconPlay);
         this.progressBar.style.width = '0%';
 
-        this.setLastTrack(JSON.parse(event.newValue));
+        if (event.key === 'lastAudio') {
+            this.setLastTrack(JSON.parse(event.newValue));
+        }
     };
 
     /**

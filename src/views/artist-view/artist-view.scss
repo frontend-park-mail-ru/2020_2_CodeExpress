@@ -119,6 +119,7 @@
 
     color: $color-gray;
     cursor: pointer;
+    user-select: none;
     text-transform: capitalize;
 
     transition: ease-in-out all 0.1s;

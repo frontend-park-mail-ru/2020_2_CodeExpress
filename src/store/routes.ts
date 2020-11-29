@@ -10,6 +10,7 @@ export const RouterStore = {
         playlists: '/playlists/',
         playlist: '/playlist/:id/',
         search: '/search/',
+        radio: '/radio/',
     },
     api: {
         user: {
@@ -49,7 +50,7 @@ export const RouterStore = {
             current: '/api/v1/playlists/:id',
             add: '/api/v1/playlists/:id/tracks',
             remove: '/api/v1/playlists/:id/tracks/:track_id',
-            update: '/api/v1/playlists/:id',
+            poster: '/api/v1/playlists/:id/photo',
             create: '/api/v1/playlists',
             delete: '/api/v1/playlists/:id',
         },

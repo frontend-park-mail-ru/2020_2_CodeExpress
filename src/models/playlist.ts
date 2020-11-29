@@ -1,9 +1,9 @@
 import { Model } from 'models/model';
 import { baseStaticUrl, IPayload, Request } from 'managers/request/request';
 import { RouterStore } from 'store/routes';
-import { ModelTrack } from 'models/track';
+import { ITrack, ModelTrack } from 'models/track';
 
-const defaultPlaylist = require('../assets/default/playlist.png');
+import defaultPlaylist from '../assets/default/playlist.png';
 
 interface IPlaylist {
     id: number,
@@ -25,7 +25,7 @@ export class ModelPlayList extends Model<IPlaylist> {
         };
 
         if (attrs) {
-            attrs.poster = attrs.poster ? attrs.poster.replace('.', baseStaticUrl) : defaultPlaylist.default;
+            attrs.poster = attrs.poster ? attrs.poster.replace('.', baseStaticUrl) : defaultPlaylist;
         }
 
         this.attrs = Object.assign(defaults, attrs);
@@ -50,6 +50,7 @@ export class ModelPlayList extends Model<IPlaylist> {
 
                 if (status === 200) {
                     playlist = new ModelPlayList(body, true);
+                    playlist.attrs.tracks = body.tracks.map ? body.tracks.map((track: ITrack) => new ModelTrack(track)) : null;
                 }
                 resolve(playlist);
             });
@@ -59,7 +60,7 @@ export class ModelPlayList extends Model<IPlaylist> {
     static fetchPostCreatePlaylist(title: string): Promise<ModelPlayList> {
         return new Promise((resolve) => {
             const payload = { title };
-            Request.post(RouterStore.api.playlists.create, { payload, serialize: false }).then((res) => {
+            Request.post(RouterStore.api.playlists.create, { payload, serialize: true }).then((res) => {
                 const { body } = res;
                 const playlist: ModelPlayList = new ModelPlayList(body);
 
@@ -86,10 +87,10 @@ export class ModelPlayList extends Model<IPlaylist> {
         });
     }
 
-    static fetchPutPlaylist(id: string, payload: FormData) {
+    static fetchChangePosterPlaylist(id: string, payload: FormData) {
         return new Promise((resolve) => {
-            const regUrl = RouterStore.api.playlists.update.replace(':id', id);
-            Request.put(regUrl, { payload, serialize: false }).then((res) => {
+            const regUrl = RouterStore.api.playlists.poster.replace(':id', id);
+            Request.post(regUrl, { payload, serialize: false }).then((res) => {
                 const playlist = new ModelPlayList(res.body);
                 resolve(playlist);
             });
