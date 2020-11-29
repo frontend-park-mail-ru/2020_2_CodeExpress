@@ -2,7 +2,7 @@ import { Model } from 'models/model';
 import { baseStaticUrl, Request } from 'managers/request/request';
 import { RouterStore } from 'store/routes';
 
-interface IArtist {
+export interface IArtist {
     id: number,
     name: string,
     poster: string,

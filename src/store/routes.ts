@@ -9,6 +9,7 @@ export const RouterStore = {
         favorite: '/favorite/',
         playlists: '/playlists/',
         playlist: '/playlist/:id/',
+        search: '/search/',
     },
     api: {
         user: {
@@ -51,6 +52,9 @@ export const RouterStore = {
             update: '/api/v1/playlists/:id',
             create: '/api/v1/playlists',
             delete: '/api/v1/playlists/:id',
+        },
+        search: {
+            all: '/api/v1/search?query=:query&offset=:offset&limit=:limit',
         },
     },
 };
