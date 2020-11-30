@@ -1,4 +1,8 @@
 <div class="search-page-placeholder">
     <img src="{{ placeholder }}" class="search-page-placeholder__img">
+    {{# if isEmpty }}
+    <div class="search-page-placeholder__title">Давайте что-нибудь найдём!.</div>
+    {{else}}
     <div class="search-page-placeholder__title">По вашему запросу ничего не найдено.</div>
+    {{/if}}
 </div>

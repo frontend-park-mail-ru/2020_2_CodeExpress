@@ -55,6 +55,9 @@ export class PlaylistsView extends View<IProps, IState> {
         }
 
         ModelPlayList.fetchPostCreatePlaylist(title.value).then((playlist) => {
+            title.value = '';
+            document.querySelector('.playlist-add-form__icon').classList.remove('playlist-add-form__icon_active');
+
             playlists = [...playlists, playlist];
             this.storage.set({ playlists });
 
