@@ -25,6 +25,7 @@
     flex-wrap: wrap;
 
     height: 100%;
+    width: 100%;
   }
 
   &-placeholder {
@@ -46,6 +47,10 @@
       font-size: 18px;
       color: $color-white;
       text-align: center;
+    }
+
+    &__link {
+      color: $color-white;
     }
   }
 }
@@ -105,6 +110,10 @@
       margin: 0 10px;
     }
 
+    &__playlists {
+      justify-content: center;
+    }
+
     &-placeholder {
       &__img {
         height: 200px;
@@ -114,5 +123,9 @@
         font-size: 16px;
       }
     }
+  }
+
+  .item-add {
+    margin: 10px auto;
   }
 }

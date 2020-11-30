@@ -11,6 +11,7 @@ export const RouterStore = {
         playlist: '/playlist/:id/',
         search: '/search/',
         radio: '/radio/',
+        subscribe: '/subscribe/',
     },
     api: {
         user: {
