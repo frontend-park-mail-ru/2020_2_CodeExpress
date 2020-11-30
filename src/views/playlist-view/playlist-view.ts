@@ -75,10 +75,8 @@ export class PlaylistView extends View<IProps, IState> {
 
     deletePlaylist = (event: Event) => {
         event.preventDefault();
-        const playlists = this.storage.get('playlists');
+
         ModelPlayList.fetchDeletePlaylist(this.props.arg).then(() => {
-            playlists.filter((item: ModelPlayList) => item.attrs.id !== Number(this.props.arg));
-            this.storage.set({ playlists });
             router.go(RouterStore.website.playlists);
         });
     };

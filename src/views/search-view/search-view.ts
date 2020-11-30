@@ -2,8 +2,9 @@ import { Page } from 'components/page/page';
 import { View } from 'managers/base-view/base-view';
 import { TrackList } from 'components/track-list/track-list';
 import { IProps, IState, IStorage } from 'store/interfaces';
-
+import { debounce } from 'managers/utils/utils';
 import { ModelSearch } from 'models/search';
+
 import SearchTemplate from './search.hbs';
 import AlbumsTemplate from './albums.hbs';
 import ArtistsTemplate from './artists.hbs';
@@ -34,7 +35,7 @@ export class SearchView extends View {
         this.isLoaded = false;
     }
 
-    search = (event: Event) => {
+    search = (event: Event): void => {
         event.preventDefault();
         const { target } = event;
 
@@ -92,7 +93,10 @@ export class SearchView extends View {
         this.props.parent.insertAdjacentHTML('afterbegin', SearchTemplate());
 
         const { parent } = this.props;
-        parent.querySelector('.header__search-input').addEventListener('change', this.search);
-        parent.querySelector('.header__search').addEventListener('submit', this.search);
+        const search = debounce(this.search, 400);
+
+        parent.querySelector('.header__search-input').addEventListener('input', search);
+        parent.querySelector('.header__search-input').addEventListener('change', search);
+        parent.querySelector('.header__search').addEventListener('submit', search);
     }
 }

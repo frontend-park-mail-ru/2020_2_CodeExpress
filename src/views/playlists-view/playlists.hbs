@@ -1,0 +1,8 @@
+{{# if isEmpty }}
+    <div class="playlists-page-placeholder">
+        <img src="{{ placeholder }}" class="playlists-page-placeholder__img">
+        <div class="playlists-page-placeholder__title">У вас пока что нет плейлистов.<br />Может, пора это исправить?</div>
+    </div>
+{{else}}
+    {{{ playlists }}}
+{{/if}}

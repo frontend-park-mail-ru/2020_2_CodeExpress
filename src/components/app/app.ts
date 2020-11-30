@@ -56,7 +56,8 @@ export class App extends Component<IProps, IAppState> {
             .register(RouterStore.website.playlists, new PlaylistsView(this.props, this.storage))
             .register(RouterStore.website.playlist, new PlaylistView(this.props, this.storage))
             .register(RouterStore.website.search, new SearchView(this.props, this.storage))
-            .register(RouterStore.website.radio, new RadioView(this.props, this.storage));
+            .register(RouterStore.website.radio, new RadioView(this.props, this.storage))
+            .register(RouterStore.website.subscribe, new RadioView(this.props, this.storage));
     }
 
     /**
