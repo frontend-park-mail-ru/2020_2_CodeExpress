@@ -55,6 +55,14 @@
   }
 }
 
+.form-add-error {
+  min-height: 20px;
+
+  margin: 10px;
+
+  color: $color-error;
+}
+
 .item-add {
   margin: 10px;
   padding: 10px 15px;
