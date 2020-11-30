@@ -61,8 +61,8 @@ export class ModelPlayList extends Model<IPlaylist> {
         return new Promise((resolve) => {
             const payload = { title };
             Request.post(RouterStore.api.playlists.create, { payload, serialize: true }).then((res) => {
-                const { body } = res;
-                const playlist: ModelPlayList = new ModelPlayList(body);
+                const { body, status } = res;
+                const playlist: ModelPlayList = status === 200 ? new ModelPlayList(body, true) : new ModelPlayList();
 
                 resolve(playlist);
             });

@@ -49,12 +49,19 @@ export class PlaylistsView extends View<IProps, IState> {
         const { target } = event;
         let playlists: ModelPlayList[] = this.storage.get('playlists');
         const title: HTMLInputElement = (<HTMLElement>target).querySelector('[name="title"]');
+        const error: HTMLElement = document.querySelector('.form-add-error');
+        error.innerText = '';
 
-        if (title.value.length === 0) {
+        if (title.value.length === 0 || title.value.length > 20) {
+            error.innerText = 'Длина строки максимум 20 символов';
             return;
         }
 
         ModelPlayList.fetchPostCreatePlaylist(title.value).then((playlist) => {
+            if (!playlist.isLoaded) {
+                return;
+            }
+
             title.value = '';
             document.querySelector('.playlist-add-form__icon').classList.remove('playlist-add-form__icon_active');
 
