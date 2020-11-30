@@ -1,9 +1,7 @@
 import { View } from 'managers/base-view/base-view';
 import { IProps, IState } from 'store/interfaces';
 import { Page } from 'components/page/page';
-import { router } from 'managers/router/router';
 import { ModelPlayList } from 'models/playlist';
-import { RouterStore } from 'store/routes';
 
 import PlayListsTemplate from './playlists-view.hbs';
 import PlaylistItemTemplate from './playlist.hbs';
@@ -52,7 +50,6 @@ export class PlaylistsView extends View<IProps, IState> {
 
         if (!user.isLoaded && this.storage.get('updateState')) {
             this.storage.set({ pageState: false });
-            router.go(RouterStore.website.index);
             return;
         }
 

@@ -11,7 +11,6 @@ import PlayListTemplate from './playlist-view.hbs';
 import './playlist-view.scss';
 
 import emptyPlaylist from '../../assets/default/emptyPlaylist.svg';
-import defaultPlaylist from '../../assets/default/playlist.png';
 
 export class PlaylistView extends View<IProps, IState> {
     private page: Page;
@@ -76,7 +75,10 @@ export class PlaylistView extends View<IProps, IState> {
 
     deletePlaylist = (event: Event) => {
         event.preventDefault();
+        const playlists = this.storage.get('playlists');
         ModelPlayList.fetchDeletePlaylist(this.props.arg).then(() => {
+            playlists.filter((item: ModelPlayList) => item.attrs.id !== Number(this.props.arg));
+            this.storage.set({ playlists });
             router.go(RouterStore.website.playlists);
         });
     };
@@ -91,7 +93,7 @@ export class PlaylistView extends View<IProps, IState> {
         }
 
         const playlist = this.isLoaded ? this.state.playlist : null;
-        const tracks = this.isLoaded ? new TrackList({ tracksList: playlist.tracks }, this.storage).render() : null;
+        const tracks = this.isLoaded ? new TrackList({ tracksList: playlist.tracks, playlistsHidden: true }, this.storage).render() : null;
         const isEmpty = !tracks;
 
         this.page.show();
@@ -111,6 +113,7 @@ export class PlaylistView extends View<IProps, IState> {
             this.props.parent.querySelector('.playlist-page__play').addEventListener('click', this.playButton);
         } else {
             this.props.parent.querySelector('.playlist-page__play').setAttribute('disabled', 'true');
+            this.props.parent.querySelector('.playlist-page__play').classList.add('button-disabled');
             this.props.parent.querySelector('.fa-share').setAttribute('disabled', 'true');
         }
     }

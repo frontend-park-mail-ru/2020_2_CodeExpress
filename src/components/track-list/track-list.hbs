@@ -12,14 +12,16 @@
         <div class="track-item__duration">{{ track.attrs.duration }}</div>
         <i class="track-item__icon track-item__icon-dots fas fa-ellipsis-v" data-disabled="true"></i>
         <div class="track-item__dots-wrapper">
-            <div class="track-item__dots-item track-item__playlist-add">
-                Добавить в плейлист
-                <div class="track-item__playlists">
-                    {{#each ../playlists as |playlist| }}
-                        <div class="track-item__playlist-item" data-playlist="{{ playlist.attrs.id }}" data-track="{{ track.attrs.id }}">{{ playlist.attrs.title }}</div>
-                    {{/each}}
+            {{#if ../playlistsHidden }}
+                <div class="track-item__dots-item track-item__playlist-add">
+                    Добавить в плейлист
+                    <div class="track-item__playlists">
+                        {{#each ../playlists as |playlist| }}
+                            <div class="track-item__playlist-item" data-playlist="{{ playlist.attrs.id }}" data-track="{{ track.attrs.id }}">{{ playlist.attrs.title }}</div>
+                        {{/each}}
+                    </div>
                 </div>
-            </div>
+            {{/if }}
             <a href="/artist/{{ track.attrs.artist_id }}" class="track-item__dots-item add-favorite">Перейти к исполнителю</a>
         </div>
     </div>

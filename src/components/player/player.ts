@@ -11,6 +11,7 @@ export interface ITrack {
     group: string,
     album: string,
     audio: string,
+    data?: Date,
 }
 
 export interface IPlayerState {
@@ -209,6 +210,7 @@ class Player extends Component<IProps, IPlayerState> {
             group: this.playerGroup.innerText,
             album: this.playerAlbum.src,
             audio: this.audio.src,
+            data: new Date(),
         };
 
         localStorage.setItem('lastAudio', JSON.stringify(newLastAudio));

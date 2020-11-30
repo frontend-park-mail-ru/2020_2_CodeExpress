@@ -35,7 +35,7 @@ export class ModelPlayList extends Model<IPlaylist> {
         return new Promise((resolve) => {
             Request.get(RouterStore.api.playlists.list).then((res) => {
                 const { body } = res;
-                const playlists = body.map ? body.map((item: IPlaylist) => new ModelPlayList(item)) : null;
+                const playlists = body.map ? body.map((item: IPlaylist) => new ModelPlayList(item)) : [];
                 resolve(playlists);
             });
         });

@@ -116,6 +116,7 @@
 
   border-radius: 5px;
   background-size: cover !important;
+  filter: grayscale(1) opacity(.5);
 
   &-content {
     display: flex;

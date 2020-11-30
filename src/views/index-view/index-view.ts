@@ -21,6 +21,8 @@ export class IndexView extends View {
 
     private trackList: TrackList;
 
+    private trackListNew: TrackList;
+
     private isLoaded: boolean;
 
     /**
@@ -41,7 +43,7 @@ export class IndexView extends View {
         });
 
         const newTracks = ModelTrack.fetchIndexTrackList(5, 5).then((tracks) => {
-            this.setState({ newList: tracks });
+            this.trackListNew = new TrackList({ tracksList: tracks }, this.storage);
         });
 
         const popularAlbums = ModelAlbum.fetchGetIndexAlbumArray(6, 0).then((albums) => {
@@ -62,6 +64,7 @@ export class IndexView extends View {
         this.page.show();
 
         const popularTrackList = this.isLoaded ? this.trackList.render() : null;
+        const newTrackList = this.isLoaded ? this.trackListNew.render() : null;
         const albumArray = this.isLoaded ? this.state.popularAlbums : null;
 
         const genreArray: Array<string> = ['Альтернативный Рок',
@@ -72,6 +75,7 @@ export class IndexView extends View {
             albums: albumArray,
             genres: genreArray,
             tracklist: popularTrackList,
+            tracklistNew: newTrackList,
             basicArticlePoster,
             basicArticleAlbum,
         }));
