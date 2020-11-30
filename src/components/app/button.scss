@@ -20,6 +20,11 @@
   user-select: none;
 }
 
+.button-disabled {
+  background-color: $color-black-2;
+  cursor: initial;
+}
+
 .button-secondary {
   border: 2px solid $color-primary;
 

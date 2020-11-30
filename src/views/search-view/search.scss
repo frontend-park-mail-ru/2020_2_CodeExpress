@@ -91,7 +91,7 @@
     }
 
     &-input {
-      width: 280px;
+      width: 100%;
 
       margin: 0 10px;
 
@@ -108,6 +108,22 @@
 
       &:focus {
         outline: 0;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .header {
+    &__search {
+      width: 250px;
+    }
+  }
+  .search-page {
+    &-placeholder {
+      margin: 10px;
+
+      &__img {
+        width: 250px;
       }
     }
   }

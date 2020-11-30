@@ -37,6 +37,13 @@
       color: $color-primary;
     }
 
+    &_disabled {
+      margin: 10px;
+
+      font-size: 20px;
+      color: $color-gray;
+    }
+
   }
 
   &__title {

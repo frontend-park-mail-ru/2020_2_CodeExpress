@@ -11,6 +11,7 @@ import './track.scss';
 
 interface ITrackList extends IProps {
     tracksList: ITrack[],
+    playlistsHidden?: boolean;
 }
 /**
  * Список песен
@@ -22,13 +23,21 @@ export class TrackList extends Component<ITrackList, IState> {
      */
     render() {
         const user: ModelUser = this.storage.get('user');
-        return TrackListTemplate({ tracks: this.props.tracksList, playlists: this.storage.get('playlists'), user: user.isLoaded });
+        const playlistsHidden = this.props.playlistsHidden || false;
+
+        return TrackListTemplate({
+            tracks: this.props.tracksList,
+            playlists: this.storage.get('playlists'),
+            user: user.isLoaded,
+            playlistsHidden: !playlistsHidden,
+        });
     }
 
     static removeTrackInFavorite(target: HTMLElement) {
         ModelTrack.fetchFavoriteTrackRemove(target.dataset.id).then((res) => {
             target.classList.remove('fa-fire');
             target.classList.add('fa-fire-alt');
+            target.dataset.add = 'false';
         });
     }
 
@@ -36,6 +45,7 @@ export class TrackList extends Component<ITrackList, IState> {
         ModelTrack.fetchFavoriteTrackAdd(target.dataset.id).then((res) => {
             target.classList.remove('fa-fire-alt');
             target.classList.add('fa-fire');
+            target.dataset.add = 'true';
         });
     }
 

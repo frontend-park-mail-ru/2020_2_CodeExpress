@@ -35,6 +35,7 @@ export class SearchView extends View {
     }
 
     search = (event: Event) => {
+        event.preventDefault();
         const { target } = event;
 
         const query: HTMLInputElement = <HTMLInputElement>target;
@@ -78,7 +79,7 @@ export class SearchView extends View {
             document.querySelector('.search-page-section__wrapper_artists').innerHTML = '';
             document.querySelector('.search-page-section__wrapper_not-found').innerHTML = '';
         }
-    }
+    };
 
     /**
      * Функция отрисовки View
@@ -91,6 +92,7 @@ export class SearchView extends View {
         this.props.parent.insertAdjacentHTML('afterbegin', SearchTemplate());
 
         const { parent } = this.props;
-        parent.querySelector('.header__search-input').addEventListener('input', this.search);
+        parent.querySelector('.header__search-input').addEventListener('change', this.search);
+        parent.querySelector('.header__search').addEventListener('submit', this.search);
     }
 }

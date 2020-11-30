@@ -170,7 +170,6 @@ export class MobilePlayer extends Component<IProps, IPlayerState> {
         this.didMount();
 
         const mobilePlayer: HTMLElement = document.querySelector('.mobile-player');
-        const headerMobile: HTMLElement = document.querySelector('.header-mobile');
         const app: HTMLElement = document.querySelector('#app');
         const mobilePlayerWrapper: HTMLElement = document.querySelector('.mobile-player__wrapper_column');
 
@@ -178,7 +177,7 @@ export class MobilePlayer extends Component<IProps, IPlayerState> {
             if (!(<HTMLElement>e.target).classList.contains('mobile-player__play')) {
                 mobilePlayer.style.bottom = 'initial';
                 mobilePlayer.style.top = '-61px';
-                headerMobile.style.bottom = '-80px';
+                (<HTMLElement>document.querySelector('.header-mobile')).style.bottom = '-80px';
                 app.style.overflow = 'hidden';
                 mobilePlayerWrapper.style.display = 'flex';
             }
@@ -187,7 +186,7 @@ export class MobilePlayer extends Component<IProps, IPlayerState> {
         document.getElementById('close-toggle').addEventListener('click', () => {
             mobilePlayer.style.bottom = '80px';
             mobilePlayer.style.top = 'calc(100% - 141px)';
-            headerMobile.style.bottom = '0px';
+            (<HTMLElement>document.querySelector('.header-mobile')).style.bottom = '0px';
             app.style.overflow = 'initial';
             setTimeout(() => { mobilePlayerWrapper.style.display = 'none'; }, 500);
         });
