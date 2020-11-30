@@ -9,11 +9,12 @@ import SearchTemplate from './search.hbs';
 import AlbumsTemplate from './albums.hbs';
 import ArtistsTemplate from './artists.hbs';
 import TracksTemplate from './tracks.hbs';
-import NotFoundTemplate from './not-found.hbs';
+import NotFoundTemplate from './placeholder.hbs';
 import './search.scss';
 import 'components/track-list/track.scss';
 import './list-item.scss';
 import NotFound from '../../assets/default/notFound.svg';
+import Start from '../../assets/default/search.svg';
 
 /**
  * View отображающая страницу поиска
@@ -21,7 +22,7 @@ import NotFound from '../../assets/default/notFound.svg';
 export class SearchView extends View {
     private page: Page;
 
-    private isLoaded: boolean;
+    private isEmpty: boolean;
 
     /**
      * Конструктор SearchView
@@ -32,7 +33,7 @@ export class SearchView extends View {
         super(props, storage);
         this.page = new Page(this.props, this.storage);
 
-        this.isLoaded = false;
+        this.isEmpty = true;
     }
 
     search = (event: Event): void => {
@@ -43,10 +44,12 @@ export class SearchView extends View {
 
         if (query.value) {
             ModelSearch.fetchGet(query.value, 0, 20).then((res) => { // TODO: magic number
+                this.isEmpty = false;
+
                 document.querySelector('.search-page-section__wrapper_tracks').innerHTML = '';
                 document.querySelector('.search-page-section__wrapper_albums').innerHTML = '';
                 document.querySelector('.search-page-section__wrapper_artists').innerHTML = '';
-                document.querySelector('.search-page-section__wrapper_not-found').innerHTML = '';
+                document.querySelector('.search-page-section__wrapper_placeholder').innerHTML = '';
 
                 if (res.attrs.tracks) {
                     document.querySelector('.search-page-section__wrapper_tracks').insertAdjacentHTML(
@@ -68,17 +71,22 @@ export class SearchView extends View {
                     );
                 }
                 if (!res.attrs.artists && !res.attrs.albums && !res.attrs.tracks) {
-                    document.querySelector('.search-page-section__wrapper_not-found').insertAdjacentHTML(
+                    document.querySelector('.search-page-section__wrapper_placeholder').insertAdjacentHTML(
                         'afterbegin',
-                        NotFoundTemplate({ placeholder: NotFound }),
+                        NotFoundTemplate({ placeholder: NotFound, isEmpty: this.isEmpty }),
                     );
                 }
             });
-        } else {
+        } else if (query.value === '') {
+            this.isEmpty = true;
             document.querySelector('.search-page-section__wrapper_tracks').innerHTML = '';
             document.querySelector('.search-page-section__wrapper_albums').innerHTML = '';
             document.querySelector('.search-page-section__wrapper_artists').innerHTML = '';
-            document.querySelector('.search-page-section__wrapper_not-found').innerHTML = '';
+            document.querySelector('.search-page-section__wrapper_placeholder').innerHTML = '';
+            document.querySelector('.search-page-section__wrapper_placeholder').insertAdjacentHTML(
+                'afterbegin',
+                NotFoundTemplate({ placeholder: Start, isEmpty: this.isEmpty }),
+            );
         }
     };
 
@@ -91,12 +99,15 @@ export class SearchView extends View {
 
         this.props.parent = document.querySelector('.page__content');
         this.props.parent.insertAdjacentHTML('afterbegin', SearchTemplate());
+        document.querySelector('.search-page-section__wrapper_placeholder').insertAdjacentHTML(
+            'afterbegin',
+            NotFoundTemplate({ placeholder: Start, isEmpty: this.isEmpty }),
+        );
 
         const { parent } = this.props;
         const search = debounce(this.search, 400);
 
         parent.querySelector('.header__search-input').addEventListener('input', search);
-        parent.querySelector('.header__search-input').addEventListener('change', search);
-        parent.querySelector('.header__search').addEventListener('submit', search);
+        parent.querySelector('.header__search').addEventListener('submit', this.search);
     }
 }
