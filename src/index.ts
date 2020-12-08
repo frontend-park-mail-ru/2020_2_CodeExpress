@@ -7,6 +7,6 @@ if ('serviceWorker' in navigator) {
 }
 
 const parent: HTMLElement = document.getElementById('app') as HTMLElement;
-const app = new App({ parent });
+export const app = new App({ parent });
 
 app.start();

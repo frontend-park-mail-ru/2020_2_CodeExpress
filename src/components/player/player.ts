@@ -1,84 +1,69 @@
-import { isMobile, statuses } from 'store/consts';
 import { Component } from 'managers/component/component';
-import { IProps } from 'store/interfaces';
-import { MobilePlayer } from 'components/mobile_player/mobile_player';
+import { IProps, IState } from 'store/interfaces';
+import { playerService } from 'components/app/app';
+import { ITrack, ModelTrack } from 'models/track';
 
 import PlayerTemplate from './player.hbs';
 import './player.scss';
 
-export interface ITrack {
-    title: string,
-    group: string,
-    album: string,
-    audio: string,
-    data?: Date,
-}
-
-export interface IPlayerState {
-    track: ITrack
-}
-
-/**
- * Плеер
- */
-class Player extends Component<IProps, IPlayerState> {
-    state: IPlayerState;
-
-    private timer: NodeJS.Timeout;
-
-    private percent: number;
-
-    public audio: HTMLMediaElement;
-
-    private lastAudio: ITrack;
-
-    private playButton: HTMLElement;
-
-    private timeLine: HTMLElement;
-
-    private progressBar: HTMLObjectElement;
-
-    private repeatButton: HTMLElement;
-
-    private volumeButton: HTMLElement;
-
-    private volumeInput: HTMLInputElement;
-
+export class DesktopPlayer extends Component<IProps, IState> {
     private playerTitle: HTMLElement;
 
     private playerAlbum: HTMLImageElement;
 
     private playerGroup: HTMLImageElement;
 
+    private volumeInput: HTMLInputElement;
+
+    private volumeButton: HTMLElement;
+
+    private repeatButton: HTMLElement;
+
+    private progressBar: HTMLObjectElement;
+
+    private timeLine: HTMLElement;
+
+    private playButton: HTMLElement;
+
     private volumeWrapper: HTMLElement;
 
-    /**
-     * Конструктор Player
-     * @param {object} props - объект, в котором лежат переданные параметры
-     */
+    private prevButton: HTMLElement;
+
+    private nextButton: HTMLElement;
+
+    private orderToggle: HTMLElement;
+
     constructor(props: IProps = {}) {
         super(props);
-
-        this.timer = null;
-        this.percent = 0;
-
-        // TODO: Переделать на запрос за рандомным треком к беку
-        const defaultTrack: ITrack = {
-            title: 'Bad Liar',
-            album: 'https://musicexpress.sarafa2n.ru:8080/album_posters/726420f0b9599ef1cb70cb66032a47f6',
-            group: 'Imagine Dragons',
-            audio: 'https://musicexpress.sarafa2n.ru:8080/track_audio/18e1d0c72345f84353be39a3fa7f5029',
-        };
-
-        this.setState({ track: defaultTrack });
     }
 
-    /**
-     * Поиск элементов управления плеера
-     */
+    changeOrderTrack(track: ModelTrack) {
+        this.progressBar.style.width = '0%';
+
+        playerService.clearTimer();
+
+        this.updateTrackView(track.attrs);
+
+        playerService.changeTrack(track.attrs.audio);
+        playerService.play().then(() => playerService.iconPlay(this.playButton));
+        playerService.setLastTrack(track);
+    }
+
+    updateTrackView(track: ITrack) {
+        if (!track) {
+            return;
+        }
+
+        this.playerTitle.innerText = track.title;
+        this.playerAlbum.src = track.album_poster;
+        this.playerGroup.innerText = track.artist;
+    }
+
+    getLastTrack() {
+        this.updateTrackView(playerService.getLastTrack());
+    }
+
     didMount(): void {
-        this.audio = new Audio() as HTMLMediaElement;
-        this.lastAudio = JSON.parse(localStorage.getItem('lastAudio'));
         this.playButton = document.getElementById('play');
         this.timeLine = document.getElementById('time-line-js');
         this.progressBar = document.getElementById('progress-bar-js') as HTMLObjectElement;
@@ -89,241 +74,94 @@ class Player extends Component<IProps, IPlayerState> {
         this.playerTitle = document.getElementById('player-title-js');
         this.playerAlbum = document.getElementById('player-album-js') as HTMLImageElement;
         this.playerGroup = document.getElementById('player-group-js') as HTMLImageElement;
+        this.prevButton = document.getElementById('backward');
+        this.nextButton = document.getElementById('forward');
+        this.orderToggle = document.querySelector('.player__toggle-order');
 
-        this.setLastTrack(this.lastAudio as ITrack || this.state.track);
+        this.volumeInput.value = `${playerService.getVolume() * 100}`;
     }
 
-    /**
-     * Функция обработки клика на иконку Play.
-     * @param {object} target - кнопка play/pause
-     */
-    tooglePlay(target: EventTarget): void {
-        if ((<HTMLElement>target).dataset.status === statuses.statusOff) {
-            localStorage.setItem('play', JSON.stringify(new Date()));
-            this.audioPlay();
-            return;
-        }
-
-        this.audio.pause();
-        (<HTMLElement>target).dataset.status = statuses.statusOff;
-        (<HTMLElement>target).classList.remove(statuses.iconPause);
-        (<HTMLElement>target).classList.add(statuses.iconPlay);
-        clearTimeout(this.timer);
-    }
-
-    stop() {
-        this.audio.src = '';
-    }
-
-    /**
-     * Функция, которая устанавливает на проигрывание либо defaultSong или песню из localStorage.
-     * @param {object} song - объект с ифнормацией о треке
-     */
-    setLastTrack(song: ITrack): void {
-        this.playerTitle.innerText = song.title;
-        this.playerGroup.innerText = song.group;
-        this.playerAlbum.src = song.album;
-        this.audio.src = song.audio;
-
-        const tempVolume = JSON.parse(localStorage.getItem('volume'));
-        const tempRepeat = JSON.parse(localStorage.getItem('repeat'));
-        this.audio.volume = tempVolume ? tempVolume.volume : 1;
-        this.audio.loop = tempRepeat || false;
-
-        if (this.audio.loop) {
-            this.repeatButton.classList.add('player-sub-controls__icon_active');
-        }
-
-        this.volumeInput.value = tempVolume ? String(tempVolume.volume * 100) : '100';
-    }
-
-    /**
-     * Функция, которая устанавлвает таймаут для вызова функции изменения progressBar.
-     * @param {number} duration - длина трека
-     * @param {object} element - html объект <audio>
-     */
-    startTimer(duration: number, element: HTMLMediaElement): void {
-        if (this.percent < 100) {
-            this.timer = setTimeout(() => this.advance(duration, element), 10);
-        }
-    }
-
-    /**
-     * Функция которая изменят ширину progressBar у песни.
-     * @param {number} duration - длина пенси
-     * @param {object} element - html объект <audio>
-     */
-    advance(duration: number, element: HTMLMediaElement): void {
-        const increment = 10 / duration;
-        this.percent = Math.min(increment * element.currentTime * 10, 100);
-        this.progressBar.style.width = `${this.percent}%`;
-        this.startTimer(duration, element);
-    }
-
-    /**
-     * Функция, которая запускает проигрыавание песни.
-     */
-    audioPlay(): void {
-        this.audio.play().then(() => {
-            this.playButton.classList.remove(statuses.iconPlay);
-            this.playButton.classList.add(statuses.iconPause);
-            this.playButton.dataset.status = statuses.statusOn;
-        });
-    }
-
-    /**
-     * Функция перемотки трека.
-     * @param {MouseEvent} event
-     */
-    seek(event: MouseEvent): void {
-        const audioPercent = event.offsetX / this.timeLine.offsetWidth;
-        this.audio.currentTime = audioPercent * this.audio.duration;
-        this.progressBar.width = `${audioPercent}%`;
-        clearTimeout(this.timer);
-        this.audioPlay();
-    }
-
-    /**
-     * Функция смены текущей песни.
-     * @param {object} item - трек
-     */
-    changeSong(item: HTMLElement): void {
+    changeCurrentTrack(item: HTMLElement) {
+        this.progressBar.style.width = '0%';
         const currentSong = document.querySelector('.track-item_active');
-        clearTimeout(this.timer);
+
+        playerService.clearTimer();
 
         if (currentSong) {
             currentSong.classList.remove('track-item_active');
         }
+
         item.classList.add('track-item_active');
-        const title: HTMLElement = item.querySelector('.track-item__title');
-        const group: HTMLElement = item.querySelector('.track-item__group');
-        const album: HTMLImageElement = item.querySelector('.track-item__album') as HTMLImageElement;
+        const track: ITrack = playerService.getTrackData(item);
+        this.updateTrackView(track);
 
-        this.playerTitle.innerText = title.textContent;
-        this.playerGroup.innerText = group.textContent;
-        this.playerAlbum.src = album.src;
-        this.audio.src = item.dataset.audio;
-        this.audioPlay();
-
-        const newLastAudio = {
-            title: this.playerTitle.innerText,
-            group: this.playerGroup.innerText,
-            album: this.playerAlbum.src,
-            audio: this.audio.src,
-            data: new Date(),
-        };
-
-        localStorage.setItem('lastAudio', JSON.stringify(newLastAudio));
+        playerService.changeTrack(track.audio);
+        playerService.play().then(() => playerService.iconPlay(this.playButton));
+        playerService.setLastTrack(new ModelTrack(track, true, false));
+        playerService.addInOrder(item);
     }
 
-    /**
-     * Функция, которая навешивает обработчики событий на элементы управления плейера.
-     */
-    setEventListeners(): void {
-        this.didMount();
-
-        this.playButton.addEventListener('click', (event) => {
-            this.tooglePlay(event.target);
-        });
-
-        this.timeLine.addEventListener('click', (event) => {
-            this.seek(event);
-        });
-
-        this.audio.addEventListener('ended', () => {
-            this.playButton.classList.remove(statuses.iconPause);
-            this.playButton.classList.add(statuses.iconPlay);
-            this.playButton.dataset.status = statuses.statusOff;
-            this.progressBar.style.width = '0%';
-            this.percent = 0;
-            clearTimeout(this.timer);
-        });
-
-        this.audio.addEventListener('playing', (event) => {
-            const { target } = event;
-            this.advance((<HTMLMediaElement>target).duration, this.audio);
-        });
-
-        this.audio.addEventListener('pause', () => {
-            clearTimeout(this.timer);
-        });
-
-        this.repeatButton.addEventListener('click', (event) => {
-            const { target } = event;
-            const loopFlag = !this.audio.loop;
-
-            this.audio.loop = loopFlag;
-
-            localStorage.setItem('repeat', JSON.stringify(loopFlag));
-
-            if (loopFlag) {
-                (<HTMLElement>target).classList.add('player-sub-controls__icon_active');
-            } else {
-                (<HTMLElement>target).classList.remove('player-sub-controls__icon_active');
-            }
-        });
-
-        this.volumeButton.addEventListener('click', () => {
-            const viewFlag: boolean = this.volumeWrapper.dataset.hidden === 'false';
-
-            this.volumeWrapper.dataset.hidden = String(viewFlag);
-            this.volumeWrapper.style.display = viewFlag ? 'none' : 'block';
-        });
-
-        this.volumeInput.oninput = (event) => {
-            const { target } = event;
-            this.audio.volume = Number((<HTMLInputElement>target).value) / 100;
-            localStorage.setItem('volume', JSON.stringify({ volume: this.audio.volume }));
-        };
-
-        window.addEventListener('storage', this.multiChangeTrack);
+    checkControlButtons(index: number, length: number) {
+        if (index === 0) {
+            this.prevButton.classList.add('controls-disabled');
+        } else if (index + 1 >= length) {
+            this.nextButton.classList.add('controls-disabled');
+        } else if (index + 1 < length && index !== 0) {
+            this.nextButton.classList.remove('controls-disabled');
+            this.prevButton.classList.remove('controls-disabled');
+        }
     }
 
-    multiChangeTrack = (event: StorageEvent) => {
+    rewind = (event: MouseEvent) => {
+        this.progressBar.style.width = playerService.rewind(event.offsetX, this.timeLine);
+        playerService.play().then(() => playerService.iconPlay(this.playButton));
+    };
+
+    showVolumeInput = () => {
+        const viewFlag: boolean = this.volumeWrapper.dataset.hidden === 'false';
+
+        this.volumeWrapper.dataset.hidden = String(viewFlag);
+        this.volumeWrapper.style.display = viewFlag ? 'none' : 'block';
+    };
+
+    changeVolume = (event: Event): void => {
+        const { target } = event;
+        const volume = Number((<HTMLInputElement>target).value) / 100;
+
+        playerService.setVolume(volume);
+        localStorage.setItem('volume', JSON.stringify(volume));
+    };
+
+    volumeStorage = (event: StorageEvent): void => {
         if (event.key === 'volume') {
             const temp = JSON.parse(event.newValue);
 
-            this.audio.volume = temp.volume;
+            playerService.setVolume(temp.volume);
             this.volumeInput.value = String(temp.volume * 100);
-            return;
-        }
-
-        if (event.key === 'repeat') {
-            const flag = JSON.parse(event.newValue);
-            this.audio.loop = flag;
-
-            if (flag) {
-                this.repeatButton.classList.add('player-sub-controls__icon_active');
-            } else {
-                this.repeatButton.classList.remove('player-sub-controls__icon_active');
-            }
-        }
-        const currentSong = document.querySelector('.track-item_active');
-
-        clearTimeout(this.timer);
-
-        if (currentSong) {
-            currentSong.classList.remove('track-item_active');
-        }
-
-        this.audio.pause();
-        this.playButton.dataset.status = statuses.statusOff;
-        this.playButton.classList.remove(statuses.iconPause);
-        this.playButton.classList.add(statuses.iconPlay);
-        this.progressBar.style.width = '0%';
-
-        if (event.key === 'lastAudio') {
-            this.setLastTrack(JSON.parse(event.newValue));
         }
     };
 
-    /**
-     * Отрисовка компонента
-     * @returns {*|string}
-     */
-    render(): HTMLCollection {
+    setup(): void {
+        this.didMount();
+        this.getLastTrack();
+        const { length, index } = playerService.getOrderInfo();
+        this.checkControlButtons(index, length);
+
+        this.playButton.addEventListener('click', () => playerService.togglePlay(this.playButton));
+        this.prevButton.addEventListener('click', playerService.prevTrack);
+        this.nextButton.addEventListener('click', playerService.nextTrack);
+
+        this.timeLine.addEventListener('click', this.rewind);
+        this.volumeButton.addEventListener('click', this.showVolumeInput);
+        this.volumeInput.oninput = (event) => this.changeVolume(event);
+
+        playerService.render();
+        playerService.events([this.playButton], this.repeatButton, this.progressBar);
+        window.addEventListener('storage', this.volumeStorage);
+        this.orderToggle.addEventListener('click', playerService.showOrder);
+    }
+
+    render() {
         return PlayerTemplate();
     }
 }
-
-export const player: Player | MobilePlayer = isMobile ? new MobilePlayer() : new Player();

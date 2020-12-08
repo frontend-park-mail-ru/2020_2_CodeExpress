@@ -1,4 +1,4 @@
-import { player } from 'components/player/player';
+import { player } from 'components/app/app';
 import { SideBar } from 'components/sidebar/sidebar';
 import { HeaderPaper } from 'components/header-paper/header-paper';
 import { Component } from 'managers/component/component';
@@ -39,7 +39,7 @@ export class Page extends Component {
 
         if (!pageState) {
             this.render();
-            this.setEventListeners();
+            this.setup();
             this.storage.set({ pageState: true });
         }
         if (pageState && updateState) {
@@ -82,8 +82,8 @@ export class Page extends Component {
     /**
      * Установка EventListeners
      */
-    setEventListeners(): void {
-        player.setEventListeners();
+    setup(): void {
+        player.setup();
     }
 
     /**

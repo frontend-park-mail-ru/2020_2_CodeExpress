@@ -31,6 +31,11 @@
   background-color: inherit;
 }
 
+.controls-disabled {
+  color: $color-gray-1;
+  cursor: initial;
+}
+
 @media only screen and (max-width: 1000px) {
   .button-primary,
   .button-secondary {

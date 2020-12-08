@@ -1,7 +1,7 @@
 import { Component } from 'managers/component/component';
 import { IProps, IState } from 'store/interfaces';
-import { ITrack, ModelTrack } from 'models/track';
-import { player } from 'components/player/player';
+import { ModelTrack } from 'models/track';
+import { player, playerService } from 'components/app/app';
 import { ModelPlayList } from 'models/playlist';
 import { classContainsValidator } from 'managers/validator/validator';
 import { ModelUser } from 'models/user';
@@ -10,7 +10,7 @@ import TrackListTemplate from './track-list.hbs';
 import './track.scss';
 
 interface ITrackList extends IProps {
-    tracksList: ITrack[],
+    tracksList: ModelTrack[],
     playlistsHidden?: boolean;
 }
 /**
@@ -109,11 +109,14 @@ export class TrackList extends Component<ITrackList, IState> {
                         TrackList.removeTrackInFavorite(target);
                     }
                 }
+                if (target.classList.contains('add-order')) {
+                    playerService.addInOrder(item);
+                }
                 if (target.classList.contains('fa-ellipsis-v')) {
                     TrackList.toggleEllipsis(target, item);
                 }
                 if (classContainsValidator(target, ...blackList)) {
-                    player.changeSong(item);
+                    player.changeCurrentTrack(item);
                 }
             });
         });

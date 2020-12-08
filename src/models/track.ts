@@ -13,10 +13,11 @@ export interface ITrack {
     artist: string,
     audio: string,
     is_favorite: boolean,
+    date?: Date
 }
 
 export class ModelTrack extends Model<ITrack> {
-    constructor(attrs: ITrack = null, isLoaded = false) {
+    constructor(attrs: ITrack = null, isLoaded = false, update = true) {
         super(attrs, isLoaded);
         const defaults: ITrack = {
             id: null,
@@ -31,7 +32,7 @@ export class ModelTrack extends Model<ITrack> {
             is_favorite: false,
         };
 
-        if (attrs) {
+        if (attrs && update) {
             attrs.index = Number.parseInt(attrs.index, 10) >= 10 ? attrs.index : `0${attrs.index}`;
             const time = new Date(Number.parseInt(attrs.duration, 10) * 1000);
             const seconds = time.getSeconds() >= 10 ? time.getSeconds() : `0${time.getSeconds()}`;
@@ -53,7 +54,7 @@ export class ModelTrack extends Model<ITrack> {
         });
     }
 
-    static fetchIndexTrackList(count: number, from: number): Promise<ITrack[]> {
+    static fetchIndexTrackList(count: number, from: number): Promise<ModelTrack[]> {
         return new Promise((resolve) => {
             let url = RouterStore.api.track.index.replace(':count', String(count));
             url = url.replace(':from', String(from));
@@ -66,7 +67,7 @@ export class ModelTrack extends Model<ITrack> {
         });
     }
 
-    static fetchArtistTracks(id: string): Promise<ITrack[]> {
+    static fetchArtistTracks(id: string): Promise<ModelTrack[]> {
         return new Promise((resolve) => {
             const url = RouterStore.api.track.artist.replace(':id', id);
 
@@ -97,7 +98,7 @@ export class ModelTrack extends Model<ITrack> {
         });
     }
 
-    static fetchFavoriteTrackList(): Promise<ITrack[]> {
+    static fetchFavoriteTrackList(): Promise<ModelTrack[]> {
         return new Promise((resolve) => {
             const url = RouterStore.api.track.favorite.list;
 

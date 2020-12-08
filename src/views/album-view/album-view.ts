@@ -5,7 +5,7 @@ import { IProps, IState } from 'store/interfaces';
 import { ModelAlbum } from 'models/album';
 import { TrackList } from 'components/track-list/track-list';
 import { router } from 'managers/router/router';
-import { player } from 'components/player/player';
+import { player, playerService } from 'components/app/app';
 
 import AlbumTemplate from './album.hbs';
 import './album.scss';
@@ -39,16 +39,8 @@ export class AlbumView extends View<IProps, IState> {
     }
 
     playButton() {
-        const items: NodeList = this.props.parent.querySelectorAll('.track-item');
-        let current = 1;
-
-        player.changeSong(items[0] as HTMLElement);
-        player.audio.addEventListener('ended', () => {
-            if (current !== items.length) {
-                player.changeSong(items[current] as HTMLElement);
-                current++;
-            }
-        });
+        const tracks = [].slice.call(this.props.parent.querySelectorAll('.track-item'));
+        playerService.albumOrder(tracks);
     }
 
     render() {

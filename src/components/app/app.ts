@@ -17,6 +17,10 @@ import { ModelPlayList } from 'models/playlist';
 import { IProps } from 'store/interfaces';
 import { PlaylistView } from 'views/playlist-view/playlist-view';
 import { RadioView } from 'views/radio-view/radio-view';
+import { PlayerService } from 'components/player-service/player-service';
+import { DesktopPlayer } from 'components/player/player';
+import { MobilePlayer } from 'components/mobile-player/mobile-player';
+import { isMobile } from 'store/consts';
 
 import './app.scss';
 import './button.scss';
@@ -60,6 +64,10 @@ export class App extends Component<IProps, IAppState> {
             .register(RouterStore.website.subscribe, new RadioView(this.props, this.storage));
     }
 
+    getStorage() {
+        return this.storage;
+    }
+
     /**
      * Функция инициализатор
      */
@@ -75,3 +83,6 @@ export class App extends Component<IProps, IAppState> {
         router.setup();
     }
 }
+
+export const playerService = new PlayerService();
+export const player: DesktopPlayer | MobilePlayer = isMobile ? new MobilePlayer() : new DesktopPlayer();
