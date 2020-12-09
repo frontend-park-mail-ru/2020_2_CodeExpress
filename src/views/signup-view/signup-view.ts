@@ -6,7 +6,7 @@ import { Request } from 'managers/request/request';
 import { router } from 'managers/router/router';
 import { IProps, IState, IStorage } from 'store/interfaces';
 import { ModelUser } from 'models/user';
-import { player } from 'components/player/player';
+import { playerService } from 'components/app/app';
 
 import SighupTemplate from './signup.hbs';
 import './signup.scss';
@@ -136,7 +136,7 @@ export class SignupView extends View {
     render() {
         const pageState = this.storage.get('pageState');
         if (pageState === true) {
-            player.stop();
+            playerService.pause();
         }
 
         this.storage.set({ pageState: false });

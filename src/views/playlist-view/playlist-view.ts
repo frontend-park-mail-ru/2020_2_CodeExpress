@@ -4,7 +4,7 @@ import { Page } from 'components/page/page';
 import { router } from 'managers/router/router';
 import { ModelPlayList } from 'models/playlist';
 import { TrackList } from 'components/track-list/track-list';
-import { player } from 'components/player/player';
+import { playerService } from 'components/app/app';
 import { RouterStore } from 'store/routes';
 
 import PlayListTemplate from './playlist-view.hbs';
@@ -38,16 +38,8 @@ export class PlaylistView extends View<IProps, IState> {
     }
 
     playButton = () => {
-        const items: NodeList = this.props.parent.querySelectorAll('.track-item');
-        let current = 1;
-
-        player.changeSong(items[0] as HTMLElement);
-        player.audio.addEventListener('ended', () => {
-            if (current !== items.length) {
-                player.changeSong(items[current] as HTMLElement);
-                current++;
-            }
-        });
+        const tracks = [].slice.call(this.props.parent.querySelectorAll('.track-item'));
+        playerService.albumOrder(tracks);
     };
 
     changePoster = (event: Event) => {

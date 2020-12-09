@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
@@ -73,7 +72,16 @@ module.exports = {
             description: 'Музыкальный сервис',
             orientation: 'portrait',
             display: 'standalone',
+            background_color: '#1a1b1f',
+            theme_color: '#1a1b1f',
             start_url: '.',
+            icons: [
+                {
+                    src: path.join(src, '/music.png'),
+                    sizes: '128x128',
+                    type: 'image/png',
+                },
+            ],
             ios: {
                 'apple-mobile-web-app-status-bar-style': 'black-translucent',
             },

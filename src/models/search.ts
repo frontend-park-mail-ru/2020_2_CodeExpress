@@ -8,7 +8,7 @@ import { Request } from 'managers/request/request';
 
 export interface ISearch {
     albums: ModelAlbum[],
-    tracks: ITrack[],
+    tracks: ModelTrack[],
     artists: ModelArtist[]
 }
 
@@ -35,7 +35,7 @@ export class ModelSearch extends Model<ISearch> {
                 const { body } = res;
 
                 const albums: ModelAlbum[] = body.albums ? body.albums.map((album: IAlbum) => new ModelAlbum(album)) : null;
-                const tracks: ITrack[] = body.tracks ? body.tracks.map((track: ITrack) => new ModelTrack(track)) : null;
+                const tracks: ModelTrack[] = body.tracks ? body.tracks.map((track: ITrack) => new ModelTrack(track)) : null;
                 const artists: ModelArtist[] = body.artists ? body.artists.map((artist: IArtist) => new ModelArtist(artist)) : null;
                 const search: ModelSearch = new ModelSearch({ albums, artists, tracks }, true);
 

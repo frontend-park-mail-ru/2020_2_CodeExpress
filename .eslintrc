@@ -17,7 +17,8 @@
     "no-console": "error",
     "class-methods-use-this": "off",
     "camelcase": "off",
-    "no-plusplus": "off"
+    "no-plusplus": "off",
+    "no-shadow": "off"
   },
   "extends": [
     "airbnb-base",

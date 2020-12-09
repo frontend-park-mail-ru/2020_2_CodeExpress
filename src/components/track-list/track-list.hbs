@@ -1,13 +1,13 @@
 {{#each tracks as |track| }}
-    <div class="track-item" data-audio="{{ track.attrs.audio }}">
+    <div class="track-item" data-audio="{{ track.attrs.audio }}" data-id="{{ attrs.id }}" data-add="{{ attrs.is_favorite }}">
         <div class="track-item__index">{{ track.attrs.index }}</div>
         {{# if ../user }}
             <i class="track-item__icon add-favorite fas {{# if attrs.is_favorite }}fa-fire{{else}}fa-fire-alt{{/if}}" data-id="{{ attrs.id }}" data-add="{{ attrs.is_favorite }}"></i>
         {{/if}}
-        <img class="track-item__album" src="{{ track.attrs.album_poster }}">
+        <img class="track-item__album" data-id="{{ track.attrs.album_id }}" src="{{ track.attrs.album_poster }}">
         <div class="track-item__wrapper">
             <div class="track-item__title">{{ attrs.title }}</div>
-            <a href="/artist/{{ track.attrs.artist_id }}" class="track-item__group">{{ track.attrs.artist }}</a>
+            <a href="/artist/{{ track.attrs.artist_id }}" class="track-item__group" data-id="{{ track.attrs.artist_id }}">{{ track.attrs.artist }}</a>
         </div>
         <div class="track-item__duration">{{ track.attrs.duration }}</div>
         <i class="track-item__icon track-item__icon-dots fas fa-ellipsis-v" data-disabled="true"></i>
@@ -23,6 +23,7 @@
                 </div>
             {{/if }}
             <a href="/artist/{{ track.attrs.artist_id }}" class="track-item__dots-item add-favorite">Перейти к исполнителю</a>
+            <div class="track-item__dots-item add-order">Добавить в очередь</div>
         </div>
     </div>
 {{/each}}

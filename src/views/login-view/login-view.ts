@@ -3,7 +3,7 @@ import { baseStaticUrl, Request } from 'managers/request/request';
 import { RouterStore } from 'store/routes';
 import { router } from 'managers/router/router';
 import { IProps, IStorage, IState } from 'src/store/interfaces';
-import { player } from 'components/player/player';
+import { player, playerService } from 'components/app/app';
 
 import LoginTemplate from './login.hbs';
 import './login.scss';
@@ -97,7 +97,7 @@ export class LoginView extends View<IProps, IState> {
     render(): void {
         const pageState = this.storage.get('pageState');
         if (pageState) {
-            player.stop();
+            playerService.pause();
         }
 
         this.storage.set({ pageState: false });
