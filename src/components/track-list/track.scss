@@ -169,6 +169,11 @@
 
 }
 
+.like-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 @media only screen and (max-width: 1000px) {
   .track-item {
     &__title {

@@ -13,7 +13,8 @@ export interface ITrack {
     artist: string,
     audio: string,
     is_favorite: boolean,
-    date?: Date
+    date?: Date,
+    is_liked: boolean,
 }
 
 export class ModelTrack extends Model<ITrack> {
@@ -30,6 +31,7 @@ export class ModelTrack extends Model<ITrack> {
             artist: null,
             audio: null,
             is_favorite: false,
+            is_liked: false,
         };
 
         if (attrs && update) {
@@ -133,6 +135,24 @@ export class ModelTrack extends Model<ITrack> {
     static fetchDeleteTrack(id: string): Promise<any> {
         return new Promise((resolve) => {
             const url = RouterStore.api.track.delete.replace(':id', id);
+            Request.delete(url).then((res) => {
+                resolve(res);
+            });
+        });
+    }
+
+    static fetchLikeTrack(id: string) :Promise<any> {
+        return new Promise((resolve) => {
+            const url = RouterStore.api.track.like.replace(':id', id);
+            Request.post(url, { payload: {}, serialize: true }).then((res) => {
+                resolve(res);
+            });
+        });
+    }
+
+    static fetchDislikeTrack(id: string) :Promise<any> {
+        return new Promise((resolve) => {
+            const url = RouterStore.api.track.like.replace(':id', id);
             Request.delete(url).then((res) => {
                 resolve(res);
             });

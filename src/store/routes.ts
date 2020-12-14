@@ -45,6 +45,7 @@ export const RouterStore = {
                 list: '/api/v1/favorite/tracks',
                 add: '/api/v1/favorite/track/:id',
             },
+            like: '/api/v1/tracks/:id/like',
         },
         playlists: {
             list: '/api/v1/playlists',
