@@ -59,6 +59,20 @@ export class TrackList extends Component<ITrackList, IState> {
         ModelPlayList.fetchPostAddTrack(playlistId, { track_id: Number(trackId) }).then();
     };
 
+    static likeTrack = (target: HTMLElement) => {
+        ModelTrack.fetchLikeTrack(target.dataset.track).then(() => {
+            target.dataset.like = 'true';
+            target.insertAdjacentHTML('beforeend', ' <i class="like-icon fas fa-heart"></i>');
+        });
+    }
+
+    static dislikeTrack = (target: HTMLElement) => {
+        ModelTrack.fetchDislikeTrack(target.dataset.track).then(() => {
+            target.dataset.like = 'false';
+            target.innerText = 'Нравится';
+        });
+    }
+
     static hideModalWindow(target: HTMLElement, wrapper: HTMLElement) {
         wrapper.classList.remove('track-item__dots-wrapper_active');
         target.dataset.disabled = 'true';
@@ -96,7 +110,7 @@ export class TrackList extends Component<ITrackList, IState> {
     };
 
     static setEventToTracks(tracks: NodeList): void {
-        const blackList: string[] = ['track-item__group', 'track-item__icon', 'track-item__dots-item', 'track-item__playlist-item'];
+        const blackList: string[] = ['track-item__group', 'track-item__icon', 'track-item__dots-item', 'track-item__playlist-item', 'like-icon'];
 
         tracks.forEach((item: HTMLElement) => {
             item.addEventListener('click', (e) => {
@@ -117,6 +131,20 @@ export class TrackList extends Component<ITrackList, IState> {
                 }
                 if (classContainsValidator(target, ...blackList)) {
                     player.changeCurrentTrack(item);
+                }
+                if (target.classList.contains('like')) {
+                    if (target.dataset.like === 'false') {
+                        TrackList.likeTrack(target);
+                    } else {
+                        TrackList.dislikeTrack(target);
+                    }
+                }
+                if (target.classList.contains('like-icon')) {
+                    if (target.parentElement.dataset.like === 'false') {
+                        TrackList.likeTrack(target.parentElement);
+                    } else {
+                        TrackList.dislikeTrack(target.parentElement);
+                    }
                 }
             });
         });

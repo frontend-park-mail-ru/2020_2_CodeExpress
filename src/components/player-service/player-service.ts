@@ -256,7 +256,9 @@ export class PlayerService extends Component<IProps, IPlayerState> {
         const album: HTMLImageElement = item.querySelector('.track-item__album') as HTMLImageElement;
         const index = item.querySelector('.track-item__index');
         const duration = item.querySelector('.track-item__duration');
-        const { audio, id, add } = item.dataset;
+        const {
+            audio, id, add, like,
+        } = item.dataset;
 
         return {
             id: Number(id),
@@ -269,6 +271,7 @@ export class PlayerService extends Component<IProps, IPlayerState> {
             duration: duration.textContent,
             audio,
             is_favorite: !!add,
+            is_liked: !!like,
         };
     }
 
