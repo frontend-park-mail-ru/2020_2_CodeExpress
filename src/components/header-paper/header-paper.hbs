@@ -5,11 +5,8 @@
     </div>
     <div class="header__profile">
         {{# if load }}
-            {{# if isAvatar }}
-                <a class="header__avatar-link" href="/profile/"><img class="header__profile-avatar" src="{{ avatar }}"></a>
-            {{else}}
-                <a class="header__avatar-link" href="/profile/"><img class="header__profile-avatar" src="{{ defaultAvatar.default }}"></a>
-            {{/if}}
+            <a class="header__avatar-link" href="/settings/"><i class="fas header__settings fa-cog"></i></a>
+            <a class="header__avatar-link" href="/profile/{{ username }}"><img class="header__profile-avatar" src="{{ avatar }}"></a>
         {{else}}
             <a href="/signup/" class="button-secondary header__profile__link">Зарегистрироваться</a>
             <a href="/login/" class="button-primary header__profile__link">Войти</a>

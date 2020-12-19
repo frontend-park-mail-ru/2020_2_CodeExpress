@@ -2,11 +2,14 @@ import { RouterStore } from 'store/routes';
 import { baseStaticUrl, Request } from 'managers/request/request';
 import { Model } from 'models/model';
 
+import DefaultAvatar from 'assets/default/user-default.svg';
+
 interface IUserAttrs {
     id: number,
     username: string,
-    email: string,
+    email?: string,
     avatar: string,
+    is_subscribed?: boolean,
 }
 
 /**
@@ -25,10 +28,11 @@ export class ModelUser extends Model<IUserAttrs> {
             username: null,
             email: null,
             avatar: null,
+            is_subscribed: false,
         };
 
         if (attrs) {
-            attrs.avatar = attrs.avatar.replace('.', baseStaticUrl);
+            attrs.avatar = attrs.avatar ? attrs.avatar.replace('.', baseStaticUrl) : DefaultAvatar;
         }
 
         this.attrs = { ...defaults, ...attrs };
@@ -49,6 +53,59 @@ export class ModelUser extends Model<IUserAttrs> {
                     user = new ModelUser(body, true);
                 }
                 resolve(user);
+            });
+        });
+    }
+
+    static getProfile(nickname: string): Promise<ModelUser> {
+        return new Promise((resolve, reject) => {
+            const url = RouterStore.api.user.profile.replace(':nickname', nickname);
+
+            Request.get(url).then((res) => {
+                const { body, status } = res;
+                if (status !== 200) {
+                    reject(body);
+                }
+
+                const user = new ModelUser(body, true);
+                resolve(user);
+            });
+        });
+    }
+
+    static getSubs(nickname: string): Promise<Array<ModelUser[]>> {
+        return new Promise((resolve, reject) => {
+            const url = RouterStore.api.user.getSubs.replace(':nickname', nickname);
+            Request.get(url).then((res) => {
+                const { body, status } = res;
+                if (status !== 200) {
+                    reject(body);
+                }
+
+                const subscribers = body.subscribers ? body.subscribers.map((item: IUserAttrs) => new ModelUser(item)) : [];
+                const subscriptions = body.subscriptions ? body.subscriptions.map((item: IUserAttrs) => new ModelUser(item)) : [];
+
+                resolve([subscribers, subscriptions]);
+            });
+        });
+    }
+
+    static follow(nickname: string) {
+        return new Promise((resolve) => {
+            const url = RouterStore.api.user.follow.replace(':nickname', nickname);
+
+            Request.post(url, { payload: {} }).then((res) => {
+                resolve(res.body);
+            });
+        });
+    }
+
+    static unFollow(nickname: string) {
+        return new Promise((resolve) => {
+            const url = RouterStore.api.user.follow.replace(':nickname', nickname);
+
+            Request.delete(url).then((res) => {
+                resolve(res.body);
             });
         });
     }

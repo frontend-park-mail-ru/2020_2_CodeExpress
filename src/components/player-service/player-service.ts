@@ -282,6 +282,7 @@ export class PlayerService extends Component<IProps, IPlayerState> {
         player.changeOrderTrack(this.order[this.index]);
         localStorage.setItem('index', JSON.stringify(this.index));
         localStorage.setItem('order', JSON.stringify(this.order));
+        this.render();
     }
 
     addInOrder(item: HTMLElement) {
@@ -294,6 +295,7 @@ export class PlayerService extends Component<IProps, IPlayerState> {
 
         this.order.push(new ModelTrack(track, true, false));
         localStorage.setItem('order', JSON.stringify(this.order));
+        this.render();
     }
 
     nextTrack = () => {
