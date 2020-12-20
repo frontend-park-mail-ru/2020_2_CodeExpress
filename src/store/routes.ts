@@ -58,6 +58,8 @@ export const RouterStore = {
             poster: '/api/v1/playlists/:id/photo',
             create: '/api/v1/playlists',
             delete: '/api/v1/playlists/:id',
+            private: '/api/v1/playlists/:id/privacy',
+            public: '/api/v1/user/:id/playlists',
         },
         search: {
             all: '/api/v1/search?query=:query&offset=:offset&limit=:limit',

@@ -4,11 +4,14 @@ import { Page } from 'components/page/page';
 import { RouterStore } from 'store/routes';
 import { router } from 'managers/router/router';
 import { ModelUser } from 'models/user';
+import { ModelPlayList } from 'models/playlist';
 
+import Placeholder from 'assets/default/radioPlaceholder.svg';
 import DefaultAvatar from 'assets/default/user-default.svg';
-import Placeholder from '../../assets/default/radioPlaceholder.svg';
 
+import PlaylistItemTemplate from 'views/playlists-view/playlist.hbs';
 import ProfileTemplate from './profile-view.hbs';
+
 import './profile-view.scss';
 
 export class ProfileView extends View<IProps, IState> {
@@ -26,7 +29,9 @@ export class ProfileView extends View<IProps, IState> {
     didMount(): void {
         const user = ModelUser.getProfile(this.props.arg)
             .then((user) => {
-                this.setState({ user });
+                ModelPlayList.fetchGetPublicPlaylists(user.attrs.id.toString()).then((playlists) => {
+                    this.setState({ user, playlists });
+                });
             })
             .catch(() => {
                 router.go(RouterStore.website.index);
@@ -78,6 +83,9 @@ export class ProfileView extends View<IProps, IState> {
         const profile: ModelUser = this.isLoaded ? this.state.user : null;
         const subscribers: ModelUser[] | [] = this.isLoaded ? this.state.subscribers : [];
         const subscriptions: ModelUser[] | [] = this.isLoaded ? this.state.subscriptions : [];
+        const playlists = this.isLoaded ? this.state.playlists : null;
+        const isEmpty = playlists ? !playlists.length : true;
+        const playlistTemp = PlaylistItemTemplate({ playlists });
         let follow = false;
 
         if (user.attrs && profile) {
@@ -87,6 +95,8 @@ export class ProfileView extends View<IProps, IState> {
         this.page.show();
         this.props.parent = document.querySelector('.page__content');
         this.props.parent.insertAdjacentHTML('afterbegin', ProfileTemplate({
+            isEmpty,
+            playlistTemp,
             follow,
             profile,
             subscribers,

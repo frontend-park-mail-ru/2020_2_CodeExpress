@@ -28,10 +28,14 @@
     </div>
     <div class="profile-page__wrap">
         <div class="profile-page__item profile-page__item_playlists profile-page__item_active">
-            <div class="playlists-page-placeholder">
-                <img src="{{ placeholder }}" class="playlists-page-placeholder__img">
-                <div class="playlists-page-placeholder__title">Скоро можно будет посмотреть плейлисты другого профиля</div>
-            </div>
+            {{# if isEmpty }}
+                <div class="playlists-page-placeholder">
+                    <img src="{{ placeholder }}" class="playlists-page-placeholder__img">
+                    <div class="playlists-page-placeholder__title">Скоро можно будет посмотреть плейлисты другого профиля</div>
+                </div>
+            {{else}}
+                {{{ playlistTemp }}}
+            {{/if}}
         </div>
         <div class="profile-page__item profile-page__item_subscribers">
             <div class="profile-page__content">

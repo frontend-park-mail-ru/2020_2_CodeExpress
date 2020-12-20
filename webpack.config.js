@@ -64,7 +64,7 @@ module.exports = {
         new CleanWebpackPlugin(),
         new webpack.EnvironmentPlugin({
             PORT: port,
-            DEBUG: process.env.DEBUG,
+            DEBUG: !isProduction,
         }),
         new WebpackPwaManifest({
             name: 'MusicExpress',

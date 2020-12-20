@@ -118,10 +118,7 @@ export class SignupView extends View {
             }
 
             if (status === 200) {
-                const user = this.storage.get('user');
-
-                user.update(body);
-                user.isLoaded = true;
+                const user = new ModelUser(body, true);
 
                 this.storage.set({ user });
                 this.storage.set({ updateState: true });

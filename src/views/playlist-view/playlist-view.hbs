@@ -1,31 +1,64 @@
 <div class="playlist-page">
     <div class="playlist-page__wrapper">
         <div class="playlist-page__header">
-            <form class="form-upload-poster">
-                <label for="upload_poster">
-                    <img src="{{ playlist.poster }}" class="playlist-page__poster">
-                </label>
-                <input class="form-avatar__input" type="file" name="upload_poster" id="upload_poster" accept="image/jpeg,image/png,image/jpg">
-            </form>
+            {{# if isAuthor }}
+                <form class="form-upload-poster">
+                    <label for="upload_poster">
+                        <img src="{{ playlist.poster }}" class="playlist-page__poster">
+                    </label>
+                    <input class="form-avatar__input" type="file" name="upload_poster" id="upload_poster" accept="image/jpeg,image/png,image/jpg">
+                </form>
+            {{ else }}
+                <img src="{{ playlist.poster }}" class="playlist-page__poster">
+            {{/if}}
             <div class="playlist-page__content">
                 <div class="playlist-page__info">
-                    <div class="playlist-page__title">{{ playlist.title }}</div>
+                    <a href="/profile/{{ author.username }}" class="playlist-page__author">
+                        <div class="author__username">{{ author.username }}</div>
+                    </a>
+                    <div class="playlist-page__title">
+                        {{ playlist.title }}
+                        {{# if isAuthor }}
+                            <i class="fas playlist-page__icon fa-trash"></i>
+                        {{/if}}
+                    </div>
                     <div class="playlist-page__play button-primary">
                         Воспроизвести
                         <i class="random-track-icon fas fa-play"></i>
                     </div>
                 </div>
-                <div class="playlists-page__icons">
-                    <i class="fas playlist-page__icon fa-trash"></i>
-                    <i class="fas playlist-page__icon_disabled fa-share"></i>
+                <div class="playlist-page__icons">
+                    {{# if isLoaded }}
+                        <div class="playlist-page__share">
+                            <a href="http://www.facebook.com/sharer/sharer.phpu={{ url }}" target="_blank" class="fab playlist-page__icon fa-facebook"></a>
+                            <a href="https://twitter.com/intent/tweet?url={{ url }}" target="_blank" class="fab playlist-page__icon fa-twitter"></a>
+                            <a href="https://vk.com/share.php?url={{ url }}" target="_blank" class="fab playlist-page__icon fa-vk"></a>
+                            <a href="https://t.me/share/url?url={{ url }}" target="_blank" class="fab playlist-page__icon fa-telegram"></a>
+                        </div>
+                    {{/if}}
+                    {{# if isAuthor }}
+                        <div class="switch-button">
+                            {{# if isPublic }}
+                                <div class="switch-button__label">Публичный плейлист</div>
+                                <input type="checkbox" class="switch-button__input" checked>
+                            {{ else }}
+                                <div class="switch-button__label">Приватный плейлист</div>
+                                <input type="checkbox" class="switch-button__input">
+                            {{/if}}
+                        </div>
+                    {{/if}}
                 </div>
             </div>
         </div>
         {{# if isEmpty }}
             <div class="playlists-page-placeholder">
                 <img src="{{ placeholder }}" class="playlists-page-placeholder__img">
-                <div class="playlists-page-placeholder__title">Ваш плейлист пуст.<br />Добавить в него треки можно на <a href="/" class="playlists-page-placeholder__link">главной странице</a>.</div>
-            </div>
+                {{# if isAuthor }}
+                    <div class="playlists-page-placeholder__title">Ваш плейлист пуст.<br />Добавить в него треки можно на <a href="/" class="playlists-page-placeholder__link">главной странице</a>.</div>
+                {{else }}
+                    <div class="playlists-page-placeholder__title">Данный плейлист пуст.</div>
+                {{/if}}
+                </div>
         {{else}}
             <div class="playlist-page-section">
                 {{{ tracks }}}
