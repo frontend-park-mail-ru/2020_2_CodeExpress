@@ -34,7 +34,7 @@ export class TrackList extends Component<ITrackList, IState> {
     }
 
     static removeTrackInFavorite(target: HTMLElement) {
-        ModelTrack.fetchFavoriteTrackRemove(target.dataset.id).then((res) => {
+        ModelTrack.fetchFavoriteTrackRemove(target.dataset.id).then(() => {
             target.classList.remove('fa-fire');
             target.classList.add('fa-fire-alt');
             target.dataset.add = 'false';
@@ -42,7 +42,7 @@ export class TrackList extends Component<ITrackList, IState> {
     }
 
     static addTrackInFavorite(target: HTMLElement) {
-        ModelTrack.fetchFavoriteTrackAdd(target.dataset.id).then((res) => {
+        ModelTrack.fetchFavoriteTrackAdd(target.dataset.id).then(() => {
             target.classList.remove('fa-fire-alt');
             target.classList.add('fa-fire');
             target.dataset.add = 'true';

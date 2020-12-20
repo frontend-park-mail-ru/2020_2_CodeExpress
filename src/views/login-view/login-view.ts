@@ -1,10 +1,10 @@
 import { View } from 'managers/base-view/base-view';
-import { baseStaticUrl, Request } from 'managers/request/request';
+import { Request } from 'managers/request/request';
 import { RouterStore } from 'store/routes';
 import { router } from 'managers/router/router';
 import { IProps, IStorage, IState } from 'src/store/interfaces';
-import { player, playerService } from 'components/app/app';
-
+import { playerService } from 'components/app/app';
+import { ModelUser } from 'models/user';
 import LoginTemplate from './login.hbs';
 import './login.scss';
 
@@ -79,12 +79,11 @@ export class LoginView extends View<IProps, IState> {
                 id: body.id,
                 username: body.username,
                 email: body.email,
-                avatar: body.avatar.replace('.', baseStaticUrl),
+                avatar: body.avatar,
             };
 
-            const user = this.storage.get('user');
-            user.update(userAttrs);
-            user.isLoaded = true;
+            const user = new ModelUser(userAttrs, true);
+
             this.storage.set({ user });
             this.storage.set({ updateState: true });
             router.back();

@@ -1,11 +1,56 @@
 @import '../../pallete';
 
+.author {
+  &__avatar {
+    height: 30px;
+    width: 30px;
+
+    margin-right: 10px;
+
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  &__username {
+    color: $color-gray;
+    font-size: 16px;
+
+    transition: ease-in-out all 0.3s;
+  }
+}
+
 .playlist-page {
   &__wrapper {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
   }
+
+  &__icons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__share {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-bottom: 10px;
+  }
+
+  &__author {
+    display: flex;
+    align-items: center;
+
+    margin: 10px 0;
+
+    text-decoration: none;
+
+    &:hover .author__username {
+      color: $color-primary;
+    }
+  }
+
 
   &__header {
     display: flex;
@@ -33,6 +78,8 @@
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 
+    text-decoration: none;
+
     &:hover {
       color: $color-primary;
     }
@@ -47,9 +94,9 @@
   }
 
   &__title {
-    margin: 20px 0;
+    margin: 10px 0 20px;
 
-    font-size: 25px;
+    font-size: 30px;
     color: $color-white;
 
   }

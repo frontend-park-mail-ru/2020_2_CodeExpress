@@ -109,6 +109,9 @@ class Router extends Component<IProps, IRouterState> {
         const replaceUrl = `https://${window.location.hostname}${port}`;
 
         if ((<HTMLElement>target).tagName === 'A') {
+            if ((<HTMLLinkElement>target).href.indexOf(replaceUrl) !== 0) {
+                return;
+            }
             event.preventDefault();
             this.go((<HTMLLinkElement>target).href.replace(replaceUrl, ''));
         } else {

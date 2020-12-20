@@ -5,7 +5,7 @@ import { IProps, IState } from 'store/interfaces';
 import { ModelAlbum } from 'models/album';
 import { TrackList } from 'components/track-list/track-list';
 import { router } from 'managers/router/router';
-import { player, playerService } from 'components/app/app';
+import { playerService } from 'components/app/app';
 
 import AlbumTemplate from './album.hbs';
 import './album.scss';

@@ -6,6 +6,7 @@ import { IState, IProps } from 'store/interfaces';
  */
 export abstract class View<TProps extends IProps = IProps, TState extends IState = IState> extends Component<TProps, TState> {
     hide(): void {
+        this.unMount();
         this.props.parent.innerHTML = '';
     }
 
@@ -15,6 +16,9 @@ export abstract class View<TProps extends IProps = IProps, TState extends IState
         this.didMount();
         this.render();
     }
+
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    unMount(): void {}
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     didMount(): void {}
