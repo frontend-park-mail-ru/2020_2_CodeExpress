@@ -1,5 +1,5 @@
-const baseBackendUrl = 'https://musicexpress.sarafa2n.ru:8080';
-export const baseStaticUrl = 'https://musicexpress.sarafa2n.ru:8080';
+const baseBackendUrl = 'https://musicexpress.sarafa2n.ru';
+export const baseStaticUrl = 'https://musicexpress.sarafa2n.ru';
 
 export interface IPayload {
     [key: string] : any
