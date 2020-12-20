@@ -2,7 +2,7 @@ import { router } from 'managers/router/router';
 import { RouterStore } from 'store/routes';
 
 import { IndexView } from 'views/index-view/index-view';
-import { ProfileView } from 'views/profile-view/profile-view';
+import { SettingsView } from 'views/settings-view/settings-view';
 import { LoginView } from 'views/login-view/login-view';
 import { SignupView } from 'views/signup-view/signup-view';
 import { AlbumView } from 'views/album-view/album-view';
@@ -21,6 +21,7 @@ import { PlayerService } from 'components/player-service/player-service';
 import { DesktopPlayer } from 'components/player/player';
 import { MobilePlayer } from 'components/mobile-player/mobile-player';
 import { isMobile } from 'store/consts';
+import { ProfileView } from 'views/profile-view/profile-view';
 
 import './app.scss';
 import './button.scss';
@@ -53,7 +54,7 @@ export class App extends Component<IProps, IAppState> {
             .register(RouterStore.website.index, new IndexView(this.props, this.storage))
             .register(RouterStore.website.login, new LoginView(this.props, this.storage))
             .register(RouterStore.website.signup, new SignupView(this.props, this.storage))
-            .register(RouterStore.website.profile, new ProfileView(this.props, this.storage))
+            .register(RouterStore.website.settings, new SettingsView(this.props, this.storage))
             .register(RouterStore.website.album, new AlbumView(this.props, this.storage))
             .register(RouterStore.website.artist, new ArtistView(this.props, this.storage))
             .register(RouterStore.website.favorite, new FavoriteTrackView(this.props, this.storage))
@@ -61,7 +62,7 @@ export class App extends Component<IProps, IAppState> {
             .register(RouterStore.website.playlist, new PlaylistView(this.props, this.storage))
             .register(RouterStore.website.search, new SearchView(this.props, this.storage))
             .register(RouterStore.website.radio, new RadioView(this.props, this.storage))
-            .register(RouterStore.website.subscribe, new RadioView(this.props, this.storage));
+            .register(RouterStore.website.profile, new ProfileView(this.props, this.storage));
     }
 
     getStorage() {

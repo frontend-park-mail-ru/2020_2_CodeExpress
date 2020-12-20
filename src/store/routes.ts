@@ -1,7 +1,7 @@
 export const RouterStore = {
     website: {
         index: '/',
-        profile: '/profile/',
+        settings: '/settings/',
         login: '/login/',
         signup: '/signup/',
         album: '/album/:title/',
@@ -11,7 +11,7 @@ export const RouterStore = {
         playlist: '/playlist/:id/',
         search: '/search/',
         radio: '/radio/',
-        subscribe: '/subscribe/',
+        profile: '/profile/:nickname',
     },
     api: {
         user: {
@@ -24,6 +24,9 @@ export const RouterStore = {
                 profile: '/api/v1/user/profile',
                 password: '/api/v1/user/password',
             },
+            profile: '/api/v1/user/:nickname/profile',
+            getSubs: '/api/v1/user/:nickname/subscriptions',
+            follow: '/api/v1/user/:nickname/subscription',
         },
         artist: {
             list: '/api/v1/artists',

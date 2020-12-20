@@ -53,6 +53,18 @@
     user-select: none;
   }
 
+
+  &__settings {
+    margin: 0 10px;
+
+    font-size: 20px;
+    color: $color-gray;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
   &__profile {
     display: flex;
     align-items: center;

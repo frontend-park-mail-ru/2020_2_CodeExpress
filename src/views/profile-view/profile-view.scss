@@ -1,0 +1,156 @@
+@import '../../pallete';
+
+.profile-page {
+  &__header {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 20px;
+    padding: 100px 35px 0;
+
+    background: $color-black-4;
+  }
+
+  &__follow {
+    margin-left: auto;
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 20px;
+  }
+
+  &__toggles {
+    display: flex;
+  }
+
+  &__item {
+    display: none;
+
+    &_active {
+      display: block;
+    }
+  }
+
+  &__toggle-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    width: fit-content;
+
+    padding: 20px;
+
+    color: $color-gray;
+    cursor: pointer;
+    user-select: none;
+    text-transform: capitalize;
+
+    transition: ease-in-out all 0.1s;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      height: 3px;
+      width: 100%;
+
+      opacity: 0;
+
+      background-color: #ff0052;
+      box-shadow: 0 0 8px #ff0052;
+
+      transition: ease-in-out opacity 0.3s;
+    }
+
+    &:hover,
+    &:hover::before {
+      opacity: 1;
+    }
+
+    &_active {
+      color: $color-white;
+
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__header-content {
+    margin-bottom: 10px;
+
+    font-size: 18px;
+    font-family: $font-regular;
+    color: $color-gray;
+  }
+
+  &__header-username {
+    font-size: 30px;
+    font-family: $font-medium;
+    color: $color-white;
+  }
+
+  &__wrapper {
+    margin: 0 100px;
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+
+    margin: 20px 40px;
+  }
+
+  &__avatar {
+    height: 125px;
+    width: 125px;
+
+    margin-right: 20px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    background-color: $color-black;
+  }
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+
+  width: fit-content;
+
+  margin: 5px;
+  padding: 10px 15px;
+
+  border-radius: 5px;
+
+  text-decoration: none;
+  transition: all 0.1s ease-in-out;
+
+  &:hover {
+    background-color: $color-black-1;
+  }
+
+  &__avatar {
+    width: 70px;
+    height: 70px;
+
+    margin-right: 20px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+  }
+
+  &__username {
+    font-size: 18px;
+    color: $color-white;
+  }
+}

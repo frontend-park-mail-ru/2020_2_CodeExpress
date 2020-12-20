@@ -1,0 +1,57 @@
+<div class="profile-page">
+    <div class="profile-page__header">
+        <div class="profile-page__user">
+            {{# if profile.attrs.avatar }}
+                <img src="{{ profile.attrs.avatar }}" class="profile-page__avatar">
+            {{else}}
+                <img src="{{ default }}" class="profile-page__avatar">
+            {{/if}}
+            <div class="profile-page__header-content">
+                <div class="profile-page__header-title">Пользователь</div>
+                <div class="profile-page__header-username">{{ profile.attrs.username }}</div>
+            </div>
+            {{# if follow }}
+                    <div class="profile-page__follow button-primary" data-username="{{ profile.attrs.username }}" data-follow="{{ profile.attrs.is_subscribed }}">
+                        {{# if profile.attrs.is_subscribed }}
+                            Отписаться
+                        {{ else }}
+                            Подписаться
+                        {{/if}}
+                    </div>
+            {{/if}}
+        </div>
+        <div class="profile-page__toggles">
+            <div class="profile-page__toggle-item profile-page__toggle-item_active" data-class="profile-page__item_playlists">Открытые плейлисты</div>
+            <div class="profile-page__toggle-item" data-class="profile-page__item_subscribers">Подписчики ({{ subscribersLength }})</div>
+            <div class="profile-page__toggle-item" data-class="profile-page__item_subscriptions">Подписки ({{ subscriptionsLength }})</div>
+        </div>
+    </div>
+    <div class="profile-page__wrap">
+        <div class="profile-page__item profile-page__item_playlists profile-page__item_active">
+            <div class="playlists-page-placeholder">
+                <img src="{{ placeholder }}" class="playlists-page-placeholder__img">
+                <div class="playlists-page-placeholder__title">Скоро можно будет посмотреть плейлисты другого профиля</div>
+            </div>
+        </div>
+        <div class="profile-page__item profile-page__item_subscribers">
+            <div class="profile-page__content">
+                {{#each subscribers as |item| }}
+                    <a href="/user/{{ item.attrs.username }}" class="user-item">
+                        <img class="user-item__avatar" src="{{ item.attrs.avatar }}">
+                        <div class="user-item__username">{{ item.attrs.username }}</div>
+                    </a>
+                {{/each}}
+            </div>
+        </div>
+        <div class="profile-page__item profile-page__item_subscriptions">
+            <div class="profile-page__content">
+                {{#each subscriptions as |item| }}
+                    <a href="/user/{{ item.attrs.username }}" class="user-item">
+                        <img class="user-item__avatar" src="{{ item.attrs.avatar }}">
+                        <div class="user-item__username">{{ item.attrs.username }}</div>
+                    </a>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>

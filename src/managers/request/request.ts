@@ -7,7 +7,7 @@ export interface IPayload {
 
 export interface IRequestBody {
     payload: IPayload,
-    serialize: boolean,
+    serialize?: boolean,
 }
 
 /**
@@ -66,7 +66,7 @@ export class Request {
      * @param {object} params - объект с доп параметрами
      * @returns {Promise<{body: *, status: *}>}
      */
-    static post(url: string, params: IRequestBody): Promise<any> {
+    static post(url: string, params?: IRequestBody): Promise<any> {
         const {
             payload: data,
             serialize = true,
