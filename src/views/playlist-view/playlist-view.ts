@@ -6,9 +6,9 @@ import { ModelPlayList } from 'models/playlist';
 import { TrackList } from 'components/track-list/track-list';
 import { playerService } from 'components/app/app';
 import { RouterStore } from 'store/routes';
-import { ModelUser } from 'models/user';
 
 import PlayListTemplate from './playlist-view.hbs';
+import ShareTemplate from './share.hbs';
 import './playlist-view.scss';
 
 import emptyPlaylist from '../../assets/default/emptyPlaylist.svg';
@@ -28,50 +28,6 @@ export class PlaylistView extends View<IProps, IState> {
         this.metaAdded = false;
     }
 
-    unMount(): void {
-        if (this.metaAdded) {
-            document.getElementById('meta-title').remove();
-            document.getElementById('meta-poster').remove();
-            document.getElementById('meta-type').remove();
-            document.getElementById('meta-url').remove();
-
-            this.metaAdded = false;
-        }
-    }
-
-    addOpenGraphMeta(playlist: ModelPlayList, author: ModelUser) {
-        if (this.metaAdded) {
-            return;
-        }
-
-        this.metaAdded = true;
-
-        const metaTitle = document.createElement('meta');
-        const metaImg = document.createElement('meta');
-        const metaType = document.createElement('meta');
-        const metaUrl = document.createElement('meta');
-
-        metaTitle.id = 'meta-title';
-        metaImg.id = 'meta-poster';
-        metaType.id = 'meta-type';
-        metaUrl.id = 'meta-url';
-
-        metaTitle.setAttribute('property', 'og:title');
-        metaImg.setAttribute('property', 'og:image');
-        metaType.setAttribute('property', 'music:creator');
-        metaUrl.setAttribute('property', 'og:url');
-
-        metaTitle.content = `Плейлист ${playlist.attrs.title}`;
-        metaImg.content = playlist.attrs.poster;
-        metaType.content = author.attrs.username;
-        metaUrl.content = window.location.href;
-
-        document.getElementsByTagName('head')[0].appendChild(metaTitle);
-        document.getElementsByTagName('head')[0].appendChild(metaImg);
-        document.getElementsByTagName('head')[0].appendChild(metaType);
-        document.getElementsByTagName('head')[0].appendChild(metaUrl);
-    }
-
     didMount() {
         ModelPlayList.fetchGetCurrentPlaylist(this.props.arg).then((res: any) => {
             const { playlist, user } = res;
@@ -82,7 +38,6 @@ export class PlaylistView extends View<IProps, IState> {
 
             this.isLoaded = true;
             this.setState({ playlist: playlist.attrs, author: user.attrs });
-            this.addOpenGraphMeta(playlist, user);
         }).then(() => {
             this.props.parent.innerHTML = '';
             this.render();
@@ -131,7 +86,16 @@ export class PlaylistView extends View<IProps, IState> {
         const label = this.props.parent.querySelector('.switch-button__label');
 
         ModelPlayList.fetchChangePrivate(playlist.id, target.checked).then(() => {
-            label.innerHTML = target.checked ? 'Публичный плейлист' : 'Частный плейлист';
+            label.innerHTML = target.checked ? 'Публичный плейлист' : 'Приватный плейлист';
+            const shareWrap = this.props.parent.querySelector('.playlist-page__share');
+            const { playlist } = this.state;
+
+            shareWrap.innerHTML = ShareTemplate({
+                isPublic: target.checked,
+                isLoaded: this.isLoaded,
+                playlist,
+                url: document.location,
+            });
         });
     };
 
@@ -157,21 +121,27 @@ export class PlaylistView extends View<IProps, IState> {
             isPublic = playlist.is_public;
         }
 
+        const share = ShareTemplate({
+            isPublic,
+            isLoaded: this.isLoaded,
+            playlist,
+            url: document.location,
+        });
+
         this.page.show();
         this.props.parent = document.querySelector('.page__content');
         this.props.parent.insertAdjacentHTML('afterbegin', PlayListTemplate({
             playlist,
+            share,
             author,
             tracks,
             isEmpty,
             placeholder: emptyPlaylist,
             isAuthor,
             isPublic,
-            isLoaded: this.isLoaded,
-            url: document.location,
         }));
 
-        if (isAuthor) {
+        if (isAuthor && this.isLoaded) {
             this.props.parent.querySelector('.form-upload-poster').addEventListener('change', this.changePoster);
             this.props.parent.querySelector('.fa-trash').addEventListener('click', this.deletePlaylist);
             this.props.parent.querySelector('.switch-button__input').addEventListener('change', this.changePrivate);

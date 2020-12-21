@@ -28,14 +28,9 @@
                     </div>
                 </div>
                 <div class="playlist-page__icons">
-                    {{# if isLoaded }}
-                        <div class="playlist-page__share">
-                            <a href="http://www.facebook.com/sharer/sharer.phpu={{ url }}" target="_blank" class="fab playlist-page__icon fa-facebook"></a>
-                            <a href="https://twitter.com/intent/tweet?url={{ url }}" target="_blank" class="fab playlist-page__icon fa-twitter"></a>
-                            <a href="https://vk.com/share.php?url={{ url }}" target="_blank" class="fab playlist-page__icon fa-vk"></a>
-                            <a href="https://t.me/share/url?url={{ url }}" target="_blank" class="fab playlist-page__icon fa-telegram"></a>
-                        </div>
-                    {{/if}}
+                    <div class="playlist-page__share">
+                        {{{ share }}}
+                    </div>
                     {{# if isAuthor }}
                         <div class="switch-button">
                             {{# if isPublic }}

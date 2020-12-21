@@ -1,0 +1,13 @@
+{{# if isLoaded }}
+    {{# if isPublic }}
+        <a href="https://www.facebook.com/sharer/sharer.php?href={{ url }}" target="_blank" class="fab playlist-page__icon fa-facebook"></a>
+        <a href="https://twitter.com/intent/tweet?url={{ url }}" target="_blank" class="fab playlist-page__icon fa-twitter"></a>
+        <a href="https://vk.com/share.php?url={{ url }}&title=Плейлист {{ playlist.title }}&image={{ playlist.poster }}" target="_blank" class="fab playlist-page__icon fa-vk"></a>
+        <a href="https://t.me/share/url?url={{ url }}&text=Плейлист {{ playlist.title }}" target="_blank" class="fab playlist-page__icon fa-telegram"></a>
+    {{ else }}
+        <a class="fab playlist-page__icon_disabled fa-facebook"></a>
+        <a class="fab playlist-page__icon_disabled fa-twitter"></a>
+        <a target="_blank" class="fab playlist-page__icon_disabled fa-vk"></a>
+        <a target="_blank" class="fab playlist-page__icon_disabled fa-telegram"></a>
+    {{/if }}
+{{/if}}
