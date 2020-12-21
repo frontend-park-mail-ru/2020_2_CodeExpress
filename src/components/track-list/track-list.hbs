@@ -12,20 +12,24 @@
         <div class="track-item__duration">{{ track.attrs.duration }}</div>
         <i class="track-item__icon track-item__icon-dots fas fa-ellipsis-v" data-disabled="true"></i>
         <div class="track-item__dots-wrapper">
-            {{#if ../playlistsHidden }}
-                <div class="track-item__dots-item track-item__playlist-add">
-                    Добавить в плейлист
-                    <div class="track-item__playlists">
-                        {{#each ../playlists as |playlist| }}
-                            <div class="track-item__playlist-item" data-playlist="{{ playlist.attrs.id }}" data-track="{{ track.attrs.id }}">{{ playlist.attrs.title }}</div>
-                        {{/each}}
-                    </div>
-                </div>
+            {{#if ../user }}
+                {{#if  ../playlistsLen }}
+                    {{#if ../playlistsHidden  }}
+                        <div class="track-item__dots-item track-item__playlist-add">
+                            Добавить в плейлист
+                            <div class="track-item__playlists">
+                                {{#each ../playlists as |playlist| }}
+                                    <div class="track-item__playlist-item" data-playlist="{{ playlist.attrs.id }}" data-track="{{ track.attrs.id }}">{{ playlist.attrs.title }}</div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    {{/if }}
+                {{/if }}
             {{/if }}
             <a href="/artist/{{ track.attrs.artist_id }}" class="track-item__dots-item add-favorite">Перейти к исполнителю</a>
             <div class="track-item__dots-item add-order">Добавить в очередь</div>
             {{# if ../user }}
-                <div class="track-item__dots-item like" data-track="{{ track.attrs.id }}" data-like="{{ attrs.is_liked }}">Нравится{{# if attrs.is_liked }} <i class="like-icon fas fa-heart"></i>{{/if}}</div>
+                <div class="track-item__dots-item like" data-track="{{ track.attrs.id }}" data-like="{{ attrs.is_liked }}"><i class="like-icon far fa-heart"></i>{{# if attrs.is_liked }}<i class="like-icon fas fa-heart"></i>{{/if}}</div>
             {{/if}}
         </div>
     </div>

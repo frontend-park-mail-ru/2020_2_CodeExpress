@@ -42,7 +42,7 @@ export class IndexView extends View {
             this.trackList = new TrackList({ tracksList: tracks }, this.storage);
         });
 
-        const newTracks = ModelTrack.fetchIndexTrackList(5, 5).then((tracks) => {
+        const newTracks = ModelTrack.fetchIndexPopularTrackList(5, 0).then((tracks) => {
             this.trackListNew = new TrackList({ tracksList: tracks }, this.storage);
         });
 

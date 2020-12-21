@@ -24,10 +24,12 @@ export class TrackList extends Component<ITrackList, IState> {
     render() {
         const user: ModelUser = this.storage.get('user');
         const playlistsHidden = this.props.playlistsHidden || false;
+        const playlists: ModelPlayList[] = this.storage.get('playlists');
 
         return TrackListTemplate({
             tracks: this.props.tracksList,
-            playlists: this.storage.get('playlists'),
+            playlists,
+            playlistsLen: playlists ? playlists.length : 0,
             user: user.isLoaded,
             playlistsHidden: !playlistsHidden,
         });
@@ -62,16 +64,20 @@ export class TrackList extends Component<ITrackList, IState> {
     static likeTrack = (target: HTMLElement) => {
         ModelTrack.fetchLikeTrack(target.dataset.track).then(() => {
             target.dataset.like = 'true';
-            target.insertAdjacentHTML('beforeend', ' <i class="like-icon fas fa-heart"></i>');
+            const icon = target.querySelector('.like-icon');
+            icon.classList.remove('far');
+            icon.classList.add('fas');
         });
-    }
+    };
 
     static dislikeTrack = (target: HTMLElement) => {
         ModelTrack.fetchDislikeTrack(target.dataset.track).then(() => {
             target.dataset.like = 'false';
-            target.innerText = 'Нравится';
+            const icon = target.querySelector('.like-icon');
+            icon.classList.remove('fas');
+            icon.classList.add('far');
         });
-    }
+    };
 
     static hideModalWindow(target: HTMLElement, wrapper: HTMLElement) {
         wrapper.classList.remove('track-item__dots-wrapper_active');

@@ -44,6 +44,7 @@ export const RouterStore = {
             delete: '/api/v1/tracks/:id',
             artist: '/api/v1/artists/:id/tracks',
             index: '/api/v1/tracks?count=:count&from=:from',
+            popular: '/api/v1/tracks/top?count=:count&from=:from',
             favorite: {
                 list: '/api/v1/favorite/tracks',
                 add: '/api/v1/favorite/track/:id',

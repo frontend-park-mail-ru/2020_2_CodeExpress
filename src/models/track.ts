@@ -69,6 +69,19 @@ export class ModelTrack extends Model<ITrack> {
         });
     }
 
+    static fetchIndexPopularTrackList(count: number, from: number): Promise<ModelTrack[]> {
+        return new Promise((resolve) => {
+            let url = RouterStore.api.track.popular.replace(':count', String(count));
+            url = url.replace(':from', String(from));
+
+            Request.get(url).then((res) => {
+                const { body } = res;
+                const tracks = body.map ? body.map((track: ITrack) => new ModelTrack(track, true)) : null;
+                resolve(tracks);
+            });
+        });
+    }
+
     static fetchArtistTracks(id: string): Promise<ModelTrack[]> {
         return new Promise((resolve) => {
             const url = RouterStore.api.track.artist.replace(':id', id);
