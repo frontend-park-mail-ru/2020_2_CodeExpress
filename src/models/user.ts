@@ -1,6 +1,7 @@
 import { RouterStore } from 'store/routes';
 import { baseStaticUrl, Request } from 'managers/request/request';
 import { Model } from 'models/model';
+import { ModelPlayList } from 'models/playlist';
 
 import DefaultAvatar from 'assets/default/user-default.svg';
 
@@ -107,6 +108,20 @@ export class ModelUser extends Model<IUserAttrs> {
             Request.delete(url).then((res) => {
                 resolve(res.body);
             });
+        });
+    }
+
+    static getProfileWithPlaylists(nickname: string) {
+        return new Promise((resolve, reject) => {
+            ModelUser.getProfile(nickname)
+                .then((user) => {
+                    ModelPlayList.fetchGetPublicPlaylists(user.attrs.id.toString()).then((playlists) => {
+                        resolve({ user, playlists });
+                    });
+                })
+                .catch(() => {
+                    reject();
+                });
         });
     }
 }
