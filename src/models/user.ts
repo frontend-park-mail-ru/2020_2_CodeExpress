@@ -3,7 +3,7 @@ import { baseStaticUrl, Request } from 'managers/request/request';
 import { Model } from 'models/model';
 import { ModelPlayList } from 'models/playlist';
 
-import DefaultAvatar from 'assets/default/user-default.svg';
+import DefaultAvatar from 'assets/default/user-default.png';
 
 interface IUserAttrs {
     id: number,

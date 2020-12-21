@@ -11,7 +11,7 @@ import { IProps, IState } from 'store/interfaces';
 import SettingsTemplate from './settings.hbs';
 import './settings.scss';
 
-import defaultAvatar from '../../assets/default/user-default.svg';
+import defaultAvatar from '../../assets/default/user-default.png';
 
 /**
  * View отображающая страницу профиля
