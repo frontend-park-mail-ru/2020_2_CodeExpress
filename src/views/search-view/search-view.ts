@@ -9,6 +9,7 @@ import SearchTemplate from './search.hbs';
 import AlbumsTemplate from './albums.hbs';
 import ArtistsTemplate from './artists.hbs';
 import TracksTemplate from './tracks.hbs';
+import UsersTemplate from './users.hbs';
 import NotFoundTemplate from './placeholder.hbs';
 import './search.scss';
 import 'components/track-list/track.scss';
@@ -49,6 +50,7 @@ export class SearchView extends View {
                 document.querySelector('.search-page-section__wrapper_tracks').innerHTML = '';
                 document.querySelector('.search-page-section__wrapper_albums').innerHTML = '';
                 document.querySelector('.search-page-section__wrapper_artists').innerHTML = '';
+                document.querySelector('.search-page-section__wrapper_users').innerHTML = '';
                 document.querySelector('.search-page-section__wrapper_placeholder').innerHTML = '';
 
                 if (res.attrs.tracks) {
@@ -70,7 +72,13 @@ export class SearchView extends View {
                         ArtistsTemplate({ artists: res.attrs.artists }),
                     );
                 }
-                if (!res.attrs.artists && !res.attrs.albums && !res.attrs.tracks) {
+                if (res.attrs.users) {
+                    document.querySelector('.search-page-section__wrapper_users').insertAdjacentHTML(
+                        'afterbegin',
+                        UsersTemplate({ users: res.attrs.users }),
+                    );
+                }
+                if (!res.attrs.artists && !res.attrs.albums && !res.attrs.tracks && !res.attrs.users) {
                     document.querySelector('.search-page-section__wrapper_placeholder').insertAdjacentHTML(
                         'afterbegin',
                         NotFoundTemplate({ placeholder: NotFound, isEmpty: this.isEmpty }),
@@ -82,6 +90,7 @@ export class SearchView extends View {
             document.querySelector('.search-page-section__wrapper_tracks').innerHTML = '';
             document.querySelector('.search-page-section__wrapper_albums').innerHTML = '';
             document.querySelector('.search-page-section__wrapper_artists').innerHTML = '';
+            document.querySelector('.search-page-section__wrapper_users').innerHTML = '';
             document.querySelector('.search-page-section__wrapper_placeholder').innerHTML = '';
             document.querySelector('.search-page-section__wrapper_placeholder').insertAdjacentHTML(
                 'afterbegin',

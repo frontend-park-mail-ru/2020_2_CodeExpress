@@ -1,0 +1,13 @@
+<div class="search-page-section__title">
+    Пользователи
+</div>
+<div class="wrapper_users">
+    {{#each users }}
+        <div class="list-item__user">
+            <a href="/profile/{{ attrs.username }}" class="user-item">
+                <img class="user-item__avatar" src="{{ attrs.avatar }}">
+                <div class="user-item__username">{{ attrs.username }}</div>
+            </a>
+        </div>
+    {{/each}}
+</div>

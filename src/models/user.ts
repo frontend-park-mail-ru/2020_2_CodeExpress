@@ -5,7 +5,7 @@ import { ModelPlayList } from 'models/playlist';
 
 import DefaultAvatar from 'assets/default/user-default.png';
 
-interface IUserAttrs {
+export interface IUserAttrs {
     id: number,
     username: string,
     email?: string,
