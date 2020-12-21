@@ -6,7 +6,7 @@ import { isMobile } from 'store/consts';
 import HeaderPaperTemplate from './header-paper.hbs';
 import './header-paper.scss';
 
-const defaultAvatar = require('../../assets/default/user-default.svg');
+const defaultAvatar = require('../../assets/default/user-default.png');
 /**
  * Header на основных страницах
  */

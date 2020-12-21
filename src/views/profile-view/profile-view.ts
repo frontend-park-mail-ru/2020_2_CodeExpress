@@ -4,10 +4,9 @@ import { Page } from 'components/page/page';
 import { RouterStore } from 'store/routes';
 import { router } from 'managers/router/router';
 import { ModelUser } from 'models/user';
-import { ModelPlayList } from 'models/playlist';
 
 import Placeholder from 'assets/default/radioPlaceholder.svg';
-import DefaultAvatar from 'assets/default/user-default.svg';
+import DefaultAvatar from 'assets/default/user-default.png';
 
 import PlaylistItemTemplate from 'views/playlists-view/playlist.hbs';
 import ProfileTemplate from './profile-view.hbs';
