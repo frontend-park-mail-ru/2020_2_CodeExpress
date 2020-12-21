@@ -27,15 +27,12 @@ export class ProfileView extends View<IProps, IState> {
     }
 
     didMount(): void {
-        const user = ModelUser.getProfile(this.props.arg)
-            .then((user) => {
-                ModelPlayList.fetchGetPublicPlaylists(user.attrs.id.toString()).then((playlists) => {
-                    this.setState({ user, playlists });
-                });
-            })
-            .catch(() => {
-                router.go(RouterStore.website.index);
-            });
+        const info = ModelUser.getProfileWithPlaylists(this.props.arg).then((data: any) => {
+            const { user, playlists } = data;
+            this.setState({ user, playlists });
+        }).catch(() => {
+            router.go(RouterStore.website.index);
+        });
 
         const subs = ModelUser.getSubs(this.props.arg).then((res) => {
             const [subscribers, subscriptions] = res;
@@ -43,9 +40,9 @@ export class ProfileView extends View<IProps, IState> {
             this.setState({ subscribers, subscriptions });
         });
 
-        Promise.all([user, subs]).then(() => {
+        Promise.all([info, subs]).then(() => {
             this.isLoaded = true;
-            this.hide();
+            this.props.parent.innerHTML = '';
             this.render();
         });
     }

@@ -40,7 +40,7 @@
         <div class="profile-page__item profile-page__item_subscribers">
             <div class="profile-page__content">
                 {{#each subscribers as |item| }}
-                    <a href="/user/{{ item.attrs.username }}" class="user-item">
+                    <a href="/profile/{{ item.attrs.username }}" class="user-item">
                         <img class="user-item__avatar" src="{{ item.attrs.avatar }}">
                         <div class="user-item__username">{{ item.attrs.username }}</div>
                     </a>
@@ -50,7 +50,7 @@
         <div class="profile-page__item profile-page__item_subscriptions">
             <div class="profile-page__content">
                 {{#each subscriptions as |item| }}
-                    <a href="/user/{{ item.attrs.username }}" class="user-item">
+                    <a href="/profile/{{ item.attrs.username }}" class="user-item">
                         <img class="user-item__avatar" src="{{ item.attrs.avatar }}">
                         <div class="user-item__username">{{ item.attrs.username }}</div>
                     </a>
