@@ -63,12 +63,18 @@
   background: $color-black-4;
 }
 
-.wrapper_albums {
-  display: flex;
-  justify-content: start;
-  align-items: baseline;
+.wrapper {
+  &_albums, &_users {
+    display: flex;
+    justify-content: start;
+    align-items: baseline;
 
-  flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  &_users {
+    flex-direction: column;
+  }
 }
 
 .header {
