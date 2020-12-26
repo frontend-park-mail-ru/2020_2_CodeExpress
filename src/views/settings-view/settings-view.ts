@@ -7,6 +7,7 @@ import { regTemplates } from 'store/reg-templates';
 import { router } from 'managers/router/router';
 import { ModelUser } from 'models/user';
 import { IProps, IState } from 'store/interfaces';
+import { toast } from 'components/app/app';
 
 import SettingsTemplate from './settings.hbs';
 import './settings.scss';
@@ -55,6 +56,7 @@ export class SettingsView extends View<IProps, IState> {
 
             if (status !== 200) {
                 formErrors.innerText = body.message;
+                toast.add(body.message, false);
                 return;
             }
 
@@ -64,6 +66,8 @@ export class SettingsView extends View<IProps, IState> {
 
             profileAvatarPage.src = avatar;
             profileAvatarHeader.src = avatar;
+
+            toast.add('Аватар усешно был изменен', true);
         });
     }
 
@@ -100,6 +104,7 @@ export class SettingsView extends View<IProps, IState> {
         }
 
         if (!isValidate) {
+            toast.add('Ошибка в форме', false);
             return;
         }
 
@@ -112,6 +117,7 @@ export class SettingsView extends View<IProps, IState> {
             const { status, body } = res;
             if (status !== 200) {
                 formErrors.innerText = body.message;
+                toast.add(body.message, false);
                 return;
             }
 
@@ -120,6 +126,7 @@ export class SettingsView extends View<IProps, IState> {
 
             email.value = user.get('email');
             username.value = user.get('username');
+            toast.add('Данные успешно обновлены', true);
         });
     }
 
@@ -173,6 +180,7 @@ export class SettingsView extends View<IProps, IState> {
         }
 
         if (!isValidate) {
+            toast.add('Ошибка в форме', false);
             return;
         }
 
@@ -186,7 +194,9 @@ export class SettingsView extends View<IProps, IState> {
             const { status, body } = res;
             if (status !== 200) {
                 formErrors.innerText = body.message;
+                toast.add(body.message, false);
             }
+            toast.add('Пароль успешно изменен', true);
         });
     }
 
@@ -196,9 +206,6 @@ export class SettingsView extends View<IProps, IState> {
      */
     logout(event: Event) {
         event.preventDefault();
-
-        // TODO: Передалать позже на выскакивающее сообщение
-        const logoutErrors: HTMLElement = this.props.parent.querySelector('.logout-error');
 
         Request.delete(RouterStore.api.user.logout).then((res) => {
             const { status, body } = res;
@@ -216,7 +223,7 @@ export class SettingsView extends View<IProps, IState> {
 
                 router.go(RouterStore.website.index);
             } else {
-                logoutErrors.innerText = body.message;
+                toast.add(body.message, false);
             }
         });
     }

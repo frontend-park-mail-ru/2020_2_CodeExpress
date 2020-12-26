@@ -2,6 +2,8 @@ import { Model } from 'models/model';
 import { baseStaticUrl, Request } from 'managers/request/request';
 import { RouterStore } from 'store/routes';
 
+import imagineDragons from '../assets/backgrounds/imagine_dragons.jpg';
+
 export interface IArtist {
     id: number,
     name: string,
@@ -52,6 +54,17 @@ export class ModelArtist extends Model<IArtist> {
                 }
                 resolve(artist);
             });
+        });
+    }
+
+    static fetchGetArtistDayMock(id: number) {
+        return new Promise((resolve) => {
+            const res = {
+                title: 'IMAGINE DRAGONS',
+                poster: imagineDragons,
+                id: 1,
+            };
+            resolve(res);
         });
     }
 }

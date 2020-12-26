@@ -11,7 +11,6 @@
 
   &__preview-wrapper {
     min-height: 370px;
-    background-image: url('../../assets/backgrounds/imagine_dragons.jpg');
     background-size: cover;
   }
 
@@ -116,7 +115,6 @@
 
   border-radius: 5px;
   background-size: cover !important;
-  filter: grayscale(1) opacity(.5);
 
   &-content {
     display: flex;

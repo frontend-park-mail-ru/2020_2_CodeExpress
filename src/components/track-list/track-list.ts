@@ -1,7 +1,7 @@
 import { Component } from 'managers/component/component';
 import { IProps, IState } from 'store/interfaces';
 import { ModelTrack } from 'models/track';
-import { player, playerService } from 'components/app/app';
+import { player, playerService, toast } from 'components/app/app';
 import { ModelPlayList } from 'models/playlist';
 import { classContainsValidator } from 'managers/validator/validator';
 import { ModelUser } from 'models/user';
@@ -11,7 +11,8 @@ import './track.scss';
 
 interface ITrackList extends IProps {
     tracksList: ModelTrack[],
-    playlistsHidden?: boolean;
+    playlistsHidden?: boolean,
+    orderShow?: boolean;
 }
 /**
  * Список песен
@@ -24,7 +25,16 @@ export class TrackList extends Component<ITrackList, IState> {
     render() {
         const user: ModelUser = this.storage.get('user');
         const playlistsHidden = this.props.playlistsHidden || false;
+        const orderShow = this.props.orderShow || false;
         const playlists: ModelPlayList[] = this.storage.get('playlists');
+
+        if (this.props.tracksList) {
+            this.props.tracksList = this.props.tracksList.map((item, index) => {
+                const idx = index + 1;
+                item.attrs.index = idx >= 10 ? `${idx}` : `0${idx}`;
+                return item;
+            });
+        }
 
         return TrackListTemplate({
             tracks: this.props.tracksList,
@@ -32,22 +42,25 @@ export class TrackList extends Component<ITrackList, IState> {
             playlistsLen: playlists ? playlists.length : 0,
             user: user.isLoaded,
             playlistsHidden: !playlistsHidden,
+            orderShow,
         });
     }
 
     static removeTrackInFavorite(target: HTMLElement) {
         ModelTrack.fetchFavoriteTrackRemove(target.dataset.id).then(() => {
-            target.classList.remove('fa-fire');
-            target.classList.add('fa-fire-alt');
+            target.classList.remove('fa-plus');
+            target.classList.add('fa-times');
             target.dataset.add = 'false';
+            toast.add('Трек успено удален из избранного', true);
         });
     }
 
     static addTrackInFavorite(target: HTMLElement) {
         ModelTrack.fetchFavoriteTrackAdd(target.dataset.id).then(() => {
-            target.classList.remove('fa-fire-alt');
-            target.classList.add('fa-fire');
+            target.classList.remove('fa-times');
+            target.classList.add('fa-plus');
             target.dataset.add = 'true';
+            toast.add('Трек успено добавлен в избранное', true);
         });
     }
 
@@ -57,14 +70,14 @@ export class TrackList extends Component<ITrackList, IState> {
         const playlistId = (<HTMLElement>target).dataset.playlist;
         const trackId = (<HTMLElement>target).dataset.track;
 
-        // TODO: Доделать с уведомлением
-        ModelPlayList.fetchPostAddTrack(playlistId, { track_id: Number(trackId) }).then();
+        ModelPlayList.fetchPostAddTrack(playlistId, { track_id: Number(trackId) }).then(() => toast.add('Трек успено добавлен в плейлист', true));
     };
 
     static likeTrack = (target: HTMLElement) => {
         ModelTrack.fetchLikeTrack(target.dataset.track).then(() => {
             target.dataset.like = 'true';
             const icon = target.querySelector('.like-icon');
+            icon.parentElement.classList.add('track-item__icon_active');
             icon.classList.remove('far');
             icon.classList.add('fas');
         });
@@ -74,6 +87,7 @@ export class TrackList extends Component<ITrackList, IState> {
         ModelTrack.fetchDislikeTrack(target.dataset.track).then(() => {
             target.dataset.like = 'false';
             const icon = target.querySelector('.like-icon');
+            icon.parentElement.classList.remove('track-item__icon_active');
             icon.classList.remove('fas');
             icon.classList.add('far');
         });

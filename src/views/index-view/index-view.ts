@@ -4,6 +4,7 @@ import { TrackList } from 'components/track-list/track-list';
 import { IProps, IState, IStorage } from 'store/interfaces';
 import { ModelTrack } from 'models/track';
 import { ModelAlbum } from 'models/album';
+import { ModelArtist } from 'models/artist';
 
 import IndexTemplate from './index.hbs';
 import './index.scss';
@@ -25,6 +26,10 @@ export class IndexView extends View {
 
     private isLoaded: boolean;
 
+    private group: any;
+
+    private articles: any;
+
     /**
      * Конструктор IndexView
      * @param {object} props - объект, в котором лежат переданные параметры
@@ -42,6 +47,14 @@ export class IndexView extends View {
             this.trackList = new TrackList({ tracksList: tracks }, this.storage);
         });
 
+        const group = ModelArtist.fetchGetArtistDayMock(1).then((res) => {
+            this.group = res;
+        });
+
+        const articles = ModelAlbum.fetchGetPopularAlbumsMock().then((res) => {
+            this.articles = res;
+        });
+
         const newTracks = ModelTrack.fetchIndexPopularTrackList(5, 0).then((tracks) => {
             this.trackListNew = new TrackList({ tracksList: tracks }, this.storage);
         });
@@ -50,7 +63,7 @@ export class IndexView extends View {
             this.setState({ popularAlbums: albums });
         });
 
-        Promise.all([popularTracks, newTracks, popularAlbums]).then(() => {
+        Promise.all([popularTracks, newTracks, popularAlbums, group, articles]).then(() => {
             this.isLoaded = true;
             this.hide();
             this.render();
@@ -66,18 +79,22 @@ export class IndexView extends View {
         const popularTrackList = this.isLoaded ? this.trackList.render() : null;
         const newTrackList = this.isLoaded ? this.trackListNew.render() : null;
         const albumArray = this.isLoaded ? this.state.popularAlbums : null;
+        const group = this.isLoaded ? this.group : null;
+        const articles = this.isLoaded ? this.articles : null;
 
         const genreArray: Array<string> = ['Альтернативный Рок',
             'Иностранный Рок', 'Русский Рок', 'Поп', 'Хипхоп', 'Саундтреки',
             'Електронная', 'Джаз', 'Блюз', 'Кантри', 'Метал', 'Классическая'];
         this.props.parent = document.querySelector('.page__content');
         this.props.parent.insertAdjacentHTML('afterbegin', IndexTemplate({
+            group,
             albums: albumArray,
             genres: genreArray,
             tracklist: popularTrackList,
             tracklistNew: newTrackList,
             basicArticlePoster,
             basicArticleAlbum,
+            articles,
         }));
 
         this.page.setEventToTracks();

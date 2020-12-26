@@ -100,6 +100,7 @@ export class MobilePlayer extends Component<IProps, IState> {
         playerService.changeTrack(newTrack.audio);
         playerService.play().then(() => playerService.iconPlay(...this.playButton));
         playerService.setLastTrack(new ModelTrack(newTrack, true, false));
+        playerService.addInOrder(track, false);
     }
 
     checkControlButtons(index: number, length: number) {

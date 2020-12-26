@@ -31,6 +31,16 @@ body {
   width: 100%;
 }
 
+.toasts {
+  position: fixed;
+  top: 100px;
+  right: 30px;
+
+  width: 180px;
+
+  z-index: 101;
+}
+
 @media only screen and (max-width: 1000px) {
   #app {
     min-height: 100vh;

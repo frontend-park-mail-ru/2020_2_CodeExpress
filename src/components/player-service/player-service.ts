@@ -1,12 +1,11 @@
 import { Component } from 'managers/component/component';
 import { IProps } from 'store/interfaces';
 import { statuses } from 'store/consts';
-import { player } from 'components/app/app';
+import { player, toast } from 'components/app/app';
 import { ModelTrack, ITrack } from 'models/track';
 import { TrackList } from 'components/track-list/track-list';
 import { app } from '../../index';
 
-import PlayerServiceTemplate from './player-service.hbs';
 import './player-service.scss';
 
 enum StorageKeys {
@@ -64,7 +63,7 @@ export class PlayerService extends Component<IProps, IPlayerState> {
     }
 
     getOrder() {
-        if (this.order.length) {
+        if (this.order.length || JSON.parse(localStorage.getItem('lastAudio'))) {
             const storageTrack: ModelTrack = JSON.parse(localStorage.getItem('lastAudio'));
             this.setState({ track: new ModelTrack(storageTrack.attrs, true, false) });
             this.index = JSON.parse(localStorage.getItem('index')) || 0;
@@ -282,21 +281,43 @@ export class PlayerService extends Component<IProps, IPlayerState> {
         player.changeOrderTrack(this.order[this.index]);
         localStorage.setItem('index', JSON.stringify(this.index));
         localStorage.setItem('order', JSON.stringify(this.order));
+
         this.render();
     }
 
-    addInOrder(item: HTMLElement) {
+    addInOrder = (item: HTMLElement, isToast = true) => {
         const track: ITrack = this.getTrackData(item);
         const inOrder = this.order.find((temp) => temp.attrs.title === track.title);
 
         if (inOrder) {
+            toast.add('Трек уже находится в очереди', false);
             return;
         }
 
         this.order.push(new ModelTrack(track, true, false));
         localStorage.setItem('order', JSON.stringify(this.order));
+
+        if (isToast) {
+            toast.add('Трек успешно добавлен в очередь', true);
+        }
+
         this.render();
-    }
+    };
+
+    removeElemInOrder = (event: Event) => {
+        const target = event.target as HTMLElement;
+        const index = this.order.findIndex((item) => item.attrs.id === Number(target.dataset.id));
+
+        if (index !== -1) {
+            this.order.splice(index, 1);
+            toast.add('Трек удален из очереди', true);
+
+            localStorage.setItem('order', JSON.stringify(this.order));
+            this.render();
+        } else {
+            toast.add('Трек не найден', false);
+        }
+    };
 
     nextTrack = () => {
         const nextIndex = this.index + 1;
@@ -363,11 +384,14 @@ export class PlayerService extends Component<IProps, IPlayerState> {
     }
 
     render() {
-        const orderTracks = new TrackList({ tracksList: this.order }, app.getStorage());
+        const orderTracks = new TrackList({ tracksList: this.order, orderShow: true }, app.getStorage());
+        const order = document.querySelector('.track-order__wrapper');
 
-        document.querySelector('#app').insertAdjacentHTML('beforeend', PlayerServiceTemplate({ order: orderTracks.render() }));
-        const order = document.querySelector('.track-order');
-
+        order.innerHTML = orderTracks.render();
         TrackList.setEventToTracks(order.querySelectorAll('.track-item'));
+
+        order.querySelectorAll('.track-item').forEach((item) => {
+            item.querySelector('.remove-order').addEventListener('click', this.removeElemInOrder);
+        });
     }
 }

@@ -4,6 +4,9 @@ import { ITrack, ModelTrack } from 'models/track';
 import { RouterStore } from 'store/routes';
 import { baseStaticUrl, Request } from 'managers/request/request';
 
+import imagineDragons from '../assets/backgrounds/imagine_dragons.jpg';
+import naturalPoster from '../assets/backgrounds/natural-imagine-dragons.jpeg';
+
 export interface IAlbum {
     id: number,
     title: string,
@@ -68,6 +71,19 @@ export class ModelAlbum extends Model<IAlbum> {
                 }
                 resolve(album);
             });
+        });
+    }
+
+    static fetchGetPopularAlbumsMock() {
+        return new Promise((resolve) => {
+            const res = {
+                poster: imagineDragons,
+                avatar: naturalPoster,
+                title: 'Natural',
+                artist: 'Imagine Dragons',
+            };
+
+            resolve([res, res, res]);
         });
     }
 }
