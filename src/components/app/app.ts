@@ -22,6 +22,7 @@ import { DesktopPlayer } from 'components/player/player';
 import { MobilePlayer } from 'components/mobile-player/mobile-player';
 import { isMobile } from 'store/consts';
 import { ProfileView } from 'views/profile-view/profile-view';
+import { Toast } from 'components/toast/toast';
 
 import './app.scss';
 import './button.scss';
@@ -85,5 +86,6 @@ export class App extends Component<IProps, IAppState> {
     }
 }
 
+export const toast = new Toast();
 export const playerService = new PlayerService();
 export const player: DesktopPlayer | MobilePlayer = isMobile ? new MobilePlayer() : new DesktopPlayer();

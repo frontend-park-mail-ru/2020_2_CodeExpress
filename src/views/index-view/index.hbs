@@ -1,15 +1,13 @@
 <div class="index-page__preview">
-    <div class="index-page__preview-wrapper">
+    <div class="index-page__preview-wrapper" style="background-image: url({{ group.poster }})">
         <div class="index-page__content">
             <div class="index-page__genre">Группа дня</div>
-            <div class="index-page__title">IMAGINE DRAGONS</div>
+            <div class="index-page__title">{{ group.title }}</div>
             <div class="index-page__wrapper">
-                <div class="button-primary button-disabled">
+                <div class="button-primary random-index-track" data-id="{{ group.id }}">
                     Случайный трек
                     <i class="random-track-icon fas fa-play"></i>
                 </div>
-                <i class="share-link fas fa-calendar-plus"></i>
-                <i class="share-link fas fa-share"></i>
             </div>
         </div>
     </div>
@@ -47,61 +45,26 @@
 
 <div class="index-page-section">
     <div class="index-page-section__wrapper_space-between index-page-section__article">
-        <div class="article" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0) 2.75%, rgba(17, 18, 23, 0.75) 100%), url({{ basicArticlePoster }})">
-            <div class="index-page__genre">Исполнители</div>
+        {{#each articles  }}
+            <div class="article" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0) 2.75%, rgba(17, 18, 23, 0.75) 100%), url({{ poster }})">
+            <div class="index-page__genre">Популярный альбом</div>
             <div class="article-content">
                 <div class="article-content__album">
                     <i class="article-content__icon fas fa-play"></i>
-                    <img class="article-content__img" src="{{ basicArticleAlbum }}">
+                    <img class="article-content__img" src="{{ avatar }}">
                 </div>
                 <div class="article-content__wrapper_column">
-                    <div class="article-content__sub-title">Новый альбом</div>
+                    <div class="article-content__sub-title">{{ artist }}</div>
                     <div class="article-content__wrapper">
                         <div class="article-content__wrapper_column">
-                            <div class="article-content__title">Natural</div>
-                            <div class="article-content__sub-title">14 песен, 1 час 54 минуты</div>
+                            <div class="article-content__title">{{ title }}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="article" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0) 2.75%, rgba(17, 18, 23, 0.75) 100%), url({{ basicArticlePoster }}">
-            <div class="index-page__genre">Исполнители</div>
-            <div class="article-content">
-                <div class="article-content__album">
-                    <i class="article-content__icon fas fa-play"></i>
-                    <img class="article-content__img" src="{{ basicArticleAlbum }}">
-                </div>
-                <div class="article-content__wrapper_column">
-                    <div class="article-content__sub-title">Новый альбом</div>
-                    <div class="article-content__wrapper">
-                        <div class="article-content__wrapper_column">
-                            <div class="article-content__title">Natural</div>
-                            <div class="article-content__sub-title">14 песен, 1 час 54 минуты</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {{/each}}
         </div>
-        <div class="article" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0) 2.75%, rgba(17, 18, 23, 0.75) 100%), url({{ basicArticlePoster }})">
-            <div class="index-page__genre">Исполнители</div>
-            <div class="article-content">
-                <div class="article-content__album">
-                    <i class="article-content__icon fas fa-play"></i>
-                    <img class="article-content__img" src="{{ basicArticleAlbum }}">
-                </div>
-                <div class="article-content__wrapper_column">
-                    <div class="article-content__sub-title">Новый альбом</div>
-                    <div class="article-content__wrapper">
-                        <div class="article-content__wrapper_column">
-                            <div class="article-content__title">Natural</div>
-                            <div class="article-content__sub-title">14 песен, 1 час 54 минуты</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <div class="index-page-section">
