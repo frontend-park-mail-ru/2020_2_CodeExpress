@@ -3,7 +3,7 @@
         <div class="track-item__index">{{ track.attrs.index }}</div>
         {{# if ../user }}
             <div class="track-item__icon {{# if attrs.is_liked }}track-item__icon_active{{/if}} like" data-track="{{ track.attrs.id }}" data-like="{{ attrs.is_liked }}"><i class="like-icon {{# if attrs.is_liked }}fas{{ else  }}far{{/if}} fa-heart"></i></div>
-            <div class="track-item__icon add-favorite fas {{# if attrs.is_favorite }}fa-plus{{else}}fa-times{{/if}}" data-id="{{ attrs.id }}" data-add="{{ attrs.is_favorite }}"></div>
+            <div class="track-item__icon add-favorite fas fa-plus {{# if attrs.is_favorite }}track-item__icon_rotated{{/if}}" data-id="{{ attrs.id }}" data-add="{{ attrs.is_favorite }}"></div>
         {{/if}}
         <img class="track-item__album" data-id="{{ track.attrs.album_id }}" src="{{ track.attrs.album_poster }}">
         <div class="track-item__wrapper">

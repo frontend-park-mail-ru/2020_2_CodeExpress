@@ -98,7 +98,6 @@ export class DesktopPlayer extends Component<IProps, IState> {
         playerService.changeTrack(track.audio);
         playerService.play().then(() => playerService.iconPlay(this.playButton));
         playerService.setLastTrack(new ModelTrack(track, true, false));
-        playerService.addInOrder(item, false);
     }
 
     checkControlButtons(index: number, length: number) {
