@@ -1,0 +1,148 @@
+<div class="admin-page">
+    <div class="admin-page__header">Админка MusicExpress</div>
+    <div class="admin-page__content">
+        <div class="admin-page__tracks">
+            <div class="admin-page__tracks-header">Треки</div>
+            <div class="form-item">
+                <div class="form-item__wrap">
+                    <div class="form-item__title">Создать трек</div>
+                    <form class="form-item__form form-create-track">
+                        <input class="form-item__input" name="title" type="text" placeholder="Название">
+                        <input class="form-item__input" name="album_id" type="text" placeholder="ID альбома">
+                        <input class="button-primary form-item__submit" type="submit">
+                    </form>
+                </div>
+                <div class="form-item__response response-create-track"></div>
+            </div>
+            <div class="form-item">
+                <div class="form-item__wrap">
+                    <div class="form-item__title">Добавить аудио файл</div>
+                    <form class="form-item__form form-add-audio">
+                        <input class="form-item__input" name="id" type="text" placeholder="ID трека">
+                        <input class="form-item__input" name="audio" type="file" placeholder="Аудио файл" accept="audio/mpeg">
+                        <input class="button-primary form-item__submit" type="submit">
+                    </form>
+                </div>
+                <div class="form-item__response response-add-audio"></div>
+            </div>
+            <div class="form-item">
+                <div class="form-item__wrap">
+                    <div class="form-item__title">Изменить трек</div>
+                    <form class="form-item__form form-change-track">
+                        <input class="form-item__input" name="id" type="text" placeholder="ID трека">
+                        <input class="form-item__input" name="title" type="text" placeholder="Название">
+                        <input class="form-item__input" name="album_id" type="text" placeholder="ID альбома">
+                        <input class="form-item__input" name="index" type="text" placeholder="Индекс">
+                        <input class="button-primary form-item__submit" type="submit">
+                    </form>
+                </div>
+                <div class="form-item__response response-change-track"></div>
+            </div>
+            <div class="form-item">
+                <div class="form-item__wrap">
+                    <div class="form-item__title">Удалить трек</div>
+                    <form class="form-item__form form-delete-track">
+                        <input class="form-item__input" name="id" type="text" placeholder="ID трека">
+                        <input class="button-primary form-item__submit" type="submit">
+                    </form>
+                </div>
+                <div class="form-item__response response-delete-track"></div>
+            </div>
+        </div>
+        <div class="admin-page__albums">
+            <div class="admin-page__tracks-header">Альбомы</div>
+            <div class="form-item">
+                <div class="form-item__wrap">
+                    <div class="form-item__title">Создать альбом</div>
+                    <form class="form-item__form form-create-album">
+                        <input class="form-item__input" name="title" type="text" placeholder="Название">
+                        <input class="form-item__input" name="artist_id" type="text" placeholder="ID артиста">
+                        <input class="button-primary form-item__submit" type="submit">
+                    </form>
+                </div>
+                <div class="form-item__response response-create-album"></div>
+            </div>
+            <div class="form-item">
+                <div class="form-item__wrap">
+                    <div class="form-item__title">Добавить постер альбома</div>
+                    <form class="form-item__form form-add-poster-album">
+                        <input class="form-item__input" name="id" type="text" placeholder="ID альбома">
+                        <input class="form-item__input" name="poster" type="file" placeholder="Постер">
+                        <input class="button-primary form-item__submit" type="submit">
+                    </form>
+                </div>
+                <div class="form-item__response response-add-poster-album"></div>
+            </div>
+            <div class="form-item">
+                <div class="form-item__wrap">
+                    <div class="form-item__title">Изменить альбом</div>
+                    <form class="form-item__form form-change-album">
+                        <input class="form-item__input" name="id" type="text" placeholder="ID альбома">
+                        <input class="form-item__input" name="title" type="text" placeholder="Название">
+                        <input class="form-item__input" name="artist_id" type="text" placeholder="ID артиста">
+                        <input class="button-primary form-item__submit" type="submit">
+                    </form>
+                </div>
+                <div class="form-item__response response-change-album"></div>
+            </div>
+            <div class="form-item">
+                <div class="form-item__wrap">
+                    <div class="form-item__title">Удалить альбом</div>
+                    <form class="form-item__form form-delete-album">
+                        <input class="form-item__input" name="id" type="text" placeholder="ID альбома">
+                        <input class="button-primary form-item__submit" type="submit">
+                    </form>
+                </div>
+                <div class="form-item__response response-delete-album"></div>
+            </div>
+        </div>
+        <div class="admin-page__artists">
+            <div class="admin-page__tracks-header">Артисты</div>
+            <div class="form-item">
+                <div class="form-item__wrap">
+                    <div class="form-item__title">Создать артиста</div>
+                    <form class="form-item__form form-create-artist">
+                        <input class="form-item__input" name="name" type="text" placeholder="Название">
+                        <input class="form-item__input" name="description" type="text" placeholder="Описание">
+                        <input class="button-primary form-item__submit" type="submit">
+                    </form>
+                </div>
+                <div class="form-item__response response-create-artist"></div>
+            </div>
+            <div class="form-item">
+                <div class="form-item__wrap">
+                    <div class="form-item__title">Обновить артиста</div>
+                    <form class="form-item__form form-change-artist">
+                        <input class="form-item__input" name="id" type="text" placeholder="ID артиста">
+                        <input class="form-item__input" name="name" type="text" placeholder="Название">
+                        <input class="form-item__input" name="description" type="text" placeholder="Описание">
+                        <input class="button-primary form-item__submit" type="submit">
+                    </form>
+                </div>
+                <div class="form-item__response response-change-artist"></div>
+            </div>
+            <div class="form-item">
+                <div class="form-item__wrap">
+                    <div class="form-item__title">Удалить артиста</div>
+                    <form class="form-item__form form-delete-artist">
+                        <input class="form-item__input" name="id" type="text" placeholder="ID артиста">
+                        <input class="button-primary form-item__submit" type="submit">
+                    </form>
+                </div>
+                <div class="form-item__response response-delete-artist"></div>
+            </div>
+            <div class="form-item">
+                <div class="form-item__wrap">
+                    <div class="form-item__title">Добавить фотки артиста</div>
+                    <form class="form-item__form form-files-artist">
+                        <input class="form-item__input" name="id" type="text" placeholder="ID артиста">
+                        <input class="form-item__input" name="poster" type="file" placeholder="Постер артиста">
+                        <input class="form-item__input" name="avatar" type="file" placeholder="Аватар артиста">
+                        <input class="button-primary form-item__submit" type="submit">
+                    </form>
+                </div>
+                <div class="form-item__response response-files-artist"></div>
+            </div>
+        </div>
+    </div>
+</div>

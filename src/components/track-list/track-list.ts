@@ -48,8 +48,7 @@ export class TrackList extends Component<ITrackList, IState> {
 
     static removeTrackInFavorite(target: HTMLElement) {
         ModelTrack.fetchFavoriteTrackRemove(target.dataset.id).then(() => {
-            target.classList.remove('fa-plus');
-            target.classList.add('fa-times');
+            target.classList.remove('track-item__icon_rotated');
             target.dataset.add = 'false';
             toast.add('Трек успено удален из избранного', true);
         });
@@ -57,10 +56,9 @@ export class TrackList extends Component<ITrackList, IState> {
 
     static addTrackInFavorite(target: HTMLElement) {
         ModelTrack.fetchFavoriteTrackAdd(target.dataset.id).then(() => {
-            target.classList.remove('fa-times');
-            target.classList.add('fa-plus');
+            target.classList.add('track-item__icon_rotated');
             target.dataset.add = 'true';
-            toast.add('Трек успено добавлен в избранное', true);
+            toast.add('Трек успешно добавлен в избранное', true);
         });
     }
 

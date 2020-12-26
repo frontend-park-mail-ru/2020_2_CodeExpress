@@ -12,6 +12,7 @@ export const RouterStore = {
         search: '/search/',
         radio: '/radio/',
         profile: '/profile/:nickname',
+        admin: '/admin/',
     },
     api: {
         user: {
@@ -64,6 +65,26 @@ export const RouterStore = {
         },
         search: {
             all: '/api/v1/search?query=:query&offset=:offset&limit=:limit',
+        },
+        admin: {
+            track: {
+                create: '/api/v1/tracks',
+                audio: '/api/v1/tracks/:id/audio',
+                change: '/api/v1/tracks/:id',
+                delete: '/api/v1/tracks/:id',
+            },
+            album: {
+                create: '/api/v1/albums',
+                poster: '/api/v1/albums/:id/photo',
+                change: '/api/v1/albums/:id',
+                delete: '/api/v1/albums/:id',
+            },
+            artist: {
+                create: '/api/v1/artists',
+                change: '/api/v1/artists/:id',
+                files: '/api/v1/artists/:id/photo',
+                delete: '/api/v1/artists/:id',
+            },
         },
     },
 };

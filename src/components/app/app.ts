@@ -10,18 +10,19 @@ import { ArtistView } from 'views/artist-view/artist-view';
 import { FavoriteTrackView } from 'views/favoriteTrack-view/favoriteTrack-view';
 import { PlaylistsView } from 'views/playlists-view/playlists-view';
 import { SearchView } from 'views/search-view/search-view';
+import { AdminView } from 'views/admin-view/admin-view';
+import { PlaylistView } from 'views/playlist-view/playlist-view';
+import { RadioView } from 'views/radio-view/radio-view';
+import { ProfileView } from 'views/profile-view/profile-view';
 
 import { Component } from 'managers/component/component';
 import { ModelUser } from 'models/user';
 import { ModelPlayList } from 'models/playlist';
 import { IProps } from 'store/interfaces';
-import { PlaylistView } from 'views/playlist-view/playlist-view';
-import { RadioView } from 'views/radio-view/radio-view';
 import { PlayerService } from 'components/player-service/player-service';
 import { DesktopPlayer } from 'components/player/player';
 import { MobilePlayer } from 'components/mobile-player/mobile-player';
 import { isMobile } from 'store/consts';
-import { ProfileView } from 'views/profile-view/profile-view';
 import { Toast } from 'components/toast/toast';
 
 import './app.scss';
@@ -63,7 +64,8 @@ export class App extends Component<IProps, IAppState> {
             .register(RouterStore.website.playlist, new PlaylistView(this.props, this.storage))
             .register(RouterStore.website.search, new SearchView(this.props, this.storage))
             .register(RouterStore.website.radio, new RadioView(this.props, this.storage))
-            .register(RouterStore.website.profile, new ProfileView(this.props, this.storage));
+            .register(RouterStore.website.profile, new ProfileView(this.props, this.storage))
+            .register(RouterStore.website.admin, new AdminView(this.props, this.storage));
     }
 
     getStorage() {

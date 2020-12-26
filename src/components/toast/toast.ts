@@ -37,6 +37,10 @@ export class Toast extends Component<IProps, IState> {
         const timer = setTimeout(() => {
             toast.style.transform = 'translateY(50px)';
             toast.style.opacity = '0';
+
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 1000);
         }, 2000);
 
         toast.querySelector('.toast__toggle').addEventListener('click', () => this.close(toast, timer), true);

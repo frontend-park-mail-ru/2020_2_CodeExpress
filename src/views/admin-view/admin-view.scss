@@ -1,0 +1,80 @@
+@import '../../pallete';
+
+.admin-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__header {
+    margin: 20px;
+
+    font-size: 40px;
+    color: $color-gray;
+  }
+
+  &__content {
+    margin: 20px;
+  }
+
+  &__tracks {
+    margin: 20px 0;
+
+    &-header {
+      margin: 10px 0;
+
+      font-size: 20px;
+      font-family: $font-black;
+      color: $color-primary;
+    }
+  }
+
+}
+
+.form-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 10px 0;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__title {
+    margin: 10px 0;
+
+    font-size: 18px;
+    color: $color-white;
+  }
+
+  &__input {
+    padding: 10px 15px;
+    margin: 5px 0;
+
+    border: 0;
+    border-radius: 5px;
+
+    color: $color-white;
+
+    background-color: $color-black-1;
+  }
+
+  &__submit {
+    margin: 10px 0;
+  }
+
+  &__response {
+    margin: 0 20px;
+    padding: 10px 15px;
+
+    min-height: 300px;
+    min-width: 400px;
+
+    color: $color-white;
+
+    background-color: $color-black-3;
+  }
+}
