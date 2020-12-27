@@ -39,8 +39,8 @@
             <div class="artist-page__albums">
                 {{#each albums }}
                     <div class="album-item">
-                        <img class="album-item__album" src="{{ attrs.poster }}">
-                        <a href="/album/{{ attrs.id }}" class="album-item__title">{{ attrs.title }}</a>
+                        <a href="/album/{{ attrs.id}}"><img class="album-item__album" src="{{ attrs.poster }}"></a>
+                        <a href="/album/{{ attrs.id}}" class="album-item__title">{{ attrs.title }}</a>
                     </div>
                 {{/each}}
             </div>
