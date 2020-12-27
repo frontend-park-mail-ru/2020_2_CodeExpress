@@ -111,7 +111,7 @@
   width: 300px;
 
   padding: 20px;
-  margin: 10px 0;
+  margin: 10px;
 
   border-radius: 5px;
   background-size: cover !important;
@@ -136,10 +136,6 @@
       transform: translate(-50%, -50%);
     }
 
-    &:hover  &__icon {
-      color: $color-primary;
-    }
-
     &__wrapper {
       display: flex;
       align-items: center;
@@ -157,6 +153,10 @@
 
       cursor: pointer;
       object-fit: cover;
+
+      &:hover  &__icon {
+        color: $color-primary;
+      }
     }
 
     &__img {
