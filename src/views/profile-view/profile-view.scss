@@ -11,6 +11,10 @@
     background: var(--color-black-4);
   }
 
+  &__wrap {
+    margin: 0 20px;
+  }
+
   &__follow {
     margin-left: auto;
   }
@@ -30,7 +34,7 @@
     display: none;
 
     &_active {
-      display: block;
+      display: flex;
     }
   }
 
