@@ -196,7 +196,7 @@ export class AdminView extends View<IProps, IState> {
 
         const payload = new FormData();
         payload.append('poster', poster);
-        payload.append('poster', avatar);
+        payload.append('avatar', avatar);
 
         Request.post(url, { payload, serialize: false }).then((res) => {
             this.props.parent.querySelector('.response-files-artist').innerHTML = JSON.stringify(res.body);

@@ -269,8 +269,8 @@ export class PlayerService extends Component<IProps, IPlayerState> {
             album_id: Number(album.dataset.id),
             duration: duration.textContent,
             audio,
-            is_favorite: !!add,
-            is_liked: !!like,
+            is_favorite: add === 'true',
+            is_liked: like === 'true',
         };
     }
 
