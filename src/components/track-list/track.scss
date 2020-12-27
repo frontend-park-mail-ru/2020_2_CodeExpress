@@ -174,9 +174,11 @@
 
     margin: 0 10px;
 
-    background-color: $color-gray;
     border-radius: 5px;
     user-select: none;
+    object-fit: cover;
+
+    background-color: $color-gray;
   }
 
 }

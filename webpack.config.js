@@ -15,6 +15,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         publicPath: '/',
+        filename: 'bundle.[hash:8].js',
     },
     resolve: {
         alias: {
@@ -50,7 +51,14 @@ module.exports = {
             },
             {
                 test: /\.ttf$/,
-                use: ['file-loader'],
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[path][name]-[hash:8].[ext]',
+                        },
+                    },
+                ],
             },
         ],
     },
@@ -67,6 +75,7 @@ module.exports = {
             DEBUG: !isProduction,
         }),
         new WebpackPwaManifest({
+            filename: 'manifest.json',
             name: 'MusicExpress',
             short_name: 'MusicExpress',
             description: 'Музыкальный сервис',
@@ -78,8 +87,7 @@ module.exports = {
             icons: [
                 {
                     src: path.join(src, '/music.png'),
-                    sizes: '128x128',
-                    type: 'image/png',
+                    sizes: [96, 128, 192, 256, 384, 512],
                 },
             ],
             ios: {

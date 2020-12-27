@@ -143,6 +143,10 @@
     color: var(--color-white);
 
     &_large {
+      margin-bottom: 10px;
+
+      text-align: center;
+
       font-size: 30px;
       font-family: $font-medium;
     }
@@ -182,6 +186,10 @@
 
   cursor: pointer;
   user-select: none;
+
+  &:last-child {
+    margin-right: 50px;
+  }
 
   &_play {
     font-size: 35px;
