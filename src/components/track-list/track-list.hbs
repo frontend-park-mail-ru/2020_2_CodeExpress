@@ -1,5 +1,5 @@
-{{#each tracks as |track| }}
-    <div class="track-item" data-audio="{{ track.attrs.audio }}" data-id="{{ attrs.id }}" data-add="{{ attrs.is_favorite }}" data-like="{{ attrs.is_liked }}">
+{{#each tracks as |track i| }}
+    <div class="track-item" data-audio="{{ track.attrs.audio }}" {{#if ../orderShow }}data-orderIdx="{{i}}"{{/if}} data-id="{{ attrs.id }}" data-add="{{ attrs.is_favorite }}" data-like="{{ attrs.is_liked }}">
         <div class="track-item__index">{{ track.attrs.index }}</div>
         {{# if ../user }}
             <div class="track-item__icon {{# if attrs.is_liked }}track-item__icon_active{{/if}} like" data-track="{{ track.attrs.id }}" data-like="{{ attrs.is_liked }}"><i class="like-icon {{# if attrs.is_liked }}fas{{ else  }}far{{/if}} fa-heart"></i></div>

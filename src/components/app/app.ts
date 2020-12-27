@@ -80,8 +80,6 @@ export class App extends Component<IProps, IAppState> {
 
         if (theme === 'light') {
             document.documentElement.setAttribute('theme', 'light');
-        } else if (!theme) {
-            localStorage.setItem('theme', document.documentElement.getAttribute('theme'));
         }
 
         const url: string = window.location.pathname;

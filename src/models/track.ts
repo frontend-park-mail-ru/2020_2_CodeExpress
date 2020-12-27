@@ -96,6 +96,20 @@ export class ModelTrack extends Model<ITrack> {
         });
     }
 
+    static fetchRandomArtistTracks(id: string, count: number, from: number): Promise<ModelTrack[]> {
+        return new Promise((resolve) => {
+            const url = RouterStore.api.track.random.replace(':id', id)
+                .replace(':from', String(from))
+                .replace(':count', String(count));
+
+            Request.get(url).then((res) => {
+                const { body } = res;
+                const tracks: ModelTrack[] = body.map ? body.map((track: ITrack) => new ModelTrack(track)) : [];
+                resolve(tracks);
+            });
+        });
+    }
+
     static fetchFavoriteTrackAdd(id: string): Promise<any> {
         return new Promise((resolve) => {
             const payload = { id };

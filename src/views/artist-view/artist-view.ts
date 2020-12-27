@@ -6,6 +6,8 @@ import { ModelArtist } from 'models/artist';
 import { router } from 'managers/router/router';
 import { ModelTrack } from 'models/track';
 import { ModelAlbum } from 'models/album';
+import { playerService } from 'components/app/app';
+import { debounce } from 'managers/utils/utils';
 
 import ArtistTemplate from './artist-view.hbs';
 import './artist-view.scss';
@@ -60,6 +62,14 @@ export class ArtistView extends View<IProps, IState> {
         });
     }
 
+    randomArtistTracks = (event: Event) => {
+        const target = event.target as HTMLElement;
+
+        ModelTrack.fetchRandomArtistTracks(target.dataset.id, 10, 0).then((tracks: ModelTrack[]) => {
+            playerService.artistOrder(tracks);
+        });
+    };
+
     render() {
         this.page.show();
 
@@ -78,7 +88,10 @@ export class ArtistView extends View<IProps, IState> {
 
         const reviewButton: HTMLElement = this.props.parent.querySelector('.review-button');
         const textButton: HTMLElement = this.props.parent.querySelector('.text-button');
+        const randomBtn = this.props.parent.querySelector('.random-artist-track');
+        const randomOrder = debounce(this.randomArtistTracks, 1000);
 
+        randomBtn.addEventListener('click', randomOrder);
         reviewButton.addEventListener('click', () => this.changeContent('.artist-page__review', '.artist-page__text', reviewButton));
         textButton.addEventListener('click', () => this.changeContent('.artist-page__text', '.artist-page__review', textButton));
     }

@@ -2,7 +2,7 @@
     <div class="index-page__preview-wrapper" style="background-image: url({{ group.poster }})">
         <div class="index-page__content">
             <div class="index-page__genre">Группа дня</div>
-            <div class="index-page__title">{{ group.title }}</div>
+            <div class="index-page__title">{{ group.name }}</div>
             <div class="index-page__wrapper">
                 <div class="button-primary random-index-track" data-id="{{ group.id }}">
                     Случайный трек
@@ -49,15 +49,15 @@
             <div class="article" style="background: var(--bg-linear), url({{ poster }})">
             <div class="index-page__genre">Популярный альбом</div>
             <div class="article-content">
-                <div class="article-content__album">
-                    <i class="article-content__icon fas fa-play"></i>
-                    <img class="article-content__img" src="{{ avatar }}">
+                <div class="article-content__album album-play" data-id="{{ id }}">
+                    <i class="article-content__icon fas fa-play" data-id="{{ id }}"></i>
+                    <img class="article-content__img" src="{{ avatar }}" data-id="{{ id }}">
                 </div>
                 <div class="article-content__wrapper_column">
-                    <div class="article-content__sub-title">{{ artist }}</div>
+                    <a href="/artist/{{ artist_id }}" class="article-content__sub-title">{{ artist }}</a>
                     <div class="article-content__wrapper">
                         <div class="article-content__wrapper_column">
-                            <div class="article-content__title">{{ title }}</div>
+                            <a href="/album/{{ id }}" class="article-content__title">{{ title }}</a>
                         </div>
                     </div>
                 </div>
