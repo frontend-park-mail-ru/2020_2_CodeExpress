@@ -18,7 +18,7 @@
 
     height: 61px;
 
-    background-color: $color-black-1;
+    background-color: var(--color-black-1);
 
   }
 
@@ -38,7 +38,7 @@
 
       padding: calc(10px + env(safe-area-inset-top)) 10px 20px;
 
-      background-color: $color-black-1;
+      background-color: var(--color-black-1);
 
       overflow: scroll;
     }
@@ -66,13 +66,13 @@
   &__help-text {
     font-size: 18px;
     font-family: $font-medium;
-    color: $color-white;
+    color: var(--color-white);
   }
 
   &__icon {
     padding: 5px;
 
-    color: $color-white;
+    color: var(--color-white);
 
     user-select: none;
   }
@@ -140,7 +140,7 @@
   }
 
   &__title {
-    color: $color-white;
+    color: var(--color-white);
 
     &_large {
       font-size: 30px;
@@ -152,7 +152,7 @@
     width: 100%;
     height: 1px;
 
-    background-color: $color-gray-1;
+    background-color: var(--color-gray-1);
 
     &_large {
       height: 5px;
@@ -189,6 +189,6 @@
 
   &_sub {
     font-size: 20px;
-    color: $color-gray-1;
+    color: var(--color-gray-1);
   }
 }

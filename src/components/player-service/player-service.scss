@@ -15,7 +15,7 @@
 
   z-index: 100;
 
-  background-color: $color-black;
+  background-color: var(--color-black);
 
   transition: all 0.3s ease-in-out;
 
@@ -39,11 +39,11 @@
 
     border-bottom: 1px solid $color-gray;
 
-    background-color: $color-black;
+    background-color: var(--color-black);
   }
 
   &__title {
-    color: $color-white;
+    color: var(--color-white);
     font-size: 20px;
   }
 

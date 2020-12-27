@@ -35,7 +35,7 @@
     border-radius: 5px;
 
     color: $color-gray;
-    background-color: $color-black-1;
+    background-color: var(--color-black-1);
 
     cursor: pointer;
     user-select: none;
@@ -96,7 +96,7 @@
 .header-paper_mobile {
   position: fixed;
 
-  background-color: $color-black;
+  background-color: var(--color-black);
 }
 
 @media only screen and (max-width: 1000px) {

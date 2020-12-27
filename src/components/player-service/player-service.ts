@@ -14,6 +14,7 @@ enum StorageKeys {
     lastAudio = 'lastAudio',
     index = 'index',
     repeat = 'repeat',
+    theme = 'theme',
 }
 
 interface IStorageEvent {
@@ -210,7 +211,7 @@ export class PlayerService extends Component<IProps, IPlayerState> {
             repeatButton,
         } = props;
 
-        if (event.key === StorageKeys.order || event.key === StorageKeys.volume || event.key === StorageKeys.index) {
+        if (event.key === StorageKeys.order || event.key === StorageKeys.volume || event.key === StorageKeys.index || event.key === StorageKeys.theme) {
             return;
         }
 

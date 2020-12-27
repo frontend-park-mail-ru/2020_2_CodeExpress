@@ -3,6 +3,7 @@ import { baseStaticUrl, Request } from 'managers/request/request';
 import { RouterStore } from 'store/routes';
 
 import imagineDragons from '../assets/backgrounds/imagine_dragons.jpg';
+import DefaultAvatar from '../assets/default/user-default.png';
 
 export interface IArtist {
     id: number,
@@ -26,7 +27,7 @@ export class ModelArtist extends Model<IArtist> {
 
         if (attrs) {
             attrs.poster = attrs.poster.replace('.', baseStaticUrl);
-            attrs.avatar = attrs.avatar.replace('.', baseStaticUrl);
+            attrs.avatar = attrs.avatar.length > 0 ? attrs.avatar.replace('.', baseStaticUrl) : DefaultAvatar;
         }
 
         this.attrs = Object.assign(defaults, attrs);

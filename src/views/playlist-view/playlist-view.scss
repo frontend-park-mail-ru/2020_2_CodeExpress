@@ -57,7 +57,7 @@
     align-items: flex-end;
 
     padding: 100px 25px 25px 25px;
-    background: $color-black-4;
+    background: var(--color-black-4);
     width: 100%;
   }
 
@@ -97,7 +97,7 @@
     margin: 10px 0 20px;
 
     font-size: 30px;
-    color: $color-white;
+    color: var(--color-white);
 
   }
 

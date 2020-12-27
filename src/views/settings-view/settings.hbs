@@ -16,6 +16,16 @@
             </form>
         </div>
         <div class="settings-page__forms">
+            <div class="form-change">
+                <div class="password-error"></div>
+                <div class="form-change__title">Интерфейс</div>
+                <div class="form-change__wrapper">
+                    <div class="form-change-item">
+                        <div class="form-change-item__title theme-change-label">{{#if theme }}Светлая тема{{else}}Темная тема{{/if}}</div>
+                        <input type="checkbox" class="switch-button__input theme-change" {{#if theme }}checked{{/if}}>
+                    </div>
+                </div>
+            </div>
             <form class="form-change form-change-profile" method="POST">
                 <div class="profile-error"></div>
                 <div class="form-change__title">Ваши данные</div>

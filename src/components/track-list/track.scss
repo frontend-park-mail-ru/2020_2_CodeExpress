@@ -8,7 +8,7 @@
   margin: 5px 10px 5px 0;
   padding: 10px;
 
-  border-bottom: 1px solid $color-gray-1;
+  border-bottom: 1px solid var(--color-gray-1);
 
   cursor: pointer;
   transition: ease-in-out all 0.2s;
@@ -17,9 +17,9 @@
   &_active,
   &:hover {
     border-radius: 5px;
-    border-color: $color-black-1;
+    border-color: var(--color-black-1);
 
-    background-color: $color-black-1;
+    background-color: var(--color-black-1);
   }
 
   &:last-child {
@@ -41,7 +41,7 @@
 
     z-index: 10;
 
-    background-color: $color-black-3;
+    background-color: var(--color-black-3);
     user-select: none;
 
     &_active {
@@ -58,7 +58,7 @@
 
     display: none;
 
-    background-color: $color-black-3;
+    background-color: var(--color-black-3);
     user-select: none;
   }
 
@@ -77,26 +77,26 @@
 
     padding: 10px 15px;
 
-    color: $color-white;
+    color: var(--color-white);
     font-size: 14px;
     text-decoration: none;
     user-select: none;
 
     &:hover {
-      background-color: $color-black-4;
+      background-color: var(--color-black-4);
     }
   }
 
   &__dots-item {
     padding: 10px 15px;
 
-    color: $color-white;
+    color: var(--color-white);
     font-size: 14px;
     text-decoration: none;
     user-select: none;
 
     &:hover {
-      background-color: $color-black-4;
+      background-color: var(--color-black-4);
     }
   }
 
@@ -142,7 +142,7 @@
   }
 
   &__title {
-    color: $color-white;
+    color: var(--color-white);
     font-family: $font-medium;
     font-size: 16px;
     user-select: none;

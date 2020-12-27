@@ -7,7 +7,7 @@
     margin-bottom: 20px;
 
     font-family: $font-black;
-    color: $color-white;
+    color: var(--color-white);
     font-size: 40px;
   }
 
@@ -67,7 +67,7 @@
     margin-bottom: 20px;
     font-size: 20px;
     font-family: $font-medium;
-    color: $color-white;
+    color: var(--color-white);
   }
 
   &-item {
@@ -93,8 +93,8 @@
       color: $color-gray;
       font-family: $font-regular;
 
-      background-color: $color-black-3;
-      border: 1px solid $color-black-3;
+      background-color: var(--color-black-3);
+      border: 1px solid var(--color-black-3);
     }
   }
 }
@@ -116,7 +116,7 @@
 
 
 @media only screen and (max-width: 1000px) {
-  .profile-page {
+  .settings-page {
     margin: 0;
     padding: calc(60px + env(safe-area-inset-top)) 20px 0;
 
