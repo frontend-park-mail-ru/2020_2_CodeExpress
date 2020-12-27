@@ -12,7 +12,6 @@ import { PlaylistsView } from 'views/playlists-view/playlists-view';
 import { SearchView } from 'views/search-view/search-view';
 import { AdminView } from 'views/admin-view/admin-view';
 import { PlaylistView } from 'views/playlist-view/playlist-view';
-import { RadioView } from 'views/radio-view/radio-view';
 import { ProfileView } from 'views/profile-view/profile-view';
 
 import { Component } from 'managers/component/component';
@@ -63,7 +62,6 @@ export class App extends Component<IProps, IAppState> {
             .register(RouterStore.website.playlists, new PlaylistsView(this.props, this.storage))
             .register(RouterStore.website.playlist, new PlaylistView(this.props, this.storage))
             .register(RouterStore.website.search, new SearchView(this.props, this.storage))
-            .register(RouterStore.website.radio, new RadioView(this.props, this.storage))
             .register(RouterStore.website.profile, new ProfileView(this.props, this.storage))
             .register(RouterStore.website.admin, new AdminView(this.props, this.storage));
     }

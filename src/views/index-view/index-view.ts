@@ -100,14 +100,10 @@ export class IndexView extends View {
         const group = this.isLoaded ? this.group : null;
         const articles = this.isLoaded ? this.articles : null;
 
-        const genreArray: Array<string> = ['Альтернативный Рок',
-            'Иностранный Рок', 'Русский Рок', 'Поп', 'Хипхоп', 'Саундтреки',
-            'Електронная', 'Джаз', 'Блюз', 'Кантри', 'Метал', 'Классическая'];
         this.props.parent = document.querySelector('.page__content');
         this.props.parent.insertAdjacentHTML('afterbegin', IndexTemplate({
             group,
             albums: albumArray,
-            genres: genreArray,
             tracklist: popularTrackList,
             tracklistNew: newTrackList,
             basicArticlePoster,

@@ -10,7 +10,6 @@ export const RouterStore = {
         playlists: '/playlists/',
         playlist: '/playlist/:id/',
         search: '/search/',
-        radio: '/radio/',
         profile: '/profile/:nickname',
         admin: '/admin/',
     },
