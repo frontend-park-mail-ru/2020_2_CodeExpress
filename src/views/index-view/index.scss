@@ -120,6 +120,8 @@
     display: flex;
     align-items: center;
 
+    transition: ease-in-out all 0.2s;
+
     &__icon {
       position: absolute;
       top: 50%;
@@ -130,7 +132,12 @@
 
       z-index: 5;
 
+      transition: ease-in-out all 0.2s;
       transform: translate(-50%, -50%);
+    }
+
+    &:hover  &__icon {
+      color: $color-primary;
     }
 
     &__wrapper {
@@ -147,6 +154,8 @@
       position: relative;
 
       margin-right: 10px;
+
+      cursor: pointer;
     }
 
     &__img {
@@ -167,12 +176,24 @@
       font-size: 24px;
       font-family: $font-medium;
       color: white;
+
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     &__sub-title {
       color: white;
       font-family: $font-regular;
       font-size: 14px;
+
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }

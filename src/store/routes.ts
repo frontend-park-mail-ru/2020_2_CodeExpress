@@ -32,11 +32,13 @@ export const RouterStore = {
         artist: {
             list: '/api/v1/artists',
             current: '/api/v1/artists/:slug',
+            day: '/api/v1/artist/day',
         },
         albums: {
             current: '/api/v1/albums/:id',
             indexList: '/api/v1/albums?count=:count&from=:from',
             artist: '/api/v1/artists/:id/albums',
+            top: '/api/v1/albums/top?count=:count&from=:from',
         },
         track: {
             all: '/api/v1/track',
@@ -51,6 +53,7 @@ export const RouterStore = {
                 add: '/api/v1/favorite/track/:id',
             },
             like: '/api/v1/tracks/:id/like',
+            random: '/api/v1/artists/:id/tracks/random?count=:count&from=:from',
         },
         playlists: {
             list: '/api/v1/playlists',

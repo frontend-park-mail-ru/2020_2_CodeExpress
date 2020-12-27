@@ -3,9 +3,8 @@ import { ITrack, ModelTrack } from 'models/track';
 
 import { RouterStore } from 'store/routes';
 import { baseStaticUrl, Request } from 'managers/request/request';
+import { ModelArtist } from 'models/artist';
 
-import imagineDragons from '../assets/backgrounds/imagine_dragons.jpg';
-import naturalPoster from '../assets/backgrounds/natural-imagine-dragons.jpeg';
 import DefaultAlbum from '../assets/default/defaultAlbum.png';
 
 export interface IAlbum {
@@ -75,16 +74,42 @@ export class ModelAlbum extends Model<IAlbum> {
         });
     }
 
-    static fetchGetPopularAlbumsMock() {
+    static fetchGetTopAlbums(count: number, from: number) {
         return new Promise((resolve) => {
-            const res = {
-                poster: imagineDragons,
-                avatar: naturalPoster,
-                title: 'Natural',
-                artist: 'Imagine Dragons',
-            };
+            const url = RouterStore.api.albums.top
+                .replace(':from', String(from))
+                .replace(':count', String(count));
 
-            resolve([res, res, res]);
+            Request.get(url).then((res) => {
+                const { body } = res;
+                const albums: ModelAlbum[] = body.map ? body.map((album: IAlbum) => new ModelAlbum(album)) : [];
+                const artists: any[] = [];
+                const result: any[] = [];
+
+                albums.forEach((item: any) => artists.push(String(item.attrs.artist_id)));
+
+                const promises = artists.map((item: any) => ModelArtist.fetchCurrentArtist(item)
+                    .then((artist: ModelArtist) => artists.push(artist)));
+
+                Promise.all(promises).then(() => {
+                    artists.splice(0, 3);
+
+                    albums.forEach((item) => {
+                        const artist = artists.find((t) => t.attrs.id === item.attrs.artist_id);
+                        const temp = {
+                            poster: artist.attrs.poster,
+                            avatar: item.attrs.poster,
+                            title: item.attrs.title,
+                            artist: item.attrs.artist_name,
+                            artist_id: item.attrs.artist_id,
+                            id: item.attrs.id,
+                        };
+
+                        result.push(temp);
+                    });
+                    resolve(result);
+                });
+            });
         });
     }
 }

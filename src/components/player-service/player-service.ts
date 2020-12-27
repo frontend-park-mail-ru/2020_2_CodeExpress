@@ -108,7 +108,12 @@ export class PlayerService extends Component<IProps, IPlayerState> {
         return track.attrs;
     }
 
-    setLastTrack(item: ModelTrack) {
+    setLastTrack(item: ModelTrack, index: string | undefined = null) {
+        if (index) {
+            this.index = Number(index);
+            localStorage.setItem('index', JSON.stringify(this.index));
+            player.checkControlButtons(this.index, this.order.length);
+        }
         item.attrs.date = new Date();
 
         localStorage.setItem('lastAudio', JSON.stringify(item));
@@ -286,6 +291,17 @@ export class PlayerService extends Component<IProps, IPlayerState> {
         this.render();
     }
 
+    artistOrder(items: ModelTrack[]) {
+        this.order = items;
+        this.index = 0;
+
+        player.changeOrderTrack(this.order[this.index]);
+        localStorage.setItem('index', JSON.stringify(this.index));
+        localStorage.setItem('order', JSON.stringify(this.order));
+
+        this.render();
+    }
+
     addInOrder = (item: HTMLElement, isToast = true) => {
         const track: ITrack = this.getTrackData(item);
         const inOrder = this.order.find((temp) => temp.attrs.title === track.title);
@@ -308,13 +324,21 @@ export class PlayerService extends Component<IProps, IPlayerState> {
     removeElemInOrder = (event: Event) => {
         const target = event.target as HTMLElement;
         const index = this.order.findIndex((item) => item.attrs.id === Number(target.dataset.id));
-
         if (index !== -1) {
+            const { title } = this.order[index].attrs;
             this.order.splice(index, 1);
             toast.add('Трек удален из очереди', true);
 
             localStorage.setItem('order', JSON.stringify(this.order));
+            localStorage.setItem('order', JSON.stringify(this.order));
             this.render();
+
+            if (index === this.index && title === document.querySelector('.player-track__title').textContent && index !== this.order.length) {
+                this.index--;
+                this.nextTrack();
+            } else if (index === this.order.length && title === document.querySelector('.player-track__title').textContent) {
+                this.prevTrack();
+            }
         } else {
             toast.add('Трек не найден', false);
         }

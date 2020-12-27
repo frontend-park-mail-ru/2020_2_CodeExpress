@@ -2,7 +2,6 @@ import { Model } from 'models/model';
 import { baseStaticUrl, Request } from 'managers/request/request';
 import { RouterStore } from 'store/routes';
 
-import imagineDragons from '../assets/backgrounds/imagine_dragons.jpg';
 import DefaultAvatar from '../assets/default/user-default.png';
 
 export interface IArtist {
@@ -58,14 +57,14 @@ export class ModelArtist extends Model<IArtist> {
         });
     }
 
-    static fetchGetArtistDayMock(id: number) {
+    static fetchGetArtistDay() {
         return new Promise((resolve) => {
-            const res = {
-                title: 'IMAGINE DRAGONS',
-                poster: imagineDragons,
-                id: 1,
-            };
-            resolve(res);
+            Request.get(RouterStore.api.artist.day).then((res) => {
+                const { body, status } = res;
+
+                const artist = new ModelArtist(body, true);
+                resolve(artist);
+            });
         });
     }
 }

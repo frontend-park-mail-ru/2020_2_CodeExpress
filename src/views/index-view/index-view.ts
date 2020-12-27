@@ -5,6 +5,8 @@ import { IProps, IState, IStorage } from 'store/interfaces';
 import { ModelTrack } from 'models/track';
 import { ModelAlbum } from 'models/album';
 import { ModelArtist } from 'models/artist';
+import { playerService } from 'components/app/app';
+import { debounce } from 'managers/utils/utils';
 
 import IndexTemplate from './index.hbs';
 import './index.scss';
@@ -47,12 +49,12 @@ export class IndexView extends View {
             this.trackList = new TrackList({ tracksList: tracks }, this.storage);
         });
 
-        const group = ModelArtist.fetchGetArtistDayMock(1).then((res) => {
-            this.group = res;
+        const group = ModelArtist.fetchGetArtistDay().then((artist: ModelTrack) => {
+            this.group = artist.attrs;
         });
 
-        const articles = ModelAlbum.fetchGetPopularAlbumsMock().then((res) => {
-            this.articles = res;
+        const articles = ModelAlbum.fetchGetTopAlbums(3, 0).then((albums) => {
+            this.articles = albums;
         });
 
         const newTracks = ModelTrack.fetchIndexPopularTrackList(5, 0).then((tracks) => {
@@ -69,6 +71,22 @@ export class IndexView extends View {
             this.render();
         });
     }
+
+    randomArtistTracks = (event: Event) => {
+        const target = event.target as HTMLElement;
+
+        ModelTrack.fetchRandomArtistTracks(target.dataset.id, 10, 0).then((tracks: ModelTrack[]) => {
+            playerService.artistOrder(tracks);
+        });
+    };
+
+    albumTracks = (event: Event) => {
+        const target = event.target as HTMLElement;
+
+        ModelAlbum.fetchGetCurrentAlbum(Number(target.dataset.id)).then((album: ModelAlbum) => {
+            playerService.artistOrder(album.attrs.tracks);
+        });
+    };
 
     /**
      * Функция отрисовки View
@@ -98,5 +116,15 @@ export class IndexView extends View {
         }));
 
         this.page.setEventToTracks();
+
+        const randomOrder = debounce(this.randomArtistTracks, 1000);
+
+        const randomBtn = this.props.parent.querySelector('.random-index-track');
+        randomBtn.addEventListener('click', randomOrder);
+
+        const albumBtns = this.props.parent.querySelectorAll('.album-play');
+        albumBtns.forEach((item) => {
+            item.addEventListener('click', this.albumTracks);
+        });
     }
 }
