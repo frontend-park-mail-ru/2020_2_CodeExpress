@@ -10,7 +10,7 @@
 
   &__header {
     padding: 100px 25px 25px 25px;
-    background: $color-black-4;
+    background: var(--color-black-4);
   }
 
   &-section {
@@ -25,7 +25,7 @@
 
       font-size: 20px;
       font-family: $font-medium;
-      color: $color-white;
+      color: var(--color-white);
     }
 
     &__wrapper_albums {
@@ -48,7 +48,7 @@
       margin: 30px 0;
 
       font-size: 18px;
-      color: $color-white;
+      color: var(--color-white);
       text-align: center;
     }
   }
@@ -57,10 +57,10 @@
 .page__title {
   margin-bottom: 20px;
 
-  color: $color-white;
+  color: var(--color-white);
   font-family: $font-black;
   font-size: 30px;
-  background: $color-black-4;
+  background: var(--color-black-4);
 }
 
 .wrapper {
@@ -85,7 +85,7 @@
     padding: 10px 15px;
 
     border-radius: 5px;
-    background-color: $color-black-3;
+    background-color: var(--color-black-3);
 
     width: 40%;
 

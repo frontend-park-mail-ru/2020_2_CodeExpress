@@ -228,12 +228,28 @@ export class SettingsView extends View<IProps, IState> {
         });
     }
 
+    themeChange = (event: Event) => {
+        const target: HTMLInputElement = event.target as HTMLInputElement;
+        const label = this.props.parent.querySelector('.theme-change-label');
+
+        if (!target.checked) {
+            document.documentElement.setAttribute('theme', 'dark');
+            label.textContent = 'Темная тема';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('theme', 'light');
+            label.textContent = 'Светлая тема';
+            localStorage.setItem('theme', 'light');
+        }
+    };
+
     /**
      * Функция отрисовки View
      */
     render() {
         const user = this.storage.get('user');
         const avatar: string = user.get('avatar');
+        const theme = localStorage.getItem('theme');
 
         if (!user.isLoaded && this.storage.get('updateState')) {
             this.storage.set({ pageState: false });
@@ -250,6 +266,7 @@ export class SettingsView extends View<IProps, IState> {
             isAvatar: avatar !== '' && avatar,
             avatar,
             defaultAvatar,
+            theme: theme === 'light',
         }));
 
         const avatarChangeForm: HTMLElement = this.props.parent.querySelector('.form-change-avatar');
@@ -263,5 +280,8 @@ export class SettingsView extends View<IProps, IState> {
 
         const logoutBtn: HTMLElement = this.props.parent.querySelector('.logout-btn');
         logoutBtn.addEventListener('click', this.logout);
+
+        const themeBtn: HTMLElement = this.props.parent.querySelector('.theme-change');
+        themeBtn.addEventListener('change', this.themeChange);
     }
 }

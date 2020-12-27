@@ -5,10 +5,10 @@
     margin-bottom: 20px;
     padding: 100px 125px 20px;
 
-    color: $color-white;
+    color: var(--color-white);
     font-family: $font-black;
     font-size: 30px;
-    background: $color-black-4;
+    background: var(--color-black-4);
   }
 
   &__wrapper {

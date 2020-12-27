@@ -8,7 +8,7 @@
     margin-bottom: 20px;
     padding: 100px 35px 0;
 
-    background: $color-black-4;
+    background: var(--color-black-4);
   }
 
   &__follow {
@@ -73,7 +73,7 @@
     }
 
     &_active {
-      color: $color-white;
+      color: var(--color-white);
 
       &::before {
         opacity: 1;
@@ -92,7 +92,7 @@
   &__header-username {
     font-size: 30px;
     font-family: $font-medium;
-    color: $color-white;
+    color: var(--color-white);
   }
 
   &__wrapper {
@@ -116,7 +116,7 @@
 
     object-fit: cover;
 
-    background-color: $color-black;
+    background-color: var(--color-black);
   }
 }
 
@@ -135,7 +135,7 @@
   transition: all 0.1s ease-in-out;
 
   &:hover {
-    background-color: $color-black-1;
+    background-color: var(--color-black-1);
   }
 
   &__avatar {
@@ -151,6 +151,6 @@
 
   &__username {
     font-size: 18px;
-    color: $color-white;
+    color: var(--color-white);
   }
 }

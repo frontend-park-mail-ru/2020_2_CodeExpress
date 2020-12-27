@@ -2,6 +2,8 @@ import { Model } from 'models/model';
 import { RouterStore } from 'store/routes';
 import { baseStaticUrl, IRequestBody, Request } from 'managers/request/request';
 
+import DefaultAlbum from '../assets/default/defaultAlbum.png';
+
 export interface ITrack {
     id: number,
     title: string,
@@ -40,7 +42,7 @@ export class ModelTrack extends Model<ITrack> {
             const seconds = time.getSeconds() >= 10 ? time.getSeconds() : `0${time.getSeconds()}`;
             attrs.duration = `${time.getMinutes()}:${seconds}`;
             attrs.audio = attrs.audio.replace('.', baseStaticUrl);
-            attrs.album_poster = attrs.album_poster.replace('.', baseStaticUrl);
+            attrs.album_poster = attrs.album_poster.length > 0 ? attrs.album_poster.replace('.', baseStaticUrl) : DefaultAlbum;
         }
 
         this.attrs = Object.assign(defaults, attrs);

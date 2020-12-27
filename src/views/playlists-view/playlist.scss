@@ -12,10 +12,10 @@
   padding: 10px;
 
   border-radius: 5px;
-  color: $color-white;
+  color: var(--color-white);
   text-decoration: none;
 
-  background-color: $color-black-1;
+  background-color: var(--color-black-1);
 
   overflow: hidden;
   transition: all 0.3s ease-in-out;

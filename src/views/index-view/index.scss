@@ -28,7 +28,7 @@
 
     font-family: $font-black;
     font-size: 36px;
-    color: $color-white;
+    color: white;
   }
 
   &__genre {
@@ -41,7 +41,7 @@
 
     font-size: 14px;
     color: $color-gray;
-    background-color: $color-black-1;
+    background-color: var(--color-black-1);
   }
 
   &-top-tracks {
@@ -63,7 +63,7 @@
 
       font-size: 20px;
       font-family: $font-medium;
-      color: $color-white;
+      color: var(--color-white);
     }
 
     &__wrapper {
@@ -126,7 +126,7 @@
       left: 50%;
 
       font-size: 20px;
-      color: $color-white;
+      color: white;
 
       z-index: 5;
 
@@ -166,11 +166,11 @@
 
       font-size: 24px;
       font-family: $font-medium;
-      color: $color-white;
+      color: white;
     }
 
     &__sub-title {
-      color: $color-white;
+      color: white;
       font-family: $font-regular;
       font-size: 14px;
     }
@@ -187,7 +187,7 @@
   border-radius: 5px;
 
   color: $color-gray;
-  background-color: $color-black-2;
+  background-color: var(--color-black-2);
 }
 
 .share-link:nth-of-type(1) {
@@ -204,7 +204,7 @@
 
   font-size: 14px;
   color: $color-gray;
-  background-color: $color-black-1;
+  background-color: var(--color-black-1);
 }
 
 @media only screen and (min-width: 2000px) {

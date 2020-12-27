@@ -47,7 +47,7 @@
     margin: 10px 0;
 
     font-size: 18px;
-    color: $color-white;
+    color: var(--color-white);
   }
 
   &__input {
@@ -57,9 +57,9 @@
     border: 0;
     border-radius: 5px;
 
-    color: $color-white;
+    color: var(--color-white);
 
-    background-color: $color-black-1;
+    background-color: var(--color-black-1);
   }
 
   &__submit {
@@ -73,8 +73,8 @@
     min-height: 300px;
     min-width: 400px;
 
-    color: $color-white;
+    color: var(--color-white);
 
-    background-color: $color-black-3;
+    background-color: var(--color-black-3);
   }
 }

@@ -76,6 +76,14 @@ export class App extends Component<IProps, IAppState> {
      * Функция инициализатор
      */
     start() {
+        const theme = localStorage.getItem('theme');
+
+        if (theme === 'light') {
+            document.documentElement.setAttribute('theme', 'light');
+        } else if (!theme) {
+            localStorage.setItem('theme', document.documentElement.getAttribute('theme'));
+        }
+
         const url: string = window.location.pathname;
         ModelUser.getCurrentUser().then((user) => {
             ModelPlayList.fetchGetPlaylists().then((playlists) => {

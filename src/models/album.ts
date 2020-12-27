@@ -6,6 +6,7 @@ import { baseStaticUrl, Request } from 'managers/request/request';
 
 import imagineDragons from '../assets/backgrounds/imagine_dragons.jpg';
 import naturalPoster from '../assets/backgrounds/natural-imagine-dragons.jpeg';
+import DefaultAlbum from '../assets/default/defaultAlbum.png';
 
 export interface IAlbum {
     id: number,
@@ -30,7 +31,7 @@ export class ModelAlbum extends Model<IAlbum> {
         };
 
         if (attrs) {
-            attrs.poster = attrs.poster.replace('.', baseStaticUrl);
+            attrs.poster = attrs.poster.length > 0 ? attrs.poster.replace('.', baseStaticUrl) : DefaultAlbum;
             attrs.tracks = attrs.tracks ? attrs.tracks.map((track: ITrack) => new ModelTrack(track, true)) : null;
         }
 
