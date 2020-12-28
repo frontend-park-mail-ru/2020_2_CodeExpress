@@ -375,7 +375,7 @@ export class PlayerService extends Component<IProps, IPlayerState> {
 
     showOrder = () => {
         (<HTMLElement>document.querySelector('#app')).style.overflow = 'hidden';
-        this.orderWrapper.style.top = 'initial';
+        this.orderWrapper.style.top = '0%';
     };
 
     hideOrder = () => {

@@ -153,10 +153,10 @@
 
       cursor: pointer;
       object-fit: cover;
+    }
 
-      &:hover  &__icon {
-        color: $color-primary;
-      }
+    &__album:hover  &__icon {
+      color: $color-primary;
     }
 
     &__img {
